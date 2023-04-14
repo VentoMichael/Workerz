@@ -5,8 +5,6 @@
 
 
 @section('content')
-    <!-- TODO: add hero section -->
-
     <!-- This example requires Tailwind CSS v2.0+ -->
     <section class="bg-white">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -18,19 +16,30 @@
                     in need of top-notch talent, our plans provide a range of features and benefits to help you succeed.
                     Choose the plan that's right for you and get started today!</p>
             </div>
+            <div class="sm:flex sm:flex-col sm:align-center">
+                <label class="relative inline-flex mx-auto mb-4 items-center cursor-pointer">
+                    <input type="checkbox" value="" id="annualPrice" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full peer-checked:after:border-purple-700 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-purple-700 after:border-purple-700 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-indigo-600 peer-checked:bg-indigo-300"></div>
+                    <span class="ml-3 text-sm font-medium text-gray-900 ">Annual pricing (save 10%)</span>
+                </label>
+            </div>
+
+
+
             <div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
                 <!-- Pricing Card -->
                 <div
-                    class="mt-14 justify-between flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow xl:p-8">
+                    class="justify-between flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow xl:p-8">
                     <div>
 
                         <h3 class="mb-4 text-2xl font-semibold">Starter</h3>
                         <p class="font-light text-gray-500 sm:text-lg">Perfect for those just starting out or looking to
                             test the waters of the platform.</p>
                         <div class="flex justify-center items-baseline my-8">
-                            <span class="mr-2 text-5xl font-extrabold">9,99€</span>
-                            <span class="text-gray-500">/month</span>
+                            <span class="mr-2 text-5xl font-extrabold text_price" data-monthly="{{9.99}}" data-yearly="{{(9.99 * 12) *.90}}">9,99€</span>
+                            <span class="text-gray-500 text_period">/month</span>
                         </div>
+
                         <!-- List -->
                         <ul role="list" class="mb-8 space-y-4 text-left">
                             <li class="flex items-center space-x-3">
@@ -82,14 +91,14 @@
                     </a>
                 </div>
                 <div
-                    class="justify-between flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border-4 border-purple-500 shadow xl:p-8">
+                    class="justify-between flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border-4 border-purple-700 shadow xl:p-8">
                     <div>
-                        <h3 class="mb-4 text-2xl font-semibold">Premium</h3>
+                        <h3 class="mb-4 text-2xl font-semibold text-purple-700">Premium</h3>
                         <p class="font-light text-gray-500 sm:text-lg">Ideal for professionals who want to stand out and
                             take their freelancing career to the next level.</p>
                         <div class="flex justify-center items-baseline my-8">
-                            <span class="mr-2 text-5xl font-extrabold">19,99€</span>
-                            <span class="text-gray-500">/month</span>
+                            <span class="mr-2 text-5xl font-extrabold text_price" data-monthly="{{19.99}}" data-yearly="{{(19.99 * 12) *.90}}">19,99€</span>
+                            <span class="text-gray-500 text_period">/month</span>
                         </div>
                         <!-- List -->
                         <ul role="list" class="mb-8 space-y-4 text-left">
@@ -161,15 +170,15 @@
                     </a>
                 </div>
                 <div
-                    class="mt-14 justify-between flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow xl:p-8">
+                    class="justify-between flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow xl:p-8">
                     <div>
 
                         <h3 class="mb-4 text-2xl font-semibold">Starter</h3>
                         <p class="font-light text-gray-500 sm:text-lg">The ultimate package for serious freelancers who
                             want to dominate the platform and expand their business.</p>
                         <div class="flex justify-center items-baseline my-8">
-                            <span class="mr-2 text-5xl font-extrabold">29,99€</span>
-                            <span class="text-gray-500">/month</span>
+                            <span class="mr-2 text-5xl font-extrabold text_price" data-monthly="{{29.99}}" data-yearly="{{(29.99 * 12) *.90}}">29,99€</span>
+                            <span class="text-gray-500 text_period">/month</span>
                         </div>
                         <!-- List -->
                         <ul role="list" class="mb-8 space-y-4 text-left">
@@ -427,6 +436,35 @@
 @endsection
 @section('scripts')
     <script>
+        const annualPriceCheckbox = document.getElementById('annualPrice');
+        const priceElements = document.querySelectorAll('.text_price');
+        const periodElement = document.querySelector('.text_period');
+
+        annualPriceCheckbox.addEventListener('click', () => {
+            if (annualPriceCheckbox.checked) {
+                priceElements.forEach(price => {
+                    const monthlyPrice = parseFloat(price.dataset.monthly);
+                    const annualPrice = (monthlyPrice * 12) * 0.90;
+                    price.textContent = annualPrice.toFixed(2) + '€';
+                });
+                periodElement.textContent = '/year';
+            } else {
+                priceElements.forEach(price => {
+                    const monthlyPrice = parseFloat(price.dataset.monthly);
+                    price.textContent = monthlyPrice.toFixed(2) + '€';
+                });
+                periodElement.textContent = '/month';
+            }
+        });
+
+
+
+
+
+
+
+
+
         const buttons = document.querySelectorAll('.button-title-faq');
 
         buttons.forEach(button => {

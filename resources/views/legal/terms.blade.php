@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title', 'Terms of Service')
-@section('description', 'Our Terms of Service outline the rules and regulations for the use of the Workerz website, https://www.workerz.be By using our website, you agree to comply with these terms. Contact us if you have any questions or concerns.')
+@section('description', 'Our Terms of Service outline the rules and regulations for the use of the Workerz website, '. config('app.url') . ' By using our website, you agree to comply with these terms. Contact us if you have any questions or concerns.')
 @section('keywords', 'terms of service, terms and conditions, website rules, website regulations, website terms, Workerz terms')
 
 @section('content')
@@ -21,7 +21,7 @@
                     website and services, and outline our obligations to you and your obligations to us. By using our
                     website and services, you agree to abide by these terms. Please read them carefully before using our
                     website or services. If you have any questions or concerns, please <a
-                        class="font-medium text-blue-400 underline hover:no-underline" href="mailto:workerz@support.be">contact
+                        class="font-medium text-blue-400 underline hover:no-underline" href="mailto:{{config('app.supportEmail')}}">contact
                         us</a>.</p>
             </div>
         </div>
@@ -34,8 +34,7 @@
                     </h2>
                     <p class="mb-3 text-gray-600 mb-8 mt-2">
                         These terms and conditions outline the rules and regulations for the use of Workerz's website,
-                        located at <a class="font-medium text-blue-600 underline hover:no-underline"
-                                      href="https://www.workerz.be" target="_blank">workerz.be</a>.
+                        located at {{ config('app.urlNoHttp') }}.
                     </p>
                     <p class="mb-3 text-gray-600 mb-8 mt-2">
                         By accessing this website, we assume you accept these terms and conditions in full. If you

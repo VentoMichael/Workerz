@@ -1,30 +1,10 @@
 <footer class="bg-gray-50" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="max-w-7xl mx-auto pt-16 pb-8 px-4 sm:px-6 lg:pt-24 lg:px-8">
-        <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-            <div class="grid grid-cols-2 gap-8 xl:col-span-2">
-                <div class="md:grid md:grid-cols-2 md:gap-8">
-                    <section>
-                        <h3 class="text-sm font-semibold text-gray-700 tracking-wider uppercase">Solutions</h3>
-                        <ul role="list" class="mt-4 space-y-4">
-                            <li>
-                                <a href="#" class="text-base text-gray-500 hover:text-gray-900"> Marketing </a>
-                            </li>
-
-                            <li>
-                                <a href="#" class="text-base text-gray-500 hover:text-gray-900"> Analytics </a>
-                            </li>
-
-                            <li>
-                                <a href="#" class="text-base text-gray-500 hover:text-gray-900"> Commerce </a>
-                            </li>
-
-                            <li>
-                                <a href="#" class="text-base text-gray-500 hover:text-gray-900"> Insights </a>
-                            </li>
-                        </ul>
-                    </section>
-                    <section class="mt-12 md:mt-0">
+        <div class="lg:grid lg:grid-cols-2 xl:grid-cols-3 lg:gap-8">
+            <div class="grid grid-cols-1 gap-8 xl:col-span-2">
+                <div class="grid grid-cols-2 md:grid-cols-3 sm:grid-cols-3 md:gap-8">
+                    <section class=" md:mt-0">
                         <h3 class="text-sm font-semibold text-gray-700 tracking-wider uppercase">Support</h3>
                         <ul role="list" class="mt-4 space-y-4">
                             <li>
@@ -54,8 +34,7 @@
                             </li>
                         </ul>
                     </section>
-                </div>
-                <div class="md:grid md:grid-cols-2 md:gap-8">
+
                     <section>
                         <h3 class="text-sm font-semibold text-gray-700 tracking-wider uppercase">Company</h3>
                         <ul role="list" class="mt-4 space-y-4">
@@ -71,7 +50,7 @@
                             </li>
                         </ul>
                     </section>
-                    <section class="mt-12 md:mt-0">
+                    <section class="mt-12 sm:mt-0 md:mt-0">
                         <h3 class="text-sm font-semibold text-gray-700 tracking-wider uppercase">Legal</h3>
                         <ul role="list" class="mt-4 space-y-4">
                             <li>

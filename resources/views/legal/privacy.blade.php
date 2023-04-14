@@ -26,13 +26,13 @@
                     Privacy Policy for Workerz
                 </h2>
                 <p class="mb-3 text-gray-600 mb-8 mt-2">
-                    At Workerz, accessible from <a class="font-medium text-blue-600 underline hover:no-underline" href="https://www.workerz.be" target="_blank">workerz.be</a>, one of our main priorities is the privacy of our
+                    At Workerz, accessible from {{ config('app.urlNoHttp') }}, one of our main priorities is the privacy of our
                     visitors. This Privacy Policy document contains types of information that is collected and recorded
                     by Workerz and how we use it.
                 </p>
                 <p class="mb-3 text-gray-600 mb-8 mt-2">
                     If you have additional questions or require more information about our Privacy Policy, do not
-                    hesitate to contact us through email at <a class="font-medium text-blue-600 underline hover:no-underline" href="mailto:workerz@support.be">workerz@support.be</a>.
+                    hesitate to contact us through email at {{config('app.supportEmail')}}.
                 </p>
             </section>
             <section>
@@ -62,7 +62,7 @@
                         rights. If you
                         wish to be informed about what Personal Information we hold about you and if you want it to be
                         removed from
-                        our systems, please <a class="font-medium text-blue-600 underline hover:no-underline" href="mailto:workerz@support.be">contact us</a>.
+                        our systems, please contact us.
                     </p>
                     <p class="mb-1 text-gray-600 mb-8 mt-2">
                         In certain circumstances, you have the following data protection rights:
@@ -181,7 +181,7 @@
                     of 13.
                     If you think that your child provided this kind of information on our website, we strongly encourage
                     you to
-                    <a class="font-medium text-blue-600 underline hover:no-underline" href="mailto:workerz@support.be">contact us</a> immediately, and we will do our best to promptly remove such information from our
+                    <a class="font-medium text-blue-600 underline hover:no-underline" href="mailto:{{config('app.supportEmail')}}">contact us</a> immediately, and we will do our best to promptly remove such information from our
                     records.</p>
             </section>
             <section>

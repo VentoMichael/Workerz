@@ -105,8 +105,8 @@
                         <!-- TODO: add error handling for form submission -->
                         <!-- TODO: add automatically the email if connected -->
                         <div>
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                            <input type="email" id="email" name="email"
+                            <label for="email-contact" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+                            <input type="email" id="email-contact" name="email-contact"
                                    class="placeholder:text-gray-400 shadow-sm bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
                                    placeholder="your-email@hotmail.com" required>
                         </div>

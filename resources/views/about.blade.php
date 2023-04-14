@@ -48,10 +48,10 @@
             <section class="max-w-max lg:max-w-7xl mx-auto">
                 <div class="relative z-10 mb-8 md:mb-2 md:px-6">
                     <div class="text-base max-w-prose lg:max-w-none">
-                        <h2 class="leading-6 text-indigo-600 font-semibold tracking-wide uppercase">How We Got
-                            Started</h2>
-                        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">Our
-                            Story</p>
+                        <p class="leading-6 text-indigo-600 font-semibold tracking-wide uppercase">How We Got
+                            Started</p>
+                        <h2 class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">Our
+                            Story</h2>
                     </div>
                 </div>
                 <div class="relative">
@@ -117,7 +117,7 @@
                     class="mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16">
                     <section>
                         <div>
-              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-white bg-opacity-100 bg-blue-500">
+              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 bg-opacity-100 bg-blue-500">
                 <!-- Heroicon name: outline/inbox -->
                 <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" aria-hidden="true">
@@ -129,39 +129,36 @@
                         <div class="mt-6">
                             <h3 class="text-lg font-medium text-gray-700">Access to a Wide Range of Skilled Workers</h3>
                             <p class="mt-2 text-base text-gray-500">With Workerz, you have access to a diverse pool of
-                                skilled workers from all over the world. Whether you need a graphic designer, web
+                                skilled workers in Belgium. Whether you need a graphic designer, web
                                 developer, or virtual assistant, you'll find the right talent to suit your needs.</p>
                         </div>
                     </section>
 
                     <section>
                         <div>
-              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-white bg-opacity-100 bg-blue-500">
-                <!-- Heroicon name: outline/users -->
-                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-                </svg>
+
+
+                            <span class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 bg-opacity-100 bg-blue-500">
+                <!-- Heroicon name: outline/trash -->
+                <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#ffffff" stroke-width="2"></path> <path d="M8 10.5H13" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8 13.5H12" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15 8C14.3732 7.37209 13.5941 7 12.7498 7C10.6788 7 9 9.23858 9 12C9 14.7614 10.6788 17 12.7498 17C13.5941 17 14.3732 16.6279 15 16" stroke="#ffffff" stroke-width="2" stroke-linecap="round"></path> </g></svg>
               </span>
                         </div>
                         <div class="mt-6">
                             <h3 class="text-lg font-medium text-gray-700">Cost-Effective Solutions</h3>
                             <p class="mt-2 text-base text-gray-500">With Workerz, you can hire skilled workers at a
                                 fraction of the cost of hiring a full-time employee. You can set your own budget,
-                                negotiate rates with individual freelancers, and choose from a variety of payment
-                                options.</p>
+                                negotiate rates with individual freelancers.</p>
                         </div>
                     </section>
 
                     <section>
                         <div>
-              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-white bg-opacity-100 bg-blue-500">
-                <!-- Heroicon name: outline/trash -->
+                            <span class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 bg-opacity-100 bg-blue-500">
+                <!-- Heroicon name: outline/users -->
                 <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                 </svg>
               </span>
                         </div>
@@ -176,27 +173,20 @@
 
                     <section>
                         <div>
-              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-white bg-opacity-100 bg-blue-500">
+              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 bg-opacity-100 bg-blue-500">
                 <!-- Heroicon name: outline/pencil-alt -->
-                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                     stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                </svg>
+                <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 8V12L15 15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"></path> <circle cx="12" cy="12" r="9" stroke="#ffffff" stroke-width="2"></circle> </g></svg>
               </span>
                         </div>
                         <div class="mt-6">
                             <h3 class="text-lg font-medium text-gray-700">Time Savings</h3>
-                            <p class="mt-2 text-base text-gray-500">By using Workerz, you can save valuable time that
-                                you would otherwise spend on recruitment, onboarding, and managing employees. Workerz
-                                takes care of all the administrative tasks, leaving you with more time to focus on your
-                                core business activities.</p>
+                            <p class="mt-2 text-base text-gray-500">By using Workerz, you can save valuable time that you would otherwise spend researching employees. Workerz takes care of all the analytics tasks, leaving you with more time to focus on your core business activities.</p>
                         </div>
                     </section>
 
                     <section>
                         <div>
-              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-white bg-opacity-100 bg-blue-500">
+              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 bg-opacity-100 bg-blue-500">
                 <!-- Heroicon name: outline/document-report -->
                 <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" aria-hidden="true">
@@ -216,12 +206,13 @@
 
                     <section>
                         <div>
-              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-white bg-opacity-100 bg-blue-500">
-                <!-- Heroicon name: outline/reply -->
+
+              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 bg-opacity-100 bg-blue-500">
+                <!-- Heroicon name: outline/chat-alt -->
                 <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
+                        d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
                 </svg>
               </span>
                         </div>
@@ -236,12 +227,12 @@
 
                     <section>
                         <div>
-              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-white bg-opacity-100 bg-blue-500">
-                <!-- Heroicon name: outline/chat-alt -->
+                            <span class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 bg-opacity-100 bg-blue-500">
+                <!-- Heroicon name: outline/reply -->
                 <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                        d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/>
                 </svg>
               </span>
                         </div>
@@ -249,13 +240,13 @@
                             <h3 class="text-lg font-medium text-gray-700">Global Reach</h3>
                             <p class="mt-2 text-base text-gray-500">With Workerz, you can hire freelancers from anywhere
                                 in Belgium, giving you access to a diverse pool of talent with unique skill sets and
-                                perspectives. This can help you to expand your business and tap into new markets.</p>
+                                perspectives. This can help you to expand your projects.</p>
                         </div>
                     </section>
 
                     <section>
                         <div>
-              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-white bg-opacity-100 bg-blue-500">
+              <span class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-600 bg-opacity-100 bg-blue-500">
                 <!-- Heroicon name: outline/heart -->
                 <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" aria-hidden="true">
@@ -266,9 +257,7 @@
                         </div>
                         <div class="mt-6">
                             <h3 class="text-lg font-medium text-gray-700">Increased Productivity</h3>
-                            <p class="mt-2 text-base text-gray-500">By outsourcing tasks to skilled freelancers, you can
-                                free up your own time and focus on your core business activities. This can lead to
-                                increased productivity and better overall business results.</p>
+                            <p class="mt-2 text-base text-gray-500">By outsourcing tasks to skilled freelancers, you can free up your own time and focus on your core business activities.</p>
                         </div>
                     </section>
                 </div>

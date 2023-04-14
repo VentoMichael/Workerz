@@ -16,7 +16,7 @@
             <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
                 <h1 class="text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">Our Cookie Policy</h1>
                 <p class="mt-6 max-w-3xl text-xl text-gray-300">This Cookie Policy explains how we use cookies and similar tracking technologies when you visit our website,
-                    workerz.be. By using our website, you consent to our use of cookies as described in this policy. If you have any questions or concerns about our use of cookies, please <a class="font-medium text-blue-400 underline hover:no-underline" href="mailto:workerz@support.be">contact us</a>.</p>
+                    {{ config('app.urlNoHttp') }}. By using our website, you consent to our use of cookies as described in this policy. If you have any questions or concerns about our use of cookies, please <a class="font-medium text-blue-400 underline hover:no-underline" href="mailto:{{config('app.supportEmail')}}">contact us</a>.</p>
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,7 +27,7 @@
                     Cookie Policy for Workerz
                 </h2>
                 <p class="mb-3 text-gray-600 mb-8 mt-2">
-                    This is the Cookie Policy for Workerz, accessible from <a class="font-medium text-blue-600 underline hover:no-underline" href="https://www.workerz.be" target="_blank">workerz.be</a>, and it explains how we use cookies and similar technologies on our website.
+                    This is the Cookie Policy for Workerz, accessible from {{ config('app.urlNoHttp') }}, and it explains how we use cookies and similar technologies on our website.
                 </p>
             </section>
             <section>
@@ -111,7 +111,7 @@
                     Contact Us
                 </h2>
                 <p class="mb-3 text-gray-600 mb-8 mt-2">
-                    If you have any questions or concerns about our Cookie Policy, please <a class="font-medium text-blue-600 underline hover:no-underline" href="mailto:workerz@support.be">contact us</a> at <a class="font-medium text-blue-600 underline hover:no-underline" href="mailto:mailto:workerz@support.be">workerz@support.be</a>.
+                    If you have any questions or concerns about our Cookie Policy, please <a class="font-medium text-blue-600 underline hover:no-underline" href="mailto:{{config('app.supportEmail')}}">contact us</a>.
                 </p>
             </section>
 
