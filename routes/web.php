@@ -26,14 +26,15 @@ Route::get('/ads', function () {
 })->name('ads');
 Route::get('/ads/details', function () {
     return view('ads.show');
-})->name('ads');
+})->name('ads.show');
 
 Route::get('/workers', function () {
     return view('workers.workers');
 })->name('workers');
+
 Route::get('/workers/details', function () {
     return view('workers.show');
-})->name('workers');
+})->name('workers.show');
 
 Route::get('/contact-us', function () {
     return view('contact-us');
@@ -51,11 +52,14 @@ Route::get('/pricing', function () {
 // Connexion page
 
 Route::get('/sign-up', function () {
-    return view('sign-up');
+    return view('connexion.sign-up.first-step');
 })->name('sign-up');
+Route::get('/sign-up/account', function () {
+    return view('connexion.sign-up.second-step');
+})->name('sign-up.account');
 
 Route::get('/sign-in', function () {
-    return view('sign-in');
+    return view('connexion.sign-in');
 })->name('sign-in');
 
 

@@ -19,11 +19,11 @@
             <div class="sm:flex sm:flex-col sm:align-center">
                 <label class="relative inline-flex mx-auto mb-4 items-center cursor-pointer">
                     <input type="checkbox" value="" id="annualPrice" class="sr-only peer">
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full peer-checked:after:border-purple-700 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-purple-700 after:border-purple-700 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-indigo-600 peer-checked:bg-indigo-300"></div>
-                    <span class="ml-3 text-sm font-medium text-gray-900 ">Annual pricing (save 10%)</span>
+                    <div class="mr-4 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full peer-checked:after:border-purple-700 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-purple-700 after:border-purple-700 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-indigo-600 peer-checked:bg-indigo-300"></div>
+                    <span class="mr-2 text-sm font-medium text-gray-900">Annual billing </span>
+                    <span class="text-sm text-gray-500">(Save 10%)</span>
                 </label>
             </div>
-
 
 
             <div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
