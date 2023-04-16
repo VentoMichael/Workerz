@@ -25,7 +25,7 @@
                             sets us apart from other freelancer job boards.</p>
                         <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                             <div class="mt-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-5">
-                                <a href="{{route('sign-up')}}">
+                                <a href="{{route('sign-up.role')}}">
                                     <x-button kind="primary-big">Get started</x-button>
                                 </a>
                                 <a href="{{route('how-it-works')}}">
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="mt-8 inline-flex rounded-md shadow">
-                            <a href="{{route('sign-up')}}">
+                            <a href="{{route('sign-up.role')}}">
                                 <x-button kind="primary-big">Join us now</x-button>
                             </a>
                         </div>
@@ -277,7 +277,7 @@
                     <a href="{{route('how-it-works')}}">
                         <x-button kind="secondary">Learn more</x-button>
                     </a>
-                    <a href="{{route('sign-up')}}">
+                    <a href="{{route('sign-up.role')}}">
                         <x-button kind="primary">Get started</x-button>
                     </a>
                 </div>

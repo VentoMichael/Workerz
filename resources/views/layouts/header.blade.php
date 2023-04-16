@@ -40,7 +40,7 @@
             <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0 gap-4">
                 <x-nav-link kind="primary" id="signin-link" href="{{ route('sign-in') }}" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" type="button" class="{{ Route::currentRouteName() === 'sign-in' ? 'font-extrabold text-purple-700' : '' }}">Sign in</x-nav-link>
 
-                <a href="{{route('sign-up')}}">
+                <a href="{{route('sign-up.role')}}">
                     <x-button kind="primary">Sign up</x-button>
                 </a>
             </div>
@@ -135,7 +135,7 @@
                 </div>
                 <div class="py-6 px-5">
                     <div class="mt-6">
-                        <a href="#"
+                        <a href="{{ route('sign-up.role') }}"
                            class="w-full flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700">
                             Sign up </a>
                         <p class="mt-6 text-center text-base font-medium text-gray-500">

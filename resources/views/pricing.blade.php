@@ -86,7 +86,7 @@
                         <!-- TODO: if connected redirect to settings -->
                     </div>
 
-                    <a href="{{route('sign-up')}}">
+                    <a href="{{route('sign-up.role')}}">
                         <x-button kind="primary">Get started</x-button>
                     </a>
                 </div>
@@ -165,7 +165,7 @@
                         </ul>
                         <!-- TODO: if connected redirect to settings -->
                     </div>
-                    <a href="{{route('sign-up')}}">
+                    <a href="{{route('sign-up.role')}}">
                         <x-button kind="primary">Get started</x-button>
                     </a>
                 </div>
@@ -255,7 +255,7 @@
                         </ul>
                         <!-- TODO: if connected redirect to settings -->
                     </div>
-                    <a href="{{route('sign-up')}}">
+                    <a href="{{route('sign-up.role')}}">
                         <x-button kind="primary">Get started</x-button>
                     </a>
 

@@ -23,7 +23,7 @@
                                 today.</p>
                             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                                 <div class="mt-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-5">
-                                    <a href="{{route('sign-up')}}">
+                                    <a href="{{route('sign-up.role')}}">
                                         <x-button kind="primary-big">Get started</x-button>
                                     </a>
                                     <a href="{{route('how-it-works')}}#steps">
@@ -195,7 +195,7 @@
                     <a href="{{route('sign-in')}}">
                         <x-button kind="secondary-big">Sign in</x-button>
                     </a>
-                    <a href="{{route('sign-up')}}">
+                    <a href="{{route('sign-up.role')}}">
                         <x-button kind="primary-big">Sign up</x-button>
                     </a>
                 </div>

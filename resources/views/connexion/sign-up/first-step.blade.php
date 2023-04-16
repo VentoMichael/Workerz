@@ -5,6 +5,18 @@
 
 
 @section('content')
+    <div class="relative bg-gray-800">
+        <div class="absolute inset-0">
+            <img class="w-full h-full object-cover"
+                 src="https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&&sat=-100"
+                 alt="">
+            <div class="absolute inset-0 bg-gray-800 mix-blend-multiply" aria-hidden="true"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+            <h1 class="text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">Let's get started!</h1>
+            <p class="mt-6 max-w-3xl text-xl text-gray-300">Welcome to our registration process. We're excited to have you on board. In this first step, please select your role by choosing either "I am a freelancer" or "I want freelancer services". Let's get started on building your next project together!</p>
+        </div>
+    </div>
     <div class="min-h-full flex mx-auto max-w-screen-xl gap-12 my-12">
         <div class=" md:block relative w-0 flex-1">
             <form action="{{route('sign-up.account')}}">
@@ -76,7 +88,6 @@
         </div>
 
         <div class="block relative w-0 flex-1 max-w-lg">
-            <!-- This example requires Tailwind CSS v2.0+ -->
             <nav aria-label="Progress" class="sticky top-8">
                 <ol role="list" class="overflow-hidden">
                     <li class="relative pb-10">
@@ -132,7 +143,6 @@
                     </li>
                 </ol>
             </nav>
-
         </div>
     </div>
 

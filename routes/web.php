@@ -53,10 +53,19 @@ Route::get('/pricing', function () {
 
 Route::get('/sign-up', function () {
     return view('connexion.sign-up.first-step');
-})->name('sign-up');
-Route::get('/sign-up/account', function () {
+})->name('sign-up.role');
+Route::get('/sign-up/role', function () {
     return view('connexion.sign-up.second-step');
 })->name('sign-up.account');
+Route::get('/sign-up/account', function () {
+    return view('connexion.sign-up.third-step');
+})->name('sign-up.confirmation');
+Route::get('/sign-up/payment', function () {
+    return view('connexion.sign-up.payment-step');
+})->name('sign-up.payment');
+
+
+
 
 Route::get('/sign-in', function () {
     return view('connexion.sign-in');
