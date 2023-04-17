@@ -1,7 +1,8 @@
 @extends('layouts.layout')
-@section('title', '')
-@section('description', '')
-@section('keywords', '')
+@section('title', 'Freelancer Payment Confirmation')
+@section('description', 'Confirm your payment details and complete your freelancer account setup on Workerz.')
+@section('keywords', 'freelancer payment confirmation, account setup, payment details, Workerz')
+
 
 
 @section('content')
@@ -13,14 +14,14 @@
             <div class="absolute inset-0 bg-gray-800 mix-blend-multiply" aria-hidden="true"></div>
         </div>
         <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-            <h1 class="text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">Create Your Account</h1>
-            <p class="mt-6 max-w-3xl text-xl text-gray-300"> You're almost there! Please review your account information and confirm your subscription to complete your registration as a freelancer. We can't wait to welcome you to our community of talented freelancers!</p>
+            <h1 class="text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">Secure payment for freelancers</h1>
+            <p class="mt-6 max-w-3xl text-xl text-gray-300"> Thank you for choosing to become a part of our freelancer community. We are committed to providing you with the best experience possible. To ensure the security of your payment, please select your preferred payment method below.</p>
         </div>
     </div>
     <div class="min-h-full flex mx-auto max-w-screen-xl gap-12 my-12">
         <div class=" md:block relative w-0 flex-1">
-            <form action="{{route('sign-up.payment')}}">
-            <div class="space-y-12">
+            <form action="{{route('sign-up.confirmation')}}">
+                <div class="space-y-12">
                     <div class="border-b border-gray-900/10 pb-12">
                         <h2 class="text-base font-semibold leading-7 text-gray-900">Profile</h2>
                         <p class="mt-1 text-sm leading-6 text-gray-600">This information will be displayed publicly so
@@ -257,8 +258,8 @@
                 </div>
 
                 <div class="mt-6 flex items-center justify-end gap-x-6">
-                    <x-nav-link href="{{ route('sign-up.account') }}" class="max-w-xs" kind="secondary">Go back</x-nav-link>
-                    <x-button type="submit" class="max-w-xs" kind="primary">Complete registration</x-button>
+                    <x-nav-link href="{{ route('sign-up.role') }}" class="max-w-xs" kind="secondary">Go back</x-nav-link>
+                    <x-button type="submit" class="max-w-xs" kind="primary">Continue to next step</x-button>
                 </div>
             </form>
 
@@ -325,9 +326,12 @@
           </span>
         </span>
                             <span class="ml-4 min-w-0 flex flex-col">
-          <span class="text-xs font-semibold tracking-wide uppercase text-indigo-600">Confirm Your Request</span>
-          <span class="text-sm text-gray-500">Confirm your account details</span>
+          <span class="text-xs font-semibold tracking-wide uppercase text-indigo-600">Payment Information (only for freelancer)</span>
+          <span class="text-sm text-gray-500">Securely pay for your account and start using our services.</span>
         </span>
+                        </a>
+                    </li>
+
                         </a>
                     </li>
                 </ol>

@@ -1,7 +1,7 @@
 @extends('layouts.layout')
-@section('title', '')
-@section('description', '')
-@section('keywords', '')
+@section('title', 'Create Account - Account Information')
+@section('description', 'Enter your account information to create your freelancer account on My Freelancer Website. Provide your name, email, password, and other details to get started.')
+@section('keywords', 'freelancer, account, information, create account, name, email, password, details')
 
 
 @section('content')
@@ -320,9 +320,10 @@
           </span>
         </span>
                             <span class="ml-4 min-w-0 flex flex-col">
-          <span class="text-xs font-semibold tracking-wide uppercase text-gray-500">Confirm Your Request</span>
-          <span class="text-sm text-gray-500">Confirm your account details</span>
+          <span class="text-xs font-semibold tracking-wide uppercase text-gray-500">Payment Information (only for freelancer)</span>
+          <span class="text-sm text-gray-500">Securely pay for your account and start using our services.</span>
         </span>
+
                         </a>
                     </li>
                 </ol>

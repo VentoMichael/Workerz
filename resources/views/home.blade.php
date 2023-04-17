@@ -54,7 +54,7 @@
                     <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
                         <!-- Illustration taken from Lucid Illustrations: https://lucid.pixsellz.io/ -->
                         <img class="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-                             src="https://tailwindui.com/img/component-images/cloud-illustration-teal-cyan.svg" alt="">
+                             src="{{asset('img/home.svg')}}" alt="">
                     </div>
                 </div>
             </div>
@@ -374,25 +374,29 @@
             class="tabs workers-home-section max-w-7xl mx-auto px-4 mt-10 text-center sm:px-6 lg:max-w-7xl lg:px-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
             <li>
                 <a href="#"
-                   class="p-4 flex flex-col bg-white border border-gray-200 rounded-lg shadow md:max-w-xl gap-4 hover:bg-gray-100 bg-white rounded-lg shadow">
-                    <div class="flex gap-4 text-left flex-row leading-normal">
-                        <img class="rounded-xl object-cover w-full rounded-t-lg w-24 h-24"
-                             src="https://randomuser.me/api/portraits/men/78.jpg" alt="">
-                        <p class="mb-2 text-2xl font-bold tracking-tight text-black">James Rodriguez <span
-                                class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded border border-green-200 inline-block">26 years exp.</span>
-                        </p>
+                   class="flex flex-col bg-white border border-gray-200 rounded-lg shadow md:max-w-xl gap-4 hover:bg-gray-100 bg-white rounded-lg shadow">
+                    <div class="max-w-md rounded-lg relative ">
+                        <div class="absolute -top-4 -right-2 p-2 bg-white rounded-lg shadow container-heart">
+                            <img class="w-8 heart-stroke" src="{{asset('img/heart-stroke.svg')}}" alt="">
+                            <img class="w-8 hidden heart-filled" src="{{asset('img/heart-filled.svg')}}" alt="">
+                        </div>
+                        <img class="w-full h-48 object-cover" src="https://randomuser.me/api/portraits/men/78.jpg" alt="Freelancer Profile">
+<div class="px-6 py-4">
+                        <div>
+                            <div class="font-bold text-xl mb-2">John Doe</div>
+                            <p class="text-gray-700 text-base">
+                                Full-stack web developer with 5 years of experience
+                            </p>
+                            <div class="flex justify-between mt-4">
+                                <div>
+                                    <p class="text-gray-600 font-medium">Hourly Rate</p>
+                                    <p class="text-gray-900">$75</p>
+                                </div>
+                            </div>
+                        </div>
+                        <x-button class="mt-4 w-full" kind="primary"> See profile </x-button>
                     </div>
-                    <p class="mb-3 font-normal text-gray-700">Here are the biggest enterprise technology acquisitions of
-                        2021 so far, in reverse chronological order.</p>
-                    <div class="flex">
-                        <span
-                            class="inline-block bg-blue-600 text-left text-white text-sm font-medium py-0.5 px-2 rounded-md">My skills</span>
-                        <p class="text-sm text-gray-500">Proficient in JavaScript, React, and Node.js</p>
                     </div>
-                    <button
-                        class="whitespace-nowrap inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700">
-                        See profile
-                    </button>
                 </a>
             </li>
 
@@ -549,6 +553,22 @@
             });
         });
 
+
+
+        //HEART
+        const containerHeart = document.querySelector('.container-heart');
+        const heartStroke = document.querySelector('.heart-stroke');
+        const heartFilled = document.querySelector('.heart-filled');
+
+        containerHeart.addEventListener('mouseover', () => {
+            heartStroke.classList.add('hidden');
+            heartFilled.classList.remove('hidden');
+        });
+
+        containerHeart.addEventListener('mouseout', () => {
+            heartStroke.classList.remove('hidden');
+            heartFilled.classList.add('hidden');
+        });
 
     </script>
 @endsection

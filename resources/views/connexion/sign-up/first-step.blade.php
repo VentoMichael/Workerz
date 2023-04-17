@@ -1,7 +1,7 @@
 @extends('layouts.layout')
-@section('title', '')
-@section('description', '')
-@section('keywords', '')
+@section('title', 'Create an Account - Step 1: Select Role')
+@section('description', 'Create an account to access our platform and connect with freelancers or clients. Select your role - freelancer or client - to get started.')
+@section('keywords', 'account creation, freelancer, client, platform')
 
 
 @section('content')
@@ -109,8 +109,6 @@
                     </li>
 
                     <li class="relative pb-10">
-                        <div class="-ml-px absolute mt-0.5 top-4 left-4 w-0.5 h-full bg-gray-300"
-                             aria-hidden="true"></div>
                         <!-- Current Step -->
                         <div class="relative flex items-start group" aria-current="step">
         <span class="h-9 flex items-center" aria-hidden="true">
@@ -126,21 +124,6 @@
                         </div>
                     </li>
 
-                    <li class="relative">
-                        <!-- Upcoming Step -->
-                        <div class="relative flex items-start group">
-        <span class="h-9 flex items-center" aria-hidden="true">
-          <span
-              class="relative z-10 w-8 h-8 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full">
-            <span class="h-2.5 w-2.5 bg-transparent rounded-full"></span>
-          </span>
-        </span>
-                            <span class="ml-4 min-w-0 flex flex-col">
-          <span class="text-xs font-semibold tracking-wide uppercase text-gray-500">Confirm Your Request</span>
-          <span class="text-sm text-gray-500">Confirm your account details</span>
-        </span>
-                        </div>
-                    </li>
                 </ol>
             </nav>
         </div>
