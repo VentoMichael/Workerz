@@ -17,13 +17,13 @@
             <p class="mt-6 max-w-3xl text-xl text-gray-300">Welcome to our registration process. We're excited to have you on board. In this first step, please select your role by choosing either "I am a freelancer" or "I want freelancer services". Let's get started on building your next project together!</p>
         </div>
     </div>
-    <div class="min-h-full flex mx-auto max-w-screen-xl gap-12 my-12">
-        <div class=" md:block relative w-0 flex-1">
+    <div class="min-h-full flex max-w-screen-xl gap-12 m-4 sm:m-12 2xl:mx-auto">
+        <div class="md:block relative w-0 flex-1">
             <form action="{{route('sign-up.account')}}">
                 <fieldset class="mb-6">
                     <legend class="text-base font-medium text-gray-900">Select your role</legend>
 
-                    <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+                    <div class="mt-4 grid grid-cols-1 gap-y-6 lg:grid-cols-2 sm:gap-3">
                         <!--
                           Checked: "border-transparent", Not Checked: "border-gray-300"
                           Active: "border-indigo-500 ring-2 ring-indigo-500"
@@ -87,7 +87,7 @@
 
         </div>
 
-        <div class="block relative w-0 flex-1 max-w-lg">
+        <div class="hidden md:block relative w-0 flex-1 max-w-lg">
             <nav aria-label="Progress" class="sticky top-8">
                 <ol role="list" class="overflow-hidden">
                     <li class="relative pb-10">

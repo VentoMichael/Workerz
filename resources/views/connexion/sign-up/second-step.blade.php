@@ -17,7 +17,7 @@
             <p class="mt-6 max-w-3xl text-xl text-gray-300"> Let's get started by creating your account. Please provide the following information to create your login credentials and keep track of your registration progress.</p>
         </div>
     </div>
-    <div class="min-h-full flex mx-auto max-w-screen-xl gap-12 my-12">
+    <div class="min-h-full flex max-w-screen-xl gap-12 m-4 sm:m-12 2xl:mx-auto">
         <div class=" md:block relative w-0 flex-1">
             <form action="{{route('sign-up.confirmation')}}">
                 <div class="space-y-12">
@@ -264,7 +264,7 @@
 
         </div>
 
-        <div class="block relative w-0 flex-1 max-w-lg">
+        <div class="hidden md:block relative w-0 flex-1 max-w-lg">
             <!-- This example requires Tailwind CSS v2.0+ -->
             <nav class="sticky top-12" aria-label="Progress">
                 <ol role="list" class="overflow-hidden">

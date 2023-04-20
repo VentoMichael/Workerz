@@ -408,7 +408,7 @@
                                     <div class="flex items-center justify-between">
                                         <div>
 
-                                            <div class="flex text-sm sm:items-center flex-col sm:flex-row">
+                                            <div class="flex text-sm sm:items-end flex-col sm:flex-row">
                                                 <h4 class="text-xl font-medium text-indigo-600 truncate">Sales Executive</h4>
                                                 <p class="sm:ml-1 flex-shrink-0 text-md font-normal text-gray-500">in Business
                                                     Development</p>
@@ -417,7 +417,7 @@
 
                                     </div>
 
-                                    <div class="flex gap-6">
+                                    <div class="flex gap-6 sm:mt-2">
                                         <div class="mt-2 gap-1 flex flex-col sm:flex-row sm:items-center text-sm text-indigo-500 sm:mt-0">
                                             <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
                                                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -434,7 +434,7 @@
                                                 <path clip-rule="evenodd" fill-rule="evenodd"
                                                       d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"></path>
                                             </svg>
-                                            <p class="sm:mt-2 flex items-center text-sm text-gray-500 sm:mt-0 gap-1">
+                                            <p class="flex items-center text-sm text-gray-500 sm:mt-0 gap-1">
                                                 <!-- Heroicon name: solid/location-marker -->
                                                 New York City, USA
                                             </p>
@@ -546,7 +546,8 @@
                             </svg>
 
                             <div class="max-w-screen-lg mx-auto">
-                                <h1 class="text-2xl font-semibold mb-4">Mason for Wall Building</h1>
+
+                                <h3 class="text-2xl font-semibold mb-4">Mason for Wall Building</h3>
                                 <div class="flex flex-wrap mb-4">
                                     <div class="w-full md:w-1/3">
                                         <p class="text-gray-700">Location:</p>
@@ -573,7 +574,13 @@
                                         <li class="text-gray-700 leading-normal">Attention to detail and ability to follow instructions</li>
                                     </ul>
                                 </div>
-                                <div class="mb-4">
+                                <div class="mb-4 flex justify-between">
+                                    <div class="flex items-end">
+                                        <svg class="w-4" fill="bg-gray-500" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <path clip-rule="evenodd" fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
+                                        </svg>
+                                        <p class="ml-2 text-gray-500 text-sm">Posted 2 days ago</p>
+                                    </div>
                                     <a href="#">
                                         <x-button kind="primary">Chat now</x-button>
                                     </a>
