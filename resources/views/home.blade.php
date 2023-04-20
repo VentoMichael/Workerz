@@ -6,59 +6,61 @@
 @section('content')
     <section>
         <div class="pt-10 sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden bg-gray-900">
-        <div class="mx-auto max-w-7xl lg:px-8">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-8">
-                <div
-                    class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
-                    <div class="lg:py-24">
-                        <a href="{{route('sign-up.role')}}"
-                           class="inline-flex items-center text-white bg-black rounded-full p-1 pr-2 sm:text-base lg:text-sm xl:text-base hover:text-gray-200">
+            <div class="mx-auto max-w-7xl lg:px-8">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-8">
+                    <div
+                        class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
+                        <div class="lg:py-24">
+                            <a href="{{route('sign-up.role')}}"
+                               class="inline-flex items-center text-white bg-black rounded-full p-1 pr-2 sm:text-base lg:text-sm xl:text-base hover:text-gray-200">
                             <span
                                 class="px-3 py-0.5 text-white text-xs font-semibold leading-5 uppercase tracking-wide bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full">Workerz</span>
-                            <span class="ml-4 text-sm">Empowering Independent Workers</span>
-                            <!-- Heroicon name: solid/chevron-right -->
-                            <svg class="ml-2 w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                      clip-rule="evenodd"/>
-                            </svg>
-                        </a>
-                        <h1 class="mt-4 text-4xl tracking-tight font-extrabold text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
-                            <span class="block">Your go-to platform</span>
-                            <span
-                                class="pb-3 block bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-600 sm:pb-5"> for independent work</span>
-                        </h1>
-                        <p class="text-base text-gray-300 sm:text-xl lg:text-lg xl:text-xl">Workerz connects independent
-                            workers with clients in a simple and efficient way. Search by zip code or occupation, and
-                            find the perfect match for your needs. Join our community today and take control of your
-                            future.</p>
-                        <div class="mt-10 sm:mt-12">
-                            <form action="#" class="sm:max-w-xl sm:mx-auto lg:mx-0">
-                                <div class="sm:flex">
-                                    <div class="min-w-0 flex-1">
-                                        <label for="name" class="sr-only text-black">Workerz name</label>
-                                        <input id="name" type="text"
-                                               placeholder="Enter the job title you need help with"
-                                               class="block w-full px-4 py-3 rounded-md border-0 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900">
+                                <span class="ml-4 text-sm">Empowering Independent Workers</span>
+                                <!-- Heroicon name: solid/chevron-right -->
+                                <svg class="ml-2 w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                          clip-rule="evenodd"/>
+                                </svg>
+                            </a>
+                            <h1 class="mt-4 text-4xl tracking-tight font-extrabold text-white sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
+                                <span class="block">Your go-to platform</span>
+                                <span
+                                    class="pb-3 block bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-600 sm:pb-5"> for independent work</span>
+                            </h1>
+                            <p class="text-base text-gray-300 sm:text-xl lg:text-lg xl:text-xl">Workerz connects
+                                independent
+                                workers with clients in a simple and efficient way. Search by zip code or occupation,
+                                and
+                                find the perfect match for your needs. Join our community today and take control of your
+                                future.</p>
+                            <div class="mt-10 sm:mt-12">
+                                <form action="#" class="sm:max-w-xl sm:mx-auto lg:mx-0">
+                                    <div class="sm:flex">
+                                        <div class="min-w-0 flex-1">
+                                            <label for="name" class="sr-only text-black">Workerz name</label>
+                                            <input id="name" type="text"
+                                                   placeholder="Enter the job title you need help with"
+                                                   class="block w-full px-4 py-3 rounded-md border-0 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900">
+                                        </div>
+                                        <div class="mt-3 sm:mt-0 sm:ml-3">
+                                            <x-button type="submit" class="h-full" kind="primary">Search</x-button>
+                                        </div>
                                     </div>
-                                    <div class="mt-3 sm:mt-0 sm:ml-3">
-                                        <x-button type="submit" kind="primary">Search</x-button>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-12 -mb-16 lg:m-0 lg:relative">
+                        <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
+                            <!-- Illustration taken from Lucid Illustrations: https://lucid.pixsellz.io/ -->
+                            <img class="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
+                                 src="{{asset('img/home.svg')}}" alt="">
                         </div>
                     </div>
                 </div>
-                <div class="mt-12 -mb-16 sm:-mb-48 lg:m-0 lg:relative">
-                    <div class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 lg:max-w-none lg:px-0">
-                        <!-- Illustration taken from Lucid Illustrations: https://lucid.pixsellz.io/ -->
-                        <img class="w-full lg:absolute lg:inset-y-0 lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-                             src="{{asset('img/home.svg')}}" alt="">
-                    </div>
-                </div>
             </div>
-        </div>
         </div>
         <section class="bg-gray-50">
             <div class="background_blur hidden fixed inset-0 flex z-40 sm:hidden" role="dialog" aria-modal="true">
@@ -82,14 +84,15 @@
                     <!-- Filters -->
                     <form class="mt-4">
                         <section class="border-t border-gray-200 px-4 py-6">
-                                <h3 class="-mx-2 -my-3 flow-root">
+                            <h3 class="-mx-2 -my-3 flow-root">
                                 <!-- Expand/collapse question button -->
                                 <button type="button"
                                         class="button_filter_category px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400"
                                         aria-controls="filter-section-0" aria-expanded="false">
                                     <span class="font-medium text-gray-900"> Category </span>
                                     <span class="ml-6 flex items-center">
-                                    <svg class="chevron_category rotate-0 h-5 w-5 transform" xmlns="http://www.w3.org/2000/svg"
+                                    <svg class="chevron_category rotate-0 h-5 w-5 transform"
+                                         xmlns="http://www.w3.org/2000/svg"
                                          viewBox="0 0 20 20"
                                          fill="currentColor" aria-hidden="true">
                                       <path fill-rule="evenodd"
@@ -102,7 +105,8 @@
                             <div class="content_filter_category pt-6 hidden" id="filter-section-0">
                                 <div class="space-y-6">
                                     <div class="flex items-center">
-                                        <input id="filter-mobile-category-0" name="category[]" value="tees" type="checkbox"
+                                        <input id="filter-mobile-category-0" name="category[]" value="tees"
+                                               type="checkbox"
                                                class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
                                         <label for="filter-mobile-category-0" class="ml-3 text-sm text-gray-500"> Tees
                                             (31)</label>
@@ -112,12 +116,14 @@
                                         <input id="filter-mobile-category-1" name="category[]" value="crewnecks"
                                                type="checkbox"
                                                class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-mobile-category-1" class="ml-3 text-sm text-gray-500"> Crewnecks
+                                        <label for="filter-mobile-category-1" class="ml-3 text-sm text-gray-500">
+                                            Crewnecks
                                             (31) </label>
                                     </div>
 
                                     <div class="flex items-center">
-                                        <input id="filter-mobile-category-2" name="category[]" value="hats" type="checkbox"
+                                        <input id="filter-mobile-category-2" name="category[]" value="hats"
+                                               type="checkbox"
                                                class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
                                         <label for="filter-mobile-category-2" class="ml-3 text-sm text-gray-500"> Hats
                                             (31) </label>
@@ -155,7 +161,8 @@
                                     </div>
 
                                     <div class="flex items-center">
-                                        <input id="filter-mobile-brand-1" name="brand[]" value="fashion-inc" type="checkbox"
+                                        <input id="filter-mobile-brand-1" name="brand[]" value="fashion-inc"
+                                               type="checkbox"
                                                class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
                                         <label for="filter-mobile-brand-1" class="ml-3 text-sm text-gray-500"> Fashion
                                             Inc. </label>
@@ -165,7 +172,8 @@
                                         <input id="filter-mobile-brand-2" name="brand[]" value="shoes-n-more"
                                                type="checkbox"
                                                class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-mobile-brand-2" class="ml-3 text-sm text-gray-500"> Shoes &#039;n
+                                        <label for="filter-mobile-brand-2" class="ml-3 text-sm text-gray-500"> Shoes
+                                            &#039;n
                                             More </label>
                                     </div>
                                 </div>
@@ -176,29 +184,23 @@
             </div>
 
             <section class="max-w-7xl mx-auto px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
-                <div class="py-24">
+                <div class="py-16">
                     <h2 class="text-4xl font-extrabold tracking-tight text-gray-900">Find Your Match Today</h2>
                     <p class="mt-4 max-w-7xl mx-auto text-base text-gray-500">Discover a diverse range of independent
-                        workers and job opportunities in just a few clicks. Our platform simplifies the search process, so
+                        workers and job opportunities in just a few clicks. Our platform simplifies the search process,
+                        so
                         you can quickly find the perfect match for your needs.</p>
                 </div>
                 <div>
-                    <div class="sm:hidden">
-                        <label for="tabs" class="sr-only">Select a tab</label>
-                        <select id="tabs" name="tabs"
-                                class="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md">
-                            <option value="workers" selected>Workers</option>
-                            <option value="ads">Ads</option>
-                        </select>
-                    </div>
-                    <div class="hidden sm:block">
+                    <div class="block" id="tabs-section">
                         <nav class="flex space-x-4 p-4 justify-center" aria-label="Tabs">
                             <!-- Add an "id" attribute to each tab link to match with their corresponding tab content section "id" attribute -->
-                            <a href="#" data-tab="workers" aria-current="page"
-                               class="tab-link bg-gray-200 text-gray-800 px-3 py-2 font-medium text-sm rounded-md">Workers</a>
-                            <a href="#" data-tab="ads"
-                               class="tab-link text-gray-600 hover:text-gray-800 px-3 py-2 font-medium text-sm rounded-md">Ads</a>
+                            <a href="{{route('workers')}}" data-tab="workers" aria-current="page"
+                               class="tab-link text-white px-3 py-2 font-medium text-sm rounded-md">Workers</a>
+                            <a href="{{route('ads')}}" data-tab="ads"
+                               class="tab-link text-gray-600 px-3 py-2 font-medium text-sm rounded-md">Ads</a>
                         </nav>
+
                     </div>
                 </div>
 
@@ -213,9 +215,10 @@
                                         id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
                                     Sort
                                     <!-- Heroicon name: solid/chevron-down -->
-                                    <svg class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                         aria-hidden="true">
+                                    <svg
+                                        class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                        aria-hidden="true">
                                         <path fill-rule="evenodd"
                                               d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                               clip-rule="evenodd"/>
@@ -235,16 +238,20 @@
                             -->
                             <div
                                 class="filter_sort_content hidden origin-top-left absolute left-0 z-10 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button" tabindex="-1">
+                                role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button"
+                                tabindex="-1">
                                 <div class="py-1" role="none">
                                     <!-- Active: "bg-gray-100", Not Active: "" -->
-                                    <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900" role="menuitem"
+                                    <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
+                                       role="menuitem"
                                        tabindex="-1" id="mobile-menu-item-0"> Most Popular </a>
 
-                                    <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900" role="menuitem"
+                                    <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
+                                       role="menuitem"
                                        tabindex="-1" id="mobile-menu-item-1"> Best Rating </a>
 
-                                    <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900" role="menuitem"
+                                    <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
+                                       role="menuitem"
                                        tabindex="-1" id="mobile-menu-item-2"> Newest </a>
                                 </div>
                             </div>
@@ -347,7 +354,8 @@
                                         </div>
 
                                         <div class="flex items-center">
-                                            <input id="filter-brand-1" name="brand[]" value="fashion-inc" type="checkbox"
+                                            <input id="filter-brand-1" name="brand[]" value="fashion-inc"
+                                                   type="checkbox"
                                                    class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
                                             <label for="filter-brand-1"
                                                    class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
@@ -355,7 +363,8 @@
                                         </div>
 
                                         <div class="flex items-center">
-                                            <input id="filter-brand-2" name="brand[]" value="shoes-n-more" type="checkbox"
+                                            <input id="filter-brand-2" name="brand[]" value="shoes-n-more"
+                                                   type="checkbox"
                                                    class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
                                             <label for="filter-brand-2"
                                                    class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
@@ -369,68 +378,214 @@
                 </section>
             </section>
         </section>
-
-        <ul id="workers-section" role="list"
-            class="tabs workers-home-section max-w-7xl mx-auto px-4 mt-10 text-center sm:px-6 lg:max-w-7xl lg:px-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-            <li>
-                <a href="#"
-                   class="flex flex-col bg-white border border-gray-200 rounded-lg shadow md:max-w-xl gap-4 hover:bg-gray-100 bg-white rounded-lg shadow">
-                    <div class="max-w-md rounded-lg relative ">
-                        <div class="absolute -top-4 -right-2 p-2 bg-white rounded-lg shadow container-heart">
-                            <img class="w-8 heart-stroke" src="{{asset('img/heart-stroke.svg')}}" alt="">
-                            <img class="w-8 hidden heart-filled" src="{{asset('img/heart-filled.svg')}}" alt="">
+        <!-- This example requires Tailwind CSS v2.0+ -->
+        <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 ">
+            <section>
+                <h3 style="z-index: -10" class="text-transparent absolute">Most popular workers</h3>
+                <div id="workers-section" role="list" class="hidden flex md:grid md:grid-cols-500px flex-col gap-4">
+                    <section class="bg-white shadow overflow-hidden sm:rounded-md relative">
+                        <div class="top-5 absolute right-6">
+                            <form action="" id="saveWorker">
+                                <button type="submit" class="flex bg-white shadow overflow-hidden sm:rounded-md p-1.5">
+                                    <svg fill="none" class="w-7" stroke="currentColor" stroke-width="1.5"
+                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                              d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"></path>
+                                    </svg>
+                                </button>
+                            </form>
                         </div>
-                        <img class="w-full h-48 object-cover" src="https://randomuser.me/api/portraits/men/78.jpg" alt="Freelancer Profile">
-<div class="px-6 py-4">
-                        <div>
-                            <div class="font-bold text-xl mb-2">John Doe</div>
-                            <p class="text-gray-700 text-base">
-                                Full-stack web developer with 5 years of experience
-                            </p>
-                            <div class="flex justify-between mt-4">
-                                <div>
-                                    <p class="text-gray-600 font-medium">Hourly Rate</p>
-                                    <p class="text-gray-900">$75</p>
+                        <a href="#" class="block hover:bg-indigo-50">
+                            <div class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 sm:grid-cols-48-1">
+
+                                <div class="flex-shrink-0 self-center">
+                                    <img class="h-12 w-12 rounded-full"
+                                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                         alt="">
+                                </div>
+                                <div class="flex justify-between flex-col w-full">
+
+                                    <div class="flex items-center justify-between">
+                                        <div>
+
+                                            <div class="flex text-sm sm:items-center flex-col sm:flex-row">
+                                                <h4 class="text-xl font-medium text-indigo-600 truncate">Sales Executive</h4>
+                                                <p class="sm:ml-1 flex-shrink-0 text-md font-normal text-gray-500">in Business
+                                                    Development</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="flex gap-6">
+                                        <div class="mt-2 gap-1 flex flex-col sm:flex-row sm:items-center text-sm text-indigo-500 sm:mt-0">
+                                            <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
+                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path
+                                                    d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"></path>
+                                            </svg>
+                                            <p class="flex items-center text-sm text-gray-500 sm:mt-0">
+                                                John Doe | ABC Inc.
+                                            </p>
+                                        </div>
+                                        <div class="mt-2 gap-1 flex flex-col sm:flex-row sm:items-center text-sm text-indigo-500 sm:mt-0">
+                                            <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
+                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path clip-rule="evenodd" fill-rule="evenodd"
+                                                      d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"></path>
+                                            </svg>
+                                            <p class="sm:mt-2 flex items-center text-sm text-gray-500 sm:mt-0 gap-1">
+                                                <!-- Heroicon name: solid/location-marker -->
+                                                New York City, USA
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col px-4 py-4 sm:px-6 flex gap-4">
+                                <p class="text-gray-500">responsible for identifying new business opportunities, building
+                                    relationships with clients, and closing deals to drive revenue growth for ABC Inc. He
+                                    has a strong track record of success in sales and customer service, and is passionate
+                                    about helping his clients achieve their goals. John is a skilled communicator and
+                                    problem solver, and works closely with his team to develop creative solutions to complex
+                                    challenges.</p>
+                            </div>
+                        </a>
+                    </section>
+                </div>
+            </section>
+
+            <section id="ads-section" role="list"
+                 class="relative mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3 hidden">
+                <h3 style="z-index: -10" class="text-transparent absolute">Most popular ads</h3>
+                <div class="max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1">
+                    <div id="title-of-ad-1"
+                         class="cursor-pointer title-of-ad bg-white shadow sm:rounded-md block overflow-hidden hover:bg-indigo-50">
+
+                        <div class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-48-1">
+
+                            <div class="flex-shrink-0 self-center">
+                                <img class="h-12 w-12 rounded-full"
+                                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                     alt="">
+                            </div>
+                            <div class="flex justify-between flex-col w-full gap-2">
+
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="flex text-sm">
+                                            <h4 class="text-indigo-600 text-xl font-medium">Need help painting a
+                                                room</h4>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="flex md:grid md:grid-cols-100px gap-6 sm:gap-2 ">
+                                    <div class="mt-2 gap-1 flex items-center text-sm text-indigo-500 sm:mt-0">
+                                        <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
+                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <path
+                                                d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"></path>
+                                        </svg>
+                                        <p class="flex items-center text-sm text-gray-500 sm:mt-0">
+                                            Michael Vento
+                                        </p>
+                                    </div>
+                                    <div class="mt-2 gap-1 flex items-center text-sm text-indigo-500 sm:mt-0">
+                                        <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
+                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                                  d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"></path>
+                                        </svg>
+                                        <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 gap-1">
+                                            <!-- Heroicon name: solid/location-marker -->
+                                            Dubai, UAE
+                                        </p>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
-                        <x-button class="mt-4 w-full" kind="primary"> See profile </x-button>
+
+                        <div class="flex flex-col px-4 py-4 sm:px-6 flex gap-4">
+                            <p class="text-gray-500">I need some help painting a room in my home. The room is
+                                approximately 12' x 12' and the walls are currently white. I would like to
+                                change the color to a light blue.</p>
+                        </div>
+                        <div class="flex px-4 py-4 sm:px-6">
+                            <svg class="w-4" fill="bg-gray-500" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path clip-rule="evenodd" fill-rule="evenodd" d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
+                            </svg>
+                            <p class="ml-2 text-gray-500 text-sm">Posted 2 days ago</p>
+                        </div>
                     </div>
-                    </div>
-                </a>
-            </li>
-
-
-            <!-- More people... -->
-        </ul>
-        <ul id="ads-section" role="list"
-            class="hidden tabs ads-home-section max-w-7xl mx-auto px-4 mt-10 text-center sm:px-6 lg:max-w-7xl lg:px-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-            <li>
-
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Noteworthy technology acquisitions
-                            2021</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-gray-700">Here are the biggest enterprise technology acquisitions of
-                        2021 so far, in reverse chronological order.</p>
-                    <a href="#"
-                       class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                        Read more
-                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                  d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                  clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
                 </div>
+                <div class="max-h-screen overflow-y-hidden sm:overflow-y-auto lg:col-start-2 md:col-span-3">
 
-            </li>
+                    <section id="content-of-ad-1" aria-labelledby="timeline-title"
+                             class="m-px hidden overflow-y-scroll sm:overflow-hidden bottom-0 z-10 bg-white shadow sm:rounded-md block overflow-hidden">
+                        <div class="bg-white px-4 py-5 sm:px-6">
+                            <div class="top-5 absolute right-6">
+                                <form action="" id="saveWorker-1">
+                                    <button type="submit" class="flex bg-white shadow overflow-hidden sm:rounded-md p-1.5">
+                                        <svg fill="none" class="w-7" stroke="currentColor" stroke-width="1.5"
+                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                  d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"></path>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                            <svg class="cursor-pointer w-6 icon-back mb-8" id="icon-back-1" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path clip-rule="evenodd" fill-rule="evenodd"
+                                      d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"></path>
+                            </svg>
 
-            ads
-            <!-- More people... -->
-        </ul>
+                            <div class="max-w-screen-lg mx-auto">
+                                <h1 class="text-2xl font-semibold mb-4">Mason for Wall Building</h1>
+                                <div class="flex flex-wrap mb-4">
+                                    <div class="w-full md:w-1/3">
+                                        <p class="text-gray-700">Location:</p>
+                                        <p class="font-semibold">City, State</p>
+                                    </div>
+                                    <div class="w-full md:w-1/3">
+                                        <p class="text-gray-700">Timeline:</p>
+                                        <p class="font-semibold">Start and end dates</p>
+                                    </div>
+                                    <div class="w-full md:w-1/3">
+                                        <p class="text-gray-700">Budget:</p>
+                                        <p class="font-semibold">$X</p>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <p class="text-gray-700 mb-2">Job Description:</p>
+                                    <p class="text-gray-700 leading-normal">Looking for a skilled mason to build a brick wall in the middle of a room. The wall should be X feet wide and Y feet high, and must be built with [specific material]. Experience in [specific type of wall building] is required.</p>
+                                </div>
+                                <div class="mb-4">
+                                    <p class="text-gray-700 mb-2">Requirements:</p>
+                                    <ul class="list-disc list-inside">
+                                        <li class="text-gray-700 leading-normal">Minimum of [number] years of experience in masonry</li>
+                                        <li class="text-gray-700 leading-normal">Ability to work with [specific materials]</li>
+                                        <li class="text-gray-700 leading-normal">Attention to detail and ability to follow instructions</li>
+                                    </ul>
+                                </div>
+                                <div class="mb-4">
+                                    <a href="#">
+                                        <x-button kind="primary">Chat now</x-button>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            </section>
+
+        </div>
 
         <!-- CTA Section -->
         <section class="bg-white">
@@ -456,120 +611,151 @@
 @endsection
 
 @section('scripts')
+    @vite('resources/js/filters.js')
     <script>
-        const filterSort = document.querySelector('.filter_sort');
-        const filterSortContent = document.querySelector('.filter_sort_content');
-        const filterCategory = document.querySelector('.filter_category');
-        const filterCategoryContent = document.querySelector('.filter_content_category');
-        const filterRegions = document.querySelector('.filter_regions');
-        const filterRegionsContent = document.querySelector('.filter_content_regions');
 
-        filterRegions.addEventListener('click', () => {
-            filterCategoryContent.classList.add('hidden');
-            filterSortContent.classList.add('hidden');
-            filterRegionsContent.classList.toggle('hidden');
-        });
-
-        filterSort.addEventListener('click', () => {
-            filterCategoryContent.classList.add('hidden');
-            filterRegionsContent.classList.add('hidden');
-            filterSortContent.classList.toggle('hidden');
-        });
-
-        filterCategory.addEventListener('click', () => {
-            filterRegionsContent.classList.add('hidden');
-            filterSortContent.classList.add('hidden');
-            filterCategoryContent.classList.toggle('hidden');
-        });
-
-
-        const closeFiltersBtn = document.querySelector('.button_filter_mobile');
-        const openFiltersBtn = document.querySelector('.button_filters_mobile_open');
-        const dialogContainer = document.querySelector('.dialog-container');
-        const filterBackground = document.querySelector('.background_blur');
-
-        closeFiltersBtn.addEventListener('click', () => {
-            dialogContainer.classList.toggle('hidden');
-            filterBackground.classList.toggle('hidden');
-        });
-        openFiltersBtn.addEventListener('click', () => {
-            dialogContainer.classList.toggle('hidden');
-            filterBackground.classList.toggle('hidden');
-        });
-
-
-        const button = document.querySelector('.button_filter_category');
-        const contentCategory = document.querySelector('.content_filter_category');
-        const isOpenCategory = () => content.classList.contains('hidden');
-        const chevronCategory = document.querySelector('.chevron_category');
-
-        button.addEventListener('click', () => {
-            contentCategory.classList.toggle('hidden');
-            button.classList.toggle('border-gray-300');
-            button.classList.toggle('-mb-px');
-            chevronCategory.classList.toggle('-rotate-180');
-            chevronCategory.classList.toggle('rotate-0');
-        });
-
-
-        const buttonFilterRegion = document.querySelector('.filter_region');
-        const contentFilterRegions = document.querySelector('.content_filter_regions');
-        const chevronRegion = document.querySelector('.chevron_region');
-        const isOpenRegion = () => content.classList.contains('hidden');
-
-        buttonFilterRegion.addEventListener('click', () => {
-            contentCategory.classList.add('hidden');
-            filterSortContent.classList.add('hidden');
-            filterRegionsContent.classList.toggle('hidden');
-            buttonFilterRegion.classList.toggle('border-gray-300');
-            buttonFilterRegion.classList.toggle('-mb-px');
-            chevronRegion.classList.toggle('-rotate-180');
-            chevronRegion.classList.toggle('rotate-0');
-        });
-
-
-        // Get the tab links and sections
+        // Get all tab links
         const tabLinks = document.querySelectorAll('.tab-link');
-        const sections = document.querySelectorAll('.tabs');
 
-        // Add event listeners to the tab links
-        tabLinks.forEach(tabLink => {
-            tabLink.addEventListener('click', e => {
-                e.preventDefault();
-                const selectedTab = e.currentTarget.getAttribute('data-tab');
+        // Loop through each tab link and add a click event listener
+        tabLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                // Get the data-tab attribute value of the clicked link
+                const tabId = link.getAttribute('data-tab');
 
-                // Add the "active" class to the clicked tab link and remove it from the inactive links
-                tabLinks.forEach(link => {
-                    if (link === e.currentTarget) {
-                        link.classList.add('bg-gray-200', 'text-gray-800', 'active');
-                    } else {
-                        link.classList.remove('bg-gray-200', 'text-gray-800', 'active');
-                    }
+                // Hide all tab content sections
+                const tabContentSections = document.querySelectorAll('[role="list"]');
+                tabContentSections.forEach(section => {
+                    section.classList.add('hidden');
+                    section.classList.remove('md:grid');
+                    section.classList.remove('md:grid-cols-500px');
                 });
 
-                // Hide/show the corresponding section
-                sections.forEach(section => section.style.display = 'none');
-                document.querySelector(`#${selectedTab}-section`).style.display = 'grid';
+                // Show the corresponding tab content section for the clicked link
+                const tabContentSection = document.getElementById(tabId + '-section');
+                tabContentSection.classList.remove('hidden');
+                if (tabId === "workers") {
+                    tabContentSection.classList.add('md:grid');
+                    tabContentSection.classList.add('md:grid-cols-500px');
+                }
+
+                // Set the current tab link as active
+                tabLinks.forEach(tabLink => {
+                    tabLink.setAttribute('aria-current', 'false');
+                    tabLink.classList.remove('bg-purple-600', 'text-white');
+                    tabLink.classList.add('text-gray-600');
+                });
+                link.setAttribute('aria-current', 'page');
+                link.classList.add('bg-purple-600', 'text-white');
+                link.classList.remove('text-gray-600');
+
+                // Store the id of the active tab in local storage
+                localStorage.setItem('activeTab', tabId);
+            });
+        });
+
+        // Set the first tab as active by default
+        const firstTabLink = tabLinks[0];
+        firstTabLink.setAttribute('aria-current', 'page');
+        firstTabLink.classList.add('bg-purple-600');
+        const firstTabId = firstTabLink.dataset.tab;
+        const firstTabContentSection = document.getElementById(firstTabId + '-section');
+        firstTabContentSection.classList.remove('hidden');
+
+        // Retrieve the id of the active tab from local storage and set it as active
+        const activeTabId = localStorage.getItem('activeTab');
+        if (activeTabId && activeTabId !== "workers") {
+            const activeTabLink = document.querySelector(`[data-tab="${activeTabId}"]`);
+            if (activeTabLink) {
+                activeTabLink.click();
+            }
+        }
+
+        // Get all elements with the class 'title-of-ad'
+        const titles = document.querySelectorAll('[id^="title-of-ad-"]');
+        const firstTitle = titles[0];
+        const contents = document.querySelectorAll('[id^="content-of-ad-"]');
+        const firstContent = contents[0];
+        const firstContentSection = document.querySelectorAll('[id^="content-of-ad-"]');
+        const icons = document.querySelectorAll('[id^="icon-back-"]');
+        const screenWidth = window.innerWidth;
+
+        if (screenWidth < 768) {
+            contents.forEach(content => {
+                content.classList.add('hidden', 'fixed', 'top-0', 'left-0', 'w-full')
+            })
+        } else {
+            firstTitle.classList.add('border-indigo-500', 'ring-2', 'ring-indigo-500', 'bg-indigo-50');
+            firstContent.classList.remove('hidden');
+        }
+        // Loop through each title and add a click event listener
+        // Loop through each title and add a click event listener
+        titles.forEach(title => {
+            title.addEventListener('click', () => {
+                const id = title.getAttribute('id').replace('title', 'content');
+                const contentSection = document.getElementById(id);
+
+                // Remove 'border-indigo-500', 'ring-2', and 'ring-indigo-500' from all titles
+                titles.forEach(t => {
+                    t.classList.remove('border-indigo-500', 'ring-2', 'ring-indigo-500', 'bg-indigo-50', 'bg-white');
+                });
+
+                if (screenWidth > 768) {
+                    title.classList.add('border-indigo-500', 'ring-2', 'ring-indigo-500', 'bg-indigo-50');
+                }
+
+                // Add 'border-indigo-500', 'ring-2', and 'ring-indigo-500' to the clicked title
+                title.classList.add('border-indigo-500', 'ring-2', 'ring-indigo-500', 'bg-indigo-50');
+
+                // Hide all 'content-of-ad' sections
+                const contentSections = document.querySelectorAll('[id^="content-of-ad-"]');
+                contentSections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                if (screenWidth < 768) {
+                    document.body.classList.add('overflow-hidden');
+                }
+
+                // Show the corresponding 'content-of-ad' section for the clicked title
+                contentSection.classList.remove('hidden');
+
+                // Set the current tab link as active
+                tabLinks.forEach(tabLink => {
+                    tabLink.setAttribute('aria-current', 'false');
+                    tabLink.classList.remove('bg-purple-600', 'text-white');
+                    tabLink.classList.add('text-gray-600');
+                });
+
+                if (id.includes('worker')) {
+                    const workersTab = document.querySelector('[data-tab="workers"]');
+                    workersTab.setAttribute('aria-current', 'page');
+                    workersTab.classList.add('bg-purple-600', 'text-white');
+                    workersTab.classList.remove('text-gray-600');
+                } else if (id.includes('ad')) {
+                    const adsTab = document.querySelector('[data-tab="ads"]');
+                    adsTab.setAttribute('aria-current', 'page');
+                    adsTab.classList.add('bg-purple-600', 'text-white');
+                    adsTab.classList.remove('text-gray-600');
+                }
             });
         });
 
 
+        // Loop through each 'icon-back' element and add a click event listener
+        icons.forEach(icon => {
+            icon.addEventListener('click', () => {
+                const id = icon.getAttribute('id').replace('icon-back-', '');
+                const contentSection = document.getElementById(`content-of-ad-${id}`);
+                contentSection.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden')
+            });
+            if (screenWidth > 768) {
+                icon.classList.add('hidden');
+            }
 
-        //HEART
-        const containerHeart = document.querySelector('.container-heart');
-        const heartStroke = document.querySelector('.heart-stroke');
-        const heartFilled = document.querySelector('.heart-filled');
-
-        containerHeart.addEventListener('mouseover', () => {
-            heartStroke.classList.add('hidden');
-            heartFilled.classList.remove('hidden');
         });
-
-        containerHeart.addEventListener('mouseout', () => {
-            heartStroke.classList.remove('hidden');
-            heartFilled.classList.add('hidden');
-        });
-
     </script>
 @endsection
 

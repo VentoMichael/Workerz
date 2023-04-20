@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'Contact Us')
+@section('title', 'About Us')
 @section('description', 'Learn more about Workerz, our mission, and our team.')
 @section('keywords', 'Workerz, about us, mission statement, team')
 
@@ -127,10 +127,8 @@
               </span>
                         </div>
                         <div class="mt-6">
-                            <h3 class="text-lg font-medium text-gray-700">Access to a Wide Range of Skilled Workers</h3>
-                            <p class="mt-2 text-base text-gray-500">With Workerz, you have access to a diverse pool of
-                                skilled workers in Belgium. Whether you need a graphic designer, web
-                                developer, or virtual assistant, you'll find the right talent to suit your needs.</p>
+                            <h3 class="text-lg font-medium text-gray-700">Skilled Workers at Your Fingertips</h3>
+                            <p class="mt-2 text-base text-gray-500">Find the right talent for your needs with Workerz - access a diverse pool of skilled workers in Belgium, including graphic designers, web developers, virtual assistants, and more.</p>
                         </div>
                     </section>
 
@@ -144,10 +142,8 @@
               </span>
                         </div>
                         <div class="mt-6">
-                            <h3 class="text-lg font-medium text-gray-700">Cost-Effective Solutions</h3>
-                            <p class="mt-2 text-base text-gray-500">With Workerz, you can hire skilled workers at a
-                                fraction of the cost of hiring a full-time employee. You can set your own budget,
-                                negotiate rates with individual freelancers.</p>
+                            <h3 class="text-lg font-medium text-gray-700">Affordable Solutions</h3>
+                            <p class="mt-2 text-base text-gray-500">Hire top-rated freelancers at a fraction of the cost of a full-time employee. Set your own budget and negotiate rates with individual freelancers to fit your project needs and budget.</p>
                         </div>
                     </section>
 
@@ -164,10 +160,7 @@
                         </div>
                         <div class="mt-6">
                             <h3 class="text-lg font-medium text-gray-700">Flexible Hiring</h3>
-                            <p class="mt-2 text-base text-gray-500">Workerz allows you to hire freelancers on a
-                                project-by-project basis, giving you the flexibility to scale your workforce up or down
-                                as needed. You can hire freelancers for short-term projects, or long-term contracts,
-                                depending on your needs.</p>
+                            <p class="mt-2 text-base text-gray-500">Hire freelancers for short-term or long-term projects, and easily scale your workforce up or down as needed with Workerz.</p>
                         </div>
                     </section>
 
@@ -180,7 +173,7 @@
                         </div>
                         <div class="mt-6">
                             <h3 class="text-lg font-medium text-gray-700">Time Savings</h3>
-                            <p class="mt-2 text-base text-gray-500">By using Workerz, you can save valuable time that you would otherwise spend researching employees. Workerz takes care of all the analytics tasks, leaving you with more time to focus on your core business activities.</p>
+                            <p class="mt-2 text-base text-gray-500">Save valuable time researching and vetting employees by using Workerz. Our platform takes care of all the analytics tasks, leaving you with more time to focus on your core business activities.</p>
                         </div>
                     </section>
 
@@ -197,10 +190,7 @@
                         </div>
                         <div class="mt-6">
                             <h3 class="text-lg font-medium text-gray-700">Quality Results</h3>
-                            <p class="mt-2 text-base text-gray-500">Workerz provides a platform where you can find
-                                top-rated freelancers who have been vetted for quality and reliability. You can review
-                                each freelancer's portfolio and ratings before hiring, ensuring that you are getting the
-                                best possible talent.</p>
+                            <p class="mt-2 text-base text-gray-500">Ensure quality and reliability by hiring top-rated freelancers who have been vetted for their skills and portfolio. With Workerz, you can review freelancer ratings and portfolios before hiring, ensuring that you get the best possible talent.</p>
                         </div>
                     </section>
 
@@ -218,10 +208,7 @@
                         </div>
                         <div class="mt-6">
                             <h3 class="text-lg font-medium text-gray-700">Easy Communication</h3>
-                            <p class="mt-2 text-base text-gray-500">Workerz provides a streamlined communication
-                                platform that allows you to stay in touch with your freelancers throughout the project.
-                                You can communicate directly with your freelancers through the platform, eliminating the
-                                need for email or phone tag.</p>
+                            <p class="mt-2 text-base text-gray-500">Stay in touch with your freelancers throughout the project using Workerz's streamlined communication platform. Communicate directly with your freelancers through the platform, eliminating the need for email or phone tag.</p>
                         </div>
                     </section>
 
@@ -238,9 +225,7 @@
                         </div>
                         <div class="mt-6">
                             <h3 class="text-lg font-medium text-gray-700">Global Reach</h3>
-                            <p class="mt-2 text-base text-gray-500">With Workerz, you can hire freelancers from anywhere
-                                in Belgium, giving you access to a diverse pool of talent with unique skill sets and
-                                perspectives. This can help you to expand your projects.</p>
+                            <p class="mt-2 text-base text-gray-500">Hire freelancers from anywhere in Belgium with Workerz, and expand your projects with access to a diverse pool of talent with unique skill sets and perspectives.</p>
                         </div>
                     </section>
 
@@ -257,7 +242,7 @@
                         </div>
                         <div class="mt-6">
                             <h3 class="text-lg font-medium text-gray-700">Increased Productivity</h3>
-                            <p class="mt-2 text-base text-gray-500">By outsourcing tasks to skilled freelancers, you can free up your own time and focus on your core business activities.</p>
+                            <p class="mt-2 text-base text-gray-500">Free up your own time and focus on your core business activities by outsourcing tasks to skilled freelancers with Workerz.</p>
                         </div>
                     </section>
                 </div>

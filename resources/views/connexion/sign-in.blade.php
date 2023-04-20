@@ -14,7 +14,7 @@
                     <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
                     <p class="mt-2 text-sm text-gray-600">
                         Or
-                        <x-nav-link kind="secondary" href="{{route('sign-up')}}">create an account</x-nav-link>
+                        <x-nav-link kind="secondary" href="{{route('sign-up.role')}}">create an account</x-nav-link>
                     </p>
                 </div>
 

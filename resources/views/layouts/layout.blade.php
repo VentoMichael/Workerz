@@ -15,7 +15,6 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
 </head>
 <body @yield('class-html')>
 
@@ -25,7 +24,8 @@
 </main>
 @include('layouts.footer')
 
-<script src="{{ asset('js/app.js') }}"></script>
+
+@vite('resources/js/app.js')
 @yield('scripts')
 </body>
 </html>
