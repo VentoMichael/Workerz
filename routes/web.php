@@ -88,3 +88,13 @@ Route::get('/disclaimer', function () {
 Route::get('/terms', function () {
     return view('legal.terms');
 })->name('terms');
+
+
+
+
+
+// Dashboard views
+
+Route::get('/dashboard/settings', function () {
+    return view('dashboard.settings');
+})->name('settings');

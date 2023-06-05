@@ -357,7 +357,7 @@
                                         </svg>
                                         <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 gap-1">
                                             <!-- Heroicon name: solid/location-marker -->
-                                            Dubai, UAE
+                                            Liège
                                         </p>
                                     </div>
 
@@ -385,17 +385,7 @@
                     <section id="content-of-ad-1" aria-labelledby="timeline-title"
                              class="m-px hidden overflow-y-scroll sm:overflow-hidden bottom-0 z-10 bg-white shadow sm:rounded-md block overflow-hidden">
                         <div class="bg-white px-4 py-5 sm:px-6">
-                            <div class="top-5 absolute right-6">
-                                <form action="" id="saveWorker-1">
-                                    <button type="submit" class="flex bg-white shadow overflow-hidden sm:rounded-md p-1.5">
-                                        <svg fill="none" class="w-7" stroke="currentColor" stroke-width="1.5"
-                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                  d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"></path>
-                                        </svg>
-                                    </button>
-                                </form>
-                            </div>
+
                             <svg class="cursor-pointer w-6 icon-back mb-8" id="icon-back-1" fill="currentColor"
                                  viewBox="0 0 20 20"
                                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -404,8 +394,37 @@
                             </svg>
 
                             <div class="max-w-screen-lg mx-auto">
-
-                                <h3 class="text-2xl font-semibold mb-4">Mason for Wall Building</h3>
+                                <div class="flex justify-between">
+                                    <h3 class="text-2xl font-semibold mb-4">Mason for Wall Building</h3>
+                                    <div class="flex gap-2 items-start">
+                                        <a href="">
+                                            <svg fill="none" class="w-6" stroke="currentColor" stroke-width="1.5"
+                                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                                 aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                      d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"></path>
+                                            </svg>
+                                        </a>
+                                        <form action="" id="saveWorker-1">
+                                            <button type="submit">
+                                                <svg fill="none" class="w-6" stroke="currentColor" stroke-width="1.5"
+                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                                     aria-hidden="true">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                          d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"></path>
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        <a href="">
+                                            <svg fill="none" class="w-6" stroke="currentColor" stroke-width="1.5"
+                                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                                 aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                      d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
                                 <div class="flex flex-wrap mb-4">
                                     <div class="w-full md:w-1/3">
                                         <p class="text-gray-700">Location:</p>
@@ -423,22 +442,21 @@
                                 <div class="mb-4">
                                     <p class="text-gray-700 mb-2">Job Description:</p>
                                     <p class="text-gray-700 leading-normal">Looking for a skilled mason to build a brick
-                                        wall in
-                                        the middle of a room. The wall should be X feet wide and Y feet high, and must be
-                                        built
-                                        with [specific material]. Experience in [specific type of wall building] is
-                                        required.</p>
+                                        wall in the middle of a room. The wall should be X feet wide and Y feet high,
+                                        and must be built with [specific material]. Experience in [specific type of wall
+                                        building] is required.</p>
                                 </div>
                                 <div class="mb-4">
                                     <p class="text-gray-700 mb-2">Requirements:</p>
                                     <ul class="list-disc list-inside">
-                                        <li class="text-gray-700 leading-normal">Minimum of [number] years of experience in
-                                            masonry
+                                        <li class="text-gray-700 leading-normal">Minimum of [number] years of experience
+                                            in masonry
                                         </li>
-                                        <li class="text-gray-700 leading-normal">Ability to work with [specific materials]
+                                        <li class="text-gray-700 leading-normal">Ability to work with [specific
+                                            materials]
                                         </li>
-                                        <li class="text-gray-700 leading-normal">Attention to detail and ability to follow
-                                            instructions
+                                        <li class="text-gray-700 leading-normal">Attention to detail and ability to
+                                            follow instructions
                                         </li>
                                     </ul>
                                 </div>
@@ -451,7 +469,7 @@
                                         </svg>
                                         <p class="ml-2 text-gray-500 text-sm">Posted 2 days ago</p>
                                     </div>
-                                    <a href="#">
+                                    <a href="{{route('ads.show')}}">
                                         <x-button kind="primary">Chat now</x-button>
                                     </a>
                                 </div>
@@ -459,6 +477,7 @@
 
                         </div>
                     </section>
+
                 </div>
             </section>
         </div>

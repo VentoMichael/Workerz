@@ -438,7 +438,7 @@
     <script>
         const annualPriceCheckbox = document.getElementById('annualPrice');
         const priceElements = document.querySelectorAll('.text_price');
-        const periodElement = document.querySelector('.text_period');
+        const periodElement = document.querySelectorAll('.text_period');
 
         annualPriceCheckbox.addEventListener('click', () => {
             if (annualPriceCheckbox.checked) {
@@ -447,13 +447,18 @@
                     const annualPrice = (monthlyPrice * 12) * 0.90;
                     price.textContent = annualPrice.toFixed(2) + '€';
                 });
-                periodElement.textContent = '/year';
+                periodElement.forEach(period => {
+                    period.textContent = '/year';
+                })
             } else {
                 priceElements.forEach(price => {
                     const monthlyPrice = parseFloat(price.dataset.monthly);
                     price.textContent = monthlyPrice.toFixed(2) + '€';
                 });
-                periodElement.textContent = '/month';
+
+                periodElement.forEach(period => {
+                    period.textContent = '/month';
+                })
             }
         });
 

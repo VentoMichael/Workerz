@@ -19,11 +19,11 @@
 </head>
 <body @yield('class-html')>
 
-@include('layouts.header')
+@include('layouts.dashboard.header')
 <main>
     @yield('content')
 </main>
-@include('layouts.footer')
+@include('layouts.dashboard.footer')
 
 
 @vite('resources/js/app.js')
