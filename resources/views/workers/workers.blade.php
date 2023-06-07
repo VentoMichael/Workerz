@@ -311,6 +311,7 @@
                 <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 ">
         <section>
             <h3 style="z-index: -10" class="text-transparent absolute">Most popular workers</h3>
+            <p class="text-xs mb-2">Environ 148 000 résultats</p>
             <div id="workers-section" role="list" class="hidden flex md:grid md:grid-cols-500px flex-col gap-4">
                 <section class="bg-white shadow overflow-hidden sm:rounded-md relative">
                     <div class="top-5 absolute right-6">
@@ -373,8 +374,8 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-col px-4 py-4 sm:px-6 flex gap-4">
-                            <p class="text-gray-500">responsible for identifying new business opportunities, building
+                        <div class="flex flex-col sm:pl-24 px-4 py-4 sm:px-6 flex gap-4">
+                            <p class="text-gray-500 truncate">responsible for identifying new business opportunities, building
                                 relationships with clients, and closing deals to drive revenue growth for ABC Inc. He
                                 has a strong track record of success in sales and customer service, and is passionate
                                 about helping his clients achieve their goals. John is a skilled communicator and
@@ -389,4 +390,8 @@
                 </div>
     </section>
 @endsection
+@section('scripts')
 
+@vite('resources/js/filters.js')
+
+@endsection

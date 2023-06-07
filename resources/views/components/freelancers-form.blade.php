@@ -166,13 +166,13 @@
                     <legend class="sr-only">Pricing plans</legend>
                     <div class="relative bg-white rounded-md -space-y-px">
                         <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
-                        <label class="rounded-tl-md rounded-tr-md relative border p-4 flex flex-col cursor-pointer md:pl-4 md:pr-6 md:grid md:grid-cols-2 focus:outline-none">
+                        <label class="justify-between rounded-tl-md rounded-tr-md relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                             <div class="flex items-center text-sm">
                                 <input type="radio" name="pricing-plan" value="Startup" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
                                 <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
                                 <span id="pricing-plans-0-label" class="ml-3 font-medium">Startup</span>
                             </div>
-                            <p id="pricing-plans-0-description-0" class="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
+                            <p id="pricing-plans-0-description-0" class="inline ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
                                 <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
                                 <span class="font-medium">$29 / mo</span>
                                 <!-- Checked: "text-indigo-700", Not Checked: "text-gray-500" -->
@@ -181,13 +181,13 @@
                         </label>
 
                         <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
-                        <label class="relative border p-4 flex flex-col cursor-pointer md:pl-4 md:pr-6 md:grid md:grid-cols-2 focus:outline-none">
+                        <label class="justify-between relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                             <div class="flex items-center text-sm">
                                 <input type="radio" name="pricing-plan" value="Business" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="pricing-plans-1-label" aria-describedby="pricing-plans-1-description-0 pricing-plans-1-description-1">
                                 <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
                                 <span id="pricing-plans-1-label" class="ml-3 font-medium">Business</span>
                             </div>
-                            <p id="pricing-plans-1-description-0" class="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
+                            <p id="pricing-plans-1-description-0" class="inline ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
                                 <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
                                 <span class="font-medium">$99 / mo</span>
                                 <!-- Checked: "text-indigo-700", Not Checked: "text-gray-500" -->
@@ -196,13 +196,13 @@
                         </label>
 
                         <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
-                        <label class="rounded-bl-md rounded-br-md relative border p-4 flex flex-col cursor-pointer md:pl-4 md:pr-6 md:grid md:grid-cols-2 focus:outline-none">
+                        <label class="rounded-bl-md rounded-br-md justify-between relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                             <div class="flex items-center text-sm">
                                 <input type="radio" name="pricing-plan" value="Enterprise" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="pricing-plans-2-label" aria-describedby="pricing-plans-2-description-0 pricing-plans-2-description-1">
                                 <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
                                 <span id="pricing-plans-2-label" class="ml-3 font-medium">Enterprise</span>
                             </div>
-                            <p id="pricing-plans-2-description-0" class="ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
+                            <p id="pricing-plans-2-description-0" class="inline ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
                                 <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
                                 <span class="font-medium">$249 / mo</span>
                                 <!-- Checked: "text-indigo-700", Not Checked: "text-gray-500" -->

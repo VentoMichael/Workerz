@@ -16,6 +16,8 @@
                                    placeholder="janesmith">
                         </div>
                     </div>
+
+                    <p class="mt-3 text-sm leading-6 text-gray-600">It will be used to find your profile.</p>
                 </div>
 
                 <div class="col-span-full">

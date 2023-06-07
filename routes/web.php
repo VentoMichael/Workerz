@@ -95,6 +95,23 @@ Route::get('/terms', function () {
 
 // Dashboard views
 
+Route::get('/dashboard', function () {
+    return view('dashboard.home');
+})->name('dashboard.dashboard');
+
+Route::get('/dashboard/profil', function () {
+    return view('dashboard.profil');
+})->name('dashboard.profil');
+
+Route::get('/dashboard/messages', function () {
+    return view('dashboard.messages');
+})->name('dashboard.messages');
+
+Route::get('/dashboard/plans', function () {
+    return view('dashboard.plans');
+})->name('dashboard.plans');
+
 Route::get('/dashboard/settings', function () {
     return view('dashboard.settings');
-})->name('settings');
+})->name('dashboard.settings');
+

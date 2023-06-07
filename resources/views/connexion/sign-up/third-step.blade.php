@@ -28,9 +28,9 @@
                         <h2 class="text-lg font-medium text-gray-900">Contact information</h2>
 
                         <div class="mt-4">
-                            <label for="email-address" class="block text-sm font-medium text-gray-700">Email address</label>
+                            <label for="email-address" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                             <div class="mt-1">
-                                <input type="email" id="email-address" name="email-address" autocomplete="email" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <input type="email" id="email-address" name="email-address" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
                     </div>
@@ -40,59 +40,59 @@
 
                         <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
                             <div>
-                                <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
+                                <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
                                 <div class="mt-1">
-                                    <input type="text" id="first-name" name="first-name" autocomplete="given-name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" id="first-name" name="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div>
-                                <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
+                                <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
                                 <div class="mt-1">
-                                    <input type="text" id="last-name" name="last-name" autocomplete="family-name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" id="last-name" name="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label for="company" class="block text-sm font-medium text-gray-700">Company</label>
+                                <label for="company" class="block text-sm font-medium leading-6 text-gray-900">Company</label>
                                 <div class="mt-1">
-                                    <input type="text" name="company" id="company" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" name="company" id="company" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                                <label for="address" class="block text-sm font-medium leading-6 text-gray-900">Address</label>
                                 <div class="mt-1">
-                                    <input type="text" name="address" id="address" autocomplete="street-address" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" name="address" id="address" autocomplete="street-address" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label for="apartment" class="block text-sm font-medium text-gray-700">Apartment, suite, etc.</label>
+                                <label for="apartment" class="block text-sm font-medium leading-6 text-gray-900">Apartment, suite, etc.</label>
                                 <div class="mt-1">
-                                    <input type="text" name="apartment" id="apartment" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" name="apartment" id="apartment" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
 
                             <div>
-                                <label for="region" class="block text-sm font-medium text-gray-700">State / Province</label>
+                                <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State / Province</label>
                                 <div class="mt-1">
-                                    <input type="text" name="region" id="region" autocomplete="address-level1" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" name="region" id="region" autocomplete="address-level1" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div>
-                                <label for="postal-code" class="block text-sm font-medium text-gray-700">Postal code</label>
+                                <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">Postal code</label>
                                 <div class="mt-1">
-                                    <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div class="sm:col-span-2">
-                                <label for="phone" class="block text-sm font-medium text-gray-700">Phone</label>
+                                <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">Phone</label>
                                 <div class="mt-1">
-                                    <input type="text" name="phone" id="phone" autocomplete="tel" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" name="phone" id="phone" autocomplete="tel" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                         </div>
@@ -107,47 +107,47 @@
                             <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
                                 <div class="flex items-center">
                                     <input id="credit-card" name="payment-type" type="radio" checked class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                    <label for="credit-card" class="ml-3 block text-sm font-medium text-gray-700"> Credit card </label>
+                                    <label for="credit-card" class="ml-3 block text-sm font-medium leading-6 text-gray-900"> Credit card </label>
                                 </div>
 
                                 <div class="flex items-center">
                                     <input id="paypal" name="payment-type" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                    <label for="paypal" class="ml-3 block text-sm font-medium text-gray-700"> PayPal </label>
+                                    <label for="paypal" class="ml-3 block text-sm font-medium leading-6 text-gray-900"> PayPal </label>
                                 </div>
 
                                 <div class="flex items-center">
                                     <input id="etransfer" name="payment-type" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
-                                    <label for="etransfer" class="ml-3 block text-sm font-medium text-gray-700"> eTransfer </label>
+                                    <label for="etransfer" class="ml-3 block text-sm font-medium leading-6 text-gray-900"> eTransfer </label>
                                 </div>
                             </div>
                         </fieldset>
 
                         <div class="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
                             <div class="col-span-4">
-                                <label for="card-number" class="block text-sm font-medium text-gray-700">Card number</label>
+                                <label for="card-number" class="block text-sm font-medium leading-6 text-gray-900">Card number</label>
                                 <div class="mt-1">
-                                    <input type="text" id="card-number" name="card-number" autocomplete="cc-number" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" id="card-number" name="card-number" autocomplete="cc-number" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div class="col-span-4">
-                                <label for="name-on-card" class="block text-sm font-medium text-gray-700">Name on card</label>
+                                <label for="name-on-card" class="block text-sm font-medium leading-6 text-gray-900">Name on card</label>
                                 <div class="mt-1">
-                                    <input type="text" id="name-on-card" name="name-on-card" autocomplete="cc-name" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" id="name-on-card" name="name-on-card" autocomplete="cc-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div class="col-span-3">
-                                <label for="expiration-date" class="block text-sm font-medium text-gray-700">Expiration date (MM/YY)</label>
+                                <label for="expiration-date" class="block text-sm font-medium leading-6 text-gray-900">Expiration date (MM/YY)</label>
                                 <div class="mt-1">
-                                    <input type="text" name="expiration-date" id="expiration-date" autocomplete="cc-exp" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" name="expiration-date" id="expiration-date" autocomplete="cc-exp" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
 
                             <div>
-                                <label for="cvc" class="block text-sm font-medium text-gray-700">CVC</label>
+                                <label for="cvc" class="block text-sm font-medium leading-6 text-gray-900">CVC</label>
                                 <div class="mt-1">
-                                    <input type="text" name="cvc" id="cvc" autocomplete="csc" class="block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <input type="text" name="cvc" id="cvc" autocomplete="csc" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                 </div>
                             </div>
                         </div>

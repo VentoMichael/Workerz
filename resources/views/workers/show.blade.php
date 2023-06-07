@@ -24,6 +24,8 @@
                              src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
                              alt="">
                     </div>
+
+
                     <div class="mt-4 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
                         <div class="sm:hidden md:block min-w-0 flex-1">
                             <div class="flex gap-4 items-center">
@@ -165,7 +167,7 @@
                     <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
                         <div class="divide-y divide-gray-200">
                             <div class="px-4 py-5 sm:px-6">
-                                <h2 id="notes-title" class="text-lg font-medium text-gray-900">Notes</h2>
+                                <h2 id="notes-title" class="text-lg font-medium text-gray-900">Commentaires</h2>
                             </div>
                             <div class="px-4 py-6 sm:px-6">
                                 <ul role="list" class="space-y-8">
@@ -186,9 +188,9 @@
                                                         ut.</p>
                                                 </div>
                                                 <div class="mt-2 text-sm space-x-2">
-                                                    <span class="text-gray-500 font-medium">4d ago</span>
+                                                    <span class="text-gray-500 font-medium">Il y a 4 jours</span>
                                                     <span class="text-gray-500 font-medium">&middot;</span>
-                                                    <button type="button" class="text-gray-900 font-medium">Reply
+                                                    <button type="button" class="text-gray-900 font-medium">Répondre
                                                     </button>
                                                 </div>
                                             </div>
@@ -212,9 +214,9 @@
                                                         facere iusto quia accusamus veniam id explicabo et aut.</p>
                                                 </div>
                                                 <div class="mt-2 text-sm space-x-2">
-                                                    <span class="text-gray-500 font-medium">4d ago</span>
+                                                    <span class="text-gray-500 font-medium">Il y a 4 jours</span>
                                                     <span class="text-gray-500 font-medium">&middot;</span>
-                                                    <button type="button" class="text-gray-900 font-medium">Reply
+                                                    <button type="button" class="text-gray-900 font-medium">Répondre
                                                     </button>
                                                 </div>
                                             </div>
@@ -238,9 +240,9 @@
                                                         consequatur autem. Perferendis rerum et.</p>
                                                 </div>
                                                 <div class="mt-2 text-sm space-x-2">
-                                                    <span class="text-gray-500 font-medium">4d ago</span>
+                                                    <span class="text-gray-500 font-medium">Il y a 4 jours</span>
                                                     <span class="text-gray-500 font-medium">&middot;</span>
-                                                    <button type="button" class="text-gray-900 font-medium">Reply
+                                                    <button type="button" class="text-gray-900 font-medium">Répondre
                                                     </button>
                                                 </div>
                                             </div>
@@ -259,10 +261,10 @@
                                 <div class="min-w-0 flex-1">
                                     <form action="#">
                                         <div>
-                                            <label for="comment" class="sr-only">About</label>
+                                            <label for="comment" class="sr-only">À propos de</label>
                                             <textarea id="comment" name="comment" rows="3"
                                                       class="p-2 shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md"
-                                                      placeholder="Add a note"></textarea>
+                                                      placeholder="Ajouter un commentaire"></textarea>
                                         </div>
                                         <div class="mt-3 flex items-center justify-between">
                                             <div class="flex items-center">
@@ -273,13 +275,10 @@
                                                           d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
                                                 </svg>
                                                 <div class="ml-2 text-sm text-gray-800 rounded-lg" role="alert">
-                                                    <span class="font-medium">Keep it respectful.</span>
+                                                    <span class="font-medium">Respectez les règles.</span>
                                                 </div>
                                             </div>
-                                            <button type="submit"
-                                                    class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                                Comment
-                                            </button>
+                                            <x-button kind="primary">Commenter</x-button>
                                         </div>
                                     </form>
                                 </div>
@@ -389,7 +388,6 @@
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
-
     <script>
         // JavaScript code
         document.addEventListener("DOMContentLoaded", function () {

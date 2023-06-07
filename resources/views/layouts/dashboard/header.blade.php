@@ -73,28 +73,10 @@
                     </div>
                 </div>
             </div>
-            <nav class="hidden lg:py-2 lg:flex lg:space-x-8" aria-label="Global">
-                <a href="#" class="rounded-md py-2 px-3 inline-flex items-center text-sm font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900"> Dashboard </a>
-
-                <a href="#" class="rounded-md py-2 px-3 inline-flex items-center text-sm font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900"> Jobs </a>
-
-                <a href="#" class="rounded-md py-2 px-3 inline-flex items-center text-sm font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900"> Applicants </a>
-
-                <a href="#" class="rounded-md py-2 px-3 inline-flex items-center text-sm font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900"> Company </a>
-            </nav>
         </div>
 
         <!-- Mobile menu, show/hide based on menu state. -->
         <nav class="lg:hidden" aria-label="Global" id="mobile-menu">
-            <div class="pt-2 pb-3 px-2 space-y-1">
-                <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">Dashboard</a>
-
-                <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">Jobs</a>
-
-                <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">Applicants</a>
-
-                <a href="#" class="block rounded-md py-2 px-3 text-base font-medium text-gray-900 hover:bg-gray-50 hover:text-gray-900">Company</a>
-            </div>
             <div class="border-t border-gray-200 pt-4 pb-3">
                 <div class="px-4 flex items-center">
                     <div class="flex-shrink-0">

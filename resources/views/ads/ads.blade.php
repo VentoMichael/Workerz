@@ -311,8 +311,10 @@
             </section>
         </section>
         <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 ">
+            <p class="text-xs">Environ 148 000 résultats</p>
+
             <section id="ads-section" role="list"
-                     class="relative mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3">
+                     class="relative mt-2 max-w-3xl mx-auto grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3">
                 <h3 style="z-index: -10" class="text-transparent absolute">Most popular ads</h3>
                 <div
                     class="max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1">
@@ -484,6 +486,8 @@
     </section>
 @endsection
 @section('scripts')
+    @vite('resources/js/filters.js')
+
     <script>
         // Get all elements with the class 'title-of-ad'
         const titles = document.querySelectorAll('[id^="title-of-ad-"]');
