@@ -7,6 +7,9 @@ module.exports = {
     ],
     theme: {
         extend: {
+            minWidth:{
+                '280':'280px'
+            },
             gridTemplateColumns: {
                 '100px': 'repeat(auto-fit, minmax(100px, 1fr))',
                 '500px': 'repeat(auto-fit, minmax(500px, 1fr))',

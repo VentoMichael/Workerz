@@ -25,8 +25,15 @@
 </main>
 @include('layouts.dashboard.footer')
 
+<script>
+    const userMenuButton = document.getElementById('user-menu-button');
+    const menuItems = document.getElementById('dropdown-menu-dashboard');
 
-@vite('resources/js/app.js')
+    userMenuButton.addEventListener('click', function() {
+        menuItems.classList.toggle('hidden');
+    });
+
+</script>
 @yield('scripts')
 </body>
 </html>
