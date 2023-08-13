@@ -166,91 +166,140 @@
                 <section aria-labelledby="notes-title">
                     <div class="bg-white shadow sm:rounded-lg sm:overflow-hidden">
                         <div class="divide-y divide-gray-200">
-                            <div class="px-4 py-5 sm:px-6">
+                            <div class="px-4 py-5 sm:px-6 flex justify-between">
                                 <h2 id="notes-title" class="text-lg font-medium text-gray-900">Commentaires</h2>
+
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                    </svg>
+                                    <p class="ml-2 text-sm font-bold text-gray-900">4.95</p>
+                                    <span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full"></span>
+                                    <p class="text-sm font-medium text-gray-900">73 reviews</p>
+                                </div>
+
                             </div>
                             <div class="px-4 py-6 sm:px-6">
-                                <ul role="list" class="space-y-8">
-                                    <li>
-                                        <div class="flex space-x-3">
-                                            <div class="flex-shrink-0">
-                                                <img class="h-10 w-10 rounded-full"
-                                                     src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                     alt="">
-                                            </div>
-                                            <div>
-                                                <div class="text-sm">
-                                                    <a href="#" class="font-medium text-gray-900">Leslie Alexander</a>
-                                                </div>
-                                                <div class="mt-1 text-sm text-gray-700">
-                                                    <p>Ducimus quas delectus ad maxime totam doloribus reiciendis ex.
-                                                        Tempore dolorem maiores. Similique voluptatibus tempore non
-                                                        ut.</p>
-                                                </div>
-                                                <div class="mt-2 text-sm space-x-2">
-                                                    <span class="text-gray-500 font-medium">Il y a 4 jours</span>
-                                                    <span class="text-gray-500 font-medium">&middot;</span>
-                                                    <button type="button" class="text-gray-900 font-medium">Répondre
-                                                    </button>
-                                                </div>
+                                <ul role="list" class="divide-y space-y-6">
+                                    <li class="pt-6">
+
+                                        <div class="flex items-center mb-4 space-x-4">
+                                            <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="">
+                                            <div class="space-y-1 font-medium">
+                                                <p>Jese Leos <time datetime="2014-08-16 19:00" class="block text-sm text-gray-500">Joined on August 2014</time></p>
                                             </div>
                                         </div>
+                                        <div class="flex items-center mb-1">
+                                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <p class="mb-5 text-sm text-gray-500"><p>Reviewed in the United Kingdom on <time datetime="2017-03-03 19:00">March 3, 2017</time></p></p>
+
+                                        </div>
+                                        <p class="mb-2 text-gray-500">This is my third Invicta Pro Diver. They are just fantastic value for money. This one arrived yesterday and the first thing I did was set the time, popped on an identical strap from another Invicta and went in the shower with it to test the waterproofing.... No problems.</p>
+                                        <a href="#" class="block mb-5 text-sm font-medium text-blue-600 hover:underline">Read more</a>
+                                        <div>
+                                            <p class="mt-1 text-xs text-gray-500">19 people found this helpful</p>
+                                            <div class="flex items-center mt-3 space-x-3 divide-x divide-gray-200">
+                                                <a href="#" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5">Helpful</a>
+                                            </div>
+                                        </div>
+
                                     </li>
 
-                                    <li>
-                                        <div class="flex space-x-3">
-                                            <div class="flex-shrink-0">
-                                                <img class="h-10 w-10 rounded-full"
-                                                     src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                     alt="">
-                                            </div>
-                                            <div>
-                                                <div class="text-sm">
-                                                    <a href="#" class="font-medium text-gray-900">Michael Foster</a>
-                                                </div>
-                                                <div class="mt-1 text-sm text-gray-700">
-                                                    <p>Et ut autem. Voluptatem eum dolores sint necessitatibus quos.
-                                                        Quis eum qui dolorem accusantium voluptas voluptatem ipsum. Quo
-                                                        facere iusto quia accusamus veniam id explicabo et aut.</p>
-                                                </div>
-                                                <div class="mt-2 text-sm space-x-2">
-                                                    <span class="text-gray-500 font-medium">Il y a 4 jours</span>
-                                                    <span class="text-gray-500 font-medium">&middot;</span>
-                                                    <button type="button" class="text-gray-900 font-medium">Répondre
-                                                    </button>
-                                                </div>
+                                    <li class="pt-6">
+
+                                        <div class="flex items-center mb-4 space-x-4">
+                                            <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="">
+                                            <div class="space-y-1 font-medium">
+                                                <p>Jese Leos <time datetime="2014-08-16 19:00" class="block text-sm text-gray-500">Joined on August 2014</time></p>
                                             </div>
                                         </div>
+                                        <div class="flex items-center mb-1">
+                                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <p class="mb-5 text-sm text-gray-500"><p>Reviewed in the United Kingdom on <time datetime="2017-03-03 19:00">March 3, 2017</time></p></p>
+
+                                        </div>
+                                        <p class="mb-2 text-gray-500">This is my third Invicta Pro Diver. They are just fantastic value for money. This one arrived yesterday and the first thing I did was set the time, popped on an identical strap from another Invicta and went in the shower with it to test the waterproofing.... No problems.</p>
+                                        <p class="mb-3 text-gray-500">It is obviously not the same build quality as those very expensive watches. But that is like comparing a Citroën to a Ferrari. This watch was well under £100! An absolute bargain.</p>
+                                        <a href="#" class="block mb-5 text-sm font-medium text-blue-600 hover:underline">Read more</a>
+                                        <div>
+                                            <p class="mt-1 text-xs text-gray-500">19 people found this helpful</p>
+                                            <div class="flex items-center mt-3 space-x-3 divide-x divide-gray-200">
+                                                <a href="#" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5">Helpful</a>
+                                            </div>
+                                        </div>
+
                                     </li>
 
-                                    <li>
-                                        <div class="flex space-x-3">
-                                            <div class="flex-shrink-0">
-                                                <img class="h-10 w-10 rounded-full"
-                                                     src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                     alt="">
-                                            </div>
-                                            <div>
-                                                <div class="text-sm">
-                                                    <a href="#" class="font-medium text-gray-900">Dries Vincent</a>
-                                                </div>
-                                                <div class="mt-1 text-sm text-gray-700">
-                                                    <p>Expedita consequatur sit ea voluptas quo ipsam recusandae. Ab
-                                                        sint et voluptatem repudiandae voluptatem et eveniet. Nihil quas
-                                                        consequatur autem. Perferendis rerum et.</p>
-                                                </div>
-                                                <div class="mt-2 text-sm space-x-2">
-                                                    <span class="text-gray-500 font-medium">Il y a 4 jours</span>
-                                                    <span class="text-gray-500 font-medium">&middot;</span>
-                                                    <button type="button" class="text-gray-900 font-medium">Répondre
-                                                    </button>
-                                                </div>
+                                    <li class="pt-6">
+
+                                        <div class="flex items-center mb-4 space-x-4">
+                                            <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="">
+                                            <div class="space-y-1 font-medium">
+                                                <p>Jese Leos <time datetime="2014-08-16 19:00" class="block text-sm text-gray-500">Joined on August 2014</time></p>
                                             </div>
                                         </div>
+                                        <div class="flex items-center mb-1">
+                                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <svg class="w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                            </svg>
+                                            <p class="mb-5 text-sm text-gray-500"><p>Reviewed in the United Kingdom on <time datetime="2017-03-03 19:00">March 3, 2017</time></p></p>
+
+                                        </div>
+                                        <p class="mb-2 text-gray-500">This is my third Invicta Pro Diver. They are just fantastic value for money. This one arrived yesterday and the first thing I did was set the time, popped on an identical strap from another Invicta and went in the shower with it to test the waterproofing.... No problems.</p>
+                                        <p class="mb-3 text-gray-500">It is obviously not the same build quality as those very expensive watches. But that is like comparing a Citroën to a Ferrari. This watch was well under £100! An absolute bargain.</p>
+                                        <a href="#" class="block mb-5 text-sm font-medium text-blue-600 hover:underline">Read more</a>
+                                        <div>
+                                            <p class="mt-1 text-xs text-gray-500">19 people found this helpful</p>
+                                            <div class="flex items-center mt-3 space-x-3 divide-x divide-gray-200">
+                                                <a href="#" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-xs px-2 py-1.5">Helpful</a>
+                                            </div>
+                                        </div>
+
                                     </li>
                                 </ul>
                             </div>
                         </div>
+
                         <div class="bg-gray-50 px-4 py-6 sm:px-6">
                             <div class="flex space-x-3">
                                 <div class="flex-shrink-0">
@@ -260,6 +309,45 @@
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <form action="#">
+                                        <div class="flex space-x-1 mb-2 items-center" id="star-rating">
+                                            <!-- Add a class for unfilled star and on hover it fills -->
+<p>Note :</p>
+                                            <label for="star1" class="star" style="font-size: 1.5rem; cursor: pointer;">
+                                                <svg class="hover:text-yellow-300 w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                                </svg>
+                                            </label>
+                                            <input type="radio" id="star1" name="rating" value="1" class="hidden" />
+
+                                            <label for="star2" class="star" style="font-size: 1.5rem; cursor: pointer;">
+                                                <svg class="hover:text-yellow-300 w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                                </svg>
+                                            </label>
+                                            <input type="radio" id="star2" name="rating" value="2" class="hidden" />
+
+                                            <label for="star3" class="star" style="font-size: 1.5rem; cursor: pointer;">
+                                                <svg class="hover:text-yellow-300 w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                                </svg>
+                                            </label>
+                                            <input type="radio" id="star3" name="rating" value="3" class="hidden" />
+
+                                            <label for="star4" class="star" style="font-size: 1.5rem; cursor: pointer;">
+                                                <svg class="hover:text-yellow-300 w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                                </svg>
+                                            </label>
+                                            <input type="radio" id="star4" name="rating" value="4" class="hidden" />
+
+                                            <label for="star5" class="star" style="font-size: 1.5rem; cursor: pointer;">
+                                                <svg class="hover:text-yellow-300 w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                                </svg>
+                                            </label>
+                                            <input type="radio" id="star5" name="rating" value="5" class="hidden" />
+                                        </div>
+
                                         <div>
                                             <label for="comment" class="sr-only">À propos de</label>
                                             <textarea id="comment" name="comment" rows="3"
@@ -275,7 +363,7 @@
                                                           d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
                                                 </svg>
                                                 <div class="ml-2 text-sm text-gray-800 rounded-lg" role="alert">
-                                                    <span class="font-medium">Respectez les règles.</span>
+                                                    <span class="font-medium">Respectez les <a href="{{route('disclaimer')}}" class="underline hover:no-underline">règles.</a></span>
                                                 </div>
                                             </div>
                                             <x-button kind="primary">Commenter</x-button>
@@ -284,6 +372,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </section>
             </div>
@@ -415,4 +504,49 @@
         });
 
     </script>
+
+    <script>
+
+        let clicked = false; // Variable to keep track of whether a star has been clicked
+
+        // Get all star labels
+        const starLabels = document.querySelectorAll('.star svg');
+
+        // Add event listeners to each star label
+        starLabels.forEach((starLabel, index) => {
+            starLabel.addEventListener('mouseover', () => {
+                // On hover, add the 'text-yellow-300' class to all the previous stars and the current star
+                if (!clicked) {
+                    for (let i = 0; i <= index; i++) {
+                        starLabels[i].classList.add('text-yellow-300');
+                    }
+                }
+            });
+
+            starLabel.addEventListener('mouseout', () => {
+                // On mouseout, remove the 'text-yellow-300' class from all the stars
+                if (!clicked) {
+                    starLabels.forEach((star) => {
+                        star.classList.remove('text-yellow-300');
+                    });
+                }
+            });
+
+            starLabel.addEventListener('click', () => {
+                clicked = true; // Mark that a star has been clicked
+
+                // Fill all stars from 1 to the clicked star
+                for (let i = 0; i <= index; i++) {
+                    starLabels[i].classList.add('text-yellow-300');
+                }
+
+                // Handle your rating logic here (if needed)
+                // For example, you can store the selected rating in a variable or submit it to the server.
+                // In this example, we'll just log the selected rating to the console.
+                console.log(`Selected rating: ${index + 1}`);
+            });
+        });
+    </script>
+
+
 @endsection

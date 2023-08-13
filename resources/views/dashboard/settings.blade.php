@@ -63,7 +63,7 @@
                                                 <p class="mt-1 text-sm text-gray-500">Update your billing information. Please note that updating your location could affect your tax rates.</p>
                                             </div>
 
-                                            <form action="#" method="POST">
+                                            <form action="{{route('dashboard.settings.privacy')}}" method="POST">
 
                                                 <div>
                                                     <ul role="list" class="mt-2 divide-y divide-gray-200">
@@ -134,7 +134,7 @@
                                                                     Integer amet, nunc hendrerit adipiscing nam. Elementum
                                                                     ame</p>
                                                             </div>
-                                                            <x-button id="delete-account" type="submit" kind="danger">Delete
+                                                            <x-button id="delete-account" type="submit" kind="danger" name="delete-account">Delete
                                                             </x-button>
 
                                                         </li>

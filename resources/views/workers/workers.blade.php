@@ -6,7 +6,8 @@
 @section('content')
 
     <section>
-        <section class="bg-gray-50">
+        <h1 class="sr-only">Ads page</h1>
+        <div class="bg-gray-50">
             <div class="background_blur hidden fixed inset-0 flex z-40 sm:hidden" role="dialog" aria-modal="true">
                 <div class="fixed inset-0 bg-black bg-opacity-25" aria-hidden="true"></div>
                 <div
@@ -48,6 +49,10 @@
                             </h3>
                             <div class="content_filter_category pt-6 hidden" id="filter-section-0">
                                 <div class="space-y-6">
+
+                                    <fieldset>
+
+                                        <legend class="sr-only">Category</legend>
                                     <div class="flex items-center">
                                         <input id="filter-mobile-category-0" name="category[]" value="tees"
                                                type="checkbox"
@@ -72,6 +77,7 @@
                                         <label for="filter-mobile-category-2" class="ml-3 text-sm text-gray-500"> Hats
                                             (31) </label>
                                     </div>
+                                    </fieldset>
                                 </div>
                             </div>
                         </section>
@@ -96,6 +102,11 @@
                             </h3>
                             <div class="content_filter_regions pt-6 hidden" id="filter-section-1">
                                 <div class="space-y-6">
+                                    <fieldset>
+
+                                        <legend class="sr-only">Category</legend>
+
+
                                     <div class="flex items-center">
                                         <input id="filter-mobile-brand-0" name="brand[]" value="clothing-company"
                                                type="checkbox"
@@ -120,6 +131,8 @@
                                             &#039;n
                                             More </label>
                                     </div>
+                                    </fieldset>
+
                                 </div>
                             </div>
                         </section>
@@ -166,6 +179,9 @@
                                 From: "transform opacity-100 scale-100"
                                 To: "transform opacity-0 scale-95"
                             -->
+                            <fieldset>
+
+                                        <legend class="sr-only">Category</legend>
                             <div
                                 class="filter_sort_content hidden origin-top-left absolute left-0 z-10 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                                 role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button"
@@ -183,8 +199,10 @@
                                     <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
                                        role="menuitem"
                                        tabindex="-1" id="mobile-menu-item-2"> Newest </a>
+
                                 </div>
                             </div>
+                            </fieldset>
                         </div>
 
                         <!-- Mobile filter dialog toggle, controls the 'mobileFilterDialogOpen' state. -->
@@ -216,6 +234,10 @@
                                 </div>
                                 <div
                                     class="filter_content_category hidden origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
+
+                                    <fieldset>
+
+                                        <legend class="sr-only">Category</legend>
                                     <form class="space-y-4">
                                         <div class="flex items-center">
                                             <input id="filter-category-0" name="category[]" value="tees" type="checkbox"
@@ -242,6 +264,7 @@
                                                 Hats (31) </label>
                                         </div>
                                     </form>
+                                    </fieldset>
                                 </div>
                             </div>
 
@@ -273,6 +296,9 @@
                                 -->
                                 <div
                                     class="filter_content_regions hidden origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <fieldset>
+
+                                        <legend class="sr-only">Category</legend>
                                     <form class="space-y-4">
                                         <div class="flex items-center">
                                             <input id="filter-brand-0" name="brand[]" value="clothing-company"
@@ -301,22 +327,24 @@
                                                 Shoes &#039;n More </label>
                                         </div>
                                     </form>
+                                    </fieldset>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
             </section>
-        </section>
+        </div>
                 <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 ">
         <section>
-            <h3 style="z-index: -10" class="text-transparent absolute">Most popular workers</h3>
+            <h3 style="z-index: -10" class="sr-only">Most popular workers</h3>
             <p class="text-xs mb-2">Environ 148 000 résultats</p>
             <div id="workers-section" role="list" class="hidden flex md:grid md:grid-cols-500px flex-col gap-4">
                 <section class="bg-white shadow overflow-hidden sm:rounded-md relative">
                     <div class="top-5 absolute right-6">
                         <form action="" id="saveWorker">
                             <button type="submit" class="flex bg-white shadow overflow-hidden sm:rounded-md p-1.5">
+                                <span class="sr-only">Save</span>
                                 <svg fill="none" class="w-7" stroke="currentColor" stroke-width="1.5"
                                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round"

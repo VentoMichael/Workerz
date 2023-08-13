@@ -11,7 +11,7 @@
                     <div
                         class="mx-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-left lg:flex lg:items-center">
                         <div class="lg:py-24">
-                            <a href="{{route('sign-up.role')}}"
+                            <a href="{{route('sign-in')}}"
                                class="inline-flex items-center text-white bg-black rounded-full p-1 pr-2 sm:text-base lg:text-sm xl:text-base hover:text-gray-200">
                             <span
                                 class="px-3 py-0.5 text-white text-xs font-semibold leading-5 uppercase tracking-wide bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full">Workerz</span>
@@ -196,9 +196,9 @@
                         <nav class="flex space-x-4 p-4 justify-center" aria-label="Tabs">
                             <!-- Add an "id" attribute to each tab link to match with their corresponding tab content section "id" attribute -->
                             <a href="{{route('workers')}}" data-tab="workers" aria-current="page"
-                               class="tab-link text-white px-3 py-2 font-medium text-sm rounded-md">Workers</a>
+                               class="tab-link text-white px-3 py-2 font-medium text-sm rounded-md border">Workers</a>
                             <a href="{{route('ads')}}" data-tab="ads"
-                               class="tab-link text-gray-600 px-3 py-2 font-medium text-sm rounded-md">Ads</a>
+                               class="tab-link text-gray-600 px-3 py-2 font-medium text-sm rounded-md border">Ads</a>
                         </nav>
 
                     </div>
@@ -466,7 +466,7 @@
             </section>
 
             <section id="ads-section"
-                     class="section-tab-content relative mt-8 max-w-3xl mx-auto grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3 hidden">
+                     class="section-tab-content relative mt-4 max-w-3xl mx-auto grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3 hidden">
                 <h3 style="z-index: -10" class="text-transparent absolute">Most popular ads</h3>
                 <div
                     class="max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1">
@@ -623,24 +623,7 @@
         </div>
 
         <!-- CTA Section -->
-        <section class="bg-white">
-            <div
-                class="max-w-4xl mx-auto py-16 px-4 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 lg:flex lg:items-center lg:justify-between">
-                <h2 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                    <span class="block">Ready to get started?</span>
-                    <span
-                        class="-mb-1 pb-1 block bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Get in touch or create an account.</span>
-                </h2>
-                <div class="mt-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-5">
-                    <a href="{{route('how-it-works')}}">
-                        <x-button kind="secondary">Learn more</x-button>
-                    </a>
-                    <a href="{{route('sign-up.role')}}">
-                        <x-button kind="primary">Get started</x-button>
-                    </a>
-                </div>
-            </div>
-        </section>
+        @include('layouts.cta')
     </section>
 
 @endsection

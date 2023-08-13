@@ -18,6 +18,7 @@
                                    placeholder="janesmith">
                         </div>
                     </div>
+                    <!-- TODO: Put instant verification -->
                 </div>
 
                 <div class="col-span-full">
@@ -25,9 +26,9 @@
                            class="block text-sm font-medium leading-6 text-gray-900">About</label>
                     <div class="mt-2">
                                     <textarea id="about" name="about" rows="3"
-                                              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                                              class="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                     </div>
-                    <p class="mt-3 text-sm leading-6 text-gray-600">Write a few sentences about
+                    <p class="mt-1 text-sm leading-6 text-gray-600">Write a few sentences about
                         yourself.</p>
                 </div>
 
@@ -41,10 +42,10 @@
                                   d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
                                   clip-rule="evenodd"/>
                         </svg>
-                        <label for="file-upload"
+                        <label for="avatar-upload"
                                class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                             <span>Upload a file</span>
-                            <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                            <input id="avatar-upload" name="avatar-upload" type="file" class="sr-only">
                         </label>
                     </div>
                 </div>
@@ -62,10 +63,10 @@
                                       clip-rule="evenodd"/>
                             </svg>
                             <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                                <label for="file-upload"
+                                <label for="background-upload"
                                        class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                     <span>Upload a file</span>
-                                    <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                                    <input id="background-upload" name="background-upload" type="file" class="sr-only">
                                 </label>
                                 <p class="pl-1">or drag and drop</p>
                             </div>
@@ -166,53 +167,52 @@
                     <legend class="sr-only">Pricing plans</legend>
                     <div class="relative bg-white rounded-md -space-y-px">
                         <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
-                        <label class="justify-between rounded-tl-md rounded-tr-md relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
+                        <label class="label_pricing bg-indigo-50 border-indigo-200 z-10 justify-between rounded-tl-md rounded-tr-md relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                             <div class="flex items-center text-sm">
                                 <input type="radio" name="pricing-plan" value="Startup" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
                                 <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
-                                <span id="pricing-plans-0-label" class="ml-3 font-medium">Startup</span>
+                                <span id="pricing-plans-0-label" class="pricing-plans-span ml-3 font-medium text-indigo-900">Startup</span>
                             </div>
-                            <p id="pricing-plans-0-description-0" class="inline ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
+                            <p id="pricing-plans-0-description-0" class="pricing-plans-description inline ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
                                 <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
-                                <span class="font-medium">$29 / mo</span>
-                                <!-- Checked: "text-indigo-700", Not Checked: "text-gray-500" -->
-                                <span>($290 / yr)</span>
+                                <span class="font-medium text_price" data-monthly="{{9.99}}" data-yearly="{{number_format(floor((9.99 * 12) * 0.90) + 0.99, 2, ',', '.')}}">9,99€ </span><span class="text_period">/ mo</span>
+
+                                <span>({{number_format(floor((9.99 * 12) * 0.90) + 0.99, 2, ',', '.')}}€ / ye)</span>
+
                             </p>
                         </label>
 
                         <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
-                        <label class="justify-between relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
+                        <label class="label_pricing justify-between relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                             <div class="flex items-center text-sm">
-                                <input type="radio" name="pricing-plan" value="Business" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="pricing-plans-1-label" aria-describedby="pricing-plans-1-description-0 pricing-plans-1-description-1">
+                                <input type="radio" name="pricing-plan" value="Business" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-red-500" aria-labelledby="pricing-plans-1-label" aria-describedby="pricing-plans-1-description-0 pricing-plans-1-description-1">
                                 <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
-                                <span id="pricing-plans-1-label" class="ml-3 font-medium">Business</span>
+                                <span id="pricing-plans-1-label" class="pricing-plans-span ml-3 font-medium">Business</span>
                             </div>
-                            <p id="pricing-plans-1-description-0" class="inline ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
-                                <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
-                                <span class="font-medium">$99 / mo</span>
-                                <!-- Checked: "text-indigo-700", Not Checked: "text-gray-500" -->
-                                <span>($990 / yr)</span>
+                            <p id="pricing-plans-1-description-0" class="pricing-plans-description inline ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
+                                <span class="font-medium text_price" data-monthly="{{9.99}}" data-yearly="{{number_format(floor((9.99 * 12) * 0.90) + 0.99, 2, ',', '.')}}">9,99€ </span><span class="text_period">/ mo</span>
+
+                                <span>({{number_format(floor((9.99 * 12) * 0.90) + 0.99, 2, ',', '.')}}€ / ye)</span>
                             </p>
                         </label>
 
                         <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
-                        <label class="rounded-bl-md rounded-br-md justify-between relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
+                        <label class="label_pricing rounded-bl-md rounded-br-md justify-between relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                             <div class="flex items-center text-sm">
                                 <input type="radio" name="pricing-plan" value="Enterprise" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="pricing-plans-2-label" aria-describedby="pricing-plans-2-description-0 pricing-plans-2-description-1">
                                 <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
-                                <span id="pricing-plans-2-label" class="ml-3 font-medium">Enterprise</span>
+                                <span id="pricing-plans-2-label" class="pricing-plans-span ml-3 font-medium">Enterprise</span>
                             </div>
-                            <p id="pricing-plans-2-description-0" class="inline ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
-                                <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
-                                <span class="font-medium">$249 / mo</span>
-                                <!-- Checked: "text-indigo-700", Not Checked: "text-gray-500" -->
-                                <span>($2490 / yr)</span>
+                            <p id="pricing-plans-2-description-0" class="pricing-plans-description inline ml-6 pl-1 text-sm md:ml-0 md:pl-0 md:text-center">
+                                <span class="font-medium text_price" data-monthly="{{9.99}}" data-yearly="{{number_format(floor((9.99 * 12) * 0.90) + 0.99, 2, ',', '.')}}">9,99€ </span><span class="text_period">/ mo</span>
+                                <span>({{number_format(floor((9.99 * 12) * 0.90) + 0.99, 2, ',', '.')}}€ / ye)</span>
                             </p>
                         </label>
                     </div>
                 </fieldset>
 
             </div>
+
         </div>
     </div>
 
@@ -221,3 +221,30 @@
         <x-button type="submit" class="max-w-xs" kind="primary">Continue to next step</x-button>
     </div>
 </form>
+
+@section('scripts')
+    <script>
+        const radioInputs = document.querySelectorAll('input[name="pricing-plan"]');
+        const pricingLabels = document.querySelectorAll('.label_pricing');
+        const pricingSpans = document.querySelectorAll('.pricing-plans-span');
+
+        radioInputs.forEach(function(input, index) {
+            input.addEventListener('change', function() {
+                radioInputs.forEach(function(radio, i) {
+                    if (i !== index) {
+                        pricingLabels[i].classList.remove('bg-indigo-50', 'border-indigo-200', 'z-10');
+                        pricingLabels[i].classList.add('border-gray-200');
+                        pricingSpans[i].classList.remove('text-indigo-900');
+                        pricingSpans[i].classList.add('text-gray-900');
+                    } else {
+                        pricingLabels[i].classList.add('bg-indigo-50', 'border-indigo-200', 'z-10');
+                        pricingLabels[i].classList.remove('border-gray-200');
+                        pricingSpans[i].classList.add('text-indigo-900');
+                        pricingSpans[i].classList.remove('text-gray-900');
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
+

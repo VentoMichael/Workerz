@@ -1,3 +1,4 @@
+// JavaScript code
 const filters = [
     {
         btn: document.querySelector('.filter_sort'),
@@ -14,7 +15,7 @@ const filters = [
 ];
 
 const toggleFilters = (btn, content) => {
-    filters.forEach(filter => {
+    filters.forEach((filter) => {
         if (filter.btn !== btn) {
             filter.content.classList.add('hidden');
         }
@@ -22,7 +23,7 @@ const toggleFilters = (btn, content) => {
     content.classList.toggle('hidden');
 };
 
-filters.forEach(filter => {
+filters.forEach((filter) => {
     filter.btn.addEventListener('click', () => {
         toggleFilters(filter.btn, filter.content);
     });
@@ -41,14 +42,14 @@ const toggleFiltersMobile = () => {
 closeFiltersBtn.addEventListener('click', toggleFiltersMobile);
 openFiltersBtn.addEventListener('click', toggleFiltersMobile);
 
-const button = document.querySelector('.button_filter_category');
+const buttonCategory = document.querySelector('.button_filter_category');
 const contentCategory = document.querySelector('.content_filter_category');
 const chevronCategory = document.querySelector('.chevron_category');
 
-button.addEventListener('click', () => {
+buttonCategory.addEventListener('click', () => {
     contentCategory.classList.toggle('hidden');
-    button.classList.toggle('border-gray-300');
-    button.classList.toggle('-mb-px');
+    buttonCategory.classList.toggle('border-gray-300');
+    buttonCategory.classList.toggle('-mb-px');
     chevronCategory.classList.toggle('-rotate-180');
     chevronCategory.classList.toggle('rotate-0');
 });
@@ -58,13 +59,12 @@ const contentFilterRegions = document.querySelector('.content_filter_regions');
 const chevronRegion = document.querySelector('.chevron_region');
 
 buttonFilterRegion.addEventListener('click', () => {
-    filters.forEach(filter => {
+    filters.forEach((filter) => {
         if (filter.content !== contentFilterRegions) {
             filter.content.classList.add('hidden');
         }
     });
     contentCategory.classList.add('hidden');
-    filterSortContent.classList.add('hidden');
     contentFilterRegions.classList.toggle('hidden');
     buttonFilterRegion.classList.toggle('border-gray-300');
     buttonFilterRegion.classList.toggle('-mb-px');

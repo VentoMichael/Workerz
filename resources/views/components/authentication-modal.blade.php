@@ -11,12 +11,12 @@
                 <h2 class="mb-4 text-xl font-medium text-gray-900">Sign in to our platform</h2>
                 <form class="space-y-6" action="#">
                     <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@company.com" required>
+                        <label for="email-login" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+                        <input type="email" name="email-login" id="email-login" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@company.com" required>
                     </div>
                     <div>
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Your password</label>
-                        <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                        <label for="password-login" class="block mb-2 text-sm font-medium text-gray-900">Your password</label>
+                        <input type="password" name="password-login" id="password-login" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                     </div>
                     <div class="flex justify-between">
                         <div class="flex items-start">

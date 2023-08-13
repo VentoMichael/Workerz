@@ -53,7 +53,7 @@
                     Update
                 </h2>
                 <p class="mb-3 text-gray-600 mb-8 mt-2">
-                    This site disclaimer was last updated on 20/05/2023. Should we update, amend or make any changes to this document, those changes will be prominently posted here.
+                    This site disclaimer was last updated on {{ config('app.date_last_update_disclaimer') }}. Should we update, amend or make any changes to this document, those changes will be prominently posted here.
                 </p>
             </section>
         </div>

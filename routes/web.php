@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,9 +37,13 @@ Route::get('/workers/details', function () {
     return view('workers.show');
 })->name('workers.show');
 
+
 Route::get('/contact-us', function () {
     return view('contact-us');
 })->name('contact-us');
+
+Route::get('/contact-us/post', [ContactController::class, 'store'])->name('contact-us.store');
+
 
 Route::get('/about-us', function () {
     return view('about');
@@ -90,7 +95,10 @@ Route::get('/terms', function () {
 })->name('terms');
 
 
+// Newsletter
 
+Route::get('/newsletter',
+    [\App\Http\Controllers\NewsletterController::class, 'storeNewsletterEmail'])->name('newsletter');
 
 
 // Dashboard views
@@ -114,4 +122,8 @@ Route::get('/dashboard/plans', function () {
 Route::get('/dashboard/settings', function () {
     return view('dashboard.settings');
 })->name('dashboard.settings');
+
+Route::post('/dashboard/settings/privacy', function () {
+    return view('dashboard.settings');
+})->name('dashboard.settings.privacy');
 

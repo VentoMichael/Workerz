@@ -80,13 +80,15 @@
                 </div>
             </div>
             <section class="mt-12 xl:mt-0">
+                <!-- TODO: add error handling for form submission -->
+
                 <h3 class="text-sm font-semibold text-gray-700 tracking-wider uppercase">Subscribe to our
                     newsletter</h3>
                 <p class="mt-4 text-base text-gray-500">The latest news, articles, and resources, sent to your inbox
                     weekly.</p>
-                <form class="mt-4 sm:flex sm:max-w-md">
-                    <label for="email-address" class="sr-only">Email address</label>
-                    <input type="email" name="email-address" id="email-address" autocomplete="email" required
+                <form class="mt-4 sm:flex sm:max-w-md" action="{{ route('newsletter')}}" method="get">
+                    <label for="newsletter" class="sr-only">Email address</label>
+                    <input type="email" name="newsletter" id="newsletter" autocomplete="email" required
                            class="appearance-none min-w-0 w-full bg-white border border-gray-300 rounded-md shadow-sm py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:placeholder-gray-400"
                            placeholder="Enter your email">
                     <div class="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
@@ -98,9 +100,11 @@
                 </form>
             </section>
         </div>
+        <!-- TODO: put good links in socials -->
+
         <div class="mt-12 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between lg:mt-16">
             <div class="flex space-x-6 md:order-2">
-                <a href="#" class="text-gray-400 hover:text-gray-500">
+                <a href="#" target="_blank"  class="text-gray-400 hover:text-gray-500">
                     <span class="sr-only text-black">Facebook</span>
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd"
@@ -109,7 +113,7 @@
                     </svg>
                 </a>
 
-                <a href="#" class="text-gray-400 hover:text-gray-500">
+                <a href="#" target="_blank"  class="text-gray-400 hover:text-gray-500">
                     <span class="sr-only text-black">Instagram</span>
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd"
@@ -118,7 +122,7 @@
                     </svg>
                 </a>
 
-                <a href="#" class="text-gray-400 hover:text-gray-500">
+                <a href="#" target="_blank" class="text-gray-400 hover:text-gray-500">
                     <span class="sr-only text-black">Twitter</span>
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path
@@ -126,7 +130,7 @@
                     </svg>
                 </a>
 
-                <a href="#" class="text-gray-400 hover:text-gray-500">
+                <a href="https://github.com/VentoMichael" target="_blank"  class="text-gray-400 hover:text-gray-500">
                     <span class="sr-only text-black">GitHub</span>
                     <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path fill-rule="evenodd"
@@ -135,14 +139,6 @@
                     </svg>
                 </a>
 
-                <a href="#" class="text-gray-400 hover:text-gray-500">
-                    <span class="sr-only text-black">Dribbble</span>
-                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill-rule="evenodd"
-                              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                              clip-rule="evenodd"/>
-                    </svg>
-                </a>
             </div>
             <p class="mt-8 text-base text-gray-700 md:mt-0 md:order-1">&copy; {{date('Y')}} Workflow, Inc. All rights
                 reserved.</p>
