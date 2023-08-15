@@ -383,241 +383,16 @@
             <section>
                 <h3 style="z-index: -10" class="text-transparent absolute">Most popular workers</h3>
                 <div id="workers-section" class="section-tab-content hidden flex md:grid md:grid-cols-500px flex-col gap-4">
-                    <section class="bg-white shadow overflow-hidden sm:rounded-md relative">
-                        <div class="top-5 absolute right-6">
-                            <form action="" id="saveWorker">
-                                <button type="submit" class="flex bg-white shadow overflow-hidden sm:rounded-md p-1.5">
-                                    <svg fill="none" class="w-7" stroke="currentColor" stroke-width="1.5"
-                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                              d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"></path>
-                                    </svg>
-                                </button>
-                            </form>
-                        </div>
-                        <a href="{{route('workers.show')}}" class="block hover:bg-indigo-50">
-                        <div class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 sm:grid-cols-48-1">
+                    @include('components.worker')
 
-                                <div class="flex-shrink-0 self-center">
-                                    <img class="h-12 w-12 rounded-full"
-                                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                         alt="">
-                                </div>
-                                <div class="flex justify-between flex-col w-full">
-
-                                    <div class="flex items-center justify-between">
-                                        <div>
-
-                                            <div class="flex text-sm sm:items-end flex-col sm:flex-row">
-                                                <h4 class="text-xl font-medium text-indigo-600 truncate">Sales
-                                                    Executive</h4>
-                                                <p class="sm:ml-1 flex-shrink-0 text-md font-normal text-gray-500">in
-                                                    Business
-                                                    Development</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="flex gap-6 sm:mt-2">
-                                        <div
-                                            class="mt-2 gap-1 flex flex-col sm:flex-row sm:items-center text-sm text-indigo-500 sm:mt-0">
-                                            <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
-                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path
-                                                    d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"></path>
-                                            </svg>
-                                            <p class="flex items-center text-sm text-gray-500 sm:mt-0">
-                                                John Doe | ABC Inc.
-                                            </p>
-                                        </div>
-                                        <div
-                                            class="mt-2 gap-1 flex flex-col sm:flex-row sm:items-center text-sm text-indigo-500 sm:mt-0">
-                                            <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
-                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path clip-rule="evenodd" fill-rule="evenodd"
-                                                      d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"></path>
-                                            </svg>
-                                            <p class="flex items-center text-sm text-gray-500 sm:mt-0 gap-1">
-                                                <!-- Heroicon name: solid/location-marker -->
-                                                New York City, USA
-                                            </p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-col px-4 py-4 sm:px-6 flex gap-4">
-                                <p class="text-gray-500">responsible for identifying new business opportunities,
-                                    building
-                                    relationships with clients, and closing deals to drive revenue growth for ABC Inc.
-                                    He
-                                    has a strong track record of success in sales and customer service, and is
-                                    passionate
-                                    about helping his clients achieve their goals. John is a skilled communicator and
-                                    problem solver, and works closely with his team to develop creative solutions to
-                                    complex
-                                    challenges.</p>
-                            </div>
-                        </a>
-                    </section>
                 </div>
             </section>
 
             <section id="ads-section"
-                     class="section-tab-content relative mt-4 max-w-3xl mx-auto grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3 hidden">
+                     class="section-tab-content max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 hidden">
                 <h3 style="z-index: -10" class="text-transparent absolute">Most popular ads</h3>
-                <div
-                    class="max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1">
-                    <div id="title-of-ad-1"
-                         class="cursor-pointer title-of-ad bg-white shadow sm:rounded-md block overflow-hidden hover:bg-indigo-50">
+                @include('components.ad')
 
-                        <div class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-48-1">
-
-                            <div class="flex-shrink-0 self-center">
-                                <img class="h-12 w-12 rounded-full"
-                                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                     alt="">
-                            </div>
-                            <div class="flex justify-between flex-col w-full gap-2">
-
-                                <div class="flex items-center justify-between">
-                                    <div>
-                                        <div class="flex text-sm">
-                                            <h4 class="text-indigo-600 text-xl font-medium">Need help painting a
-                                                room</h4>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="flex md:grid md:grid-cols-100px gap-6 sm:gap-2 ">
-                                    <div class="mt-2 gap-1 flex items-center text-sm text-indigo-500 sm:mt-0">
-                                        <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
-                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path
-                                                d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"></path>
-                                        </svg>
-                                        <p class="flex items-center text-sm text-gray-500 sm:mt-0">
-                                            Michael Vento
-                                        </p>
-                                    </div>
-                                    <div class="mt-2 gap-1 flex items-center text-sm text-indigo-500 sm:mt-0">
-                                        <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
-                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path clip-rule="evenodd" fill-rule="evenodd"
-                                                  d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"></path>
-                                        </svg>
-                                        <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 gap-1">
-                                            <!-- Heroicon name: solid/location-marker -->
-                                            Liège
-                                        </p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col px-4 py-4 sm:px-6 flex gap-4">
-                            <p class="text-gray-500">I need some help painting a room in my home. The room is
-                                approximately 12' x 12' and the walls are currently white. I would like to
-                                change the color to a light blue.</p>
-                        </div>
-                        <div class="flex px-4 py-4 sm:px-6">
-                            <svg class="w-4" fill="bg-gray-500" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                 aria-hidden="true">
-                                <path clip-rule="evenodd" fill-rule="evenodd"
-                                      d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
-                            </svg>
-                            <p class="ml-2 text-gray-500 text-sm">Posted 2 days ago</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="max-h-screen overflow-y-hidden sm:overflow-y-auto lg:col-start-2 md:col-span-3">
-
-                    <section id="content-of-ad-1" aria-labelledby="timeline-title"
-                             class="m-px hidden overflow-y-scroll sm:overflow-hidden bottom-0 z-10 bg-white shadow sm:rounded-md block overflow-hidden">
-                        <div class="bg-white px-4 py-5 sm:px-6">
-
-                            <svg class="cursor-pointer w-6 icon-back mb-8" id="icon-back-1" fill="currentColor"
-                                 viewBox="0 0 20 20"
-                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path clip-rule="evenodd" fill-rule="evenodd"
-                                      d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"></path>
-                            </svg>
-
-                            <div class="max-w-screen-lg mx-auto">
-                                <div class="flex justify-between">
-                                    <h3 class="text-2xl font-semibold mb-4">Mason for Wall Building</h3>
-                                    <div class="flex gap-2 items-start">
-                                        <a href="">
-                                            <svg fill="none" class="w-6" stroke="currentColor" stroke-width="1.5"
-                                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                                                 aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z"></path>
-                                            </svg>
-                                        </a>
-                                        <form action="" id="saveWorker-1">
-                                            <button type="submit">
-                                                <svg fill="none" class="w-6" stroke="currentColor" stroke-width="1.5"
-                                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                                                     aria-hidden="true">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"></path>
-                                                </svg>
-                                            </button>
-                                        </form>
-                                        <a href="">
-                                            <svg fill="none" class="w-6" stroke="currentColor" stroke-width="1.5"
-                                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
-                                                 aria-hidden="true">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5"></path>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="flex flex-wrap mb-4">
-                                    <div class="w-full md:w-1/3">
-                                        <p class="text-gray-700">Location:</p>
-                                        <p class="font-semibold">City, State</p>
-                                    </div>
-                                    <div class="w-full md:w-1/3">
-                                        <p class="text-gray-700">Timeline:</p>
-                                        <p class="font-semibold">Start and end dates</p>
-                                    </div>
-                                    <div class="w-full md:w-1/3">
-                                        <p class="text-gray-700">Budget:</p>
-                                        <p class="font-semibold">$X</p>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <p class="text-gray-700 mb-2">Job Description:</p>
-                                    <p class="text-gray-700 leading-normal">Looking for a skilled mason to build a brick
-                                        wall in the middle of a room. The wall should be X feet wide and Y feet high,
-                                        and must be built with [specific material]. Experience in [specific type of wall
-                                        building] is required.</p>
-                                </div>
-                                <div class="mb-4 flex justify-between">
-                                    <div class="flex items-end">
-                                        <svg class="w-4" fill="bg-gray-500" viewBox="0 0 20 20"
-                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path clip-rule="evenodd" fill-rule="evenodd"
-                                                  d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
-                                        </svg>
-                                        <p class="ml-2 text-gray-500 text-sm">Posted 2 days ago</p>
-                                    </div>
-                                    <a href="#">
-                                        <x-button kind="primary">Chat now</x-button>
-                                    </a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </section>
-                </div>
             </section>
 
         </div>
@@ -630,6 +405,8 @@
 
 @section('scripts')
     @vite('resources/js/filters.js')
+    @vite('resources/js/sharing-reporting.js')
+
     <script>
 
         // Get all tab links

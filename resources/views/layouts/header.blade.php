@@ -25,16 +25,16 @@
                 </button>
             </div>
             <nav class="hidden md:flex space-x-10">
-                <x-nav-link kind="primary" href="{{ route('ads') }}" class="{{ Route::currentRouteName() === 'ads' ? 'font-extrabold text-purple-700' : '' }}">
+                <x-nav-link kind="primary" href="{{ route('ads') }}" class="{{ Route::currentRouteName() === 'ads' || Route::currentRouteName() === 'ads.show' ? 'font-extrabold text-purple-700' : '' }}">
                     Ads
                 </x-nav-link>
-                <x-nav-link kind="primary" href="{{ route('workers') }}" class="{{ Route::currentRouteName() === 'workers' ? 'font-extrabold text-purple-700' : '' }}">
+                <x-nav-link kind="primary" href="{{ route('workers') }}" class="{{ Route::currentRouteName() === 'workers' || Route::currentRouteName() === 'workers.show' ? 'font-extrabold text-purple-700' : '' }}">
                     Workers
                 </x-nav-link>
                 <x-nav-link kind="primary" href="{{ route('contact-us') }}" class="{{ Route::currentRouteName() === 'contact-us' ? 'font-extrabold text-purple-700' : '' }}">
                     Contact
                 </x-nav-link>
-                <x-nav-link kind="primary" href="{{ route('about-us') }}" class="{{ Route::currentRouteName() === 'about-us' ? 'font-extrabold text-purple-700' : '' }}">About us</x-nav-link>
+                <x-nav-link kind="primary" href="{{ route('about-us') }}" class="{{ Route::currentRouteName() === 'about-us'  ? 'font-extrabold text-purple-700' : '' }}">About us</x-nav-link>
 
             </nav>
             <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0 gap-4">

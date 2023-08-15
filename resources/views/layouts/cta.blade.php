@@ -1,6 +1,6 @@
-<section class="bg-white">
+<section class="bg-white my-12">
     <div
-        class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-24  lg:flex lg:items-center lg:justify-between">
+        class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-24 lg:flex lg:items-center lg:justify-between">
         <h2 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
             <span class="block">Ready to get started?</span>
             <span

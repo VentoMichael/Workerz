@@ -71,3 +71,24 @@ buttonFilterRegion.addEventListener('click', () => {
     chevronRegion.classList.toggle('-rotate-180');
     chevronRegion.classList.toggle('rotate-0');
 });
+
+document.body.addEventListener('click', (event) => {
+    const isFilterButton = filters.some(filter => filter.btn.contains(event.target));
+    const isFilterContent = filters.some(filter => filter.content.contains(event.target));
+    const isFilterMobileButton = closeFiltersBtn.contains(event.target) || openFiltersBtn.contains(event.target);
+
+    if (!isFilterButton && !isFilterContent && !isFilterMobileButton) {
+        filters.forEach(filter => {
+            filter.content.classList.add('hidden');
+        });
+
+        // Close other specific content sections if needed
+        contentCategory.classList.add('hidden');
+        contentFilterRegions.classList.add('hidden');
+        // Add other content sections as needed
+
+        // Hide dialog and background if open
+        dialogContainer.classList.add('hidden');
+        filterBackground.classList.add('hidden');
+    }
+});

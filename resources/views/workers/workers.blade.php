@@ -53,30 +53,30 @@
                                     <fieldset>
 
                                         <legend class="sr-only">Category</legend>
-                                    <div class="flex items-center">
-                                        <input id="filter-mobile-category-0" name="category[]" value="tees"
-                                               type="checkbox"
-                                               class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-mobile-category-0" class="ml-3 text-sm text-gray-500"> Tees
-                                            (31)</label>
-                                    </div>
+                                        <div class="flex items-center mt-0">
+                                            <input id="filter-mobile-category-0" name="category[]" value="tees"
+                                                   type="checkbox"
+                                                   class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                                            <label for="filter-mobile-category-0" class="ml-3 text-sm text-gray-500"> Tees
+                                                (31)</label>
+                                        </div>
 
-                                    <div class="flex items-center">
-                                        <input id="filter-mobile-category-1" name="category[]" value="crewnecks"
-                                               type="checkbox"
-                                               class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-mobile-category-1" class="ml-3 text-sm text-gray-500">
-                                            Crewnecks
-                                            (31) </label>
-                                    </div>
+                                        <div class="flex items-center">
+                                            <input id="filter-mobile-category-1" name="category[]" value="crewnecks"
+                                                   type="checkbox"
+                                                   class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                                            <label for="filter-mobile-category-1" class="ml-3 text-sm text-gray-500">
+                                                Crewnecks
+                                                (31) </label>
+                                        </div>
 
-                                    <div class="flex items-center">
-                                        <input id="filter-mobile-category-2" name="category[]" value="hats"
-                                               type="checkbox"
-                                               class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-mobile-category-2" class="ml-3 text-sm text-gray-500"> Hats
-                                            (31) </label>
-                                    </div>
+                                        <div class="flex items-center">
+                                            <input id="filter-mobile-category-2" name="category[]" value="hats"
+                                                   type="checkbox"
+                                                   class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                                            <label for="filter-mobile-category-2" class="ml-3 text-sm text-gray-500"> Hats
+                                                (31) </label>
+                                        </div>
                                     </fieldset>
                                 </div>
                             </div>
@@ -107,30 +107,30 @@
                                         <legend class="sr-only">Category</legend>
 
 
-                                    <div class="flex items-center">
-                                        <input id="filter-mobile-brand-0" name="brand[]" value="clothing-company"
-                                               type="checkbox"
-                                               class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-mobile-brand-0" class="ml-3 text-sm text-gray-500"> Clothing
-                                            Company </label>
-                                    </div>
+                                        <div class="flex items-center  mt-0">
+                                            <input id="filter-mobile-brand-0" name="brand[]" value="clothing-company"
+                                                   type="checkbox"
+                                                   class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                                            <label for="filter-mobile-brand-0" class="ml-3 text-sm text-gray-500"> Clothing
+                                                Company </label>
+                                        </div>
 
-                                    <div class="flex items-center">
-                                        <input id="filter-mobile-brand-1" name="brand[]" value="fashion-inc"
-                                               type="checkbox"
-                                               class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-mobile-brand-1" class="ml-3 text-sm text-gray-500"> Fashion
-                                            Inc. </label>
-                                    </div>
+                                        <div class="flex items-center">
+                                            <input id="filter-mobile-brand-1" name="brand[]" value="fashion-inc"
+                                                   type="checkbox"
+                                                   class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                                            <label for="filter-mobile-brand-1" class="ml-3 text-sm text-gray-500"> Fashion
+                                                Inc. </label>
+                                        </div>
 
-                                    <div class="flex items-center">
-                                        <input id="filter-mobile-brand-2" name="brand[]" value="shoes-n-more"
-                                               type="checkbox"
-                                               class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                        <label for="filter-mobile-brand-2" class="ml-3 text-sm text-gray-500"> Shoes
-                                            &#039;n
-                                            More </label>
-                                    </div>
+                                        <div class="flex items-center">
+                                            <input id="filter-mobile-brand-2" name="brand[]" value="shoes-n-more"
+                                                   type="checkbox"
+                                                   class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                                            <label for="filter-mobile-brand-2" class="ml-3 text-sm text-gray-500"> Shoes
+                                                &#039;n
+                                                More </label>
+                                        </div>
                                     </fieldset>
 
                                 </div>
@@ -239,7 +239,7 @@
 
                                         <legend class="sr-only">Category</legend>
                                     <form class="space-y-4">
-                                        <div class="flex items-center">
+                                        <div class="flex items-center mt-0">
                                             <input id="filter-category-0" name="category[]" value="tees" type="checkbox"
                                                    class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
                                             <label for="filter-category-0"
@@ -300,7 +300,7 @@
 
                                         <legend class="sr-only">Category</legend>
                                     <form class="space-y-4">
-                                        <div class="flex items-center">
+                                        <div class="flex items-center mt-0">
                                             <input id="filter-brand-0" name="brand[]" value="clothing-company"
                                                    type="checkbox"
                                                    class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
@@ -340,78 +340,7 @@
             <h3 style="z-index: -10" class="sr-only">Most popular workers</h3>
             <p class="text-xs mb-2">Environ 148 000 résultats</p>
             <div id="workers-section" role="list" class="hidden flex md:grid md:grid-cols-500px flex-col gap-4">
-                <section class="bg-white shadow overflow-hidden sm:rounded-md relative">
-                    <div class="top-5 absolute right-6">
-                        <form action="" id="saveWorker">
-                            <button type="submit" class="flex bg-white shadow overflow-hidden sm:rounded-md p-1.5">
-                                <span class="sr-only">Save</span>
-                                <svg fill="none" class="w-7" stroke="currentColor" stroke-width="1.5"
-                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                          d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"></path>
-                                </svg>
-                            </button>
-                        </form>
-                    </div>
-                    <a href="{{route('workers.show')}}" class="block hover:bg-indigo-50">
-                        <div class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 sm:grid-cols-48-1">
-
-                            <div class="flex-shrink-0 self-center">
-                                <img class="h-12 w-12 rounded-full"
-                                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                     alt="">
-                            </div>
-                            <div class="flex justify-between flex-col w-full">
-
-                                <div class="flex items-center justify-between">
-                                    <div>
-
-                                        <div class="flex text-sm sm:items-end flex-col sm:flex-row">
-                                            <h4 class="text-xl font-medium text-indigo-600 truncate">Sales Executive</h4>
-                                            <p class="sm:ml-1 flex-shrink-0 text-md font-normal text-gray-500">in Business
-                                                Development</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="flex gap-6 sm:mt-2">
-                                    <div class="mt-2 gap-1 flex flex-col sm:flex-row sm:items-center text-sm text-indigo-500 sm:mt-0">
-                                        <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
-                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path
-                                                d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"></path>
-                                        </svg>
-                                        <p class="flex items-center text-sm text-gray-500 sm:mt-0">
-                                            John Doe | ABC Inc.
-                                        </p>
-                                    </div>
-                                    <div class="mt-2 gap-1 flex flex-col sm:flex-row sm:items-center text-sm text-indigo-500 sm:mt-0">
-                                        <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
-                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path clip-rule="evenodd" fill-rule="evenodd"
-                                                  d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"></path>
-                                        </svg>
-                                        <p class="flex items-center text-sm text-gray-500 sm:mt-0 gap-1">
-                                            <!-- Heroicon name: solid/location-marker -->
-                                            New York City, USA
-                                        </p>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex flex-col sm:pl-24 px-4 py-4 sm:px-6 flex gap-4">
-                            <p class="text-gray-500 truncate">responsible for identifying new business opportunities, building
-                                relationships with clients, and closing deals to drive revenue growth for ABC Inc. He
-                                has a strong track record of success in sales and customer service, and is passionate
-                                about helping his clients achieve their goals. John is a skilled communicator and
-                                problem solver, and works closely with his team to develop creative solutions to complex
-                                challenges.</p>
-                        </div>
-                    </a>
-                </section>
+                @include('components.worker')
             </div>
         </section>
 
@@ -421,5 +350,6 @@
 @section('scripts')
 
 @vite('resources/js/filters.js')
+@vite('resources/js/sharing-reporting.js')
 
 @endsection
