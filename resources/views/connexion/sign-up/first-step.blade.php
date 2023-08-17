@@ -79,7 +79,7 @@
                         </label>
                     </div>
                 </fieldset>
-                <div class="flex justify-end ">
+                <div class="flex justify-end">
                     <x-button class="max-w-xs" kind="primary">Next step</x-button>
                 </div>
             </form>

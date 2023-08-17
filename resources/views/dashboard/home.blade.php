@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.layout')
-@section('title', '')
-@section('description', '')
-@section('keywords', '')
+@section('title', 'Dashboard')
+@section('description', 'Welcome to your dashboard! Manage your profile, settings, and activities.')
+@section('keywords', 'dashboard, manage profile, settings, activities')
 
 @section('content')
 
@@ -21,7 +21,5 @@
 
 @endsection
 
-@section('scripts')
 
-@endsection
 

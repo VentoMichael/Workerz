@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.layout')
-@section('title', '')
-@section('description', '')
-@section('keywords', '')
+@section('title', 'Account Settings')
+@section('description', 'Update your account settings and preferences.')
+@section('keywords', 'account settings, user preferences, update settings')
 
 @section('content')
 
@@ -30,8 +30,8 @@
                                     <div class="shadow sm:rounded-md sm:overflow-hidden">
                                         <div class="bg-white py-6 px-4 sm:p-6">
                                             <div>
-                                                <h2 id="payment-details-heading" class="text-lg leading-6 font-medium text-gray-900">Account information</h2>
-                                                <p class="mt-1 text-sm text-gray-500">Update your billing information. Please note that updating your location could affect your tax rates.</p>
+                                                <h2 id="payment-details-heading" class="text-lg leading-6 font-medium text-gray-900">Account Information</h2>
+                                                <p class="mt-1 text-sm text-gray-500">Update your account password to enhance security. Keeping a strong and unique password helps protect your information and ensures the safety of your account.</p>
                                             </div>
 
                                             <div class="mt-6 grid grid-cols-4 gap-6">
@@ -60,7 +60,7 @@
                                         <div class="bg-white py-6 px-4 sm:p-6">
                                             <div>
                                                 <h2 id="payment-details-heading" class="text-lg leading-6 font-medium text-gray-900">Privacy</h2>
-                                                <p class="mt-1 text-sm text-gray-500">Update your billing information. Please note that updating your location could affect your tax rates.</p>
+                                                <p class="mt-1 text-sm text-gray-500">Update profile visibility.</p>
                                             </div>
 
                                             <form action="{{route('dashboard.settings.privacy')}}" method="POST">
@@ -73,8 +73,7 @@
                                                                    id="privacy-option-1-label">Available to hire</p>
                                                                 <p class="text-sm text-gray-500"
                                                                    id="privacy-option-1-description">
-                                                                    Nulla amet tempus sit accumsan. Aliquet turpis sed sit
-                                                                    lacinia.</p>
+                                                                    Share your availability for hiring. Let others know you're open for new opportunities.</p>
                                                             </div>
                                                             <button type="button"
                                                                     class="bg-gray-200 ml-4 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -91,8 +90,7 @@
                                                                    id="privacy-option-2-label">Make account private</p>
                                                                 <p class="text-sm text-gray-500"
                                                                    id="privacy-option-2-description">
-                                                                    Pharetra morbi dui mi mattis tellus sollicitudin cursus
-                                                                    pharetra.</p>
+                                                                    Keep your account details private. Your profile will not be longer visible by the others</p>
                                                             </div>
                                                             <!-- Enabled: "bg-teal-500", Not Enabled: "bg-gray-200" -->
                                                             <button type="button"
@@ -111,8 +109,7 @@
                                                                    id="privacy-option-3-label">Allow commenting</p>
                                                                 <p class="text-sm text-gray-500"
                                                                    id="privacy-option-3-description">
-                                                                    Integer amet, nunc hendrerit adipiscing nam. Elementum
-                                                                    ame</p>
+                                                                    Enable comments on your profile.</p>
                                                             </div>
                                                             <!-- Enabled: "bg-teal-500", Not Enabled: "bg-gray-200" -->
                                                             <button type="button"
@@ -131,8 +128,7 @@
                                                                    id="privacy-option-3-label">Delete account</p>
                                                                 <p class="text-sm text-gray-500"
                                                                    id="privacy-option-3-description">
-                                                                    Integer amet, nunc hendrerit adipiscing nam. Elementum
-                                                                    ame</p>
+                                                                    Permanently delete your account. This action cannot be undone.</p>
                                                             </div>
                                                             <x-button id="delete-account" type="submit" kind="danger" name="delete-account">Delete
                                                             </x-button>

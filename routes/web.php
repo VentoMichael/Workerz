@@ -70,6 +70,9 @@ Route::get('/sign-up/payment', function () {
 })->name('sign-up.payment');
 
 
+Route::post('/sign-up', function () {
+    return request();
+})->name('inscription.freelancers');
 
 
 Route::get('/sign-in', function () {

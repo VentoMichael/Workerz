@@ -27,7 +27,7 @@
                         </div>
                         <a href="#" class="text-sm text-blue-700 hover:underline">Lost Password?</a>
                     </div>
-                    <x-button type="submit" kind="secondary">Login to your account</x-button>
+                    <x-button type="submit" kind="primary">Login to your account</x-button>
                     <div class="text-sm font-medium text-gray-500">
                         Not registered? <a href="#" class="text-blue-700 hover:underline">Create account</a>
                     </div>

@@ -389,7 +389,7 @@
             </section>
 
             <section id="ads-section"
-                     class="section-tab-content max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 hidden">
+                     class="section-tab-content hidden">
                 <h3 style="z-index: -10" class="text-transparent absolute">Most popular ads</h3>
                 @include('components.ad')
 

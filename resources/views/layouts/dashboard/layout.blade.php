@@ -25,15 +25,31 @@
 </main>
 @include('layouts.dashboard.footer')
 
-<script>
-    const userMenuButton = document.getElementById('user-menu-button');
-    const menuItems = document.getElementById('dropdown-menu-dashboard');
+    <script>
+        const userMenuButton = document.getElementById('user-menu-button');
+        const userMenuButtonNotification = document.getElementById('notification-user-menu');
+        const menuItems = document.getElementById('dropdown-menu-dashboard');
+        const menuItemsNotification = document.getElementById('dropdown-menu-notification');
 
-    userMenuButton.addEventListener('click', function() {
-        menuItems.classList.toggle('hidden');
-    });
+        userMenuButton.addEventListener('click', function(event) {
+            menuItems.classList.toggle('hidden');
+            menuItemsNotification.classList.add('hidden'); // Close the other modal
+            event.stopPropagation();
+        });
 
-</script>
+        userMenuButtonNotification.addEventListener('click', function(event) {
+            menuItemsNotification.classList.toggle('hidden');
+            menuItems.classList.add('hidden'); // Close the other modal
+            event.stopPropagation();
+        });
+
+        // Close both modals when clicking outside
+        document.addEventListener('click', function() {
+            menuItems.classList.add('hidden');
+            menuItemsNotification.classList.add('hidden');
+        });
+    </script>
+
 @yield('scripts')
 </body>
 </html>

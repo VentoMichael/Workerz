@@ -13,8 +13,11 @@
             <div class="absolute inset-0 bg-gray-800 mix-blend-multiply" aria-hidden="true"></div>
         </div>
         <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-            <h1 class="text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">Create Your Account</h1>
-            <p class="mt-6 max-w-3xl text-xl text-gray-300"> Let's get started by creating your account. Please provide the following information to create your login credentials and keep track of your registration progress.</p>
+            <h1 class="text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">Create Your
+                Account</h1>
+            <p class="mt-6 max-w-3xl text-xl text-gray-300"> Let's get started by creating your account. Please provide
+                the following information to create your login credentials and keep track of your registration
+                progress.</p>
         </div>
     </div>
     <div class="min-h-full flex max-w-screen-xl gap-12 m-4 sm:m-12 2xl:mx-auto">

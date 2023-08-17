@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.layout')
-@section('title', '')
-@section('description', '')
-@section('keywords', '')
+@section('title', 'My Profile')
+@section('description', 'Manage your profile information and settings.')
+@section('keywords', 'profile, user settings, manage profile')
 
 @section('content')
 
@@ -26,24 +26,30 @@
 
                                 <div class="mt-6 flex flex-col lg:flex-row">
                                     <div class="flex-grow space-y-6">
-                                        <div class="col-span-12 sm:col-span-6">
-                                            <label for="first-name" class="block text-sm font-medium text-gray-700">
-                                                Username</label>
-                                            <input type="text" name="first-name" id="first-name"
-                                                   autocomplete="given-name"
-                                                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-sky-500 sm:text-sm">
-                                        </div>
-
-                                        <div>
-                                            <label for="about" class="block text-sm font-medium text-gray-700">
-                                                About </label>
-                                            <div class="mt-1">
-                                                <textarea id="about" name="about" rows="3"
-                                                          class="shadow-sm focus:ring-indigo-500 focus:border-sky-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"></textarea>
+                                        <div class="sm:col-span-4">
+                                        <label for="username"
+                                               class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                                        <div class="mt-2">
+                                            <div
+                                                class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
+                                                <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">workerz.be/workers/</span>
+                                                <input type="text" name="username" id="username" autocomplete="username"
+                                                       class="block flex-1 border-0 bg-transparent py-1.5 pl-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                                       placeholder="janesmith">
                                             </div>
-                                            <p class="mt-2 text-sm text-gray-500">Brief description for your
-                                                profile.
-                                                URLs are hyperlinked.</p>
+                                        </div>
+                                        <!-- TODO: Put instant verification -->
+                                    </div>
+
+                                        <div class="col-span-full">
+                                            <label for="about"
+                                                   class="block text-sm font-medium leading-6 text-gray-900">About</label>
+                                            <div class="mt-2">
+                                    <textarea id="about" name="about" rows="3"
+                                              class="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                                            </div>
+                                            <p class="mt-1 text-sm leading-6 text-gray-600">Write a few sentences about
+                                                yourself.</p>
                                         </div>
                                     </div>
 
@@ -88,20 +94,68 @@
                                     </div>
                                 </div>
 
-                                <div class="mt-6 grid grid-cols-12 gap-6">
-                                    <div class="col-span-12 sm:col-span-6">
-                                        <label for="first-name" class="block text-sm font-medium text-gray-700">First
+                                <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                    <div class="sm:col-span-3">
+                                        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First
                                             name</label>
-                                        <input type="text" name="first-name" id="first-name"
-                                               autocomplete="given-name"
-                                               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-sky-500 sm:text-sm">
+                                        <div class="mt-2">
+                                            <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                                                   class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        </div>
                                     </div>
 
-                                    <div class="col-span-12 sm:col-span-6">
-                                        <label for="company"
-                                               class="block text-sm font-medium text-gray-700">Email</label>
-                                        <input type="text" name="company" id="company" autocomplete="organization"
-                                               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-sky-500 sm:text-sm">
+                                    <div class="sm:col-span-3">
+                                        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last
+                                            name</label>
+                                        <div class="mt-2">
+                                            <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                                   class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        </div>
+                                    </div>
+
+                                    <div class="sm:col-span-3">
+                                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
+                                            address</label>
+                                        <div class="mt-2">
+                                            <input id="email" name="email" type="email" autocomplete="email"
+                                                   class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        </div>
+                                    </div>
+
+                                    <div class="sm:col-span-3">
+                                        <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Street
+                                            address</label>
+                                        <div class="mt-2">
+                                            <input type="text" name="street-address" id="street-address"
+                                                   autocomplete="street-address"
+                                                   class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        </div>
+                                    </div>
+
+                                    <div class="sm:col-span-2 sm:col-start-1">
+                                        <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
+                                        <div class="mt-2">
+                                            <input type="text" name="city" id="city" autocomplete="address-level2"
+                                                   class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        </div>
+                                    </div>
+
+                                    <div class="sm:col-span-2">
+                                        <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State /
+                                            Province</label>
+                                        <div class="mt-2">
+                                            <input type="text" name="region" id="region" autocomplete="address-level1"
+                                                   class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        </div>
+                                    </div>
+
+                                    <div class="sm:col-span-2">
+                                        <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP /
+                                            Postal code</label>
+                                        <div class="mt-2">
+                                            <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code"
+                                                   class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 -mx-6 -mb-8 mt-6">

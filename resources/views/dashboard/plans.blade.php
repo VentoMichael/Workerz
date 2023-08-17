@@ -1,7 +1,8 @@
 @extends('layouts.dashboard.layout')
-@section('title', '')
-@section('description', '')
-@section('keywords', '')
+@section('title', 'Plans')
+@section('description', 'Explore our subscription plans and choose the one that suits your needs.')
+@section('keywords', 'subscription plans, pricing, features, choose a plan')
+
 
 @section('content')
 
@@ -93,7 +94,7 @@
                                                 <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
                                                 <label class="label_pricing bg-indigo-50 border-indigo-200 z-10 justify-between rounded-tl-md rounded-tr-md relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                                                     <div class="flex items-center text-sm">
-                                                        <input type="radio" name="pricing-plan" value="Startup" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+                                                        <input type="radio" checked name="pricing-plan" value="Startup" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
                                                         <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
                                                         <span id="pricing-plans-0-label" class="pricing-plans-span ml-3 font-medium text-indigo-900">Startup</span>
                                                     </div>
@@ -137,23 +138,6 @@
 
                                     </div>
 
-                                    <div class="sm:flex sm:flex-col sm:align-center">
-                                        <label class="relative inline-flex mb-4 items-center cursor-pointer">
-                                            <button type="button" id="annualPrice"
-                                                    class="bg-gray-200 mr-2 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                                    role="switch"
-                                                    aria-labelledby="privacy-option-3-label"
-                                                    aria-describedby="privacy-option-3-description">
-                                                <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
-                                                <span aria-hidden="true"
-                                                      class="translate-x-0 inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200"></span>
-                                            </button>
-                                            <span class="mr-2 text-sm font-medium text-gray-900">Annual billing </span>
-                                            <span class="text-sm text-gray-500">(Save 10%)</span>
-                                        </label>
-
-                                    </div>
-
                                 </div>
                                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                                     <x-button type="submit" kind="primary">I want to change plan</x-button>
@@ -194,7 +178,7 @@
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Business Plan - Annual Billing</td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">CA$109.00</td>
                                                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <a href="#" class="text-indigo-600 hover:text-orange-900">View receipt</a>
+                                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">View receipt</a>
                                                     </td>
                                                 </tr>
 
