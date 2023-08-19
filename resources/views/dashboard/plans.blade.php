@@ -12,13 +12,13 @@
 
 
                 <!-- Payment details -->
-                <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
-                    <section aria-labelledby="payment-details-heading">
+                <section class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
+                    <div aria-labelledby="payment-details-heading">
                         <form action="#" method="POST">
                             <div class="shadow sm:rounded-md sm:overflow-hidden">
                                 <div class="bg-white py-6 px-4 sm:p-6">
                                     <div>
-                                        <h2 id="payment-details-heading" class="text-lg leading-6 font-medium text-gray-900">Payment details</h2>
+                                        <h1 id="payment-details-heading" class="text-lg leading-6 font-medium text-gray-900">Payment details</h1>
                                         <p class="mt-1 text-sm text-gray-500">Update your billing information. Please note that updating your location could affect your tax rates.</p>
                                     </div>
 
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                         </form>
-                    </section>
+                    </div>
 
                     <!-- Plan -->
                     <section aria-labelledby="plan-heading">
@@ -94,7 +94,7 @@
                                                 <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
                                                 <label class="label_pricing bg-indigo-50 border-indigo-200 z-10 justify-between rounded-tl-md rounded-tr-md relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                                                     <div class="flex items-center text-sm">
-                                                        <input type="radio" checked name="pricing-plan" value="Startup" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="pricing-plans-0-label" aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
+                                                        <input type="radio" checked name="pricing-plan" value="Startup" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="pricing-plans-0-label">
                                                         <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
                                                         <span id="pricing-plans-0-label" class="pricing-plans-span ml-3 font-medium text-indigo-900">Startup</span>
                                                     </div>
@@ -110,7 +110,7 @@
                                                 <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
                                                 <label class="label_pricing justify-between relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                                                     <div class="flex items-center text-sm">
-                                                        <input type="radio" name="pricing-plan" value="Business" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-red-500" aria-labelledby="pricing-plans-1-label" aria-describedby="pricing-plans-1-description-0 pricing-plans-1-description-1">
+                                                        <input type="radio" name="pricing-plan" value="Business" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-red-500" aria-labelledby="pricing-plans-1-label">
                                                         <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
                                                         <span id="pricing-plans-1-label" class="pricing-plans-span ml-3 font-medium">Business</span>
                                                     </div>
@@ -124,7 +124,7 @@
                                                 <!-- Checked: "bg-indigo-50 border-indigo-200 z-10", Not Checked: "border-gray-200" -->
                                                 <label class="label_pricing rounded-bl-md rounded-br-md justify-between relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                                                     <div class="flex items-center text-sm">
-                                                        <input type="radio" name="pricing-plan" value="Enterprise" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="pricing-plans-2-label" aria-describedby="pricing-plans-2-description-0 pricing-plans-2-description-1">
+                                                        <input type="radio" name="pricing-plan" value="Enterprise" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" aria-labelledby="pricing-plans-2-label">
                                                         <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
                                                         <span id="pricing-plans-2-label" class="pricing-plans-span ml-3 font-medium">Enterprise</span>
                                                     </div>
@@ -190,7 +190,7 @@
                             </div>
                         </div>
                     </section>
-                </div>
+                </section>
             </div>
         </main>
 

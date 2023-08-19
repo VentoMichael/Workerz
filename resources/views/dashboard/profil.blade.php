@@ -6,19 +6,18 @@
 @section('content')
 
     <main class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
-        <div class="lg:grid lg:grid-cols-12 lg:gap-x-5">
+        <section class="lg:grid lg:grid-cols-12 lg:gap-x-5">
             @include('layouts.dashboard.secondHeader')
-
 
             <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
                 <!-- Payment details -->
-                <section aria-labelledby="payment-details-heading">
+                <div>
 
                     <form action="#" method="POST">
                         <div class="shadow sm:rounded-md sm:overflow-hidden">
                             <div class="py-6 px-4 sm:p-6 lg:pb-8">
                                 <div>
-                                    <h2 class="text-lg leading-6 font-medium text-gray-900">Profile</h2>
+                                    <h1 class="text-lg leading-6 font-medium text-gray-900">Profile</h1>
                                     <p class="mt-1 text-sm text-gray-500">This information will be displayed
                                         publicly so
                                         be careful what you share.</p>
@@ -165,7 +164,7 @@
 
                         </div>
                     </form>
-                </section>
+                </div>
                 <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
                     <div class="bg-white rounded-lg shadow overflow-hidden">
                         <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
@@ -324,7 +323,7 @@
                                                         <input type="text" name="description" id="description" autocomplete="description"
                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                                     </div>
-                                                <p class="mt-2 text-gray-400 text-sm">
+                                                <p class="mt-2 text-gray-500 text-sm">
                                                     Short description (max 256 characters).
                                                 </p>
                                             </div>
@@ -361,7 +360,7 @@
 
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
 
@@ -439,4 +438,16 @@
         }
     </script>
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
 

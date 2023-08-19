@@ -45,17 +45,17 @@
                 <div class="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
                     <button type="button" id="notification-user-menu"
                             class="relative flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:indigo-900">
-                        <span class="sr-only">View notifications</span>
+                        <span class="sr-only text-black">View notifications</span>
                         <!-- Heroicon name: outline/bell -->
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
                         </svg>
-                        <div
-                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-indigo-500 border-2 border-white rounded-full -top-2 -right-2">
+                        <span
+                            class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-indigo-600 border-2 border-white rounded-full -top-2 -right-2">
                             2
-                        </div>
+                        </span>
                     </button>
 
                     <!-- Profile dropdown -->
@@ -83,7 +83,7 @@
                         -->
                         <div id="dropdown-menu-notification"
                              class="hidden shadow origin-top-right absolute right-0 mt-2 w-80 rounded-md bg-white py-1 focus:outline-none"
-                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                             aria-orientation="vertical" tabindex="-1">
                             <a href="#">
                                 <div id="toast-message-cta"
                                      class="cursor-pointer hover:bg-indigo-100 w-full max-w-lg p-4 text-gray-500 bg-white"
@@ -174,7 +174,7 @@
                     </div>
                     <button id="notification-user-menu" type="button"
                             class="ml-auto flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:indigo-900">
-                        <span class="sr-only">View notifications</span>
+                        <span class="sr-only text-black">View notifications</span>
                         <!-- Heroicon name: outline/bell -->
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor" aria-hidden="true">

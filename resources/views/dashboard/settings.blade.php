@@ -16,21 +16,20 @@
         @include('layouts.dashboard.secondHeader')
 
 
-
         <!-- Payment details -->
             <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
                 <div class="">
-                    <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
+                    <section class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
 
                         <div class="divide-y divide-gray-200 lg:col-span-12">
                             <!-- Profile section -->
 
-                            <section aria-labelledby="payment-details-heading">
+                            <div aria-labelledby="payment-details-heading">
                                 <form action="#" method="POST">
                                     <div class="shadow sm:rounded-md sm:overflow-hidden">
                                         <div class="bg-white py-6 px-4 sm:p-6">
                                             <div>
-                                                <h2 id="payment-details-heading" class="text-lg leading-6 font-medium text-gray-900">Account Information</h2>
+                                                <h1 id="payment-details-heading" class="text-lg leading-6 font-medium text-gray-900">Account Information</h1>
                                                 <p class="mt-1 text-sm text-gray-500">Update your account password to enhance security. Keeping a strong and unique password helps protect your information and ensures the safety of your account.</p>
                                             </div>
 
@@ -52,7 +51,7 @@
                                         </div>
                                     </div>
                                 </form>
-                            </section>
+                            </div>
 
                             <section class="mt-6" aria-labelledby="payment-details-heading">
                                 <form action="#" method="POST">
@@ -147,7 +146,7 @@
                             </section>
                         </div>
 
-                    </div>
+                    </section>
                 </div>
 
             </div>

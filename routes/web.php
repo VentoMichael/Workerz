@@ -106,9 +106,7 @@ Route::get('/newsletter',
 
 // Dashboard views
 
-Route::get('/dashboard', function () {
-    return view('dashboard.home');
-})->name('dashboard.dashboard');
+Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.dashboard');
 
 Route::get('/dashboard/profil', function () {
     return view('dashboard.profil');
