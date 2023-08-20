@@ -12,7 +12,7 @@
 
 
                 <!-- Payment details -->
-                <section class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
+                <section id="main_content" class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
                     <div aria-labelledby="payment-details-heading">
                         <form action="#" method="POST">
                             <div class="shadow sm:rounded-md sm:overflow-hidden">

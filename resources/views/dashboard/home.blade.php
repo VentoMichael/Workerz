@@ -5,124 +5,231 @@
 
 @section('content')
 
-    <main class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
+    <div class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
         <section class="lg:grid lg:grid-cols-12 lg:gap-x-5">
             <h1 class="sr-only">
                 My dashboard
             </h1>
             @include('layouts.dashboard.secondHeader')
 
-            <div class="flex w-full gap-4 col-span-9">
-                <section class="w-1/3 w-max bg-white border border-gray-200 rounded-lg shadow">
-                    <h2 class="sr-only">My profile</h2>
-                    <div class="relative">
-                        <img class="rounded-t-lg w-full h-32 object-cover"
-                             src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-                             alt=""/>
-                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-indigo-600 opacity-60"></div>
-                        <img
-                            class="rounded-full h-20 w-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                            src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-                            alt="Profile Picture"/>
+            <div id="main_content" class="py-6 px-4 sm:p-6 lg:pb-8 flex w-full gap-4 col-span-9 flex-col">
+                <section class="w-full bg-white rounded-lg shadow">
+                    <div class="flex justify-between p-4 md:p-6 pb-0 md:pb-0">
+                        <div>
+                            <h2 class="leading-none text-3xl font-bold text-gray-900">Interactions Over the 7 last days</h2>
+                            <p class="text-base font-normal text-gray-500">Activity Trends<p>
+                        </div>
+                        <div
+                            class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 text-center">
+                            23%
+                            <svg class="w-3 h-3 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 10 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2" d="M5 13V1m0 0L1 5m4-4 4 4"/>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="p-5">
-                        <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Marco Piombo</p>
-                        <p class="mb-3 font-normal text-gray-700">Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Beatae debitis fuga laboriosam quibusdam rerum sint ullam</p>
-                        <x-button type="submit" kind="primary" class="mt-4 w-full max-w-xs">See my profile</x-button>
-                    </div>
-                </section>
-                <section class="w-2/3 w-max bg-white border border-gray-200 rounded-lg shadow">
-                    <div class="p-5 flex flex-col justify-between h-full">
-                        <h2 class="text-lg font-semibold text-gray-900">Recent Comments</h2>
-
-                        <!-- List of recent comments -->
-                        <ul class="space-y-4 divide-y">
-                            <!-- Comment item -->
-                            <li class="pt-4">
-
-                                <div class="flex items-center mb-4 space-x-4">
-                                    <img class="h-10 w-10 rounded-full"
-                                         src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-                                         alt="">
-                                    <div class="space-y-1 font-medium">
-                                        <p>Jese Leos
-                                            <time datetime="2014-08-16 19:00"
-                                                  class="block text-sm text-gray-500">Published on
-                                                <time datetime="2017-03-03 19:00">March 3, 2017</time>
-                                            </time>
-                                        </p>
-                                    </div>
-                                </div>
-                                <p class="mb-2 text-gray-500">This is my third Invicta Pro Diver. They are just
-                                    fantastic value for money...</p>
-
-                            </li>
-                            <li class="pt-4">
-
-                                <div class="flex items-center mb-4 space-x-4">
-                                    <img class="h-10 w-10 rounded-full"
-                                         src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-                                         alt="">
-                                    <div class="space-y-1 font-medium">
-                                        <p>Jese Leos
-                                            <time datetime="2014-08-16 19:00"
-                                                  class="block text-sm text-gray-500">Published on
-                                                <time datetime="2017-03-03 19:00">March 3, 2017</time>
-                                            </time>
-                                        </p>
-                                    </div>
-                                </div>
-                                <p class="mb-2 text-gray-500">This is my third Invicta Pro Diver. They are just
-                                    fantastic value for money...</p>
-
-                            </li>
-
-                            <!-- Add more comment items as needed -->
-                        </ul>
-
-                        <!-- View all comments link -->
-                        <x-button type="submit" kind="primary" class="max-w-xs mt-4 w-full">See all messages</x-button>
-                    </div>
+                    <div id="labels-chart" class="px-2.5"></div>
                 </section>
 
+
+                <div class="flex w-full gap-4 col-span-9">
+                    <section class="w-6/12 w-max bg-white border border-gray-200 rounded-lg shadow flex flex-col">
+                        <h2 class="text-lg font-semibold text-gray-900 p-5 sr-only">My profile</h2>
+                        <div class="relative">
+                            <img class="rounded-t-lg w-full h-32 object-cover"
+                                 src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
+                                 alt=""/>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-indigo-600 opacity-60"></div>
+                            <img
+                                class="rounded-full h-20 w-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                                src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
+                                alt="Profile Picture"/>
+                        </div>
+                        <div class="p-5 flex h-full flex-col justify-between">
+                            <div>
+                            <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Marco Piombo</p>
+                            <p class="mb-3 font-normal text-gray-700">Lorem ipsum dolor sit amet, consectetur
+                                adipisicing
+                                elit. Beatae debitis fuga laboriosam quibusdam rerum sint ullam</p>
+                            </div>
+                            <x-button type="submit" kind="primary" class="mt-4 w-full max-w-xl">See my profile
+                            </x-button>
+                        </div>
+                    </section>
+                    <section class="w-6/12 w-max bg-white border border-gray-200 rounded-lg shadow">
+                        <div class="p-5 flex flex-col justify-between h-full">
+                            <h2 class="text-lg font-semibold text-gray-900">Recent Comments</h2>
+
+                            <!-- List of recent comments -->
+                            <ul class="space-y-4 divide-y">
+                                <!-- Comment item -->
+                                <li class="pt-4">
+
+                                    <div class="flex items-center mb-4 space-x-4">
+                                        <img class="h-10 w-10 rounded-full"
+                                             src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
+                                             alt="">
+                                        <div class="space-y-1 font-medium">
+                                            <p>Jese Leos
+                                                <time datetime="2014-08-16 19:00"
+                                                      class="block text-sm text-gray-500">Published on
+                                                    <time datetime="2017-03-03 19:00">March 3, 2017</time>
+                                                </time>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="mb-2 text-gray-700">This is my third Invicta Pro Diver. They are just
+                                        fantastic value for money...</p>
+
+                                </li>
+                                <li class="pt-4">
+
+                                    <div class="flex items-center mb-4 space-x-4">
+                                        <img class="h-10 w-10 rounded-full"
+                                             src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
+                                             alt="">
+                                        <div class="space-y-1 font-medium">
+                                            <p>Jese Leos
+                                                <time datetime="2014-08-16 19:00"
+                                                      class="block text-sm text-gray-500">Published on
+                                                    <time datetime="2017-03-03 19:00">March 3, 2017</time>
+                                                </time>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p class="mb-2 text-gray-700">This is my third Invicta Pro Diver. They are just
+                                        fantastic value for money...</p>
+
+                                </li>
+
+                                <!-- Add more comment items as needed -->
+                            </ul>
+
+                            <!-- View all comments link -->
+                            <x-button type="submit" kind="primary" class="mt-4 max-w-xl">See all messages
+                            </x-button>
+                        </div>
+                    </section>
+
+                </div>
             </div>
-
         </section>
-    </main>
+    </div>
+
+
 
 
 
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
-        // Get sales data from PHP
-        const salesData = @json($salesData);
-
-        // Data for the doughnut chart
-        const data = {
-            labels: Object.keys(salesData),
-            datasets: [{
-                data: Object.values(salesData),
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#FF9800'],
-                hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#FF9800']
-            }]
-        };
-
-        // Chart configuration
-        const config = {
-            type: 'doughnut',
-            data: data,
-            options: {
-                responsive: true,
+        // ApexCharts options and config
+        window.addEventListener("load", function () {
+            let options = {
+                // set the labels option to true to show the labels on the X and Y axis
+                xaxis: {
+                    show: true,
+                    categories: ['01 Feb', '02 Feb', '03 Feb', '04 Feb', '05 Feb', '06 Feb', '07 Feb'],
+                    labels: {
+                        show: true,
+                        style: {
+                            fontFamily: "Inter, sans-serif",
+                            cssClass: 'text-xs font-normal fill-gray-500'
+                        }
+                    },
+                    axisBorder: {
+                        show: false,
+                    },
+                    axisTicks: {
+                        show: false,
+                    },
+                },
+                yaxis: {
+                    show: true,
+                    labels: {
+                        show: true,
+                        style: {
+                            fontFamily: "Inter, sans-serif",
+                            cssClass: 'text-xs font-normal fill-gray-500'
+                        },
+                        formatter: function (value) {
+                            return value;
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name: "Profile viewed",
+                        data: [10, 11, 3, 41, 2, 4],
+                        color: "#5850EC",
+                    },
+                    {
+                        name: "Messages received",
+                        data: [1, 3, 4, 12, 32, 2],
+                        color: "#2E82F0",
+                    },
+                    {
+                        name: "Profile shared",
+                        data: [0, 0, 1, 2, 21, 31],
+                        color: "#7E3AF2",
+                    },
+                ],
+                chart: {
+                    sparkline: {
+                        enabled: false
+                    },
+                    height: "100%",
+                    width: "100%",
+                    type: "area",
+                    fontFamily: "Inter, sans-serif",
+                    dropShadow: {
+                        enabled: false,
+                    },
+                    toolbar: {
+                        show: false,
+                    },
+                },
+                tooltip: {
+                    enabled: true,
+                    x: {
+                        show: false,
+                    },
+                },
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        opacityFrom: 0.55,
+                        opacityTo: 0,
+                        shade: "#1C64F2",
+                        gradientToColors: ["#1C64F2"],
+                    },
+                },
+                dataLabels: {
+                    enabled: false,
+                },
+                stroke: {
+                    width: 6,
+                },
+                legend: {
+                    show: false
+                },
+                grid: {
+                    show: false,
+                },
             }
-        };
 
-        // Create the doughnut chart
-        const ctx = document.getElementById('doughnutChart').getContext('2d');
-        new Chart(ctx, config);
+            if (document.getElementById("labels-chart") && typeof ApexCharts !== 'undefined') {
+                const chart = new ApexCharts(document.getElementById("labels-chart"), options);
+                chart.render();
+            }
+        });
     </script>
+
+
 @endsection
 

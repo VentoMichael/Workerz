@@ -32,22 +32,81 @@
         const menuItemsNotification = document.getElementById('dropdown-menu-notification');
 
         userMenuButton.addEventListener('click', function(event) {
-            menuItems.classList.toggle('hidden');
-            menuItemsNotification.classList.add('hidden'); // Close the other modal
+            toggleMenu(menuItems);
+            closeMenu(menuItemsNotification);
             event.stopPropagation();
         });
 
         userMenuButtonNotification.addEventListener('click', function(event) {
-            menuItemsNotification.classList.toggle('hidden');
-            menuItems.classList.add('hidden'); // Close the other modal
+            toggleMenu(menuItemsNotification);
+            closeMenu(menuItems);
             event.stopPropagation();
         });
 
         // Close both modals when clicking outside
         document.addEventListener('click', function() {
-            menuItems.classList.add('hidden');
-            menuItemsNotification.classList.add('hidden');
+            closeMenu(menuItems);
+            closeMenu(menuItemsNotification);
         });
+
+        const userPrimaryMenuButton = document.getElementById('openPrimaryMenu');
+        const userPrimaryMenuButtonClose = document.getElementById('closePrimaryMenu');
+        const contentPrimaryMenu = document.getElementById('primaryMenu');
+        const userMenuButtonMobile = document.getElementById('user-menu-button-mobile');
+        const userMenuButtonNotificationMobile = document.getElementById('notification-user-menu-mobile');
+        const menuItemsMobile = document.getElementById('dropdown-menu-dashboard-mobile');
+        const menuItemsNotificationMobile = document.getElementById('dropdown-menu-notification-mobile');
+        const overlay = document.getElementById('overlay');
+
+        userMenuButtonMobile.addEventListener('click', function(event) {
+            toggleMenu(menuItemsMobile);
+            closeMenu(menuItemsNotificationMobile);
+            event.stopPropagation();
+        });
+
+        overlay.addEventListener('click', function(event) {
+            toggleMenu(contentPrimaryMenu);
+            toggleMenu(overlay);
+            toggleMenu(userPrimaryMenuButton);
+            event.stopPropagation();
+        });
+
+        userPrimaryMenuButton.addEventListener('click', function(event) {
+            toggleMenu(contentPrimaryMenu);
+            closeMenu(menuItemsNotificationMobile);
+            closeMenu(menuItemsMobile);
+            closeMenu(userPrimaryMenuButton);
+            toggleMenu(overlay);
+            event.stopPropagation();
+        });
+
+        userPrimaryMenuButtonClose.addEventListener('click', function(event) {
+            toggleMenu(contentPrimaryMenu);
+            closeMenu(userPrimaryMenuButton);
+            toggleMenu(overlay);
+            event.stopPropagation();
+        });
+
+        userMenuButtonNotificationMobile.addEventListener('click', function(event) {
+            toggleMenu(menuItemsNotificationMobile);
+            closeMenu(menuItemsMobile);
+            event.stopPropagation();
+        });
+
+        // Close both modals when clicking outside
+        document.addEventListener('click', function() {
+            closeMenu(menuItemsMobile);
+            closeMenu(menuItemsNotificationMobile);
+        });
+
+        function toggleMenu(element) {
+            element.classList.toggle('hidden');
+        }
+
+        function closeMenu(element) {
+            element.classList.add('hidden');
+        }
+
     </script>
 
 @yield('scripts')

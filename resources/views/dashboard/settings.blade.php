@@ -17,7 +17,7 @@
 
 
         <!-- Payment details -->
-            <div class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
+            <div id="main_content" class="space-y-6 sm:px-6 lg:px-0 lg:col-span-9">
                 <div class="">
                     <section class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
 

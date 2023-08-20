@@ -10,7 +10,7 @@
             <h1 class="sr-only">Messenger</h1>
             @include('layouts.dashboard.secondHeader')
 
-            <div class="container mx-auto col-span-9">
+            <div id="main_content" class="container mx-auto col-span-9">
                 <div class="scroll-smooth overflow-x-auto flex gap-2">
                     <div id="toast-notification"
                          class="border-2 border-gray-100 min-w-280 mb-4 w-full max-w-xs p-4 text-gray-900 bg-white rounded-lg cursor-pointer"
