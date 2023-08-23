@@ -108,6 +108,8 @@ Route::get('/newsletter',
 
 Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.dashboard');
 
+Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
+
 Route::get('/dashboard/profil', function () {
     return view('dashboard.profil');
 })->name('dashboard.profil');
