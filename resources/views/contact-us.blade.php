@@ -45,7 +45,7 @@
                                 satisfaction.</p>
                         </div>
                         <div class="p-6 bg-blue-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8">
-                            <a href="{{route('contact-us')}}?subject=Technical%20support#form"
+                            <a href="{{ route('contact-us') }}?subject=Technical%20support#form"
                                class="text-base font-medium text-indigo-600 hover:text-indigo-800">Contact us<span
                                     aria-hidden="true"> &rarr;</span></a>
                         </div>
@@ -99,36 +99,7 @@
                 </div>
             </div>
 
-            <div class="mt-8">
-                <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md" id="form">
-                    <form action="{{ route('contact-us.store')}}" method="get" class="space-y-8">
-                        <!-- TODO: add error handling for form submission -->
-                        <!-- TODO: add automatically the email if connected -->
-                        <div>
-                            <label for="email-contact" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                            <input type="email" id="email-contact" name="email-contact"
-                                   class="placeholder:text-gray-400 shadow-sm bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
-                                   placeholder="your-email@hotmail.com" required>
-                        </div>
-                        <div>
-                            <label for="subject" class="block mb-2 text-sm font-medium text-gray-900">Subject</label>
-                            <input type="text" id="subject" name="subject" value="{{ request('subject') }}"
-                                   class="placeholder:text-gray-400 block p-3 w-full text-sm text-black bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500"
-                                   placeholder="Let us know how we can help you" required>
-                        </div>
-                        <div class="sm:col-span-2">
-                            <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Your
-                                message</label>
-                            <textarea id="message" name="message" rows="6"
-                                      class="placeholder:text-gray-400 block p-2.5 w-full text-sm text-black bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
-                                      placeholder="Leave a message..."></textarea>
-                        </div>
-                        <div class="sm:w-fit">
-                            <x-button type="submit" kind="primary">Send message</x-button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <livewire:contact-form/>
         </section>
         <!-- FAQ -->
         @include('layouts.faq')

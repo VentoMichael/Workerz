@@ -5,7 +5,7 @@
             <div class="flex justify-start lg:w-0 lg:flex-1">
                 <a href="{{route('home')}}">
                     <span class="sr-only">Workerz</span>
-                    {!! file_get_contents('img/logo.svg') !!}
+                    {!! file_get_contents(asset('img/logo.svg')) !!}
                 </a>
             </div>
             <!-- Main modal -->
@@ -51,8 +51,7 @@
                 <div class="pt-5 pb-6 px-5">
                     <div class="flex items-center justify-between">
                         <div>
-                            {!! file_get_contents('img/logo.svg') !!}
-
+                            {!! file_get_contents(asset('img/logo.svg')) !!}
                         </div>
                         <div class="-mr-2">
                             <button type="button"

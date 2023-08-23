@@ -42,7 +42,7 @@ Route::get('/contact-us', function () {
     return view('contact-us');
 })->name('contact-us');
 
-Route::get('/contact-us/post', [ContactController::class, 'store'])->name('contact-us.store');
+Route::post('/contact-us/post', [ContactController::class, 'store'])->name('contact-us.store');
 
 
 Route::get('/about-us', function () {

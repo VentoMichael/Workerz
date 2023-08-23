@@ -16,6 +16,8 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     @yield('head')
     @vite('resources/css/app.css')
+    @livewireStyles
+
 </head>
 <body @yield('class-html')>
 
@@ -25,7 +27,7 @@
 </main>
 @include('layouts.footer')
 
-
+@livewireScripts
 @vite('resources/js/app.js')
 @yield('scripts')
 </body>

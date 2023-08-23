@@ -15,13 +15,11 @@ class ContactController extends Controller
     public function store()
     {
         request()->validate([
-            'email-contact' => 'email',
-            'subject' => 'max:256',
-            'message' => 'max:256',
+            'email-contact' => 'required|email',
+            'subject' => 'required|max:256',
+            'message' => 'required|max:256',
         ]);
-        //return Redirect::to(URL::previous() . "#createMsg")->with('success', 'Votre message a été envoyé avec succès.
-        //Nous vous contacterons bientôt !');
-        return request('email-contact');
+
     }
 
 }
