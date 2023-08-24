@@ -35,21 +35,8 @@
                                 and
                                 find the perfect match for your needs. Join our community today and take control of your
                                 future.</p>
-                            <div class="mt-10 sm:mt-12">
-                                <form action="#" class="sm:max-w-xl sm:mx-auto lg:mx-0">
-                                    <div class="sm:flex">
-                                        <div class="min-w-0 flex-1">
-                                            <label for="name" class="sr-only text-black">Workerz name</label>
-                                            <input id="name" type="text"
-                                                   placeholder="Enter the job title you need help with"
-                                                   class="block w-full px-4 py-3 rounded-md border-0 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900">
-                                        </div>
-                                        <div class="mt-3 sm:mt-0 sm:ml-3">
-                                            <x-button type="submit" class="h-full" kind="primary">Search</x-button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                            <livewire:search-job-dropdown/>
+
                         </div>
                     </div>
                     <div class="mt-12 -mb-16 lg:m-0 lg:relative">

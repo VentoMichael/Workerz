@@ -37,7 +37,7 @@
 
 
                 <div class="flex w-full gap-4 col-span-9">
-                    <section class="w-6/12 w-max bg-white border border-gray-200 rounded-lg shadow flex flex-col">
+                    <section class="w-2/4 w-max bg-white border border-gray-200 rounded-lg shadow flex flex-col">
                         <h2 class="text-lg font-semibold text-gray-900 p-5 sr-only">My profile</h2>
                         <div class="relative">
                             <img class="rounded-t-lg w-full h-32 object-cover"
@@ -61,7 +61,7 @@
                             </x-button>
                         </div>
                     </section>
-                    <section class="w-6/12 w-max bg-white border border-gray-200 rounded-lg shadow">
+                    <section class="w-2/4 w-max bg-white border border-gray-200 rounded-lg shadow">
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h2 class="text-lg font-semibold text-gray-900">Recent Comments</h2>
 
@@ -128,6 +128,7 @@
 @endsection
 
 @section('scripts')
+
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
@@ -232,55 +233,8 @@
             }
         });
     </script>
-    <script>
-        const tutorialSteps = document.querySelectorAll('.tutorial-modal');
-        const closeButtons = document.querySelectorAll('.close-tutorial-button');
-        const nextButtons = document.querySelectorAll('.next-step-button');
-
-        let currentStep = 0;
-
-        function showStep(stepIndex) {
-            tutorialSteps.forEach((step, index) => {
-                if (index === stepIndex) {
-                    step.classList.remove('hidden');
-                } else {
-                    step.classList.add('hidden');
-                }
-            });
-        }
-
-        function nextStep() {
-            currentStep++;
-            if (currentStep < tutorialSteps.length) {
-                showStep(currentStep);
-            } else {
-                closeTutorial();
-            }
-        }
-
-        function closeTutorial() {
-            tutorialSteps.forEach(step => {
-                step.classList.add('hidden');
-            });
-        }
-
-        nextButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                nextStep();
-            });
-        });
-
-        closeButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                closeTutorial();
-            });
-        });
-
-        // Show the initial step when needed
-        // For example, when a user logs in for the first time
-        showStep(currentStep);
-    </script>
     @vite('resources/js/tutorial-dashboard.js')
+
 
 @endsection
 
