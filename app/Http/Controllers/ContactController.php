@@ -14,11 +14,6 @@ class ContactController extends Controller
      */
     public function store()
     {
-        request()->validate([
-            'email-contact' => 'required|email',
-            'subject' => 'required|max:256',
-            'message' => 'required|max:256',
-        ]);
 
     }
 

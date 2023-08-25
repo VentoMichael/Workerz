@@ -19,7 +19,8 @@
     </div>
     <div class="min-h-full flex max-w-screen-xl gap-12 m-4 sm:m-12 2xl:mx-auto">
         <div class="md:block relative w-0 flex-1">
-            <form action="{{route('sign-up.account')}}">
+            <form action="{{route('post.sign-up.role')}}" method="post">
+                @csrf
                 <fieldset class="mb-6">
                     <legend class="text-base font-medium text-gray-900">Select your role</legend>
 
@@ -29,11 +30,11 @@
                           Active: "border-indigo-500 ring-2 ring-indigo-500"
                         -->
                         <label class="input_radio relative bg-white border-gray-300 border rounded-lg shadow-sm p-4 flex cursor-pointer focus:outline-none">
-                            <input type="radio" name="project-type" value="Newsletter" class="sr-only" aria-labelledby="project-type-0-label" aria-describedby="project-type-0-description-0 project-type-0-description-1">
+                            <input type="radio" name="role" value="Worker" class="sr-only" aria-labelledby="role-0-label" aria-describedby="role-0-description-0 role-0-description-1">
                             <div class="flex-1 flex">
                                 <div class="flex flex-col">
-                                    <span id="project-type-0-label" class="block text-sm font-medium text-gray-900"> I am a freelancer </span>
-                                    <span id="project-type-0-description-0" class="mt-1 flex items-center text-sm text-gray-500"> If you are an independent professional or self-employed individual offering your services to others, select this option. </span>
+                                    <span id="role-0-label" class="block text-sm font-medium text-gray-900"> I am a freelancer </span>
+                                    <span id="role-0-description-0" class="mt-1 flex items-center text-sm text-gray-500"> If you are an independent professional or self-employed individual offering your services to others, select this option. </span>
                                 </div>
                             </div>
                             <!--
@@ -56,11 +57,11 @@
                           Active: "border-indigo-500 ring-2 ring-indigo-500"
                         -->
                         <label class="input_radio relative bg-white border-gray-300 border rounded-lg shadow-sm p-4 flex cursor-pointer focus:outline-none">
-                            <input type="radio" name="project-type" value="Existing Customers" class="sr-only" aria-labelledby="project-type-1-label" aria-describedby="project-type-1-description-0 project-type-1-description-1">
+                            <input type="radio" name="role" value="User" class="sr-only" aria-labelledby="role-1-label" aria-describedby="role-1-description-0 role-1-description-1">
                             <div class="flex-1 flex">
                                 <div class="flex flex-col">
-                                    <span id="project-type-1-label" class="block text-sm font-medium text-gray-900"> I want freelancers services</span>
-                                    <span id="project-type-1-description-0" class="mt-1 flex items-center text-sm text-gray-500"> If you need help with a project or task and want to hire an independent professional or self-employed individual to assist you, select this option. </span>
+                                    <span id="role-1-label" class="block text-sm font-medium text-gray-900"> I want freelancers services</span>
+                                    <span id="role-1-description-0" class="mt-1 flex items-center text-sm text-gray-500"> If you need help with a project or task and want to hire an independent professional or self-employed individual to assist you, select this option. </span>
                                 </div>
                             </div>
                             <!--

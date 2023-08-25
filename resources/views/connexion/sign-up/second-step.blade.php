@@ -22,7 +22,7 @@
     </div>
     <div class="min-h-full flex max-w-screen-xl gap-12 m-4 sm:m-12 2xl:mx-auto">
         <div class=" md:block relative w-0 flex-1">
-            @include('components.freelancers-form')
+            <livewire:freelancer-form/>
 
         </div>
 
@@ -77,3 +77,4 @@
     </div>
 
 @endsection
+

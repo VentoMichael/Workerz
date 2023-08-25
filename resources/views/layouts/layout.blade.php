@@ -27,8 +27,9 @@
 </main>
 @include('layouts.footer')
 
-@livewireScripts
 @vite('resources/js/app.js')
+@livewireScripts
+
 @yield('scripts')
 </body>
 </html>

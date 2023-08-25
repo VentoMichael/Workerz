@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,23 +57,22 @@ Route::get('/pricing', function () {
 
 // Connexion page
 
-Route::get('/sign-up', function () {
-    return view('connexion.sign-up.first-step');
-})->name('sign-up.role');
-Route::get('/sign-up/role', function () {
-    return view('connexion.sign-up.second-step');
-})->name('sign-up.account');
-Route::get('/sign-up/account', function () {
-    return view('connexion.sign-up.third-step');
-})->name('sign-up.confirmation');
-Route::get('/sign-up/payment', function () {
-    return view('connexion.sign-up.payment-step');
-})->name('sign-up.payment');
+// Step 1: User role selection
+Route::get('/sign-up', [RegistrationController::class, 'showRoleForm'])->name('sign-up.role');
+Route::post('/sign-up', [RegistrationController::class, 'storeRole'])->name('post.sign-up.role');
 
+// Step 2: User account information
+Route::get('/sign-up/account', [RegistrationController::class, 'showAccountForm'])->name('sign-up.account');
+Route::post('/sign-up/account', [RegistrationController::class, 'storeAccount'])->name('post.sign-up.account');
 
-Route::post('/sign-up', function () {
-    return request();
-})->name('inscription.freelancers');
+// Step 3: Confirmation
+Route::get('/sign-up/confirmation', [RegistrationController::class, 'showConfirmationForm'])->name('sign-up.confirmation');
+Route::post('/sign-up/confirmation', [RegistrationController::class, 'storeConfirmation'])->name('post.sign-up.confirmation');
+
+// Step 4: Payment
+Route::get('/sign-up/payment', [RegistrationController::class, 'showPaymentForm'])->name('sign-up.payment');
+Route::post('/sign-up/payment', [RegistrationController::class, 'storePayment'])->name('post.sign-up.payment');
+
 
 
 Route::get('/sign-in', function () {
