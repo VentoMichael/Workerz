@@ -32,30 +32,16 @@ class RegistrationController extends Controller
 
     public function storeAccount(Request $request)
     {
+        dd('f');
+        $user = session('user', []);
 
+        // Add user account information to the user array
+        $user['account'] = $request->all();
 
-        $validator = Validator::make($request->all(), [
-            'username' => 'required|unique:users|min:3',
-            'about' => 'required|min:10',
-            'avatarUpload' => 'image|mimes:jpeg,png|max:2048',
-            'backgroundUpload' => 'image|mimes:jpeg,png|max:2048',
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
-            'streetAddress' => 'required',
-            'city' => 'required',
-            'region' => 'required',
-            'postalCode' => 'required',
-        ]);
+        // Store the updated user array in the session
+        session(['user' => $user]);
 
-        if ($validator->fails()) {
-            return redirect()->route('sign-up.account')->withErrors($validator)->withInput();
-        }
-
-        // Validation passed, store the data
-
-
+        dd(session('user'));
 
         // Store user account information (in session or database)
         return redirect()->route('sign-up.confirmation');

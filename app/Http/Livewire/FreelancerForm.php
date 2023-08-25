@@ -35,7 +35,7 @@ class FreelancerForm extends Component
         'streetAddress' => 'required',
         'city' => 'required',
         'region' => 'required',
-        'postalCode' => 'required',
+        'postalCode' => 'required|integer',
         'pricingPlan' => 'required',
     ];
 
@@ -45,6 +45,7 @@ class FreelancerForm extends Component
     }
 
     public function submitForm(){
+
         $signUp['username'] = $this->username;
         $signUp['about'] = $this->about;
         $signUp['avatarUpload'] = $this->avatarUpload;
@@ -58,15 +59,37 @@ class FreelancerForm extends Component
         $signUp['region'] = $this->region;
         $signUp['postalCode'] = $this->postalCode;
         $signUp['pricingPlan'] = $this->pricingPlan;
-
         $this->validate();
-        $user = session('user', []);
-// Add user account information to the user array
-        $user['account'] = request()->all();
 
+        // Store the relevant form data and uploaded file paths in the session
+        $user = session('user', []);
+        $user['account'] = [
+            'username' => $this->username,
+            'about' => $this->about,
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'email' => $this->email,
+            'password' => $this->password,
+            'streetAddress' => $this->streetAddress,
+            'city' => $this->city,
+            'region' => $this->region,
+            'postalCode' => $this->postalCode,
+            'pricingPlan' => $this->pricingPlan,
+        ];
+        if ($this->avatarUpload) {
+            $avatarPath = $this->avatarUpload->store('avatars', 'public');
+            $user['account']['avatarUpload'] = $avatarPath;
+        }
+        if ($this->backgroundUpload) {
+            $coverPath = $this->backgroundUpload->store('cover', 'public');
+            $user['account']['backgroundUpload'] = $coverPath;
+        }
         // Store the updated user array in the session
         session(['user' => $user]);
+        // Add user account information to the user array
+
         sleep(1);
+        return redirect()->route('sign-up.confirmation');
     }
     public function render()
     {
