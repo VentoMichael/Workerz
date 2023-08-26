@@ -16,6 +16,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'stripeKey' => env('STRIPE_SECRET'),
     'supportEmail' => env('APP_SUPPORT_EMAIL','workerz@support.be'),
     'urlNoHttp' => env('URL','workerz.be'),
     'date_last_update_disclaimer' => env('DATE_LAST_UPDATE_DISCLAIMER'),
@@ -188,7 +189,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Laravel\Fortify\FortifyServiceProvider::class,
         /*
          * Application Service Providers...
          */

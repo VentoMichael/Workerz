@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Stripe\Stripe;
 
 class RegistrationController extends Controller
 {
@@ -15,6 +16,9 @@ class RegistrationController extends Controller
 
     public function storeRole(Request $request)
     {
+        Validator::make($request->all(), [
+            'role' => 'required',
+        ])->validate();
         $user = [
             'role' => $request->input('role')
         ];
@@ -32,19 +36,6 @@ class RegistrationController extends Controller
 
     public function storeAccount(Request $request)
     {
-        dd('f');
-        $user = session('user', []);
-
-        // Add user account information to the user array
-        $user['account'] = $request->all();
-
-        // Store the updated user array in the session
-        session(['user' => $user]);
-
-        dd(session('user'));
-
-        // Store user account information (in session or database)
-        return redirect()->route('sign-up.confirmation');
     }
 
     public function showConfirmationForm()
@@ -54,19 +45,7 @@ class RegistrationController extends Controller
 
     public function storeConfirmation(Request $request)
     {
-        // Store confirmation information (in session or database)
         return redirect()->route('sign-up.payment');
-    }
-
-    public function showPaymentForm()
-    {
-        return view('connexion.sign-up.payment-step');
-    }
-
-    public function storePayment(Request $request)
-    {
-        // Process payment and complete registration
-        // Redirect to the user dashboard or appropriate page
     }
 }
 

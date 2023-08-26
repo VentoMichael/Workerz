@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Stripe\Stripe;
 
 class FreelancerForm extends Component
 {
@@ -21,7 +23,8 @@ class FreelancerForm extends Component
     public $city;
     public $region;
     public $postalCode;
-    public $pricingPlan;
+    public $plan;
+    public $annualBilling = false;
 
     protected $rules = [
         'username' => 'required|unique:users',
@@ -36,7 +39,7 @@ class FreelancerForm extends Component
         'city' => 'required',
         'region' => 'required',
         'postalCode' => 'required|integer',
-        'pricingPlan' => 'required',
+        'plan' => 'required',
     ];
 
     public function updated($propertyName)
@@ -44,8 +47,18 @@ class FreelancerForm extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function submitForm(){
+    public function toggleAnnualBilling()
+    {
+        $this->annualBilling = !$this->annualBilling;
+    }
 
+    public function submitForm(){
+        $products = session('products');
+        foreach ($products as $product){
+            if ($this->plan === $product['product']['name']){
+                session(['productSelected' => $product]);
+            }
+        }
         $signUp['username'] = $this->username;
         $signUp['about'] = $this->about;
         $signUp['avatarUpload'] = $this->avatarUpload;
@@ -58,12 +71,13 @@ class FreelancerForm extends Component
         $signUp['city'] = $this->city;
         $signUp['region'] = $this->region;
         $signUp['postalCode'] = $this->postalCode;
-        $signUp['pricingPlan'] = $this->pricingPlan;
+        $signUp['plan'] = $this->plan;
         $this->validate();
 
         // Store the relevant form data and uploaded file paths in the session
         $user = session('user', []);
         $user['account'] = [
+            'id' => User::count() + 1,
             'username' => $this->username,
             'about' => $this->about,
             'firstname' => $this->firstname,
@@ -74,8 +88,8 @@ class FreelancerForm extends Component
             'city' => $this->city,
             'region' => $this->region,
             'postalCode' => $this->postalCode,
-            'pricingPlan' => $this->pricingPlan,
-        ];
+            'plan' => $this->plan
+            ];
         if ($this->avatarUpload) {
             $avatarPath = $this->avatarUpload->store('avatars', 'public');
             $user['account']['avatarUpload'] = $avatarPath;
@@ -84,15 +98,53 @@ class FreelancerForm extends Component
             $coverPath = $this->backgroundUpload->store('cover', 'public');
             $user['account']['backgroundUpload'] = $coverPath;
         }
-        // Store the updated user array in the session
         session(['user' => $user]);
-        // Add user account information to the user array
 
         sleep(1);
         return redirect()->route('sign-up.confirmation');
     }
     public function render()
     {
-        return view('livewire.freelancer-form');
+        Stripe::setApiKey(config('app.stripeKey'));
+
+        // Fetch the products from Stripe
+        $products = \Stripe\Product::all();
+        $pricingPlans = \Stripe\Price::all();
+
+        // Create an array to hold the formatted product and pricing data
+        $formattedProducts = [];
+
+        foreach ($products as $product) {
+            // Find pricing plans associated with the current product
+            $productPricingPlans = array_filter($pricingPlans->data, function ($plan) use ($product) {
+                return $plan->product == $product->id;
+            });
+
+            // Format the product and pricing plan data
+            $formattedPricingPlans = [];
+            foreach ($productPricingPlans as $plan) {
+                $intervalKey = ($plan->recurring->interval === 'month') ? 'monthly' : 'yearly';
+                $formattedPricingPlans[$intervalKey] = [
+                    'id' => $plan->id,
+                    'billing_scheme' => $plan->billing_scheme,
+                    'amount' => number_format($plan->unit_amount / 100, 2),
+                    'currency' => $plan->currency,
+                    'interval' => $plan->recurring->interval,
+                ];
+            }
+
+            $formattedProducts[] = [
+                'product' => [
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    // Add more product details as needed
+                ],
+                'plans' => $formattedPricingPlans,
+            ];
+            session(['products' => $formattedProducts]);
+
+        }
+        // Now you have an array of products with their associated pricing plans and details
+        return view('livewire.freelancer-form',compact('formattedProducts'));
     }
 }

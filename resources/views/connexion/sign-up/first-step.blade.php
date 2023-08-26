@@ -37,6 +37,7 @@
                                     <span id="role-0-description-0" class="mt-1 flex items-center text-sm text-gray-500"> If you are an independent professional or self-employed individual offering your services to others, select this option. </span>
                                 </div>
                             </div>
+
                             <!--
                               Not Checked: "invisible"
 
@@ -78,6 +79,9 @@
                             -->
                             <div class="border_radio border-2 border-transparent absolute -inset-px rounded-lg border-2 pointer-events-none" aria-hidden="true"></div>
                         </label>
+                        @error('role')
+                        <p class="text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                 </fieldset>
                 <div class="flex justify-end">
