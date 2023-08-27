@@ -24,7 +24,6 @@ return new class extends Migration
             $table->string('city');
             $table->string('region');
             $table->string('postalCode');
-            $table->string('pricingPlan');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

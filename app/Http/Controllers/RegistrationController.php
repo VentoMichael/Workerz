@@ -45,6 +45,7 @@ class RegistrationController extends Controller
 
     public function storeConfirmation(Request $request)
     {
+
         return redirect()->route('sign-up.payment');
     }
 }

@@ -236,27 +236,27 @@
                     <div
                         class="@error('plan')border border-red-500 @enderror relative bg-white rounded-md -space-y-px">
 
-                        @foreach($formattedProducts as $plan)
+                        @foreach($plans as $plan)
                             <label
                                 class="label_pricing justify-between relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                                 <div class="flex items-center text-sm">
                                     <input wire:model.lazy="plan" type="radio" name="plan"
-                                           value="{{ $plan['product']['name'] }}"
+                                           value="{{ $plan->name }}"
                                            class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
                                            aria-labelledby="pricing-plans-0-label"
                                            aria-describedby="pricing-plans-0-description-0 pricing-plans-0-description-1">
                                     <span id="pricing-plans-0-label"
-                                          class="pricing-plans-span ml-3 font-medium">{{ $plan['product']['name'] }}</span>
+                                          class="pricing-plans-span ml-3 font-medium">{{ $plan->name }}</span>
                                 </div>
                                 <template x-if="annualBilling">
                                     <p x-cloak class="font-medium text_price">
-                                        {{ $plan['plans']['yearly']['amount'] }}€
+                                        {{ $plan->price_yearly }}€
                                         <span class="text-gray-500">/yearly</span>
                                     </p>
                                 </template>
                                 <template x-if="!annualBilling">
                                     <p x-cloak class="font-medium text_price">
-                                        {{ $plan['plans']['monthly']['amount'] }}€
+                                        {{ $plan->price_monthly }}€
                                         <span class="text-gray-500">/monthly</span>
                                     </p>
                                 </template>

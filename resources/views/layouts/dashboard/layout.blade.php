@@ -20,45 +20,52 @@
 <body @yield('class-html')>
 
 @include('layouts.dashboard.header')
-<main>
+<main class="mt-6 lg:mt-0">
     @yield('content')
 </main>
 @include('layouts.dashboard.footer')
 
     <script>
-        const userMenuButton = document.getElementById('user-menu-button');
-        const userMenuButtonNotification = document.getElementById('notification-user-menu');
+
+        const userMenuButtons = document.getElementById('user-menu-button');
+        const userMenuButtonNotifications = document.getElementById('notification-user-menu');
         const menuItems = document.getElementById('dropdown-menu-dashboard');
-        const menuItemsNotification = document.getElementById('dropdown-menu-notification');
+        const menuItemsNotifications = document.getElementById('dropdown-menu-notification');
 
-        userMenuButton.addEventListener('click', function(event) {
-            toggleMenu(menuItems);
-            closeMenu(menuItemsNotification);
-            event.stopPropagation();
-        });
+        if (userMenuButtons) {
+            // Add click event listeners to user menu buttons
+                userMenuButtons.addEventListener('click', function (event) {
+                    console.log(userMenuButtons);
+                    toggleMenu(menuItems);
+                    closeMenu(menuItemsNotifications);
+                    event.stopPropagation();
+                });
+        }
 
-        userMenuButtonNotification.addEventListener('click', function(event) {
-            toggleMenu(menuItemsNotification);
-            closeMenu(menuItems);
-            event.stopPropagation();
-        });
+        if (userMenuButtonNotifications) {
+                userMenuButtonNotifications.addEventListener('click', function (event) {
+                    console.log(userMenuButtonNotifications);
+                    toggleMenu(menuItemsNotifications);
+                    closeMenu(menuItems);
+                    event.stopPropagation();
+                });
+        }
 
-        // Close both modals when clicking outside
-        document.addEventListener('click', function() {
-            closeMenu(menuItems);
-            closeMenu(menuItemsNotification);
-        });
+
 
         const userPrimaryMenuButton = document.getElementById('openPrimaryMenu');
         const userPrimaryMenuButtonClose = document.getElementById('closePrimaryMenu');
         const contentPrimaryMenu = document.getElementById('primaryMenu');
+
         const userMenuButtonMobile = document.getElementById('user-menu-button-mobile');
-        const userMenuButtonNotificationMobile = document.getElementById('notification-user-menu-mobile');
         const menuItemsMobile = document.getElementById('dropdown-menu-dashboard-mobile');
+
+        const userMenuButtonNotificationMobile = document.getElementById('notification-user-menu-mobile');
         const menuItemsNotificationMobile = document.getElementById('dropdown-menu-notification-mobile');
         const overlay = document.getElementById('overlay');
 
         userMenuButtonMobile.addEventListener('click', function(event) {
+            console.log(menuItemsMobile)
             toggleMenu(menuItemsMobile);
             closeMenu(menuItemsNotificationMobile);
             event.stopPropagation();
@@ -75,19 +82,20 @@
             toggleMenu(contentPrimaryMenu);
             closeMenu(menuItemsNotificationMobile);
             closeMenu(menuItemsMobile);
-            closeMenu(userPrimaryMenuButton);
+            toggleMenu(userPrimaryMenuButton);
             toggleMenu(overlay);
             event.stopPropagation();
         });
 
         userPrimaryMenuButtonClose.addEventListener('click', function(event) {
             toggleMenu(contentPrimaryMenu);
-            closeMenu(userPrimaryMenuButton);
+            toggleMenu(userPrimaryMenuButton);
             toggleMenu(overlay);
             event.stopPropagation();
         });
 
         userMenuButtonNotificationMobile.addEventListener('click', function(event) {
+            console.log(menuItemsNotificationMobile)
             toggleMenu(menuItemsNotificationMobile);
             closeMenu(menuItemsMobile);
             event.stopPropagation();
@@ -100,6 +108,7 @@
         });
 
         function toggleMenu(element) {
+
             element.classList.toggle('hidden');
         }
 

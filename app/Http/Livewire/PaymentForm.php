@@ -2,14 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Cashier\Cashier;
 use Livewire\Component;
 use Stripe\Customer;
-use Stripe\PaymentMethod;
+use Stripe\SetupIntent;
 use Stripe\Stripe;
-use Stripe\PaymentIntent;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Laravel\Cashier\Subscription;
 
 class PaymentForm extends Component
 {
@@ -35,45 +34,86 @@ class PaymentForm extends Component
         Stripe::setApiKey(config('app.stripeKey'));
 
         $user = session('user')['account'];
-        // Create a new customer
-        $customer = Customer::create([
-            'email' => $user['email'], // Customer's email
-            'name' => $user['firstname'], // Customer's name
-            'metadata' => [
-                'user_id' => $user['id'], // Optional: You can associate your user ID here
-            ],
-        ]);
-
-        // Retrieve the customer ID
-        $customerId = $customer->id;
-
-
         $this->selectedPlan = session('productSelected')['product']['id'];
-        $this->email = $user['account']['email'];
-        $this->firstName = $user['account']['firstname'];
-        $this->lastName = $user['account']['lastname'];
+        $this->email = $user['email'];
+        $this->firstName = $user['firstname'];
+        $this->lastName = $user['lastname'];
     }
 
     public function render()
     {
-        return view('livewire.payment-form');
+        $user = session('user')['account'];
+
+        // Check if the customer exists or create a new one
+        $customer = Customer::all(['email' => $user['email']])->data[0] ?? null;
+
+        if (!$customer) {
+            // Customer doesn't exist, so create a new customer
+            $customer = Customer::create([
+                'email' => $user['email'],
+                'name' => $user['firstname'], // Set the customer's name
+            ]);
+        }
+
+        // Create a SetupIntent for the customer
+        $setupIntent = SetupIntent::create([
+            'customer' => $customer->id,
+        ]);
+
+        $intentClientSecret = $setupIntent->client_secret;
+
+        return view('livewire.payment-form',compact('intentClientSecret'));
     }
 
     public function createSubscription()
     {
-        // Create a PaymentIntent
-        $paymentIntent = PaymentIntent::create([
-            'amount' => 1000,  // Replace with the actual amount
-            'currency' => 'usd',  // Replace with the desired currency
-            'payment_method' => $this->paymentMethods[0]->id, // Replace with the selected payment method ID
-            'confirm' => true,
+        Stripe::setApiKey(config('app.stripeKey'));
+
+        $user = session('user')['account'];
+        $productSelected = session('productSelected')['product'];
+        $planPayment = session('productSelected')['paymentYearly'] ? $productSelected['price_yearly'] : $productSelected['price_monthly'];
+
+        User::create([
+            'username' => $user['username'] ?? '', // Make sure to provide a value for 'username'
+            'email' => $user['email'] ?? '',
+            'about' => $user['about'] ?? '',
+            'password' => Hash::make($user['password']) ?? '',
+            'avatarUpload' => $user['avatarUpload'] ?? '',
+            'backgroundUpload' => $user['backgroundUpload'] ?? '',
+            'firstname' => $user['firstname'] ?? '',
+            'lastname' => $user['lastname'] ?? '',
+            'streetAddress' => $user['streetAddress'] ?? '',
+            'city' => $user['city'] ?? '',
+            'region' => $user['region'] ?? '',
+            'postalCode' => $user['postalCode'] ?? '',
         ]);
 
-        // Create the user in your application's database and associate them with the Stripe customer ID
-        $stripeCustomerId = $paymentIntent->customer;
-        $user = session('user')['account'];
+        $newUser = User::where('email',$user['email'])->createSetupIntent();
+        // Check if the customer already exists in Stripe
+            // Customer doesn't exist, create a new one
+            $stripeCustomer = Customer::create([
+                'email' => $user['email'],
+                'name' => $user['firstname'], // Set the customer's name
+                'metadata' => [
+                    'user_id' => $user['id'], // Optional: You can associate your user ID here
+                ],
+            ]);
 
-        // Begin database transaction for creating user and subscription
-        DB::beginTransaction();
+        // Now $stripeCustomer contains the customer, whether it was retrieved or created
+
+        // Proceed with creating the subscription
+        $productSelected = session('productSelected')['product'];
+        $planPayment = session('productSelected')['paymentYearly']
+            ? $productSelected['price_yearly']
+            : $productSelected['price_monthly'];
+
+        // Create the subscription for the customer
+        $subscription = $stripeCustomer->subscriptions->create([
+            'items' => [
+                [
+                    'price' => $planPayment,
+                ],
+            ],
+        ]);
     }
 }

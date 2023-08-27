@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
@@ -101,6 +102,7 @@ Route::get('/pricing', function () {
 })->name('pricing');
 
 
+
 // Connexion page
 
 // Step 1: User role selection
@@ -120,25 +122,14 @@ Route::post('/sign-up/payment', [RegistrationController::class, 'storePayment'])
 
 
 
-    Route::get('/subscribe', [SubscriptionController::class, 'showSubscriptionForm'])->name('showFormSubscription');
-    Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('showFormSubscription.post');
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-Route::get('/sign-in', function () {
-    return view('connexion.sign-in');
-})->name('sign-in');
+//
+//Route::get('/sign-in', function () {
+//    return view('connexion.sign-in');
+//})->name('sign-in');
 
 
 

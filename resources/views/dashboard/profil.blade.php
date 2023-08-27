@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <main class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
+    <div class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
         <section class="lg:grid lg:grid-cols-12 lg:gap-x-5">
             @include('layouts.dashboard.secondHeader')
 
@@ -361,7 +361,7 @@
                 </div>
             </div>
         </section>
-    </main>
+    </div>
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Plan;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -53,10 +54,14 @@ class FreelancerForm extends Component
     }
 
     public function submitForm(){
-        $products = session('products');
+        $products = Plan::all();
         foreach ($products as $product){
-            if ($this->plan === $product['product']['name']){
-                session(['productSelected' => $product]);
+            if ($this->plan === $product['name']){
+                $productData = [
+                    'product' => $product,
+                    'paymentYearly' => $this->annualBilling, // Add the 'paymentYearly' field
+                ];
+                session(['productSelected' => $productData]);
             }
         }
         $signUp['username'] = $this->username;
@@ -105,46 +110,8 @@ class FreelancerForm extends Component
     }
     public function render()
     {
-        Stripe::setApiKey(config('app.stripeKey'));
-
-        // Fetch the products from Stripe
-        $products = \Stripe\Product::all();
-        $pricingPlans = \Stripe\Price::all();
-
-        // Create an array to hold the formatted product and pricing data
-        $formattedProducts = [];
-
-        foreach ($products as $product) {
-            // Find pricing plans associated with the current product
-            $productPricingPlans = array_filter($pricingPlans->data, function ($plan) use ($product) {
-                return $plan->product == $product->id;
-            });
-
-            // Format the product and pricing plan data
-            $formattedPricingPlans = [];
-            foreach ($productPricingPlans as $plan) {
-                $intervalKey = ($plan->recurring->interval === 'month') ? 'monthly' : 'yearly';
-                $formattedPricingPlans[$intervalKey] = [
-                    'id' => $plan->id,
-                    'billing_scheme' => $plan->billing_scheme,
-                    'amount' => number_format($plan->unit_amount / 100, 2),
-                    'currency' => $plan->currency,
-                    'interval' => $plan->recurring->interval,
-                ];
-            }
-
-            $formattedProducts[] = [
-                'product' => [
-                    'id' => $product->id,
-                    'name' => $product->name,
-                    // Add more product details as needed
-                ],
-                'plans' => $formattedPricingPlans,
-            ];
-            session(['products' => $formattedProducts]);
-
-        }
+        $plans = Plan::all();
         // Now you have an array of products with their associated pricing plans and details
-        return view('livewire.freelancer-form',compact('formattedProducts'));
+        return view('livewire.freelancer-form',compact('plans'));
     }
 }

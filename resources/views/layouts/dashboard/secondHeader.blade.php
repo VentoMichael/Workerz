@@ -1,12 +1,12 @@
-<div class="hidden" id="primaryMenu">
+<div id="primaryMenu" class="hidden">
     <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
 
     <!-- Static sidebar for desktop -->
-    <div class="z-20 hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
+    <div class="z-20 flex w-64 flex-col fixed inset-y-0">
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
             <div class="absolute top-0 right-0 -mr-12 pt-2">
-                <button id="closePrimaryMenu" type="button" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <button type="button" id="closePrimaryMenu" class=" ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span class="sr-only">Close sidebar</span>
                     <!-- Heroicon name: outline/x -->
                     <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">

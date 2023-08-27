@@ -29,6 +29,127 @@
 
 @vite('resources/js/app.js')
 @livewireScripts
+@auth
+    <script>
+
+
+        // Get user menu buttons by class name
+        const userMenuButtons = document.querySelectorAll('.user-menu-button');
+        const userMenuButtonNotifications = document.querySelectorAll('.notification-user-menu');
+        const menuItems = document.querySelectorAll('.dropdown-menu-dashboard');
+        const menuItemsNotifications = document.querySelectorAll('.dropdown-menu-notification');
+
+        if (userMenuButtons) {
+            // Add click event listeners to user menu buttons
+            userMenuButtons.forEach(userMenuButton => {
+                userMenuButton.addEventListener('click', function (event) {
+                    console.log(userMenuButton)
+                    toggleMenu(menuItems);
+                    closeMenu(menuItemsNotifications);
+                    event.stopPropagation();
+                });
+            });
+        }
+        if (userMenuButtonNotifications) {
+
+            userMenuButtonNotifications.forEach(userMenuButtonNotification => {
+                userMenuButtonNotification.addEventListener('click', function (event) {
+                    console.log(userMenuButtonNotification)
+
+                    toggleMenu(menuItemsNotifications);
+                    closeMenu(menuItems);
+                    event.stopPropagation();
+                });
+            });
+        }
+
+
+        // Get user menu buttons by class name
+        const userPrimaryMenuButton = document.querySelectorAll('.open-primary-menu');
+        const userPrimaryMenuButtonClose = document.querySelectorAll('.close-primary-menu');
+        const contentPrimaryMenu = document.querySelectorAll('.primary-menu');
+        const userMenuButtonMobile = document.querySelectorAll('.user-menu-button-mobile');
+        const userMenuButtonNotificationMobile = document.querySelectorAll('.notification-user-menu-mobile');
+        const menuItemsMobile = document.querySelectorAll('.dropdown-menu-dashboard-mobile');
+        const menuItemsNotificationMobile = document.querySelectorAll('.dropdown-menu-notification-mobile');
+        const overlay = document.querySelectorAll('.overlay');
+
+        if (userMenuButtonMobile) {
+            userMenuButtonMobile.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    toggleMenu(menuItemsMobile);
+                    closeMenu(menuItemsNotificationMobile);
+                    event.stopPropagation();
+                });
+            });
+        }
+
+        if (overlay) {
+            overlay.forEach(element => {
+                element.addEventListener('click', function (event) {
+                    toggleMenu(contentPrimaryMenu);
+                    toggleMenu(overlay);
+                    toggleMenu(userPrimaryMenuButton);
+                    event.stopPropagation();
+                });
+            });
+        }
+
+        if (userPrimaryMenuButton) {
+            userPrimaryMenuButton.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    toggleMenu(contentPrimaryMenu);
+                    closeMenu(menuItemsNotificationMobile);
+                    closeMenu(menuItemsMobile);
+                    closeMenu(userPrimaryMenuButton);
+                    toggleMenu(overlay);
+                    event.stopPropagation();
+                });
+            });
+        }
+
+        if (userPrimaryMenuButtonClose) {
+            userPrimaryMenuButtonClose.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    toggleMenu(contentPrimaryMenu);
+                    closeMenu(userPrimaryMenuButton);
+                    toggleMenu(overlay);
+                    event.stopPropagation();
+                });
+            });
+        }
+
+        if (userMenuButtonNotificationMobile) {
+            userMenuButtonNotificationMobile.forEach(button => {
+                button.addEventListener('click', function (event) {
+                    toggleMenu(menuItemsNotificationMobile);
+                    closeMenu(menuItemsMobile);
+                    event.stopPropagation();
+                });
+            });
+        }
+
+        function toggleMenu(element) {
+            element.forEach(el => {
+                el.classList.toggle('hidden');
+            });
+        }
+
+        function closeMenu(element) {
+            element.forEach(el => {
+                el.classList.add('hidden');
+            });
+        }
+
+        document.addEventListener('click', function () {
+            closeMenu(menuItems);
+            closeMenu(menuItemsNotifications);
+            closeMenu(menuItemsMobile);
+            closeMenu(menuItemsNotificationMobile);
+        })
+    </script>
+
+@endauth
 <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 @yield('scripts')
 </body>
