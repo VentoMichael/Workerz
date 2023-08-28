@@ -4,8 +4,9 @@
 @section('keywords', 'dashboard, manage profile, settings, activities')
 
 @section('content')
-   @include('components.tutorial-dashboard')
-
+    @if(!auth()->user()->tutorial_shown)
+        @include('components.tutorial-dashboard')
+    @endif
 
 
     <div class="max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8">
@@ -13,14 +14,17 @@
             <h1 class="sr-only">
                 My dashboard
             </h1>
-            @include('layouts.dashboard.secondHeader')
+
+                @include('layouts.dashboard.secondHeader')
 
             <div id="main_content" class="py-6 px-4 sm:p-6 lg:pb-8 flex w-full gap-4 col-span-9 flex-col">
                 <section class="w-full bg-white rounded-lg shadow">
                     <div class="flex justify-between p-4 md:p-6 pb-0 md:pb-0">
                         <div>
-                            <h2 class="leading-none text-3xl font-bold text-gray-900">Interactions Over the 7 last days</h2>
-                            <p class="text-base font-normal text-gray-500">Activity Trends<p>
+                            <h2 class="leading-none text-3xl font-bold text-gray-900">Interactions Over the 7 last
+                                days</h2>
+                            <p class="text-base font-normal text-gray-500">Activity Trends
+                            <p>
                         </div>
                         <div
                             class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 text-center">
@@ -52,10 +56,10 @@
                         </div>
                         <div class="p-5 flex h-full flex-col justify-between">
                             <div>
-                            <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Marco Piombo</p>
-                            <p class="mb-3 font-normal text-gray-700">Lorem ipsum dolor sit amet, consectetur
-                                adipisicing
-                                elit. Beatae debitis fuga laboriosam quibusdam rerum sint ullam</p>
+                                <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Marco Piombo</p>
+                                <p class="mb-3 font-normal text-gray-700">Lorem ipsum dolor sit amet, consectetur
+                                    adipisicing
+                                    elit. Beatae debitis fuga laboriosam quibusdam rerum sint ullam</p>
                             </div>
                             <x-button type="submit" kind="primary" class="mt-4 w-full max-w-xl">See my profile
                             </x-button>

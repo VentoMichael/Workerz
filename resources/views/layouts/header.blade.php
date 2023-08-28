@@ -13,9 +13,9 @@
                 <!-- Main modal -->
                 <div class="-mr-2 -my-2 flex md:hidden">
 
-                    <div class="notification-user-menu flex md:hidden lg:relative lg:z-10 lg:ml-4 lg:items-center">
+                    <div class="flex md:hidden lg:relative lg:z-10 lg:ml-4 lg:items-center">
                         <button type="button"
-                                class="relative flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:indigo-900">
+                                class="notification-user-menu relative flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:indigo-900">
                             <span class="sr-only text-black">View notifications</span>
                             <!-- Heroicon name: outline/bell -->
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -156,9 +156,9 @@
                     <x-nav-link kind="primary" href="{{ route('about-us') }}" class="{{ Route::currentRouteName() === 'about-us'  ? 'font-extrabold text-purple-700' : '' }}">About us</x-nav-link>
 
                 </nav>
-                <div class="notification-user-menu hidden md:flex lg:relative lg:z-10 lg:ml-4 lg:items-center">
+                <div class=" hidden md:flex lg:relative lg:z-10 lg:ml-4 lg:items-center">
                     <button type="button"
-                            class="relative flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:indigo-900">
+                            class="notification-user-menu relative flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:indigo-900">
                         <span class="sr-only text-black">View notifications</span>
                         <!-- Heroicon name: outline/bell -->
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

@@ -155,30 +155,20 @@ Route::get('/terms', function () {
 Route::get('/newsletter',
     [\App\Http\Controllers\NewsletterController::class, 'storeNewsletterEmail'])->name('newsletter');
 
+// Routes accessible only to authenticated users
+Route::middleware(['auth'])->group(function () {
+    // Dashboard views
+    Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 
-// Dashboard views
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.dashboard');
 
-Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.dashboard');
+    Route::get('/dashboard/profil', [\App\Http\Controllers\DashboardController::class, 'profil'])->name('dashboard.profil');
 
-Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard/messages', [\App\Http\Controllers\DashboardController::class, 'messages'])->name('dashboard.messages');
 
-Route::get('/dashboard/profil', function () {
-    return view('dashboard.profil');
-})->name('dashboard.profil');
+    Route::get('/dashboard/plans', [\App\Http\Controllers\DashboardController::class, 'plans'])->name('dashboard.plans');
 
-Route::get('/dashboard/messages', function () {
-    return view('dashboard.messages');
-})->name('dashboard.messages');
+    Route::get('/dashboard/settings', [\App\Http\Controllers\DashboardController::class, 'settings'])->name('dashboard.settings');
 
-Route::get('/dashboard/plans', function () {
-    return view('dashboard.plans');
-})->name('dashboard.plans');
-
-Route::get('/dashboard/settings', function () {
-    return view('dashboard.settings');
-})->name('dashboard.settings');
-
-Route::post('/dashboard/settings/privacy', function () {
-    return view('dashboard.settings');
-})->name('dashboard.settings.privacy');
-
+    Route::post('/dashboard/settings', [\App\Http\Controllers\DashboardController::class, 'updateSettings'])->name('dashboard.settings.privacy');
+});

@@ -20,6 +20,7 @@ class FreelancerForm extends Component
     public $lastname;
     public $email;
     public $password;
+    public $passwordVisible;
     public $streetAddress;
     public $city;
     public $region;
@@ -52,7 +53,10 @@ class FreelancerForm extends Component
     {
         $this->annualBilling = !$this->annualBilling;
     }
-
+    public function togglePasswordVisibility()
+    {
+        $this->passwordVisible = !$this->passwordVisible;
+    }
     public function submitForm(){
         $products = Plan::all();
         foreach ($products as $product){
@@ -72,6 +76,7 @@ class FreelancerForm extends Component
         $signUp['lastname'] = $this->lastname;
         $signUp['email'] = $this->email;
         $signUp['password'] = $this->password;
+        $signUp['passwordVisible'] = $this->passwordVisible;
         $signUp['streetAddress'] = $this->streetAddress;
         $signUp['city'] = $this->city;
         $signUp['region'] = $this->region;

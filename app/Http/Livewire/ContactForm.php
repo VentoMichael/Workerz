@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Contact;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 
 class ContactForm extends Component
@@ -22,7 +24,14 @@ class ContactForm extends Component
     {
         $this->validateOnly($propertyName,);
     }
-
+    public function mount()
+    {
+        $this->email_contact = Auth::user()->email;
+        $subjectFromQuery = Request::query('subject');
+        if ($subjectFromQuery) {
+            $this->subject = $subjectFromQuery;
+        }
+    }
     public function submitForm(){
 
         $contact['email_contact'] = $this->email_contact;

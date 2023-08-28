@@ -24,6 +24,10 @@ return new class extends Migration
             $table->string('city');
             $table->string('region');
             $table->string('postalCode');
+            $table->boolean('tutorial_shown')->default(false);
+            $table->boolean('hiring')->default(false);
+            $table->boolean('private')->default(false);
+            $table->boolean('allow_commenting')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -18,7 +18,7 @@
                 </button>
             </div>
         @endif
-        <form wire:submit.prevent="submitForm" method="get" class="space-y-8">
+        <form id="form" wire:submit.prevent="submitForm" method="get" class="space-y-8">
             <!-- TODO: add error handling for form submission -->
             <!-- TODO: add automatically the email if connected -->
             @csrf

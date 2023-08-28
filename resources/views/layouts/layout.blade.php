@@ -43,19 +43,16 @@
             // Add click event listeners to user menu buttons
             userMenuButtons.forEach(userMenuButton => {
                 userMenuButton.addEventListener('click', function (event) {
-                    console.log(userMenuButton)
-                    toggleMenu(menuItems);
                     closeMenu(menuItemsNotifications);
+                    toggleMenu(menuItems);
                     event.stopPropagation();
                 });
             });
         }
         if (userMenuButtonNotifications) {
-
+//BEUGGG QUAND ON VA DANS LE PROFIL IL SAFFICHE RAPIDEMENT
             userMenuButtonNotifications.forEach(userMenuButtonNotification => {
                 userMenuButtonNotification.addEventListener('click', function (event) {
-                    console.log(userMenuButtonNotification)
-
                     toggleMenu(menuItemsNotifications);
                     closeMenu(menuItems);
                     event.stopPropagation();

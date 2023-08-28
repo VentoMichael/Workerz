@@ -45,7 +45,7 @@
                                 satisfaction.</p>
                         </div>
                         <div class="p-6 bg-blue-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8">
-                            <a href="{{ route('contact-us') }}?subject=Technical%20support#form"
+                            <a href="?subject=Technical%20support#form"
                                class="text-base font-medium text-indigo-600 hover:text-indigo-800">Contact us<span
                                     aria-hidden="true"> &rarr;</span></a>
                         </div>
@@ -68,7 +68,7 @@
                                 mission with journalists and media outlets.</p>
                         </div>
                         <div class="p-6 bg-blue-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8">
-                            <a href="{{route('contact-us')}}?subject=Media%20inquiries#form"
+                            <a href="?subject=Media%20inquiries#form"
                                class="text-base font-medium text-indigo-600 hover:text-indigo-800">Contact us<span
                                     aria-hidden="true"> &rarr;</span></a>
                         </div>
@@ -91,7 +91,7 @@
                                 information.</p>
                         </div>
                         <div class="p-6 bg-blue-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8">
-                            <a href="{{route('contact-us')}}?subject=Partnership%20opportunities#form"
+                            <a href="?subject=Partnership%20opportunities#form"
                                class="text-base font-medium text-indigo-600 hover:text-indigo-800">Contact us<span
                                     aria-hidden="true"> &rarr;</span></a>
                         </div>
