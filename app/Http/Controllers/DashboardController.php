@@ -6,6 +6,7 @@ use App\Http\Requests\StoreDashboardRequest;
 use App\Http\Requests\UpdateDashboardRequest;
 use App\Models\Dashboard;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
@@ -14,6 +15,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        Session::flush();
         //mettre un message de bonjour ou rebonjour et bouger avec la session apres 10m
 // Set the tutorial_shown column for the authenticated user
         if (request()->has('nevermind')){
@@ -75,5 +77,9 @@ class DashboardController extends Controller
         }
         //update
             return view('dashboard.settings');
+    }
+
+
+    public function deleteAccount(){
     }
 }

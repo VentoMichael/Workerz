@@ -7,7 +7,6 @@
 
 
 
-    @include('components.modal-delete')
 
 
 

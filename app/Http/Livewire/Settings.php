@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Settings extends Component
@@ -12,6 +13,7 @@ class Settings extends Component
     public $clearProperty;
     public $allowCommenting;
     public $successMessage = '';
+    public $showDeleteModal = false;
     public $infoMessage = '';
     public $changesMade = false; // Track changes flag
 
@@ -43,6 +45,9 @@ class Settings extends Component
 
     public function submitForm()
     {
+        if ($this->showDeleteModal === true){
+            $this->confirmDelete();
+        }
         if ($this->changesMade) { // Check if any changes were made
             $user = auth()->user();
             $user->update([
@@ -66,6 +71,22 @@ class Settings extends Component
     public function clearMessage($property)
     {
         $this->$property = null;
+    }
+    public function confirmDelete()
+    {
+        auth()->user()->delete();
+        Session::flush();
+        // Log the user out
+        Auth::logout();
+        sleep(2);
+
+        // Redirect with success message
+        return redirect()->route('home');
+    }
+
+    public function closeDeleteModal()
+    {
+        $this->showDeleteModal = false;
     }
     public function render()
     {

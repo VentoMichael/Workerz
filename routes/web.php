@@ -171,4 +171,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/settings', [\App\Http\Controllers\DashboardController::class, 'settings'])->name('dashboard.settings');
 
     Route::post('/dashboard/settings', [\App\Http\Controllers\DashboardController::class, 'updateSettings'])->name('dashboard.settings.privacy');
+    Route::delete('/dashboard/delete', [\App\Http\Controllers\DashboardController::class, 'deleteAccount'])->name('dashboard.settings.delete');
 });

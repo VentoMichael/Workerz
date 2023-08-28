@@ -1,8 +1,8 @@
 <div class="divide-y divide-gray-200 lg:col-span-12">
     <!-- Profile section -->
-
     <div aria-labelledby="payment-details-heading">
         <form action="#" method="POST">
+            @include('components.modal-delete')
 
             <div class="shadow sm:rounded-md sm:overflow-hidden">
                 <div class="bg-white py-6 px-4 sm:p-6">
@@ -128,10 +128,7 @@
                                         Permanently delete your account. This action cannot
                                         be undone.</p>
                                 </div>
-                                <x-button id="delete-account" type="submit" kind="danger"
-                                          name="delete-account">Delete
-                                </x-button>
-
+                                <x-button wire:click="$set('showDeleteModal', true)" kind="danger">Delete</x-button>
                             </li>
                         </ul>
                     </div>
