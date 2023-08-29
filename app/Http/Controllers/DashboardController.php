@@ -15,14 +15,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        Session::flush();
+        $user = Auth::user();
+        //Session::flush();
         //mettre un message de bonjour ou rebonjour et bouger avec la session apres 10m
 // Set the tutorial_shown column for the authenticated user
         if (request()->has('nevermind')){
-            Auth::user()->update(['tutorial_shown' => true]);
+            $user->update(['tutorial_shown' => true]);
         }
 
-        return view('dashboard.home');
+        return view('dashboard.home',compact('user'));
 
     }
 
@@ -31,7 +32,9 @@ class DashboardController extends Controller
      */
     public function profil()
     {
-        return view('dashboard.profil');
+        $user = Auth::user();
+
+        return view('dashboard.profil',compact('user'));
     }
 
     /**
@@ -77,6 +80,9 @@ class DashboardController extends Controller
         }
         //update
             return view('dashboard.settings');
+    }
+    public function updatePassword(){
+        dd('f');
     }
 
 

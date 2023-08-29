@@ -88,7 +88,7 @@
             </div>
         </div>
     </div>
-    <a href="{{route('workers.show')}}" class="block hover:bg-indigo-50">
+    <a href="{{ route('workers.show',['username' => auth()->user()->username]) }}" class="block hover:bg-indigo-50">
 
         <div class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 sm:grid-cols-48-1">
 

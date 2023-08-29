@@ -31,7 +31,6 @@ function closeTutorial() {
 
 nextButtons.forEach(button => {
     button.addEventListener('click', () => {
-        console.log('Next button clicked'); // Add this line
         nextStep();
     });
 });

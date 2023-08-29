@@ -149,7 +149,7 @@
                              role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                             <!-- Active: "bg-gray-100", Not Active: "" -->
                             <a href="#" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                               id="user-menu-item-0">Your Profile</a>
+                               id="user-menu-item-0">Profil</a>
 
                             <a href="#" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
                                id="user-menu-item-1">Settings</a>

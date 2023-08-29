@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -13,9 +14,14 @@ class Settings extends Component
     public $clearProperty;
     public $allowCommenting;
     public $successMessage = '';
+    public $successMessagePassword = '';
     public $showDeleteModal = false;
     public $infoMessage = '';
     public $changesMade = false; // Track changes flag
+
+
+    public $currentPassword;
+    public $newPassword;
 
     public function mount()
     {
@@ -84,6 +90,26 @@ class Settings extends Component
         return redirect()->route('home');
     }
 
+
+    public function updatePassword()
+    {
+        $this->validate([
+            'currentPassword' => ['required', function ($attribute, $value, $fail) {
+                if (!Hash::check($value, Auth::user()->password)) {
+                    $fail('The current password is incorrect.');
+                }
+            }],
+            'newPassword' => ['required', 'string', 'min:8'],
+        ]);
+        Auth::user()->update([
+            'password' => Hash::make($this->newPassword),
+        ]);
+
+        $this->currentPassword = '';
+        $this->newPassword = '';
+
+        session()->flash('success', 'Password updated successfully!');
+    }
     public function closeDeleteModal()
     {
         $this->showDeleteModal = false;

@@ -26,7 +26,7 @@ class ContactForm extends Component
     }
     public function mount()
     {
-        $this->email_contact = Auth::user()->email;
+        $this->email_contact = Auth::user()->email ?? '';
         $subjectFromQuery = Request::query('subject');
         if ($subjectFromQuery) {
             $this->subject = $subjectFromQuery;

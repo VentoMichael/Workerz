@@ -41,7 +41,7 @@
 
                 <div class="col-span-full">
 
-                    <label class="block text-sm font-medium leading-6 text-indigo-900" for="avatarUpload">Upload
+                    <label class="block text-sm font-medium leading-6" for="avatarUpload">Upload
                         file</label>
                     <div class="relative">
                         @if ($avatarUpload)

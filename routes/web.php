@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SubscriptionController;
@@ -37,7 +38,7 @@ Route::get('/workers', function () {
     return view('workers.workers');
 })->name('workers');
 
-Route::get('/workers/details', function () {
+Route::get('/workers/{username}', function () {
     return view('workers.show');
 })->name('workers.show');
 
@@ -156,7 +157,7 @@ Route::get('/newsletter',
     [\App\Http\Controllers\NewsletterController::class, 'storeNewsletterEmail'])->name('newsletter');
 
 // Routes accessible only to authenticated users
-Route::middleware(['auth'])->group(function () {
+ Route::middleware(['auth'])->group(function () {
     // Dashboard views
     Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
 
@@ -169,7 +170,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/plans', [\App\Http\Controllers\DashboardController::class, 'plans'])->name('dashboard.plans');
 
     Route::get('/dashboard/settings', [\App\Http\Controllers\DashboardController::class, 'settings'])->name('dashboard.settings');
-
+    Route::put('/dashboard/password', [DashboardController::class, 'updatePassword'])->middleware(['auth'])->name('password.update');
     Route::post('/dashboard/settings', [\App\Http\Controllers\DashboardController::class, 'updateSettings'])->name('dashboard.settings.privacy');
     Route::delete('/dashboard/delete', [\App\Http\Controllers\DashboardController::class, 'deleteAccount'])->name('dashboard.settings.delete');
-});
+ });

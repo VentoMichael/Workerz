@@ -12,7 +12,6 @@ buttons.forEach(function(button) {
     }
 
     button.addEventListener('click', function() {
-        console.log(button)
         const isEnabled = button.getAttribute('aria-checked') === 'true';
 
         if (isEnabled) {

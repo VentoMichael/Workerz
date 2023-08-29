@@ -15,7 +15,7 @@
                 My dashboard
             </h1>
 
-                @include('layouts.dashboard.secondHeader')
+            @include('layouts.dashboard.secondHeader')
 
             <div id="main_content" class="py-6 px-4 sm:p-6 lg:pb-8 flex w-full gap-4 col-span-9 flex-col">
                 <section class="w-full bg-white rounded-lg shadow">
@@ -41,31 +41,30 @@
 
 
                 <div class="flex w-full gap-4 col-span-9">
-                    <section class="w-2/4 w-max bg-white border border-gray-200 rounded-lg shadow flex flex-col">
+                    <section class="w-full bg-white border border-gray-200 rounded-lg shadow flex flex-col">
                         <h2 class="text-lg font-semibold text-gray-900 p-5 sr-only">My profile</h2>
                         <div class="relative">
                             <img class="rounded-t-lg w-full h-32 object-cover"
-                                 src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-                                 alt=""/>
+                                 src="{{ $user->backgroundUpload }}"
+                                 alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
                             <div
                                 class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-indigo-600 opacity-60"></div>
                             <img
                                 class="rounded-full h-20 w-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                                src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-                                alt="Profile Picture"/>
+                                src="{{ $user->avatarUpload }}"
+                                alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
                         </div>
                         <div class="p-5 flex h-full flex-col justify-between">
                             <div>
-                                <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Marco Piombo</p>
-                                <p class="mb-3 font-normal text-gray-700">Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing
-                                    elit. Beatae debitis fuga laboriosam quibusdam rerum sint ullam</p>
+                                <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $user->username }}</p>
+                                <p class="mb-3 font-normal text-gray-700">{{ $user->about }}</p>
                             </div>
-                            <x-button type="submit" kind="primary" class="mt-4 w-full max-w-xl">See my profile
-                            </x-button>
+                            <a href="{{ route('dashboard.profil') }}"
+                               class="mt-4 w-full max-w-xl whitespace-nowrap inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700">
+                                Edit my profile </a>
                         </div>
                     </section>
-                    <section class="w-2/4 w-max bg-white border border-gray-200 rounded-lg shadow">
+                    <section class="w-full bg-white border border-gray-200 rounded-lg shadow">
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h2 class="text-lg font-semibold text-gray-900">Recent Comments</h2>
 

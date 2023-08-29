@@ -94,6 +94,12 @@ class FreelancerForm extends Component
             'lastname' => $this->lastname,
             'email' => $this->email,
             'password' => $this->password,
+            'avatarUpload' => $this->avatarUpload
+                ? $this->avatarUpload->store('avatars', 'public')
+                : 'default_avatar.jpg',
+            'backgroundUpload' => $this->avatarUpload
+                ? $this->avatarUpload->store('covers', 'public')
+                : 'default_cover.jpg',
             'streetAddress' => $this->streetAddress,
             'city' => $this->city,
             'region' => $this->region,

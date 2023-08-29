@@ -1,8 +1,10 @@
 <div class="divide-y divide-gray-200 lg:col-span-12">
     <!-- Profile section -->
     <div aria-labelledby="payment-details-heading">
-        <form action="#" method="POST">
+        <form wire:submit.prevent="updatePassword" action="{{ route('password.update') }}" method="POST">
+            @csrf
             @include('components.modal-delete')
+            @include('components.success-message', ['message' => $successMessagePassword,'clearProperty' => 'successMessagePassword'])
 
             <div class="shadow sm:rounded-md sm:overflow-hidden">
                 <div class="bg-white py-6 px-4 sm:p-6">
@@ -17,27 +19,29 @@
 
                     <div class="mt-6 grid grid-cols-4 gap-6">
                         <div class="col-span-4 sm:col-span-2">
-                            <label for="first-name"
-                                   class="block text-sm font-medium text-gray-700">Actual
-                                password</label>
-                            <input type="text" name="first-name" id="first-name"
-                                   autocomplete="cc-given-name"
+                            <label for="currentPassword" class="block text-sm font-medium text-gray-700">Current Password</label>
+                            <input type="password" wire:model="currentPassword" id="currentPassword"
                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:indigo-900 focus:border-indigo-900 sm:text-sm">
+                        @error('currentPassword')
+                        <p class="text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                         </div>
 
+
+
                         <div class="col-span-4 sm:col-span-2">
-                            <label for="last-name"
-                                   class="block text-sm font-medium text-gray-700">New
-                                password</label>
-                            <input type="text" name="last-name" id="last-name"
-                                   autocomplete="cc-family-name"
+                            <label for="newPassword" class="block text-sm font-medium text-gray-700">New Password</label>
+                            <input type="password" wire:model="newPassword" id="newPassword"
                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:indigo-900 focus:border-indigo-900 sm:text-sm">
+                        @error('newPassword')
+                        <p class="text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                         </div>
 
                     </div>
                 </div>
                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                    <x-button type="submit" kind="primary">Save</x-button>
+                    <x-button wire:click="updatePassword" type="submit" kind="primary">Save</x-button>
                 </div>
             </div>
         </form>

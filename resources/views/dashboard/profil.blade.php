@@ -32,7 +32,7 @@
                                             <div
                                                 class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
                                                 <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">workerz.be/workers/</span>
-                                                <input type="text" name="username" id="username" autocomplete="username"
+                                                <input value="{{ $user->username }}" type="text" name="username" id="username" autocomplete="username"
                                                        class="block flex-1 border-0 bg-transparent py-1.5 pl-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                                        placeholder="janesmith">
                                             </div>
@@ -45,7 +45,7 @@
                                                    class="block text-sm font-medium leading-6 text-gray-900">About</label>
                                             <div class="mt-2">
                                     <textarea id="about" name="about" rows="3"
-                                              class="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                                              class="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ $user->about }}</textarea>
                                             </div>
                                             <p class="mt-1 text-sm leading-6 text-gray-600">Write a few sentences about
                                                 yourself.</p>
@@ -60,8 +60,8 @@
                                                     class="flex-shrink-0 inline-block rounded-full overflow-hidden h-12 w-12"
                                                     aria-hidden="true">
                                                     <img class="rounded-full h-full w-full"
-                                                         src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80"
-                                                         alt="">
+                                                         src="{{ $user->avatarUpload }}"
+                                                         alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
                                                 </div>
                                                 <div class="ml-5 rounded-md shadow-sm">
                                                     <div
@@ -80,8 +80,8 @@
 
                                         <div class="hidden relative rounded-full overflow-hidden lg:block">
                                             <img class="relative rounded-full w-40 h-40"
-                                                 src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80"
-                                                 alt="">
+                                                 src="{{ $user->avatarUpload }}"
+                                                 alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
                                             <label for="desktop-user-photo"
                                                    class="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
                                                 <span>Change</span>
@@ -95,19 +95,19 @@
 
                                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                                     <div class="sm:col-span-3">
-                                        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">First
+                                        <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">First
                                             name</label>
                                         <div class="mt-2">
-                                            <input type="text" name="first-name" id="first-name" autocomplete="given-name"
+                                            <input value="{{ $user->firstname }}" type="text" name="firstname" id="firstname" autocomplete="given-name"
                                                    class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
                                     </div>
 
                                     <div class="sm:col-span-3">
-                                        <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Last
+                                        <label for="lastname" class="block text-sm font-medium leading-6 text-gray-900">Last
                                             name</label>
                                         <div class="mt-2">
-                                            <input type="text" name="last-name" id="last-name" autocomplete="family-name"
+                                            <input value="{{ $user->lastname }}" type="text" name="lastname" id="lastname" autocomplete="family-name"
                                                    class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
                                     </div>
@@ -116,16 +116,16 @@
                                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
                                             address</label>
                                         <div class="mt-2">
-                                            <input id="email" name="email" type="email" autocomplete="email"
+                                            <input value="{{ $user->email }}" id="email" name="email" type="email" autocomplete="email"
                                                    class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
                                     </div>
 
                                     <div class="sm:col-span-3">
-                                        <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Street
+                                        <label for="streetAddress" class="block text-sm font-medium leading-6 text-gray-900">Street
                                             address</label>
                                         <div class="mt-2">
-                                            <input type="text" name="street-address" id="street-address"
+                                            <input value="{{ $user->streetAddress }}" type="text" name="streetAddress" id="streetAddress"
                                                    autocomplete="street-address"
                                                    class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
@@ -134,7 +134,7 @@
                                     <div class="sm:col-span-2 sm:col-start-1">
                                         <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
                                         <div class="mt-2">
-                                            <input type="text" name="city" id="city" autocomplete="address-level2"
+                                            <input value="{{ $user->city }}" type="text" name="city" id="city" autocomplete="city"
                                                    class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
                                     </div>
@@ -143,16 +143,16 @@
                                         <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State /
                                             Province</label>
                                         <div class="mt-2">
-                                            <input type="text" name="region" id="region" autocomplete="address-level1"
+                                            <input value="{{ $user->region }}" type="text" name="region" id="region" autocomplete="region"
                                                    class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
                                     </div>
 
                                     <div class="sm:col-span-2">
-                                        <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">ZIP /
+                                        <label for="postalCode" class="block text-sm font-medium leading-6 text-gray-900">ZIP /
                                             Postal code</label>
                                         <div class="mt-2">
-                                            <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code"
+                                            <input value="{{ $user->postalCode }}" type="text" name="postalCode" id="postalCode" autocomplete="postal-code"
                                                    class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
                                     </div>

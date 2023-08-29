@@ -24,10 +24,10 @@
                             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                                 <div class="mt-6 space-y-4 sm:space-y-0 flex flex-col sm:space-x-5 gap-1 sm:flex-row">
                                     <a href="{{route('sign-up.role')}}">
-                                        <x-button kind="primary-big">Get started</x-button>
+                                        <x-button kind="primary">Get started</x-button>
                                     </a>
                                     <a href="{{route('how-it-works')}}#steps">
-                                        <x-button kind="secondary-big">Learn more</x-button>
+                                        <x-button kind="secondary">Learn more</x-button>
                                     </a>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                                                                       d="M10 2a1 1 0 00-1 1v1a1 1 0 002 0V3a1 1 0 00-1-1zM4 4h3a3 3 0 006 0h3a2 2 0 012 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm2.5 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm2.45 4a2.5 2.5 0 10-4.9 0h4.9zM12 9a1 1 0 100 2h3a1 1 0 100-2h-3zm-1 4a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z"
                                                                                       clip-rule="evenodd"></path></svg>
                                     </span>
-                                <p class="text-black mb-2 font-medium leading-tight">Create your profile</p>
+                                <p class="text-black mb-2 font-medium leading-tight">Create your profil</p>
                                 <p class="text-sm">Create a job posting with your project
                                     details and required skills.</p>
                             </li>
@@ -124,7 +124,7 @@
                                                                                       clip-rule="evenodd"></path></svg>
                                     </span>
                                 <p class="text-black mb-2 font-medium leading-tight">Post your job</p>
-                                <p class="text-sm">Sign up and fill out your profile with
+                                <p class="text-sm">Sign up and fill out your profil with
                                     your skills, experience, and portfolio.</p>
                             </li>
                             <li class="mb-16 ml-6 text-left">
