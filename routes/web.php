@@ -91,20 +91,16 @@ Route::get('/pricing', function () {
                 'id' => $product->id,
                 'name' => $product->name,
                 'description' => $product->description,
-                'features' => $features, // Replace with actual metadata key
-                // Add more product details as needed
+                'features' => $features,
             ],
             'pricingPlans' => $formattedPricingPlans,
         ];
     }
 
-    // Now you have an array of products with their associated pricing plans and details
     return view('pricing', compact('formattedProducts'));
 })->name('pricing');
 
 
-
-// Connexion page
 
 // Step 1: User role selection
 Route::get('/sign-up', [RegistrationController::class, 'showRoleForm'])->name('sign-up.role');
@@ -114,12 +110,9 @@ Route::post('/sign-up', [RegistrationController::class, 'storeRole'])->name('pos
 Route::get('/sign-up/account', [RegistrationController::class, 'showAccountForm'])->name('sign-up.account');
 Route::post('/sign-up/account', [RegistrationController::class, 'storeAccount'])->name('post.sign-up.account');
 
-// Step 3: Confirmation
+// Step 3: Payment / confirmation
 Route::get('/sign-up/confirmation', [RegistrationController::class, 'showConfirmationForm'])->name('sign-up.confirmation');
 Route::post('/sign-up/confirmation', [RegistrationController::class, 'storeConfirmation'])->name('post.sign-up.confirmation');
-// Step 4: Payment
-Route::get('/sign-up/payment', [RegistrationController::class, 'showPaymentForm'])->name('sign-up.payment');
-Route::post('/sign-up/payment', [RegistrationController::class, 'storePayment'])->name('post.sign-up.payment');
 
 
 

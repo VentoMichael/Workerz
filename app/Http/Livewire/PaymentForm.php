@@ -51,7 +51,7 @@ class PaymentForm extends Component
             // Customer doesn't exist, so create a new customer
             $customer = Customer::create([
                 'email' => $user['email'],
-                'name' => $user['firstname'], // Set the customer's name
+                'name' => $user['firstname'],
             ]);
         }
 
@@ -74,7 +74,7 @@ class PaymentForm extends Component
         $planPayment = session('productSelected')['paymentYearly'] ? $productSelected['price_yearly'] : $productSelected['price_monthly'];
 
         User::create([
-            'username' => $user['username'] ?? '', // Make sure to provide a value for 'username'
+            'username' => $user['username'] ?? '',
             'email' => $user['email'] ?? '',
             'about' => $user['about'] ?? '',
             'password' => Hash::make($user['password']) ?? '',
@@ -90,18 +90,15 @@ class PaymentForm extends Component
 
         $newUser = User::where('email',$user['email'])->createSetupIntent();
         // Check if the customer already exists in Stripe
-            // Customer doesn't exist, create a new one
             $stripeCustomer = Customer::create([
                 'email' => $user['email'],
-                'name' => $user['firstname'], // Set the customer's name
+                'name' => $user['firstname'],
                 'metadata' => [
-                    'user_id' => $user['id'], // Optional: You can associate your user ID here
+                    'user_id' => $user['id'],
                 ],
             ]);
 
-        // Now $stripeCustomer contains the customer, whether it was retrieved or created
 
-        // Proceed with creating the subscription
         $productSelected = session('productSelected')['product'];
         $planPayment = session('productSelected')['paymentYearly']
             ? $productSelected['price_yearly']
