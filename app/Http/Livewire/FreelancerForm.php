@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Models\Plan;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Stripe\Stripe;
@@ -63,7 +65,7 @@ class FreelancerForm extends Component
             if ($this->plan === $product['name']){
                 $productData = [
                     'product' => $product,
-                    'paymentYearly' => $this->annualBilling, // Add the 'paymentYearly' field
+                    'paymentYearly' => $this->annualBilling,
                 ];
                 session(['productSelected' => $productData]);
             }
@@ -84,22 +86,16 @@ class FreelancerForm extends Component
         $signUp['plan'] = $this->plan;
         $this->validate();
 
-        // Store the relevant form data and uploaded file paths in the session
         $user = session('user', []);
         $user['account'] = [
-            'id' => User::count() + 1,
             'username' => $this->username,
             'about' => $this->about,
             'firstname' => $this->firstname,
             'lastname' => $this->lastname,
             'email' => $this->email,
             'password' => $this->password,
-            'avatarUpload' => $this->avatarUpload
-                ? $this->avatarUpload->store('avatars', 'public')
-                : 'default_avatar.jpg',
-            'backgroundUpload' => $this->avatarUpload
-                ? $this->avatarUpload->store('covers', 'public')
-                : 'default_cover.jpg',
+            'avatarUpload' => $this->processAndStoreImage($this->avatarUpload, 'avatars', $this->username),
+            'backgroundUpload' => $this->processAndStoreImage($this->avatarUpload, 'covers', $this->username),
             'streetAddress' => $this->streetAddress,
             'city' => $this->city,
             'region' => $this->region,
@@ -119,10 +115,84 @@ class FreelancerForm extends Component
         sleep(1);
         return redirect()->route('sign-up.confirmation');
     }
+
+    public function generateInitialsImage()
+    {
+        $name = $this->username;
+        $initials = strtoupper($name[0]);
+
+        $image = Image::canvas(100, 100);
+
+        // Add a colored background
+        $bgColor = '#CCCCCC';
+        $image->rectangle(0, 0, 100, 100, function ($draw) use ($bgColor) {
+            $draw->background($bgColor);
+        });
+
+        // Add the initials text
+        $textColor = '#FFFFFF'; // White text color
+        $image->text($initials, 50, 50, function ($font) use ($textColor) {
+            $font->file(public_path('path-to-your-font.ttf'));
+            $font->size(48);
+            $font->color($textColor);
+            $font->align('center');
+            $font->valign('middle');
+        });
+
+        // Save the image to a temporary directory
+        $filename = uniqid('initials_image_') . '.png';
+        $image->save(public_path('temp/' . $filename));
+
+        return '/temp/' . $filename;
+    }
+    protected function processAndStoreImage($uploadedImage, $folder, $username)
+    {
+        if (!$uploadedImage) {
+            // Generate initials image
+            $initialsImageUrl = $this->generateInitialsImage($username);
+            return [
+                'initials' => $initialsImageUrl,
+            ];
+        }
+
+        $filename = Str::random(40);
+        $originalPath = $uploadedImage->storeAs($folder, $filename . '.' . $uploadedImage->getClientOriginalExtension(), 'public');
+
+        // Create and store optimized WebP version
+        $webpPath = $this->createWebpImage($originalPath, $folder, $filename);
+
+        // Convert to different formats (e.g., JPG, PNG)
+        $jpgPath = $this->convertToFormat($originalPath, $folder, $filename, 'jpg');
+
+        return [
+            'original' => $originalPath,
+            'webp' => $webpPath,
+            'jpg' => $jpgPath,
+        ];
+    }
+
+    protected function createWebpImage($originalPath, $folder, $filename)
+    {
+        $image = Image::make(storage_path('app/public/' . $originalPath));
+        $webpPath = $folder . '/' . $filename . '.webp';
+        $image->save(storage_path('app/public/' . $webpPath), 80, 'webp');
+
+        return $webpPath;
+    }
+
+    protected function convertToFormat($originalPath, $folder, $filename, $format)
+    {
+        $image = Image::make(storage_path('app/public/' . $originalPath));
+        $newPath = $folder . '/' . $filename . '.' . $format;
+        $image->save(storage_path('app/public/' . $newPath), 80, $format);
+
+        return $newPath;
+    }
+
+
     public function render()
     {
         $plans = Plan::all();
-        // Now you have an array of products with their associated pricing plans and details
         return view('livewire.freelancer-form',compact('plans'));
     }
 }
