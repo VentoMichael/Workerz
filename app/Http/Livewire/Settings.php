@@ -12,12 +12,13 @@ class Settings extends Component
     public $hiring;
     public $private;
     public $clearProperty;
+    public $saveLoading = false;
     public $allowCommenting;
     public $successMessage = '';
     public $successMessagePassword = '';
     public $showDeleteModal = false;
     public $infoMessage = '';
-    public $changesMade = false; // Track changes flag
+    public $changesMade = false;
 
 
     public $currentPassword;
@@ -34,27 +35,30 @@ class Settings extends Component
     public function toggleHiring()
     {
         $this->hiring = !$this->hiring;
-        $this->changesMade = true; // Mark changes made
+        $this->changesMade = true;
     }
 
     public function togglePrivate()
     {
         $this->private = !$this->private;
-        $this->changesMade = true; // Mark changes made
+        $this->changesMade = true;
     }
 
     public function toggleAllowCommenting()
     {
         $this->allowCommenting = !$this->allowCommenting;
-        $this->changesMade = true; // Mark changes made
+        $this->changesMade = true;
     }
 
     public function submitForm()
     {
-        if ($this->showDeleteModal === true){
+        if ($this->showDeleteModal === true) {
             $this->confirmDelete();
+            return;
         }
-        if ($this->changesMade) { // Check if any changes were made
+
+        if ($this->changesMade) {
+            $this->saveLoading = true;
             $user = auth()->user();
             $user->update([
                 'private' => $this->private,
@@ -62,32 +66,35 @@ class Settings extends Component
                 'hiring' => $this->hiring,
             ]);
 
-            // For demonstration purposes, let's simulate a delay
-            sleep(1);
+            sleep(1.5);
+
             $this->successMessage = 'Settings updated successfully!';
             $this->infoMessage = null;
             $this->clearProperty = 'successMessage';
-            $this->changesMade = false; // Reset changes made flag
+            $this->changesMade = false;
         } else {
             $this->successMessage = null;
             $this->clearProperty = 'infoMessage';
             $this->infoMessage = 'No changes made to update.';
         }
     }
+
+
     public function clearMessage($property)
     {
         $this->$property = null;
     }
+
     public function confirmDelete()
     {
-        auth()->user()->delete();
+        //auth()->user()->delete();
         Session::flush();
         // Log the user out
-        Auth::logout();
-        sleep(2);
-
+        //Auth::logout();
+        sleep(10);
+        dd('d');
         // Redirect with success message
-        return redirect()->route('home');
+        //return redirect()->route('home');
     }
 
 
@@ -110,10 +117,12 @@ class Settings extends Component
 
         session()->flash('success', 'Password updated successfully!');
     }
+
     public function closeDeleteModal()
     {
         $this->showDeleteModal = false;
     }
+
     public function render()
     {
         return view('livewire.settings');
