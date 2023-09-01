@@ -36,9 +36,11 @@
                                         class="user-menu-button bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:indigo-900"
                                         aria-expanded="false" aria-haspopup="true">
                                     <span class="sr-only">Open user menu</span>
-                                    <img class="h-8 w-8 rounded-full"
-                                         src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-                                         alt="">
+                                    @if(!$user->avatarUpload)
+                                        <img src="{{ $user->generateInitialsImage() }}" alt="{{ $user->name }}" class="w-12 h-12 rounded-full">
+                                    @else
+                                        <img src="{{ $user->avatarUpload }}" alt="{{ $user->name }}" class="w-12 h-12 rounded-full">
+                                    @endif
                                 </button>
                             </div>
 
@@ -116,7 +118,7 @@
                                  class="dropdown-menu-dashboard hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
                                  role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                 <!-- Active: "bg-gray-100", Not Active: "" -->
-                                <a href="{{route('dashboard.home') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                <a href="{{route('dashboard.dashboard') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
                                    id="user-menu-item-0">Dashboard</a>
 
                                 <a href="{{route('dashboard.profil')}} " class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
@@ -262,7 +264,7 @@
                              class="dropdown-menu-dashboard hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
                              role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                             <!-- Active: "bg-gray-100", Not Active: "" -->
-                            <a href="{{route('dashboard.home') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                            <a href="{{route('dashboard.dashboard') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
                                id="user-menu-item-0">Dashboard</a>
 
                             <a href="{{route('dashboard.profil')}} " class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
@@ -461,7 +463,7 @@
                                  class="dropdown-menu-dashboard hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
                                  role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                 <!-- Active: "bg-gray-100", Not Active: "" -->
-                                <a href="{{route('dashboard.home') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                <a href="{{route('dashboard.dashboard') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
                                    id="user-menu-item-0">Dashboard</a>
 
                                 <a href="{{route('dashboard.profil') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"

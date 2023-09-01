@@ -2,15 +2,13 @@
     <div class="bg-white p-6 rounded-lg shadow-lg max-w-xl">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold">Welcome to the Dashboard Tutorial</h2>
-            <form action="{{route('dashboard.dashboard')}}" method="get">
-                <button name="nevermind" class="text-gray-500 hover:text-gray-700 close-tutorial-button">
+                <button class="text-gray-500 hover:text-gray-700 close-tutorial-button">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
                               d="M17.293 17.293a1 1 0 001.414-1.414L11.414 10l6.293-6.293a1 1 0 00-1.414-1.414L10 8.586 3.707 2.293a1 1 0 00-1.414 1.414L8.586 10 2.293 16.293a1 1 0 001.414 1.414L10 11.414l6.293 6.293z"
                               clip-rule="evenodd"/>
                     </svg>
                 </button>
-            </form>
 
         </div>
         <div class="pb-4">
@@ -45,19 +43,17 @@
     </div>
 </section>
 
-<section class="fixed inset-0 flex justify-center items-center bg-opacity-80 z-10 bg-gray-900 tutorial-modal">
+<section class="hidden fixed inset-0 flex justify-center items-center bg-opacity-80 z-10 bg-gray-900 tutorial-modal">
     <div class="bg-white p-6 rounded-lg shadow-lg max-w-xl">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold">Welcome to the Dashboard Tutorial</h2>
-            <form action="{{route('dashboard.dashboard')}}" method="get">
-                <button name="nevermind" class="text-gray-500 hover:text-gray-700 close-tutorial-button">
+                <button class="text-gray-500 hover:text-gray-700 close-tutorial-button">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
                               d="M17.293 17.293a1 1 0 001.414-1.414L11.414 10l6.293-6.293a1 1 0 00-1.414-1.414L10 8.586 3.707 2.293a1 1 0 00-1.414 1.414L8.586 10 2.293 16.293a1 1 0 001.414 1.414L10 11.414l6.293 6.293z"
                               clip-rule="evenodd"/>
                     </svg>
                 </button>
-            </form>
         </div>
         <div class="pb-4">
             <div class="mb-4">

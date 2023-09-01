@@ -145,17 +145,24 @@
                             </a>
                         </div>
                         <div id="dropdown-menu-dashboard"
-                             class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
-                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                            class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
+                            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                             <!-- Active: "bg-gray-100", Not Active: "" -->
-                            <a href="#" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                            <a href="{{route('dashboard.dashboard') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                               id="user-menu-item-0">Dashboard</a>
+
+                            <a href="{{route('dashboard.profil') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
                                id="user-menu-item-0">Profil</a>
 
-                            <a href="#" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                            <a href="{{ route('dashboard.settings') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
                                id="user-menu-item-1">Settings</a>
 
-                            <a href="#" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                               id="user-menu-item-2">Sign out</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+
+                                <button type="submit" href="{{ route('logout') }}" class="text-left w-full hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                        id="user-menu-item-2">Sign out</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -260,17 +267,26 @@
                         </div>
                     </div>
                 </div>
-                <div id="dropdown-menu-dashboard-mobile" class="hidden mt-3 px-2 space-y-1">
-                    <a href="#"
-                       class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">Your
-                        Profile</a>
 
-                    <a href="#"
-                       class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">Settings</a>
+                <div id="dropdown-menu-dashboard-mobile"
+                     class="hidden mt-3 px-2 space-y-1"
+                     role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                    <!-- Active: "bg-gray-100", Not Active: "" -->
+                    <a href="{{route('dashboard.dashboard') }}" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900" role="menuitem" tabindex="-1"
+                       id="user-menu-item-0">Dashboard</a>
 
-                    <a href="#"
-                       class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900">Sign
-                        out</a>
+                    <a href="{{route('dashboard.profil') }}" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900" role="menuitem" tabindex="-1"
+                       id="user-menu-item-0">Profil</a>
+
+                    <a href="{{ route('dashboard.settings') }}" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900" role="menuitem" tabindex="-1"
+                       id="user-menu-item-1">Settings</a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+
+                        <button type="submit" href="{{ route('logout') }}" class="text-left w-full hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                id="user-menu-item-2">Sign out</button>
+                    </form>
                 </div>
             </div>
         </nav>

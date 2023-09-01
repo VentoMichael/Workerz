@@ -4,6 +4,7 @@
 @section('keywords', 'independent workers, small businesses, services, products, clients, skilled, sign up, sign in')
 
 @section('content')
+
     <section>
         <div class="pt-10 sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden bg-gray-900">
             <div class="mx-auto max-w-7xl lg:px-8">
