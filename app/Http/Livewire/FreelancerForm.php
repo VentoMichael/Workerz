@@ -114,32 +114,18 @@ class FreelancerForm extends Component
         $name = $this->username;
         $initials = strtoupper($name[0]);
 
-        $image = Image::canvas(100, 100);
-
-        $bgColor = '#5850EC';
-        $image->rectangle(0, 0, 100, 100, function ($draw) use ($bgColor) {
-            $draw->background($bgColor);
-        });
-
-        $textColor = '#FFFFFF';
-        $image->text($initials, 50, 50, function ($font) use ($textColor) {
-            $font->file(public_path('fonts/ubuntu/ubuntu-bold-webfont.ttf'));
-            $font->size(48);
-            $font->color($textColor);
-            $font->align('center');
-            $font->valign('middle');
-        });
+        $svgImage = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <rect width="100%" height="100%" fill="#5850EC" />
+        <text x="50" y="54" font-family="Ubuntu, sans-serif" font-size="48" fill="#FFFFFF" text-anchor="middle" alignment-baseline="middle">' . $initials . '</text>
+    </svg>';
 
         $filename = uniqid('', true);
-        $jpegFilename = $filename . '.jpg';
-        $webpFilename = $filename . '.webp';
-
-        Storage::disk('public')->put('initials/' . $jpegFilename, $image->encode('jpg'));
-
-        $image->encode('webp')->save(Storage::disk('public')->path('initials/' . $webpFilename));
+        Storage::disk('public')->put('initials/' . $filename . '.svg', $svgImage);
 
         return 'initials/' . $filename;
     }
+
+
     protected function processAndStoreImage($uploadedImage, $folder, $username)
     {
         if (!$uploadedImage) {
