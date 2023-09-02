@@ -150,7 +150,7 @@
     </script>
 
 @endauth
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
 @yield('scripts')
 </body>
 </html>

@@ -72,7 +72,6 @@ class PaymentForm extends Component
         $user = session('user')['account'];
         $productSelected = session('productSelected')['product'];
         $planPayment = session('productSelected')['paymentYearly'] ? $productSelected['price_yearly'] : $productSelected['price_monthly'];
-
         User::create([
             'username' => $user['username'] ?? '',
             'email' => $user['email'] ?? '',

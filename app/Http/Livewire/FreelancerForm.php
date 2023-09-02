@@ -4,11 +4,12 @@ namespace App\Http\Livewire;
 
 use App\Models\Plan;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Stripe\Stripe;
+use Illuminate\Http\UploadedFile;
 
 class FreelancerForm extends Component
 {
@@ -95,21 +96,13 @@ class FreelancerForm extends Component
             'email' => $this->email,
             'password' => $this->password,
             'avatarUpload' => $this->processAndStoreImage($this->avatarUpload, 'avatars', $this->username),
-            'backgroundUpload' => $this->processAndStoreImage($this->avatarUpload, 'covers', $this->username),
+            'backgroundUpload' => $this->backgroundUpload ? $this->processAndStoreImage($this->backgroundUpload, 'covers', $this->username) : 'covers/default_background',
             'streetAddress' => $this->streetAddress,
             'city' => $this->city,
             'region' => $this->region,
             'postalCode' => $this->postalCode,
             'plan' => $this->plan
             ];
-        if ($this->avatarUpload) {
-            $avatarPath = $this->avatarUpload->store('avatars', 'public');
-            $user['account']['avatarUpload'] = $avatarPath;
-        }
-        if ($this->backgroundUpload) {
-            $coverPath = $this->backgroundUpload->store('cover', 'public');
-            $user['account']['backgroundUpload'] = $coverPath;
-        }
         session(['user' => $user]);
 
         sleep(1);
@@ -123,68 +116,62 @@ class FreelancerForm extends Component
 
         $image = Image::canvas(100, 100);
 
-        // Add a colored background
-        $bgColor = '#CCCCCC';
+        $bgColor = '#5850EC';
         $image->rectangle(0, 0, 100, 100, function ($draw) use ($bgColor) {
             $draw->background($bgColor);
         });
 
-        // Add the initials text
-        $textColor = '#FFFFFF'; // White text color
+        $textColor = '#FFFFFF';
         $image->text($initials, 50, 50, function ($font) use ($textColor) {
-            $font->file(public_path('path-to-your-font.ttf'));
+            $font->file(public_path('fonts/ubuntu/ubuntu-bold-webfont.ttf'));
             $font->size(48);
             $font->color($textColor);
             $font->align('center');
             $font->valign('middle');
         });
 
-        // Save the image to a temporary directory
-        $filename = uniqid('initials_image_') . '.png';
-        $image->save(public_path('temp/' . $filename));
+        $filename = uniqid('', true);
+        $jpegFilename = $filename . '.jpg';
+        $webpFilename = $filename . '.webp';
 
-        return '/temp/' . $filename;
+        Storage::disk('public')->put('initials/' . $jpegFilename, $image->encode('jpg'));
+
+        $image->encode('webp')->save(Storage::disk('public')->path('initials/' . $webpFilename));
+
+        return 'initials/' . $filename;
     }
     protected function processAndStoreImage($uploadedImage, $folder, $username)
     {
         if (!$uploadedImage) {
-            // Generate initials image
-            $initialsImageUrl = $this->generateInitialsImage($username);
-            return [
-                'initials' => $initialsImageUrl,
-            ];
+            $initialsPath = $this->generateInitialsImage($username);
+            return $initialsPath;
         }
 
         $filename = Str::random(40);
-        $originalPath = $uploadedImage->storeAs($folder, $filename . '.' . $uploadedImage->getClientOriginalExtension(), 'public');
+        $extension = $uploadedImage->getClientOriginalExtension();
 
-        // Create and store optimized WebP version
+        $originalPath = $uploadedImage->storeAs($folder, $filename . '.' . $extension, 'public');
+
         $webpPath = $this->createWebpImage($originalPath, $folder, $filename);
 
-        // Convert to different formats (e.g., JPG, PNG)
-        $jpgPath = $this->convertToFormat($originalPath, $folder, $filename, 'jpg');
-
-        return [
-            'original' => $originalPath,
-            'webp' => $webpPath,
-            'jpg' => $jpgPath,
-        ];
+        return $folder . '/' . $filename;
     }
 
     protected function createWebpImage($originalPath, $folder, $filename)
     {
-        $image = Image::make(storage_path('app/public/' . $originalPath));
+        $image = Image::make(Storage::path('public/' . $originalPath));
         $webpPath = $folder . '/' . $filename . '.webp';
-        $image->save(storage_path('app/public/' . $webpPath), 80, 'webp');
+        $image->save(Storage::path('public/' . $webpPath), 80, 'webp');
 
         return $webpPath;
     }
 
+
     protected function convertToFormat($originalPath, $folder, $filename, $format)
     {
-        $image = Image::make(storage_path('app/public/' . $originalPath));
+        $image = Image::make(Storage::path('public/' . $originalPath));
         $newPath = $folder . '/' . $filename . '.' . $format;
-        $image->save(storage_path('app/public/' . $newPath), 80, $format);
+        $image->save(Storage::path('public/' . $newPath), 80, $format);
 
         return $newPath;
     }
