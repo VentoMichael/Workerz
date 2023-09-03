@@ -119,7 +119,6 @@ Route::post('/sign-up/confirmation', [RegistrationController::class, 'storeConfi
 
 
 
-
 //
 //Route::get('/sign-in', function () {
 //    return view('connexion.sign-in');

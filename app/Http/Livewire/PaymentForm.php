@@ -3,7 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Laravel\Cashier\Cashier;
 use Livewire\Component;
 use Stripe\Customer;
@@ -22,12 +26,13 @@ class PaymentForm extends Component
     public $region;
     public $postalCode;
     public $phone;
-    protected $paymentMethods = [];
     public $paymentType;
     public $cardNumber;
     public $nameOnCard;
     public $expirationDate;
     public $cvc;
+    public $paymentSuccessful = false;
+    protected $paymentMethods = [];
 
     public function mount()
     {
@@ -42,74 +47,58 @@ class PaymentForm extends Component
 
     public function render()
     {
-        $user = session('user')['account'];
+        $user = User::where('email',session('user')['account']['email'])->first();
 
-        // Check if the customer exists or create a new one
-        $customer = Customer::all(['email' => $user['email']])->data[0] ?? null;
+        $productSelected = session('productSelected')['product'];
 
-        if (!$customer) {
-            // Customer doesn't exist, so create a new customer
-            $customer = Customer::create([
-                'email' => $user['email'],
-                'name' => $user['firstname'],
-            ]);
-        }
-
-        // Create a SetupIntent for the customer
-        $setupIntent = SetupIntent::create([
-            'customer' => $customer->id,
-        ]);
-
-        $intentClientSecret = $setupIntent->client_secret;
-
-        return view('livewire.payment-form',compact('intentClientSecret'));
+        $planPayment = session('productSelected')['paymentYearly'] ? $productSelected['price_yearly'] : $productSelected['price_monthly'];
+        $intent = $user->createSetupIntent();
+        return view('livewire.payment-form',compact('planPayment','user','intent','productSelected'));
     }
 
-    public function createSubscription()
+
+    public function generateInitialsImage()
     {
-        Stripe::setApiKey(config('app.stripeKey'));
-
         $user = session('user')['account'];
-        $productSelected = session('productSelected')['product'];
-        $planPayment = session('productSelected')['paymentYearly'] ? $productSelected['price_yearly'] : $productSelected['price_monthly'];
-        User::create([
-            'username' => $user['username'] ?? '',
-            'email' => $user['email'] ?? '',
-            'about' => $user['about'] ?? '',
-            'password' => Hash::make($user['password']) ?? '',
-            'avatarUpload' => $user['avatarUpload'] ?? '',
-            'backgroundUpload' => $user['backgroundUpload'] ?? '',
-            'firstname' => $user['firstname'] ?? '',
-            'lastname' => $user['lastname'] ?? '',
-            'streetAddress' => $user['streetAddress'] ?? '',
-            'city' => $user['city'] ?? '',
-            'region' => $user['region'] ?? '',
-            'postalCode' => $user['postalCode'] ?? '',
-        ]);
 
-        $newUser = User::where('email',$user['email'])->createSetupIntent();
-        // Check if the customer already exists in Stripe
-            $stripeCustomer = Customer::create([
-                'email' => $user['email'],
-                'name' => $user['firstname'],
-                'metadata' => [
-                    'user_id' => $user['id'],
-                ],
-            ]);
+        $name = $user['username'];
+        $initials = strtoupper($name[0]);
+
+        $svgImage = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <rect width="100%" height="100%" fill="#5850EC" />
+        <text x="50" y="54" font-family="Ubuntu, sans-serif" font-size="48" fill="#FFFFFF" text-anchor="middle" alignment-baseline="middle">' . $initials . '</text>
+    </svg>';
+
+        $filename = uniqid('', true);
+        Storage::disk('public')->put('initials/' . $filename . '.svg', $svgImage);
+
+        return 'initials/' . $filename;
+    }
 
 
-        $productSelected = session('productSelected')['product'];
-        $planPayment = session('productSelected')['paymentYearly']
-            ? $productSelected['price_yearly']
-            : $productSelected['price_monthly'];
+    protected function processAndStoreImage($uploadedImage, $folder, $username)
+    {
+        if (!$uploadedImage) {
+            $initialsPath = $this->generateInitialsImage($username);
+            return $initialsPath;
+        }
 
-        // Create the subscription for the customer
-        $subscription = $stripeCustomer->subscriptions->create([
-            'items' => [
-                [
-                    'price' => $planPayment,
-                ],
-            ],
-        ]);
+        $filename = Str::random(40);
+        $extension = $uploadedImage->getClientOriginalExtension();
+
+        $originalPath = $uploadedImage->storeAs($folder, $filename . '.' . $extension, 'public');
+
+        $webpPath = $this->createWebpImage($originalPath, $folder, $filename);
+
+        return $folder . '/' . $filename;
+    }
+
+    protected function createWebpImage($originalPath, $folder, $filename)
+    {
+        $image = Image::make(Storage::path('public/' . $originalPath));
+        $webpPath = $folder . '/' . $filename . '.webp';
+        $image->save(Storage::path('public/' . $webpPath), 80, 'webp');
+
+        return $webpPath;
     }
 }

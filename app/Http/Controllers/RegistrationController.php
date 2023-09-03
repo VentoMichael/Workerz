@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -45,8 +46,30 @@ class RegistrationController extends Controller
 
     public function storeConfirmation(Request $request)
     {
+        if ($request->has('changePlan')){
+            session(['changePlan' => true]);
+            return redirect()->route('sign-up.account');
+        }
+        $user = User::where('email',session('user')['account']['email'])->first();
+        $productSelected = session('productSelected')['product'];
+        $planPayment = session('productSelected')['paymentYearly'] ? $productSelected['price_yearly'] : $productSelected['price_monthly'];
+        $planId = session('productSelected')['paymentYearly'] ? $productSelected['stripe_plan_yearly'] : $productSelected['stripe_plan_monthly'];
+        $paymentMethod = $request->input('payment_method');
+        $user->createOrGetStripeCustomer();
+        $user->addPaymentMethod($paymentMethod);
+        try
+        {
+            $user->charge($planPayment*100, $paymentMethod);
+            $user->newSubscription(
+                $productSelected['name'], $planId
+            )->create($paymentMethod);
 
-        return redirect()->route('sign-up.payment');
+        }
+        catch (\Exception $e)
+        {
+            return back()->withErrors(['message' => 'Error creating subscription. ' . $e->getMessage()]);
+        }
+        return redirect('home');
     }
 }
 

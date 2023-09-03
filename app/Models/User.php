@@ -14,6 +14,7 @@ use Laravel\Cashier\Billable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, TwoFactorAuthenticatable;
+    use Billable;
 
     /**
      * The attributes that are mass assignable.

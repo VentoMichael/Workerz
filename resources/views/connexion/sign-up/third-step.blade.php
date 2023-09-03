@@ -15,8 +15,11 @@
             <div class="absolute inset-0 bg-gray-800 mix-blend-multiply" aria-hidden="true"></div>
         </div>
         <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-            <h1 class="text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">Secure payment for freelancers</h1>
-            <p class="mt-6 max-w-3xl text-xl text-gray-300"> Thank you for choosing to become a part of our freelancer community. We are committed to providing you with the best experience possible. To ensure the security of your payment, please select your preferred payment method below.</p>
+            <h1 class="text-4xl font-extrabold tracking-tight text-white md:text-5xl lg:text-6xl">Secure payment for
+                freelancers</h1>
+            <p class="mt-6 max-w-3xl text-xl text-gray-300"> Thank you for choosing to become a part of our freelancer
+                community. We are committed to providing you with the best experience possible. To ensure the security
+                of your payment, please select your preferred payment method below.</p>
         </div>
     </div>
     <livewire:payment-form/>
@@ -29,42 +32,63 @@
 @section('scripts')
     <script src="https://js.stripe.com/v3/"></script>
     <script>
-        const stripe = Stripe('{{ env('STRIPE_KEY') }}')
-
-        const elements = stripe.elements()
-        const cardElement = elements.create('card')
-
-        cardElement.mount('#card-element')
-
-        const form = document.getElementById('payment-form')
-        const cardBtn = document.getElementById('card-button')
-        const cardHolderName = document.getElementById('card-holder-name')
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault()
-
-            cardBtn.disabled = true
-            const { setupIntent, error } = await stripe.confirmCardSetup(
-                cardBtn.dataset.secret, {
+        var stripe = Stripe('{{ env('STRIPE_KEY') }}');
+        var elements = stripe.elements();
+        var style = {
+            base: {
+                color: '#32325d',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+        var card = elements.create('card', {hidePostalCode: true, style: style});
+        card.mount('#card-element');
+        console.log(document.getElementById('card-element'));
+        card.addEventListener('change', function (event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+        const cardHolderName = document.getElementById('card-holder-name');
+        const cardButton = document.getElementById('card-button');
+        const clientSecret = cardButton.dataset.secret;
+        cardButton.addEventListener('click', async (e) => {
+            console.log("attempting");
+            const {setupIntent, error} = await stripe.confirmCardSetup(
+                clientSecret, {
                     payment_method: {
-                        card: cardElement,
-                        billing_details: {
-                            name: cardHolderName.value
-                        }
+                        card: card,
+                        billing_details: {name: cardHolderName.value}
                     }
                 }
-            )
-
-            if(error) {
-                cardBtn.disable = false
+            );
+            if (error) {
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = error.message;
             } else {
-                let token = document.createElement('input')
-                token.setAttribute('type', 'hidden')
-                token.setAttribute('name', 'token')
-                token.setAttribute('value', setupIntent.payment_method)
-                form.appendChild(token)
-                form.submit();
+                paymentMethodHandler(setupIntent.payment_method);
             }
-        })
+        });
+
+        function paymentMethodHandler(payment_method) {
+            var form = document.getElementById('subscribe-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'payment_method');
+            hiddenInput.setAttribute('value', payment_method);
+            form.appendChild(hiddenInput);
+            form.submit();
+        }
     </script>
 @endsection

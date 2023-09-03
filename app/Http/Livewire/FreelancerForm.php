@@ -4,12 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\Plan;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Illuminate\Http\UploadedFile;
 
 class FreelancerForm extends Component
 {
@@ -47,8 +48,28 @@ class FreelancerForm extends Component
         'plan' => 'required',
     ];
 
+    public function mount()
+    {
+        // Load user data from the session if available
+        $userData = session('user', []);
+
+        // Set Livewire properties with the session data
+        $this->username = $userData['account']['username'] ?? '';
+        $this->about = $userData['account']['about'] ?? '';
+        $this->firstname = $userData['account']['firstname'] ?? '';
+        $this->lastname = $userData['account']['lastname'] ?? '';
+        $this->email = $userData['account']['email'] ?? '';
+        $this->password = $userData['account']['password'] ?? '';
+        $this->streetAddress = $userData['account']['streetAddress'] ?? '';
+        $this->city = $userData['account']['city'] ?? '';
+        $this->region = $userData['account']['region'] ?? '';
+        $this->postalCode = $userData['account']['postalCode'] ?? '';
+        $this->plan = $userData['account']['plan'] ?? '';
+    }
+
     public function updated($propertyName)
     {
+
         $this->validateOnly($propertyName);
     }
 
@@ -56,14 +77,19 @@ class FreelancerForm extends Component
     {
         $this->annualBilling = !$this->annualBilling;
     }
+
     public function togglePasswordVisibility()
     {
         $this->passwordVisible = !$this->passwordVisible;
     }
-    public function submitForm(){
+
+    public function submitForm()
+    {
+
+
         $products = Plan::all();
-        foreach ($products as $product){
-            if ($this->plan === $product['name']){
+        foreach ($products as $product) {
+            if ($this->plan === $product['name']) {
                 $productData = [
                     'product' => $product,
                     'paymentYearly' => $this->annualBilling,
@@ -71,6 +97,7 @@ class FreelancerForm extends Component
                 session(['productSelected' => $productData]);
             }
         }
+
         $signUp['username'] = $this->username;
         $signUp['about'] = $this->about;
         $signUp['avatarUpload'] = $this->avatarUpload;
@@ -85,7 +112,9 @@ class FreelancerForm extends Component
         $signUp['region'] = $this->region;
         $signUp['postalCode'] = $this->postalCode;
         $signUp['plan'] = $this->plan;
-        $this->validate();
+        if (!request()->has('changePlan')) {
+            $this->validate();
+        }
 
         $user = session('user', []);
         $user['account'] = [
@@ -102,9 +131,25 @@ class FreelancerForm extends Component
             'region' => $this->region,
             'postalCode' => $this->postalCode,
             'plan' => $this->plan
-            ];
+        ];
         session(['user' => $user]);
 
+        if (!request()->has('changePlan')) {
+            User::create([
+                'username' => session('user')['account']['username'] ?? '',
+                'email' => session('user')['account']['email'] ?? '',
+                'about' => session('user')['account']['about'] ?? '',
+                'password' => Hash::make(session('user')['account']['password']) ?? '',
+                'avatarUpload' => session('user')['account']['avatarUpload'] ?? '',
+                'backgroundUpload' => session('user')['account']['backgroundUpload'] ?? '',
+                'firstname' => session('user')['account']['firstname'] ?? '',
+                'lastname' => session('user')['account']['lastname'] ?? '',
+                'streetAddress' => session('user')['account']['streetAddress'] ?? '',
+                'city' => session('user')['account']['city'] ?? '',
+                'region' => session('user')['account']['region'] ?? '',
+                'postalCode' => session('user')['account']['postalCode'] ?? '',
+            ]);
+        }
         sleep(1);
         return redirect()->route('sign-up.confirmation');
     }
@@ -153,19 +198,9 @@ class FreelancerForm extends Component
     }
 
 
-    protected function convertToFormat($originalPath, $folder, $filename, $format)
-    {
-        $image = Image::make(Storage::path('public/' . $originalPath));
-        $newPath = $folder . '/' . $filename . '.' . $format;
-        $image->save(Storage::path('public/' . $newPath), 80, $format);
-
-        return $newPath;
-    }
-
-
     public function render()
     {
         $plans = Plan::all();
-        return view('livewire.freelancer-form',compact('plans'));
+        return view('livewire.freelancer-form', compact('plans'));
     }
 }
