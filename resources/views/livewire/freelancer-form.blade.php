@@ -14,9 +14,9 @@
                         <div
                             class="@error('username')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror flex rounded-md shadow-sm ring-inset focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                             <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">workerz.be/workers/</span>
-                            <input disabled wire:model="username" value="{{ old('username') }}" type="text" name="username"
+                            <input wire:model="username" value="{{ old('username') }}" type="text" name="username"
                                    id="username" autocomplete="username"
-                                   class="disabled:opacity-40 disabled:cursor-not-allowed block flex-1 border-0 bg-transparent py-1.5 pl-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                   class="block flex-1 border-0 bg-transparent py-1.5 pl-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                    placeholder="janesmith">
                         </div>
                     </div>
@@ -29,8 +29,8 @@
                     <label for="about"
                            class="block text-sm font-medium leading-6 text-gray-900">About</label>
                     <div class="mt-2">
-                                    <textarea disabled id="about" wire:model.lazy="about" name="about" rows="3"
-                                              class="@error('about')border border-red-500 @else border-0 ring-gray-300 ring-1 @enderror disabled:opacity-40 disabled:cursor-not-allowed p-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ old('about') }}</textarea>
+                                    <textarea id="about" wire:model.lazy="about" name="about" rows="3"
+                                              class="@error('about')border border-red-500 @else border-0 ring-gray-300 ring-1 @enderror p-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ old('about') }}</textarea>
                     </div>
                     <p class="mt-1 text-sm leading-6 text-gray-600">Write a few sentences about
                         yourself.</p>
@@ -43,7 +43,7 @@
 
                     <label class="block text-sm font-medium leading-6" for="avatarUpload">Upload
                         file</label>
-                    <div class="disabled:opacity-40 disabled:cursor-not-allowed relative">
+                    <div class="relative">
                         @if ($avatarUpload)
                             <button wire:click.lazy="$set('avatarUpload',null)" type="button"
                                     class="inset-y-1/2 mt-[-16px] right-3 absolute ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
@@ -56,8 +56,8 @@
                                 </svg>
                             </button>
                         @endif
-                        <input disabled wire:model.lazy="avatarUpload"
-                               class="disabled:opacity-40 disabled:cursor-not-allowed block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white focus:outline-none"
+                        <input wire:model.lazy="avatarUpload"
+                               class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white focus:outline-none"
                                aria-describedby="avatarUpload" id="avatarUpload" type="file">
                     </div>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF
@@ -75,7 +75,7 @@
                 <div
                     @if($backgroundUpload) style="background-image: url('{{ $backgroundUpload->temporaryUrl() }}'); background-position: center;background-repeat: no-repeat;background-size: cover;"
                     @endif
-                    class="@error('$backgroundUpload')border border-red-500 rounded-md @enderror disabled:opacity-40 disabled:cursor-not-allowed mt-2 flex justify-center rounded-lg border border-dashed relative border-gray-900/25 px-6 py-10">
+                    class="@error('$backgroundUpload')border border-red-500 rounded-md @enderror mt-2 flex justify-center rounded-lg border border-dashed relative border-gray-900/25 px-6 py-10">
                     @if($backgroundUpload)
                         <button wire:click.lazy="$set('backgroundUpload',null)" type="button"
                                 class="top-2 right-2 absolute ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
@@ -99,7 +99,7 @@
                             <label for="backgroundUpload"
                                    class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                 <span>Upload a file</span>
-                                <input disabled wire:model.lazy="backgroundUpload" id="backgroundUpload"
+                                <input wire:model.lazy="backgroundUpload" id="backgroundUpload"
                                        name="backgroundUpload" type="file" class="sr-only">
                             </label>
                             <p class="pl-1">or drag and drop</p>
@@ -125,9 +125,9 @@
                 <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">First
                     name</label>
                 <div class="mt-2">
-                    <input disabled wire:model.lazy="firstname" type="text" name="firstname" id="firstname"
+                    <input wire:model.lazy="firstname" type="text" name="firstname" id="firstname"
                            autocomplete="firstname"
-                           class="@error('firstname')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror disabled:opacity-40 disabled:cursor-not-allowed px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                           class="@error('firstname')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
                 @error('firstname')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
@@ -137,9 +137,9 @@
                 <label for="lastname" class="block text-sm font-medium leading-6 text-gray-900">Last
                     name</label>
                 <div class="mt-2">
-                    <input disabled wire:model.lazy="lastname" type="text" name="lastname" id="lastname"
+                    <input wire:model.lazy="lastname" type="text" name="lastname" id="lastname"
                            autocomplete="lastname"
-                           class="@error('lastname')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror disabled:opacity-40 disabled:cursor-not-allowed px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                           class="@error('lastname')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
                 @error('lastname')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
@@ -150,9 +150,9 @@
                 <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
                     address</label>
                 <div class="mt-2">
-                    <input disabled wire:model.lazy="email" id="email" name="email" type="email"
+                    <input wire:model.lazy="email" id="email" name="email" type="email"
                            autocomplete="email"
-                           class="@error('email')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror disabled:opacity-40 disabled:cursor-not-allowed px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                           class="@error('email')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
                 @error('email')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
@@ -161,9 +161,9 @@
             <div class="sm:col-span-3">
                 <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                 <div class="mt-2 relative">
-                    <input disabled wire:model.lazy="password" id="password" name="password" type="{{ $passwordVisible ? 'text' : 'password' }}"
+                    <input wire:model.lazy="password" id="password" name="password" type="{{ $passwordVisible ? 'text' : 'password' }}"
                            autocomplete="password"
-                           class="@error('password')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror disabled:opacity-40 disabled:cursor-not-allowed px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                           class="@error('password')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     <div wire:click="togglePasswordVisibility" class="absolute inset-y-0 right-2 flex items-center cursor-pointer">
                         @if ($passwordVisible)
                             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#5850ec}</style><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
@@ -182,9 +182,9 @@
                 <label for="streetAddress" class="block text-sm font-medium leading-6 text-gray-900">Street
                     address</label>
                 <div class="mt-2">
-                    <input disabled wire:model.lazy="streetAddress" type="text" name="streetAddress" id="streetAddress"
+                    <input wire:model.lazy="streetAddress" type="text" name="streetAddress" id="streetAddress"
                            autocomplete="streetAddress"
-                           class="@error('streetAddress')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror disabled:opacity-40 disabled:cursor-not-allowed px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                           class="@error('streetAddress')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
                 @error('streetAddress')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
@@ -194,8 +194,8 @@
             <div class="sm:col-span-2 sm:col-start-1">
                 <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
                 <div class="mt-2">
-                    <input disabled wire:model.lazy="city" type="text" name="city" id="city" autocomplete="city"
-                           class="@error('city')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror disabled:opacity-40 disabled:cursor-not-allowed px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    <input wire:model.lazy="city" type="text" name="city" id="city" autocomplete="city"
+                           class="@error('city')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
                 @error('city')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
@@ -206,9 +206,9 @@
                 <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State /
                     Province</label>
                 <div class="mt-2">
-                    <input disabled wire:model.lazy="region" type="text" name="region" id="region"
+                    <input wire:model.lazy="region" type="text" name="region" id="region"
                            autocomplete="region"
-                           class="@error('region')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror disabled:opacity-40 disabled:cursor-not-allowed px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                           class="@error('region')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
                 @error('region')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
@@ -219,9 +219,9 @@
                 <label for="postalCode" class="block text-sm font-medium leading-6 text-gray-900">ZIP /
                     Postal code</label>
                 <div class="mt-2">
-                    <input disabled wire:model.lazy="postalCode" type="text" name="postalCode" id="postalCode"
+                    <input wire:model.lazy="postalCode" type="text" name="postalCode" id="postalCode"
                            autocomplete="postalCode"
-                           class="@error('postalCode')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror disabled:opacity-40 disabled:cursor-not-allowed px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                           class="@error('postalCode')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
                 @error('postalCode')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
@@ -278,7 +278,7 @@
                         <p class="text-red-500 mt-2">{{ $message }}</p>
                         @enderror
                         <label class="relative ml-auto mt-4 inline-flex mb-4 items-center cursor-pointer">
-                            <input disabled wire:click="toggleAnnualBilling()" type="checkbox" x-model="annualBilling" name="annualBilling" class="sr-only peer">
+                            <input wire:click="toggleAnnualBilling()" type="checkbox" x-model="annualBilling" name="annualBilling" class="sr-only peer">
                             <div
                                 class="mr-4 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full peer-checked:after:border-purple-700 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-purple-700 after:border-purple-700 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-indigo-600 peer-checked:bg-indigo-300"></div>
                             <span class="mr-2 text-sm font-medium text-gray-900">Annual billing </span>

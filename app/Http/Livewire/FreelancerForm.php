@@ -85,8 +85,6 @@ class FreelancerForm extends Component
 
     public function submitForm()
     {
-
-
         $products = Plan::all();
         foreach ($products as $product) {
             if ($this->plan === $product['name']) {
@@ -98,20 +96,6 @@ class FreelancerForm extends Component
             }
         }
 
-        $signUp['username'] = $this->username;
-        $signUp['about'] = $this->about;
-        $signUp['avatarUpload'] = $this->avatarUpload;
-        $signUp['backgroundUpload'] = $this->backgroundUpload;
-        $signUp['firstname'] = $this->firstname;
-        $signUp['lastname'] = $this->lastname;
-        $signUp['email'] = $this->email;
-        $signUp['password'] = $this->password;
-        $signUp['passwordVisible'] = $this->passwordVisible;
-        $signUp['streetAddress'] = $this->streetAddress;
-        $signUp['city'] = $this->city;
-        $signUp['region'] = $this->region;
-        $signUp['postalCode'] = $this->postalCode;
-        $signUp['plan'] = $this->plan;
         if (!request()->has('changePlan')) {
             $this->validate();
         }
@@ -136,18 +120,18 @@ class FreelancerForm extends Component
 
         if (!request()->has('changePlan')) {
             User::create([
-                'username' => session('user')['account']['username'] ?? '',
-                'email' => session('user')['account']['email'] ?? '',
-                'about' => session('user')['account']['about'] ?? '',
-                'password' => Hash::make(session('user')['account']['password']) ?? '',
-                'avatarUpload' => session('user')['account']['avatarUpload'] ?? '',
-                'backgroundUpload' => session('user')['account']['backgroundUpload'] ?? '',
-                'firstname' => session('user')['account']['firstname'] ?? '',
-                'lastname' => session('user')['account']['lastname'] ?? '',
-                'streetAddress' => session('user')['account']['streetAddress'] ?? '',
-                'city' => session('user')['account']['city'] ?? '',
-                'region' => session('user')['account']['region'] ?? '',
-                'postalCode' => session('user')['account']['postalCode'] ?? '',
+                'username' => $this->username ?? '',
+                'about' => $this->about ?? '',
+                'firstname' => $this->firstname ?? '',
+                'lastname' => Hash::make($this->lastname) ?? '',
+                'email' => $this->email ?? '',
+                'password' => $this->password ?? '',
+                'avatarUpload' => $this->avatarUpload ?? '',
+                'backgroundUpload' => $this->backgroundUpload ?? '',
+                'streetAddress' => $this->streetAddress ?? '',
+                'city' => $this->city ?? '',
+                'region' => $this->region ?? '',
+                'postalCode' => $this->postalCode ?? '',
             ]);
         }
         sleep(1);

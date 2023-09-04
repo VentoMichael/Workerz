@@ -16,7 +16,7 @@
                         <label for="card-holder-name" class="block text-sm font-medium leading-6 text-gray-900">Card
                             Holder Name</label>
                         <div class="mt-2">
-                            <input value="{{$user['firstname'] . ' ' . $user['lastname']}}" disabled type="text"
+                            <input value="{{ucfirst($user['firstname']) . ' ' . ucfirst($user['lastname'])}}" disabled type="text"
                                    name="card-holder-name" id="card-holder-name"
                                    autocomplete="card-holder-name"
                                    class="border-0 ring-gray-300 ring-1 px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
