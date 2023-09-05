@@ -46,30 +46,24 @@ class RegistrationController extends Controller
 
     public function storeConfirmation(Request $request)
     {
-        if ($request->has('changePlan')){
-            session(['changePlan' => true]);
-            return redirect()->route('sign-up.account');
-        }
-        $user = User::where('email',session('user')['account']['email'])->first();
+        $user = User::where('email', session('user')['account']['email'])->first();
         $productSelected = session('productSelected')['product'];
-        $planPayment = session('productSelected')['paymentYearly'] ? $productSelected['price_yearly'] : $productSelected['price_monthly'];
         $planId = session('productSelected')['paymentYearly'] ? $productSelected['stripe_plan_yearly'] : $productSelected['stripe_plan_monthly'];
-        $paymentMethod = $request->input('payment_method');
+        $paymentMethod = \request()->input('payment_method');
+        $planPayment = session('price');
+        dd($productSelected,$planId,$paymentMethod,session()->all());
         $user->createOrGetStripeCustomer();
+        //Todo:send invoice
         $user->addPaymentMethod($paymentMethod);
-        try
-        {
-            $user->charge($planPayment*100, $paymentMethod);
+        try {
+            $user->charge($planPayment * 100, $paymentMethod);
             $user->newSubscription(
                 $productSelected['name'], $planId
             )->create($paymentMethod);
-
+            return redirect('dashboard.dashboard');
+        } catch (\Exception $e) {
+            return back();
         }
-        catch (\Exception $e)
-        {
-            return back()->withErrors(['message' => 'Error creating subscription. ' . $e->getMessage()]);
-        }
-        return redirect('home');
     }
 }
 

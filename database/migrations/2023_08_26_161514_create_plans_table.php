@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('stripe_plan_monthly');
             $table->string('stripe_plan_yearly');
+            $table->string('image');
             $table->float('price_monthly');
             $table->float('price_yearly');
             $table->string('description');

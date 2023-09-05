@@ -13,6 +13,7 @@ class ContactForm extends Component
     public $subject;
     public $message;
     public $successMessage;
+    public $clearProperty;
 
     protected $rules = [
         'email_contact' => 'required|email',
@@ -34,10 +35,6 @@ class ContactForm extends Component
     }
     public function submitForm(){
 
-        $contact['email_contact'] = $this->email_contact;
-        $contact['subject'] = $this->subject;
-        $contact['message'] = $this->message;
-
         $this->validate();
 
         Contact::create([
@@ -47,7 +44,12 @@ class ContactForm extends Component
         ]);
         sleep(1);
         $this->resetForm();
+        $this->clearProperty = 'successMessage';
         $this->successMessage = 'We received your message successfully and will get back to you shortly!';
+    }
+    public function clearMessage($property)
+    {
+        $this->$property = null;
     }
     private function resetForm(){
         $this->email_contact = '';

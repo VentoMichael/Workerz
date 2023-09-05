@@ -36,7 +36,6 @@
                                 and
                                 find the perfect match for your needs. Join our community today and take control of your
                                 future.</p>
-                            <livewire:search-job-dropdown/>
 
                         </div>
                     </div>

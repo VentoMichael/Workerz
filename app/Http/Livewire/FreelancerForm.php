@@ -96,10 +96,6 @@ class FreelancerForm extends Component
             }
         }
 
-        if (!request()->has('changePlan')) {
-            $this->validate();
-        }
-
         $user = session('user', []);
         $user['account'] = [
             'username' => $this->username,
@@ -122,10 +118,10 @@ class FreelancerForm extends Component
             User::create([
                 'username' => $this->username ?? '',
                 'about' => $this->about ?? '',
-                'firstname' => $this->firstname ?? '',
-                'lastname' => Hash::make($this->lastname) ?? '',
+                'firstname' => ucfirst($this->firstname) ?? '',
+                'lastname' => ucfirst($this->lastname) ?? '',
                 'email' => $this->email ?? '',
-                'password' => $this->password ?? '',
+                'password' => Hash::make($this->password) ?? '',
                 'avatarUpload' => $this->avatarUpload ?? '',
                 'backgroundUpload' => $this->backgroundUpload ?? '',
                 'streetAddress' => $this->streetAddress ?? '',

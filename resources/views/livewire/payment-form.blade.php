@@ -1,6 +1,5 @@
 <div class="bg-gray-50">
 
-
     <div class="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 class="sr-only">Checkout</h2>
 
@@ -16,17 +15,18 @@
                         <label for="card-holder-name" class="block text-sm font-medium leading-6 text-gray-900">Card
                             Holder Name</label>
                         <div class="mt-2">
-                            <input value="{{ucfirst($user['firstname']) . ' ' . ucfirst($user['lastname'])}}" disabled type="text"
+                            <input disabled value="{{ucfirst($user['firstname']) . ' ' . ucfirst($user['lastname'])}}"
+                                   type="text"
                                    name="card-holder-name" id="card-holder-name"
                                    autocomplete="card-holder-name"
-                                   class="border-0 ring-gray-300 ring-1 px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                   class="disabled:opacity-50 disabled:cursor-not-allowed border-0 ring-gray-300 ring-1 px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
 
                     </div>
                     <div class="col-span-full">
                         <label for="card-element" class="block text-sm font-medium leading-6 text-gray-900">Credit or
                             debit card</label>
-                        <div id="card-element"
+                        <div wire:model="paymentMethods" wire:ignore id="card-element" name="card-element"
                              class="border-0 ring-gray-300 ring-1 px-2 block w-full rounded-md py-2 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-white"></div>
                         <!-- Used to display form errors. -->
                         <div id="card-errors" role="alert"></div>
@@ -52,7 +52,7 @@
                             <li class="flex py-6 px-4 sm:px-6">
                                 <div class="flex-shrink-0">
                                     <img
-                                        src="https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg"
+                                        src="{{ $productSelected['image'] }}"
                                         alt="Front of men&#039;s Basic Tee in black." class="w-20 rounded-md">
                                 </div>
                                 <div class="flex flex-col w-full">
@@ -66,13 +66,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="text-blue-300 hover:underline" name="changePlan">Change plan</button>
+                                        <div onclick="Livewire.emit('openModal', 'change-plans')"
+                                             class="cursor-pointer text-blue-300 hover:underline">Change plan
+                                        </div>
                                     </div>
 
                                     <div class="space-y-6 sm:pl-6">
                                         <div class="flex items-center justify-between pt-6">
                                             <dt class="text-base font-medium">Total</dt>
-                                            <dd class="text-base font-medium text-gray-900">{{$planPayment}}€</dd>
+                                            <dd class="text-base font-medium text-gray-900">
+                                                <span wire:model="planPayment">{{$planPayment}}</span>€ {{$yearlyPayment ? '/yearly' : '/monthly'}}
                                         </div>
                                     </div>
                                 </div>

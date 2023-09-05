@@ -24,7 +24,6 @@ class PlanSeeder extends Seeder
 
         // Create an array to hold the formatted product and pricing data
         $formattedProducts = [];
-
         foreach ($products as $product) {
             // Find pricing plans associated with the current product
             $productPricingPlans = array_filter($pricingPlans->data, function ($plan) use ($product) {
@@ -50,6 +49,7 @@ class PlanSeeder extends Seeder
                     'name' => $product->name,
                     'description' => $product->description,
                     'features' => $product->metadata->features,
+                    'images' => $product->images[0],
                     // Add more product details as needed
                 ],
                 'plans' => $formattedPricingPlans,
@@ -62,6 +62,7 @@ class PlanSeeder extends Seeder
                 'stripe_plan_yearly' => $plan['plans']['yearly']['id'],
                 'price_yearly' => $plan['plans']['yearly']['amount'],
                 'stripe_plan_monthly' => $plan['plans']['monthly']['id'],
+                'image' => $plan['product']['images'],
                 'price_monthly' => $plan['plans']['monthly']['amount'],
                 'description' => $plan['product']['description'],
                 'features' => json_encode($plan['product']['features'], JSON_THROW_ON_ERROR)

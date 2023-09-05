@@ -91,4 +91,6 @@
             form.submit();
         }
     </script>
+    @livewire('livewire-ui-modal')
+
 @endsection
