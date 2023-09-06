@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Stripe\Stripe;
@@ -53,9 +54,10 @@ class RegistrationController extends Controller
         $planPayment = session('price');
         $user->createOrGetStripeCustomer();
         //Todo:send invoice
-        //dd($productSelected,$planId,$paymentMethod,session()->all());
+
         try {
             // Create a subscription
+
             $user->newSubscription($productSelected['name'], $planId)->create($paymentMethod);
 
             // If the subscription creation was successful, charge the user
@@ -63,10 +65,16 @@ class RegistrationController extends Controller
 
             // Add the payment method (this line may not be needed)
             $user->addPaymentMethod($paymentMethod);
-            //return redirect('dashboard.dashboard');
-            return redirect()->back();
+
+            Auth::login($user);
+
+            return redirect(route('dashboard.dashboard'));
         } catch (\Exception $e) {
-            return back();
+            // Log the exception for debugging purposes
+            dd('Billing error: ' . $e->getMessage(),$paymentMethod);
+
+            // Handle the error gracefully, you can redirect to an error page or return with an error message
+            return back()->with('error', 'There was an issue processing your payment. Please try again later.');
         }
     }
 }
