@@ -51,16 +51,20 @@ class RegistrationController extends Controller
         $planId = session('productSelected')['paymentYearly'] ? $productSelected['stripe_plan_yearly'] : $productSelected['stripe_plan_monthly'];
         $paymentMethod = \request()->input('payment_method');
         $planPayment = session('price');
-        dd($productSelected,$planId,$paymentMethod,session()->all());
         $user->createOrGetStripeCustomer();
         //Todo:send invoice
-        $user->addPaymentMethod($paymentMethod);
+        //dd($productSelected,$planId,$paymentMethod,session()->all());
         try {
+            // Create a subscription
+            $user->newSubscription($productSelected['name'], $planId)->create($paymentMethod);
+
+            // If the subscription creation was successful, charge the user
             $user->charge($planPayment * 100, $paymentMethod);
-            $user->newSubscription(
-                $productSelected['name'], $planId
-            )->create($paymentMethod);
-            return redirect('dashboard.dashboard');
+
+            // Add the payment method (this line may not be needed)
+            $user->addPaymentMethod($paymentMethod);
+            //return redirect('dashboard.dashboard');
+            return redirect()->back();
         } catch (\Exception $e) {
             return back();
         }

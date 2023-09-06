@@ -32,65 +32,69 @@
 @section('scripts')
     <script src="https://js.stripe.com/v3/"></script>
     <script>
-        var stripe = Stripe('{{ env('STRIPE_KEY') }}');
-        var elements = stripe.elements();
-        var style = {
-            base: {
-                color: '#32325d',
-                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                fontSmoothing: 'antialiased',
-                fontSize: '16px',
-                '::placeholder': {
-                    color: '#aab7c4'
-                }
-            },
-            invalid: {
-                color: '#fa755a',
-                iconColor: '#fa755a'
-            }
-        };
-        var card = elements.create('card', {hidePostalCode: true, style: style});
-        card.mount('#card-element');
-        console.log(document.getElementById('card-element'));
-        card.addEventListener('change', function (event) {
-            var displayError = document.getElementById('card-errors');
-            if (event.error) {
-                displayError.textContent = event.error.message;
-            } else {
-                displayError.textContent = '';
-            }
-        });
-        const cardHolderName = document.getElementById('card-holder-name');
-        const cardButton = document.getElementById('card-button');
-        const clientSecret = cardButton.dataset.secret;
-        cardButton.addEventListener('click', async (e) => {
-            console.log("attempting");
-            const {setupIntent, error} = await stripe.confirmCardSetup(
-                clientSecret, {
+        const stripe = Stripe('{{ env('STRIPE_KEY') }}')
+
+        const elements = stripe.elements()
+        const cardElement = elements.create('card')
+
+        cardElement.mount('#card-element')
+
+        const form = document.getElementById('subscribe-form')
+        const cardBtn = document.getElementById('card-button')
+        const cardHolderName = document.getElementById('card-holder-name')
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault()
+
+            cardBtn.disabled = true;
+            cardBtn.classList.add('opacity-50');
+            const loadingSvg = document.getElementById('loading-svg');
+            loadingSvg.classList.remove('hidden');
+
+            const { setupIntent, error } = await stripe.confirmCardSetup(
+                cardBtn.dataset.secret, {
                     payment_method: {
-                        card: card,
-                        billing_details: {name: cardHolderName.value}
+                        card: cardElement,
+                        billing_details: {
+                            name: cardHolderName.value
+                        }
                     }
                 }
-            );
-            if (error) {
-                var errorElement = document.getElementById('card-errors');
-                errorElement.textContent = error.message;
-            } else {
-                paymentMethodHandler(setupIntent.payment_method);
-            }
-        });
+            )
 
-        function paymentMethodHandler(payment_method) {
-            var form = document.getElementById('subscribe-form');
-            var hiddenInput = document.createElement('input');
-            hiddenInput.setAttribute('type', 'hidden');
-            hiddenInput.setAttribute('name', 'payment_method');
-            hiddenInput.setAttribute('value', payment_method);
-            form.appendChild(hiddenInput);
-            form.submit();
+            if (error) {
+                cardBtn.disabled = false;
+                cardBtn.classList.remove('opacity-50');
+                loadingSvg.classList.add('hidden');
+
+                const errorElement = document.createElement('p')
+                errorElement.className = 'text-red-500 mt-1'
+                errorElement.textContent = error.message
+
+                const errorContainer = document.getElementById('card-errors')
+                errorContainer.innerHTML = ''
+                errorContainer.appendChild(errorElement)
+
+                e.preventDefault()
+            } else {
+                let token = document.createElement('input')
+                token.setAttribute('type', 'hidden')
+                token.setAttribute('name', 'token')
+                token.setAttribute('value', setupIntent.payment_method)
+                form.appendChild(token)
+                form.submit()
+            }
+        })
+
+        const resetButton = () => {
+            cardBtn.disabled = false;
+            cardBtn.classList.remove('opacity-50');
+            loadingSvg.classList.add('hidden');
         }
     </script>
+
+
+
     @livewire('livewire-ui-modal')
 
 @endsection

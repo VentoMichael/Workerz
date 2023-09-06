@@ -68,9 +68,7 @@ class PaymentForm extends Component
     }
 
     public function clearMessage($property)
-
     {
-
         $this->$property = null;
     }
 

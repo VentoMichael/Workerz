@@ -4,7 +4,6 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 use Stripe\Stripe;
 
