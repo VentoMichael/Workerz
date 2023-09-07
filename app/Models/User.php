@@ -22,7 +22,6 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $guarded;
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -40,5 +39,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'avatarUpload' => 'array',
+        'backgroundUpload' => 'array',
     ];
 }

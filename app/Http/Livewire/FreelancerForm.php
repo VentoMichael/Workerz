@@ -31,6 +31,9 @@ class FreelancerForm extends Component
     public $postalCode;
     public $plan;
     public $annualBilling = false;
+    protected $avatarSizes = ['32x32', '160x160', '128x128'];
+    protected $backgroundSizes = ['1980x192', '1280x192', '680x192'];
+
 
     protected $rules = [
         'username' => 'required|unique:users',
@@ -95,40 +98,25 @@ class FreelancerForm extends Component
                 session(['productSelected' => $productData]);
             }
         }
-
-        $user = session('user', []);
-        $user['account'] = [
+        $userData = [
             'username' => $this->username,
             'about' => $this->about,
-            'firstname' => $this->firstname,
-            'lastname' => $this->lastname,
+            'firstname' => ucfirst($this->firstname),
+            'lastname' => ucfirst($this->lastname),
             'email' => $this->email,
-            'password' => $this->password,
-            'avatarUpload' => $this->processAndStoreImage($this->avatarUpload, 'avatars', $this->username),
-            'backgroundUpload' => $this->backgroundUpload ? $this->processAndStoreImage($this->backgroundUpload, 'covers', $this->username) : 'covers/default_background',
+            'password' => Hash::make($this->password),
+            'avatarUpload' => $this->processAndStoreImage($this->avatarUpload, 'avatars', $this->username, true),
             'streetAddress' => $this->streetAddress,
             'city' => $this->city,
             'region' => $this->region,
             'postalCode' => $this->postalCode,
-            'plan' => $this->plan
         ];
+        $user = session('user', []);
+        $user['account'] = $userData;
         session(['user' => $user]);
 
         if (!request()->has('changePlan')) {
-            User::create([
-                'username' => $this->username ?? '',
-                'about' => $this->about ?? '',
-                'firstname' => ucfirst($this->firstname) ?? '',
-                'lastname' => ucfirst($this->lastname) ?? '',
-                'email' => $this->email ?? '',
-                'password' => Hash::make($this->password) ?? '',
-                'avatarUpload' => $this->avatarUpload ?? '',
-                'backgroundUpload' => $this->backgroundUpload ?? '',
-                'streetAddress' => $this->streetAddress ?? '',
-                'city' => $this->city ?? '',
-                'region' => $this->region ?? '',
-                'postalCode' => $this->postalCode ?? '',
-            ]);
+            User::create($userData);
         }
         sleep(1);
         return redirect()->route('sign-up.confirmation');
@@ -151,30 +139,39 @@ class FreelancerForm extends Component
     }
 
 
-    protected function processAndStoreImage($uploadedImage, $folder, $username)
+    protected function processAndStoreImage($uploadedImage, $folder, $filename, $isAvatar)
     {
         if (!$uploadedImage) {
-            $initialsPath = $this->generateInitialsImage($username);
+            $initialsPath = $this->generateInitialsImage($filename);
             return $initialsPath;
         }
 
-        $filename = Str::random(40);
-        $extension = $uploadedImage->getClientOriginalExtension();
+        $imagePath = $this->createImages($uploadedImage, $folder, $filename, $isAvatar);
 
-        $originalPath = $uploadedImage->storeAs($folder, $filename . '.' . $extension, 'public');
-
-        $webpPath = $this->createWebpImage($originalPath, $folder, $filename);
-
-        return $folder . '/' . $filename;
+        return $imagePath;
     }
 
-    protected function createWebpImage($originalPath, $folder, $filename)
+    protected function createImages($uploadedImage, $folder, $filename, $isAvatar)
     {
-        $image = Image::make(Storage::path('public/' . $originalPath));
-        $webpPath = $folder . '/' . $filename . '.webp';
-        $image->save(Storage::path('public/' . $webpPath), 80, 'webp');
+        $imagePath = [];
 
-        return $webpPath;
+        foreach (($isAvatar ? $this->avatarSizes : $this->backgroundSizes) as $size) {
+            list($width, $height) = explode('x', $size);
+
+            $image = Image::make($uploadedImage)
+                ->fit($width, $height)
+                ->encode('jpg', 80);
+
+            $imagePath[] = $folder . '/' . $filename . '/' . $size . '.jpg';
+            Storage::disk('public')->put($folder . '/' . $filename . '/' . $size . '.jpg', $image);
+
+            $webpImage = clone $image;
+            $webpImage->encode('webp', 80);
+            $imagePath[] = $folder . '/' . $filename . '/' . $size . '.webp';
+            Storage::disk('public')->put($folder . '/' . $filename . '/' . $size . '.webp', $webpImage);
+        }
+
+        return $imagePath;
     }
 
 

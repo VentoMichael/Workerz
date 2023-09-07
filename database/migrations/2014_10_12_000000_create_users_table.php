@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('username');
             $table->string('about');
-            $table->string('avatarUpload');
-            $table->string('backgroundUpload');
+            $table->json('avatarUpload');
+            $table->json('backgroundUpload');
             $table->string('firstname');
             $table->string('lastname');
             $table->string('streetAddress');

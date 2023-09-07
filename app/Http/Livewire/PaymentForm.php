@@ -56,6 +56,7 @@ class PaymentForm extends Component
         $product = $newProductData['product'];
         $this->planPayment = $newProductData['paymentYearly'] ? $product['price_yearly'] : $product['price_monthly'];
         session('price', $this->planPayment);
+        //TODO:STILL TWO PAYMENT
     }
     public function render()
     {
@@ -70,50 +71,5 @@ class PaymentForm extends Component
     public function clearMessage($property)
     {
         $this->$property = null;
-    }
-
-    public function generateInitialsImage()
-    {
-        $user = session('user')['account'];
-
-        $name = $user['username'];
-        $initials = strtoupper($name[0]);
-
-        $svgImage = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <rect width="100%" height="100%" fill="#5850EC" />
-        <text x="50" y="54" font-family="Ubuntu, sans-serif" font-size="48" fill="#FFFFFF" text-anchor="middle" alignment-baseline="middle">' . $initials . '</text>
-    </svg>';
-
-        $filename = uniqid('', true);
-        Storage::disk('public')->put('initials/' . $filename . '.svg', $svgImage);
-
-        return 'initials/' . $filename;
-    }
-
-
-    protected function processAndStoreImage($uploadedImage, $folder, $username)
-    {
-        if (!$uploadedImage) {
-            $initialsPath = $this->generateInitialsImage($username);
-            return $initialsPath;
-        }
-
-        $filename = Str::random(40);
-        $extension = $uploadedImage->getClientOriginalExtension();
-
-        $originalPath = $uploadedImage->storeAs($folder, $filename . '.' . $extension, 'public');
-
-        $webpPath = $this->createWebpImage($originalPath, $folder, $filename);
-
-        return $folder . '/' . $filename;
-    }
-
-    protected function createWebpImage($originalPath, $folder, $filename)
-    {
-        $image = Image::make(Storage::path('public/' . $originalPath));
-        $webpPath = $folder . '/' . $filename . '.webp';
-        $image->save(Storage::path('public/' . $webpPath), 80, 'webp');
-
-        return $webpPath;
     }
 }
