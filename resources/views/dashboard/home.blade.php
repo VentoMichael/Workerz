@@ -41,30 +41,49 @@
 
 
                 <div class="flex w-full gap-4 col-span-9">
-                    <section class="w-full bg-white border border-gray-200 rounded-lg shadow flex flex-col">
+                    <section class="w-2/4 bg-white border border-gray-200 rounded-lg shadow flex flex-col">
                         <h2 class="text-lg font-semibold text-gray-900 p-5 sr-only">My profile</h2>
                         <div class="relative">
                             <img class="rounded-t-lg w-full h-32 object-cover"
-                                 src="{{ $user->backgroundUpload }}"
+                                 srcset="
+            @if (is_array($user->backgroundUpload))
+                                 @foreach($user->backgroundUpload as $imagePath)
+                                 {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                @endforeach
+                                 @endif
+                                     "
+                                 src="{{ asset('storage/' . (is_array($user->backgroundUpload) ? $user->backgroundUpload[0] : $user->backgroundUpload)) }}"
                                  alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
                             <div
                                 class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-indigo-600 opacity-60"></div>
-                            <img
-                                class="rounded-full h-20 w-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                                src="{{ $user->avatarUpload }}"
-                                alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
+                            @if (is_string(\Illuminate\Support\Facades\Auth::user()->avatarUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->avatarUpload, 'initials') !== false)
+                                <img class="rounded-full h-20 w-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                                     src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
+                                     alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                            @else
+                                <img class="rounded-full h-20 w-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                                     srcset="
+            @if (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
+                                     @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+                                     {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                @endforeach
+                                     @endif
+                                         "
+                                     src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                     alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                            @endif
                         </div>
                         <div class="p-5 flex h-full flex-col justify-between">
                             <div>
                                 <p class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $user->username }}</p>
-                                <p class="mb-3 font-normal text-gray-700">{{ $user->about }}</p>
+                                <p class="text-ellipsis mb-3 font-normal text-gray-700 break-words">{{ \Illuminate\Support\Str::limit($user->about,120) }}</p>
                             </div>
                             <a href="{{ route('dashboard.profil') }}"
                                class="mt-4 w-full max-w-xl whitespace-nowrap inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700">
                                 Edit my profile </a>
                         </div>
                     </section>
-                    <section class="w-full bg-white border border-gray-200 rounded-lg shadow">
+                    <section class="w-2/4 bg-white border border-gray-200 rounded-lg shadow">
                         <div class="p-5 flex flex-col justify-between h-full">
                             <h2 class="text-lg font-semibold text-gray-900">Recent Comments</h2>
 

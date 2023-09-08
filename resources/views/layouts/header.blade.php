@@ -1,6 +1,5 @@
 <header>
     @auth
-
         <div class="relative bg-white">
             <div
                 class="flex justify-between items-center max-w-7xl mx-auto px-4 py-6 sm:px-6 md:justify-between md:space-x-10 lg:px-8">
@@ -36,11 +35,24 @@
                                         class="user-menu-button bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:indigo-900"
                                         aria-expanded="false" aria-haspopup="true">
                                     <span class="sr-only">Open user menu</span>
-                                    @if(!$user->avatarUpload)
-                                        <img src="{{ $user->generateInitialsImage() }}" alt="{{ $user->name }}" class="w-12 h-12 rounded-full">
-                                    @else
-                                        <img src="{{ $user->avatarUpload }}" alt="{{ $user->name }}" class="w-12 h-12 rounded-full">
-                                    @endif
+
+                                        @if (is_string(\Illuminate\Support\Facades\Auth::user()->avatarUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->avatarUpload, 'initials') !== false)
+                                            <img class="w-12 h-12 rounded-full"
+                                                 src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
+                                                 alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                        @else
+                                            <img class="w-12 h-12 rounded-full"
+                                                 srcset="
+            @if (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
+                                                 @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+                                                 {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                @endforeach
+                                                 @endif
+                                                     "
+                                                 src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                                 alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                        @endif
+
                                 </button>
                             </div>
 
@@ -90,9 +102,22 @@
                                          class="cursor-pointer hover:bg-indigo-100 w-full max-w-lg p-4 text-gray-500 bg-white"
                                          role="alert">
                                         <div class="flex">
-                                            <img class="h-8 w-8 rounded-full"
-                                                 src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-                                                 alt="">
+                                            @if (is_string(\Illuminate\Support\Facades\Auth::user()->avatarUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->avatarUpload, 'initials') !== false)
+                                                <img class="w-8 h-8 rounded-full"
+                                                     src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
+                                                     alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                            @else
+                                                <img class="w-8 h-8 rounded-full"
+                                                     srcset="
+            @if (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
+                                                     @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+                                                     {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                @endforeach
+                                                     @endif
+                                                         "
+                                                     src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                                     alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                            @endif
                                             <div class="ml-3 text-sm font-normal">
                                                 <span class="mb-1 text-sm font-semibold text-gray-900">Jese Leos</span>
                                                 <div class="mb-2 text-sm font-normal">Hi Neil, thanks for sharing your
@@ -184,9 +209,22 @@
                                     class="user-menu-button bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:indigo-900"
                                     aria-expanded="false" aria-haspopup="true">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full"
-                                     src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=80"
-                                     alt="">
+                                @if (is_string(\Illuminate\Support\Facades\Auth::user()->avatarUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->avatarUpload, 'initials') !== false)
+                                    <img class="w-8 h-8 rounded-full"
+                                         src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
+                                         alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                @else
+                                    <img class="w-8 h-8 rounded-full"
+                                         srcset="
+            @if (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
+                                         @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+                                         {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                @endforeach
+                                         @endif
+                                             "
+                                         src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                         alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                @endif
                             </button>
                         </div>
 

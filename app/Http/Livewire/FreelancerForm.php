@@ -111,6 +111,11 @@ class FreelancerForm extends Component
             'region' => $this->region,
             'postalCode' => $this->postalCode,
         ];
+        if ($this->backgroundUpload) {
+            $userData['backgroundUpload'] = $this->processAndStoreImage($this->backgroundUpload, 'covers', $this->username, false);
+        } else {
+            $userData['backgroundUpload'] = ["covers/default_background_320.jpg", "covers/default_background_320.webp", "covers/default_background_680.jpg", "covers/default_background_680.webp", "covers/default_background_1280.jpg", "covers/default_background_1280.webp","covers/default_background_1980.jpg", "covers/default_background_1980.webp"];
+        }
         $user = session('user', []);
         $user['account'] = $userData;
         session(['user' => $user]);
@@ -122,7 +127,7 @@ class FreelancerForm extends Component
         return redirect()->route('sign-up.confirmation');
     }
 
-    public function generateInitialsImage()
+    public function generateInitialsImage($folder,$username)
     {
         $name = $this->username;
         $initials = strtoupper($name[0]);
@@ -133,16 +138,16 @@ class FreelancerForm extends Component
     </svg>';
 
         $filename = uniqid('', true);
-        Storage::disk('public')->put('initials/' . $filename . '.svg', $svgImage);
+        Storage::disk('public')->put($folder.'/'.$username.'/initials/' . $filename . '.svg', $svgImage);
 
-        return 'initials/' . $filename;
+        return $folder.'/'.$username.'/initials/' . $filename;
     }
 
 
     protected function processAndStoreImage($uploadedImage, $folder, $filename, $isAvatar)
     {
         if (!$uploadedImage) {
-            $initialsPath = $this->generateInitialsImage($filename);
+            $initialsPath = $this->generateInitialsImage($folder,$filename);
             return $initialsPath;
         }
 

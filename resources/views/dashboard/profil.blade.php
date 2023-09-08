@@ -16,13 +16,69 @@
                     <form action="#" method="POST">
                         <div class="shadow sm:rounded-md sm:overflow-hidden">
                             <div class="py-6 px-4 sm:p-6 lg:pb-8">
-                                <div>
+                                <div class="mb-6">
                                     <h1 class="text-lg leading-6 font-medium text-gray-900">Profile</h1>
                                     <p class="mt-1 text-sm text-gray-500">This information will be displayed
                                         publicly so
                                         be careful what you share.</p>
                                 </div>
+                                <div class="mt-6 flex-grow lg:mt-0 lg:flex-grow-0 lg:flex-shrink-0">
+                                    <p class="text-sm font-medium text-gray-700 mb-2" aria-hidden="true">Background
+                                        picture</p>
+                                    <div class="mt-1 lg:hidden">
+                                        <div class="flex items-center">
+                                            <div
+                                                class="flex-shrink-0 inline-block rounded-md overflow-hidden h-12 w-12"
+                                                aria-hidden="true">
 
+                                                <img class="w-full relative h-40"
+                                                     srcset="
+            @if (is_array($user->backgroundUpload))
+                                                     @foreach($user->backgroundUpload as $imagePath)
+                                                     {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                @endforeach
+                                                     @endif
+                                                         "
+                                                     src="{{ asset('storage/' . (is_array($user->backgroundUpload) ? $user->backgroundUpload[0] : $user->backgroundUpload)) }}"
+                                                     alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
+
+
+                                            </div>
+                                            <div class="ml-5 rounded-md shadow-sm">
+                                                <div
+                                                    class="group relative border border-gray-300 rounded-md py-2 px-3 flex items-center justify-center hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-500">
+                                                    <label for="mobile-user-photo"
+                                                           class="relative text-sm leading-4 font-medium text-gray-700 pointer-events-none">
+                                                        <span>Change</span>
+                                                        <span class="sr-only"> user photo</span>
+                                                    </label>
+                                                    <input id="mobile-user-photo" name="user-photo" type="file"
+                                                           class="absolute w-full h-full opacity-0 cursor-pointer border-gray-300">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="hidden relative rounded-md overflow-hidden lg:block">
+                                        <img class="w-full relative "
+                                             srcset="
+            @if (is_array($user->backgroundUpload))
+                                             @foreach($user->backgroundUpload as $imagePath)
+                                             {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                @endforeach
+                                             @endif
+                                                 "
+                                             src="{{ asset('storage/' . (is_array($user->backgroundUpload) ? $user->backgroundUpload[0] : $user->backgroundUpload)) }}"
+                                             alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
+                                        <label for="desktop-user-photo"
+                                               class="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
+                                            <span>Change</span>
+                                            <span class="sr-only"> user photo</span>
+                                            <input type="file" id="desktop-user-photo" name="user-photo"
+                                                   class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300">
+                                        </label>
+                                    </div>
+                                </div>
                                 <div class="mt-6 flex flex-col lg:flex-row">
                                     <div class="flex-grow space-y-6">
                                         <div class="sm:col-span-4">
@@ -33,9 +89,9 @@
                                                     class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
                                                     <span
                                                         class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">workerz.be/workers/</span>
-                                                    <input value="{{ $user->username }}" type="text" name="username"
+                                                    <input readonly disabled value="{{ $user->username }}" type="text" name="username"
                                                            id="username" autocomplete="username"
-                                                           class="block flex-1 border-0 bg-transparent py-1.5 pl-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                                           class="disabled:opacity-50 disabled:cursor-not-allowed block flex-1 border-0 bg-transparent py-1.5 pl-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                                            placeholder="janesmith">
                                                 </div>
                                             </div>
@@ -54,6 +110,7 @@
                                         </div>
                                     </div>
 
+
                                     <div class="mt-6 flex-grow lg:mt-0 lg:ml-6 lg:flex-grow-0 lg:flex-shrink-0">
                                         <p class="text-sm font-medium text-gray-700" aria-hidden="true">Photo</p>
                                         <div class="mt-1 lg:hidden">
@@ -62,20 +119,23 @@
                                                     class="flex-shrink-0 inline-block rounded-full overflow-hidden h-12 w-12"
                                                     aria-hidden="true">
 
-                                                    @if (str_starts_with($user->avatarUpload[0], 'initial'))
+                                                    @if (is_string($user->avatarUpload) && strpos($user->avatarUpload, 'initials') !== false)
                                                         <img class="rounded-full h-full w-full"
-                                                             src="{{ asset('storage/' . $user->avatarUpload[0] . '.svg') }}"
+                                                             src="{{ asset('storage/' . $user->avatarUpload . '.svg') }}"
                                                              alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
                                                     @else
                                                         <img class="rounded-full h-full w-full"
                                                              srcset="
-            @foreach($user->avatarUpload as $imagePath)
+            @if (is_array($user->avatarUpload))
+                                                             @foreach($user->avatarUpload as $imagePath)
                                                              {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
-            @endforeach
+                @endforeach
+                                                             @endif
                                                                  "
-                                                             src="{{ asset('storage/' . $user->avatarUpload[0]) }}"
+                                                             src="{{ asset('storage/' . (is_array($user->avatarUpload) ? $user->avatarUpload[0] : $user->avatarUpload)) }}"
                                                              alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
                                                     @endif
+
 
                                                 </div>
                                                 <div class="ml-5 rounded-md shadow-sm">
@@ -94,21 +154,22 @@
                                         </div>
 
                                         <div class="hidden relative rounded-full overflow-hidden lg:block">
-                                            @if (str_starts_with($user->avatarUpload[0], 'initial'))
+                                            @if (is_string($user->avatarUpload) && strpos($user->avatarUpload, 'initials') !== false)
                                                 <img class="relative rounded-full w-40 h-40"
-                                                     src="{{ asset('storage/' . $user->avatarUpload[0] . '.svg') }}"
+                                                     src="{{ asset('storage/' . $user->avatarUpload . '.svg') }}"
                                                      alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
                                             @else
                                                 <img class="relative rounded-full w-40 h-40"
                                                      srcset="
-            @foreach($user->avatarUpload as $imagePath)
+            @if (is_array($user->avatarUpload))
+                                                     @foreach($user->avatarUpload as $imagePath)
                                                      {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
-            @endforeach
+                @endforeach
+                                                     @endif
                                                          "
-                                                     src="{{ asset('storage/' . $user->avatarUpload[0]) }}"
+                                                     src="{{ asset('storage/' . (is_array($user->avatarUpload) ? $user->avatarUpload[0] : $user->avatarUpload)) }}"
                                                      alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
                                             @endif
-
                                             <label for="desktop-user-photo"
                                                    class="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
                                                 <span>Change</span>
@@ -146,9 +207,9 @@
                                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
                                             address</label>
                                         <div class="mt-2">
-                                            <input value="{{ $user->email }}" id="email" name="email" type="email"
-                                                   autocomplete="email"
-                                                   class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                            <input readonly value="{{ $user->email }}" id="email" name="email" type="email"
+                                                   disabled autocomplete="email"
+                                                   class="disabled:opacity-50 disabled:cursor-not-allowed px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
                                     </div>
 
