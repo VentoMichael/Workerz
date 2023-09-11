@@ -40,7 +40,6 @@
         if (userMenuButtons) {
             // Add click event listeners to user menu buttons
                 userMenuButtons.addEventListener('click', function (event) {
-                    console.log(userMenuButtons);
                     toggleMenu(menuItems);
                     closeMenu(menuItemsNotifications);
                     event.stopPropagation();
@@ -49,7 +48,6 @@
 
         if (userMenuButtonNotifications) {
                 userMenuButtonNotifications.addEventListener('click', function (event) {
-                    console.log(userMenuButtonNotifications);
                     toggleMenu(menuItemsNotifications);
                     closeMenu(menuItems);
                     event.stopPropagation();
@@ -70,7 +68,6 @@
         const overlay = document.getElementById('overlay');
 
         userMenuButtonMobile.addEventListener('click', function(event) {
-            console.log(menuItemsMobile)
             toggleMenu(menuItemsMobile);
             closeMenu(menuItemsNotificationMobile);
             event.stopPropagation();
@@ -100,7 +97,6 @@
         });
 
         userMenuButtonNotificationMobile.addEventListener('click', function(event) {
-            console.log(menuItemsNotificationMobile)
             toggleMenu(menuItemsNotificationMobile);
             closeMenu(menuItemsMobile);
             event.stopPropagation();
@@ -110,6 +106,8 @@
         document.addEventListener('click', function() {
             closeMenu(menuItemsMobile);
             closeMenu(menuItemsNotificationMobile);
+            closeMenu(menuItems);
+            closeMenu(menuItemsNotifications);
         });
 
         function toggleMenu(element) {
@@ -120,7 +118,6 @@
         function closeMenu(element) {
             element.classList.add('hidden');
         }
-
     </script>
 @livewireScripts
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>

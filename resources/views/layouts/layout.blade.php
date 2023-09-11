@@ -34,16 +34,12 @@
 @livewireScripts
 @auth
     <script>
-
-
-        // Get user menu buttons by class name
         const userMenuButtons = document.querySelectorAll('.user-menu-button');
         const userMenuButtonNotifications = document.querySelectorAll('.notification-user-menu');
         const menuItems = document.querySelectorAll('.dropdown-menu-dashboard');
         const menuItemsNotifications = document.querySelectorAll('.dropdown-menu-notification');
 
         if (userMenuButtons) {
-            // Add click event listeners to user menu buttons
             userMenuButtons.forEach(userMenuButton => {
                 userMenuButton.addEventListener('click', function (event) {
                     closeMenu(menuItemsNotifications);
@@ -64,7 +60,6 @@
         }
 
 
-        // Get user menu buttons by class name
         const userPrimaryMenuButton = document.querySelectorAll('.open-primary-menu');
         const userPrimaryMenuButtonClose = document.querySelectorAll('.close-primary-menu');
         const contentPrimaryMenu = document.querySelectorAll('.primary-menu');

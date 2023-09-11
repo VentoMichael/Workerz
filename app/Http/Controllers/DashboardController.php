@@ -72,12 +72,6 @@ class DashboardController extends Controller
         if (request()->has('nevermind')){
             Auth::user()->update(['tutorial_shown' => true]);
         }
-        if (request()->has('nevermind')){
-            Auth::user()->update(['tutorial_shown' => true]);
-        }
-        if (request()->has('nevermind')){
-            Auth::user()->update(['tutorial_shown' => true]);
-        }
         //update
             return view('dashboard.settings');
     }

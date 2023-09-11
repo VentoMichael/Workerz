@@ -514,7 +514,7 @@
                                     @csrf
 
                                     <button type="submit" href="{{ route('logout') }}" class="text-left w-full hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                                            id="user-menu-item-2">Sign out</button>
+                                            id="user-menu-item-3">Sign out</button>
                                 </form>
                             </div>
                         </div>
