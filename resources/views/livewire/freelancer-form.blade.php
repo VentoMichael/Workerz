@@ -14,7 +14,7 @@
                         <div
                             class="@error('username')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror flex rounded-md shadow-sm ring-inset focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                             <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">workerz.be/workers/</span>
-                            <input wire:model="username" value="{{ old('username') }}" type="text" name="username"
+                            <input wire:model="username" type="text" name="username"
                                    id="username" autocomplete="username"
                                    class="block flex-1 border-0 bg-transparent py-1.5 pl-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                    placeholder="janesmith">
@@ -30,7 +30,7 @@
                            class="block text-sm font-medium leading-6 text-gray-900">About</label>
                     <div class="mt-2">
                                     <textarea id="about" wire:model.lazy="about" name="about" rows="3"
-                                              class="@error('about')border border-red-500 @else border-0 ring-gray-300 ring-1 @enderror p-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ old('about') }}</textarea>
+                                              class="@error('about')border border-red-500 @else border-0 ring-gray-300 ring-1 @enderror p-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                     </div>
                     <p class="mt-1 text-sm leading-6 text-gray-600">Write a few sentences about
                         yourself.</p>

@@ -53,10 +53,8 @@ class FreelancerForm extends Component
 
     public function mount()
     {
-        // Load user data from the session if available
         $userData = session('user', []);
 
-        // Set Livewire properties with the session data
         $this->username = $userData['account']['username'] ?? '';
         $this->about = $userData['account']['about'] ?? '';
         $this->firstname = $userData['account']['firstname'] ?? '';
@@ -70,10 +68,9 @@ class FreelancerForm extends Component
         $this->plan = $userData['account']['plan'] ?? '';
     }
 
-    public function updated($propertyName)
+    public function updated($property)
     {
-
-        $this->validateOnly($propertyName);
+        $this->validateOnly($property);
     }
 
     public function toggleAnnualBilling()
@@ -137,7 +134,7 @@ class FreelancerForm extends Component
         <text x="50" y="54" font-family="Ubuntu, sans-serif" font-size="48" fill="#FFFFFF" text-anchor="middle" alignment-baseline="middle">' . $initials . '</text>
     </svg>';
 
-        $filename = uniqid('', true);
+        $filename = 'initial';
         Storage::disk('public')->put($folder.'/'.$username.'/initials/' . $filename . '.svg', $svgImage);
 
         return $folder.'/'.$username.'/initials/' . $filename;
@@ -146,8 +143,8 @@ class FreelancerForm extends Component
 
     protected function processAndStoreImage($uploadedImage, $folder, $filename, $isAvatar)
     {
-        if (!$uploadedImage) {
             $initialsPath = $this->generateInitialsImage($folder,$filename);
+        if (!$uploadedImage) {
             return $initialsPath;
         }
 

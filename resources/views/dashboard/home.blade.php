@@ -55,7 +55,7 @@
                                  src="{{ asset('storage/' . (is_array($user->backgroundUpload) ? $user->backgroundUpload[0] : $user->backgroundUpload)) }}"
                                  alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
                             <div
-                                class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-indigo-600 opacity-60"></div>
+                                class="absolute inset-0 bg-gradient-to-tr from-blue-400 to-indigo-400 opacity-60"></div>
                             @if (is_string(\Illuminate\Support\Facades\Auth::user()->avatarUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->avatarUpload, 'initials') !== false)
                                 <img class="rounded-full h-20 w-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                                      src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
