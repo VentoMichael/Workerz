@@ -3,7 +3,6 @@
     <div aria-labelledby="payment-details-heading">
         <form wire:submit.prevent="updatePassword" action="{{ route('password.update') }}" method="POST">
             @csrf
-            @include('components.modal-delete')
             @include('components.success-message', ['message' => $successMessagePassword,'clearProperty' => 'successMessagePassword'])
 
             <div class="shadow sm:rounded-md sm:overflow-hidden">
@@ -46,7 +45,6 @@
             </div>
         </form>
     </div>
-
     <section class="mt-6" aria-labelledby="payment-details-heading">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
             <div class="bg-white py-6 px-4 sm:p-6">
@@ -133,7 +131,8 @@
                                         be undone.</p>
                                 </div>
                                 <!-- Delete Button -->
-                                <x-button wire:click="confirmDelete" kind="danger" class="disabled:opacity-50" wire:loading.attr="disabled" wire:target="confirmDelete">
+
+                                <x-button onclick="Livewire.emit('openModal', 'confirm-delete')" kind="danger" class="disabled:opacity-50" wire:loading.attr="disabled" wire:target="deleteAccount" wire:click="deleteBtn">
                                     Delete
                                     <svg wire:loading wire:target="confirmDelete" aria-hidden="true" class="inline w-5 h-5 ml-2 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -147,7 +146,6 @@
                             </li>
                         </ul>
                     </div>
-                        tt : {{$saveLoading}}
                     <div class="-mx-6 px-4 py-3 bg-gray-50 text-right sm:px-6 -mb-6 mt-6">
 
                         <x-button wire:click="$set('saveLoading',true)" type="submit" kind="primary" class="disabled:opacity-50">
@@ -172,3 +170,8 @@
         </div>
     </section>
 </div>
+@section('scripts')
+
+@livewire('livewire-ui-modal')
+
+@endsection

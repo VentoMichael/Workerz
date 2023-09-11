@@ -16,11 +16,10 @@ class Settings extends Component
     public $allowCommenting;
     public $successMessage = '';
     public $successMessagePassword = '';
-    public $showDeleteModal = false;
     public $infoMessage = '';
     public $changesMade = false;
-
-
+    protected $listeners = ['confirmedDeletion' => 'deleteAccount'];
+    public $deleteActivation =false;
     public $currentPassword;
     public $newPassword;
 
@@ -49,13 +48,12 @@ class Settings extends Component
         $this->allowCommenting = !$this->allowCommenting;
         $this->changesMade = true;
     }
-
+public function deleteBtn()
+{
+    $this->deleteActivation = true;
+}
     public function submitForm()
     {
-        if ($this->showDeleteModal === true) {
-            $this->confirmDelete();
-            return;
-        }
 
         if ($this->changesMade) {
             $this->saveLoading = true;
@@ -73,9 +71,11 @@ class Settings extends Component
             $this->clearProperty = 'successMessage';
             $this->changesMade = false;
         } else {
-            $this->successMessage = null;
-            $this->clearProperty = 'infoMessage';
-            $this->infoMessage = 'No changes made to update.';
+            if(!$this->deleteActivation) {
+                $this->successMessage = null;
+                $this->clearProperty = 'infoMessage';
+                $this->infoMessage = 'No changes made to update.';
+            }
         }
     }
 
@@ -83,18 +83,6 @@ class Settings extends Component
     public function clearMessage($property)
     {
         $this->$property = null;
-    }
-
-    public function confirmDelete()
-    {
-        //auth()->user()->delete();
-        Session::flush();
-        // Log the user out
-        //Auth::logout();
-        sleep(10);
-        dd('d');
-        // Redirect with success message
-        //return redirect()->route('home');
     }
 
 
@@ -118,10 +106,6 @@ class Settings extends Component
         session()->flash('success', 'Password updated successfully!');
     }
 
-    public function closeDeleteModal()
-    {
-        $this->showDeleteModal = false;
-    }
 
     public function render()
     {
