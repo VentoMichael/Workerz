@@ -3,7 +3,7 @@
         <div class="sm:flex relative">
             <div class="min-w-0 flex-1">
                 <label for="name" class="sr-only text-black">Workerz name</label>
-                <input wire:model.debounce.300ms="search" id="search" type="search"
+                <input wire:model.live.debounce.300ms="search" id="search" type="search"
                        placeholder="Enter the job title you need help with"
                        class="block w-full px-4 py-3 rounded-md border-0 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 focus:ring-offset-gray-900">
             </div>

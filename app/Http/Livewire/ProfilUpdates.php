@@ -148,7 +148,7 @@ class ProfilUpdates extends Component
         }
 
         // Use Livewire's built-in function to emit a client-side event
-        $this->dispatchBrowserEvent('delayed-action', ['delay' => 1000]); // Delay for 1 second
+        $this->dispatch('delayed-action', ['delay' => 1000]); // Delay for 1 second
     }
 
 

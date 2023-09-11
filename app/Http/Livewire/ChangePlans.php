@@ -27,10 +27,10 @@ class ChangePlans extends ModalComponent
                 session(['productSelected' => $newProductData]);
             }
         }
-        $this->emit('closeModal');
+        $this->dispatch('closeModal');
         $this->clearProperty = 'successMessage';
         $this->successMessage = 'We received your message successfully and will get back to you shortly!';
-        $this->emit('productDataUpdated', session('productSelected'));
+        $this->dispatch('productDataUpdated', session('productSelected'));
 
 
     }

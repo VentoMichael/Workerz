@@ -4,7 +4,7 @@
         changes, but you pick what else you want to hear about.</p>
 
     <div class="mt-4 space-y-10" id="changePlan">
-        <form wire:submit.prevent="submitForm" method="post">
+        <form wire:submit="submitForm" method="post">
             <legend class="sr-only">Pricing plans</legend>
             <div x-data="{ annualBilling: false }">
                 <div
@@ -14,7 +14,7 @@
                         <label
                             class="label_pricing justify-between relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                             <div class="flex items-center text-sm">
-                                <input wire:model.lazy="plan" type="radio" name="plan"
+                                <input wire:model.blur="plan" type="radio" name="plan"
                                        value="{{ $plan->name }}"
                                        class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
                                        aria-labelledby="pricing-plans-0-label"

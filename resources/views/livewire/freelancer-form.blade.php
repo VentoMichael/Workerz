@@ -1,4 +1,4 @@
-<form wire:submit.prevent="submitForm" action="{{ route('post.sign-up.account') }}" method="post">
+<form wire:submit="submitForm" action="{{ route('post.sign-up.account') }}" method="post">
     @csrf
     <div class="space-y-12">
         <div class="border-b border-gray-900/10 pb-12">
@@ -14,7 +14,7 @@
                         <div
                             class="@error('username')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror flex rounded-md shadow-sm ring-inset focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                             <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">workerz.be/workers/</span>
-                            <input wire:model="username" type="text" name="username"
+                            <input wire:model.live="username" type="text" name="username"
                                    id="username" autocomplete="username"
                                    class="block flex-1 border-0 bg-transparent py-1.5 pl-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                    placeholder="janesmith">
@@ -29,7 +29,7 @@
                     <label for="about"
                            class="block text-sm font-medium leading-6 text-gray-900">About</label>
                     <div class="mt-2">
-                                    <textarea id="about" wire:model.lazy="about" name="about" rows="3"
+                                    <textarea id="about" wire:model.blur="about" name="about" rows="3"
                                               class="@error('about')border border-red-500 @else border-0 ring-gray-300 ring-1 @enderror p-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                     </div>
                     <p class="mt-1 text-sm leading-6 text-gray-600">Write a few sentences about
@@ -56,7 +56,7 @@
                                 </svg>
                             </button>
                         @endif
-                        <input wire:model.lazy="avatarUpload"
+                        <input wire:model.blur="avatarUpload"
                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white focus:outline-none"
                                aria-describedby="avatarUpload" id="avatarUpload" type="file">
                     </div>
@@ -99,7 +99,7 @@
                             <label for="backgroundUpload"
                                    class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                                 <span>Upload a file</span>
-                                <input wire:model.lazy="backgroundUpload" id="backgroundUpload"
+                                <input wire:model.blur="backgroundUpload" id="backgroundUpload"
                                        name="backgroundUpload" type="file" class="sr-only">
                             </label>
                             <p class="pl-1">or drag and drop</p>
@@ -125,7 +125,7 @@
                 <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">First
                     name</label>
                 <div class="mt-2">
-                    <input wire:model.lazy="firstname" type="text" name="firstname" id="firstname"
+                    <input wire:model.blur="firstname" type="text" name="firstname" id="firstname"
                            autocomplete="firstname"
                            class="@error('firstname')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
@@ -137,7 +137,7 @@
                 <label for="lastname" class="block text-sm font-medium leading-6 text-gray-900">Last
                     name</label>
                 <div class="mt-2">
-                    <input wire:model.lazy="lastname" type="text" name="lastname" id="lastname"
+                    <input wire:model.blur="lastname" type="text" name="lastname" id="lastname"
                            autocomplete="lastname"
                            class="@error('lastname')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
@@ -150,7 +150,7 @@
                 <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
                     address</label>
                 <div class="mt-2">
-                    <input wire:model.lazy="email" id="email" name="email" type="email"
+                    <input wire:model.blur="email" id="email" name="email" type="email"
                            autocomplete="email"
                            class="@error('email')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
@@ -161,7 +161,7 @@
             <div class="sm:col-span-3">
                 <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                 <div class="mt-2 relative">
-                    <input wire:model.lazy="password" id="password" name="password" type="{{ $passwordVisible ? 'text' : 'password' }}"
+                    <input wire:model.blur="password" id="password" name="password" type="{{ $passwordVisible ? 'text' : 'password' }}"
                            autocomplete="password"
                            class="@error('password')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     <div wire:click="togglePasswordVisibility" class="absolute inset-y-0 right-2 flex items-center cursor-pointer">
@@ -182,7 +182,7 @@
                 <label for="streetAddress" class="block text-sm font-medium leading-6 text-gray-900">Street
                     address</label>
                 <div class="mt-2">
-                    <input wire:model.lazy="streetAddress" type="text" name="streetAddress" id="streetAddress"
+                    <input wire:model.blur="streetAddress" type="text" name="streetAddress" id="streetAddress"
                            autocomplete="streetAddress"
                            class="@error('streetAddress')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
@@ -194,7 +194,7 @@
             <div class="sm:col-span-2 sm:col-start-1">
                 <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
                 <div class="mt-2">
-                    <input wire:model.lazy="city" type="text" name="city" id="city" autocomplete="city"
+                    <input wire:model.blur="city" type="text" name="city" id="city" autocomplete="city"
                            class="@error('city')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
                 @error('city')
@@ -206,7 +206,7 @@
                 <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State /
                     Province</label>
                 <div class="mt-2">
-                    <input wire:model.lazy="region" type="text" name="region" id="region"
+                    <input wire:model.blur="region" type="text" name="region" id="region"
                            autocomplete="region"
                            class="@error('region')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
@@ -219,7 +219,7 @@
                 <label for="postalCode" class="block text-sm font-medium leading-6 text-gray-900">ZIP /
                     Postal code</label>
                 <div class="mt-2">
-                    <input wire:model.lazy="postalCode" type="text" name="postalCode" id="postalCode"
+                    <input wire:model.blur="postalCode" type="text" name="postalCode" id="postalCode"
                            autocomplete="postalCode"
                            class="@error('postalCode')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                 </div>
@@ -247,7 +247,7 @@
                             <label
                                 class="label_pricing justify-between relative border p-4 flex flex-col cursor-pointer md:pl-4 sm:pr-6 md:flex-row focus:outline-none">
                                 <div class="flex items-center text-sm">
-                                    <input wire:model.lazy="plan" type="radio" name="plan"
+                                    <input wire:model.blur="plan" type="radio" name="plan"
                                            value="{{ $plan->name }}"
                                            class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500"
                                            aria-labelledby="pricing-plans-0-label"

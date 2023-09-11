@@ -26,7 +26,7 @@
                     <div class="col-span-full">
                         <label for="card-element" class="block text-sm font-medium leading-6 text-gray-900">Credit or
                             debit card</label>
-                        <div wire:model="paymentMethods" wire:ignore id="card-element" name="card-element"
+                        <div wire:model.live="paymentMethods" wire:ignore id="card-element" name="card-element"
                              class="border-0 ring-gray-300 ring-1 px-2 block w-full rounded-md py-2 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-white"></div>
                         <!-- Used to display form errors. -->
                         <div id="card-errors" role="alert"></div>
@@ -59,7 +59,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div onclick="Livewire.emit('openModal', 'change-plans')"
+                                        <div onclick="Livewire.dispatch('openModal', { component: 'change-plans' })"
                                              class="cursor-pointer text-blue-300 hover:underline">Change plan
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                                         <div class="flex items-center justify-between pt-6">
                                             <dt class="text-base font-medium">Total</dt>
                                             <dd class="text-base font-medium text-gray-900">
-                                                <span wire:model="planPayment">{{$planPayment}}</span>€ {{$yearlyPayment ? '/yearly' : '/monthly'}}
+                                                <span wire:model.live="planPayment">{{$planPayment}}</span>€ {{$yearlyPayment ? '/yearly' : '/monthly'}}
                                         </div>
                                     </div>
                                 </div>
