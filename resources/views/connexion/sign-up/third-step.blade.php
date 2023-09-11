@@ -51,7 +51,6 @@
         };
         var card = elements.create('card', {hidePostalCode: true, style: style});
         card.mount('#card-element');
-        console.log(document.getElementById('card-element'));
         card.addEventListener('change', function (event) {
             var displayError = document.getElementById('card-errors');
             if (event.error) {
@@ -77,7 +76,6 @@
                     }
                 }
             );
-            console.log(error)
             if (error) {
                 cardButton.disabled = false;
                 cardButton.classList.remove('opacity-50');
@@ -90,8 +88,6 @@
                 const errorContainer = document.getElementById('card-errors');
                 errorContainer.innerHTML = '';
                 errorContainer.appendChild(errorElement);
-
-                e.preventDefault();
             } else {
                 var form = document.getElementById('subscribe-form');
                 var hiddenInput = document.createElement('input');
@@ -102,6 +98,7 @@
                 form.submit();
             }
         });
+
 
     </script>
 

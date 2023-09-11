@@ -56,25 +56,16 @@ class RegistrationController extends Controller
         //Todo:send invoice
 
         try {
-            // Create a subscription
 
             $user->newSubscription($productSelected['name'], $planId)->create($paymentMethod);
 
-            // If the subscription creation was successful, charge the user
-            $user->charge($planPayment * 100, $paymentMethod);
-
-            // Add the payment method (this line may not be needed)
             $user->addPaymentMethod($paymentMethod);
 
             Auth::login($user);
 
             return redirect(route('dashboard.dashboard'));
         } catch (\Exception $e) {
-            // Log the exception for debugging purposes
-            dd('Billing error: ' . $e->getMessage(),$paymentMethod);
-
-            // Handle the error gracefully, you can redirect to an error page or return with an error message
-            return back()->with('error', 'There was an issue processing your payment. Please try again later.');
+            return back();
         }
     }
 }
