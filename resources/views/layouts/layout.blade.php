@@ -49,7 +49,6 @@
             });
         }
         if (userMenuButtonNotifications) {
-//BEUGGG QUAND ON VA DANS LE PROFIL IL SAFFICHE RAPIDEMENT
             userMenuButtonNotifications.forEach(userMenuButtonNotification => {
                 userMenuButtonNotification.addEventListener('click', function (event) {
                     toggleMenu(menuItemsNotifications);
