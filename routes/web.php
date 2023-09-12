@@ -150,8 +150,6 @@ Route::get('/newsletter',
 // Routes accessible only to authenticated users
  Route::middleware(['auth'])->group(function () {
     // Dashboard views
-    Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
-
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.dashboard');
 
     Route::get('/dashboard/profil', [\App\Http\Controllers\DashboardController::class, 'profil'])->name('dashboard.profil');
