@@ -4,11 +4,11 @@
         @if($successMessage)
             @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
         @endif
-        <form id="form" wire:submit.prevent="submitForm" method="get" class="space-y-8">
+        <form id="form" wire:submit="submitForm" method="get" class="space-y-8">
             @csrf
             <div>
                 <label for="email_contact" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                <input wire:model.lazy="email_contact" value="{{ old('email_contact') }}" type="email" id="email_contact" name="email_contact"
+                <input wire:model.blur="email_contact" value="{{ old('email_contact') }}" type="email" id="email_contact" name="email_contact"
                        class="@error('email_contact')border border-red-500 @enderror placeholder:text-gray-400 shadow-sm bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
                        placeholder="your-email@hotmail.com" >
                  @error('email_contact')
@@ -18,7 +18,7 @@
 
             <div>
                 <label for="subject" class="block mb-2 text-sm font-medium text-gray-900">Subject</label>
-                <input wire:model.lazy="subject" value="{{ old('subject') }}" type="text" id="subject" name="subject"
+                <input wire:model.blur="subject" value="{{ old('subject') }}" type="text" id="subject" name="subject"
                        class="@error('subject')border border-red-500 @enderror placeholder:text-gray-400 block p-3 w-full text-sm text-black bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500"
                        placeholder="Let us know how we can help you" >
                 @error('subject')
@@ -29,7 +29,7 @@
             <div class="sm:col-span-2">
                 <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Your
                     message</label>
-                <textarea wire:model.lazy="message" id="message" name="message" rows="6"
+                <textarea wire:model.blur="message" id="message" name="message" rows="6"
                           class="@error('message')border border-red-500 @enderror placeholder:text-gray-400 block p-2.5 w-full text-sm text-black bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
                           placeholder="Leave a message...">{{ old('message') }}</textarea>
                 @error('message')

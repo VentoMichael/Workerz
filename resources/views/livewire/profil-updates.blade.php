@@ -1,4 +1,4 @@
-<form wire:submit.prevent="submitForm" method="POST">
+<form wire:submit="submitForm" method="POST">
 
     <div class="shadow sm:rounded-md sm:overflow-hidden">
 
@@ -65,7 +65,7 @@
                                     <span>Change</span>
                                     <span class="sr-only"> background photo</span>
                                 </label>
-                                <input wire:model.lazy="backgroundUpload" id="mobile-user-background"
+                                <input wire:model.blur="backgroundUpload" id="mobile-user-background"
                                        name="user-background"
                                        type="file"
                                        class="absolute w-full h-full opacity-0 cursor-pointer border-gray-300">
@@ -118,7 +118,7 @@
                            class="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
                         <span>Change</span>
                         <span class="sr-only"> background photo</span>
-                        <input wire:model.lazy="backgroundUpload" type="file" id="desktop-user-background"
+                        <input wire:model.blur="backgroundUpload" type="file" id="desktop-user-background"
                                name="user-background"
                                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300">
                     </label>
@@ -137,7 +137,7 @@
                                 class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
                                                     <span
                                                         class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">workerz.be/workers/</span>
-                                <input readonly disabled wire:model.lazy="username" type="text" name="username"
+                                <input readonly disabled wire:model.blur="username" type="text" name="username"
                                        id="username" autocomplete="username"
                                        class="disabled:opacity-50 disabled:cursor-not-allowed block flex-1 border-0 bg-transparent py-1.5 pl-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6">
                             </div>
@@ -148,7 +148,7 @@
                         <label for="about"
                                class="block text-sm font-medium leading-6 text-gray-900">About</label>
                         <div class="mt-2">
-                                    <textarea wire:model.lazy="about" id="about" name="about" rows="3"
+                                    <textarea wire:model.blur="about" id="about" name="about" rows="3"
                                               class="p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                         </div>
                         <p class="mt-1 text-sm leading-6 text-gray-600">Write a few sentences about
@@ -218,7 +218,7 @@
                                         <span>Change</span>
                                         <span class="sr-only"> user photo</span>
                                     </label>
-                                    <input wire:model.lazy="avatarUpload" id="mobile-user-photo" name="user-photo"
+                                    <input wire:model.blur="avatarUpload" id="mobile-user-photo" name="user-photo"
                                            type="file"
                                            class="absolute w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md">
                                 </div>
@@ -257,7 +257,7 @@
                                class="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
                             <span>Change</span>
                             <span class="sr-only"> user photo</span>
-                            <input wire:model.lazy="avatarUpload" type="file" id="desktop-user-photo" name="user-photo"
+                            <input wire:model.blur="avatarUpload" type="file" id="desktop-user-photo" name="user-photo"
                                    class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300 rounded-md">
                         </label>
                     </div>
@@ -271,7 +271,7 @@
                 <div class="sm:col-span-3">
                     <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
                     <div class="mt-2">
-                        <input wire:model.lazy="firstname" type="text" name="firstname" id="firstname"
+                        <input wire:model.blur="firstname" type="text" name="firstname" id="firstname"
                                autocomplete="firstname"
                                class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
@@ -285,7 +285,7 @@
                     <label for="lastname" class="block text-sm font-medium leading-6 text-gray-900">Last
                         name</label>
                     <div class="mt-2">
-                        <input wire:model.lazy="lastname" type="text" name="lastname"
+                        <input wire:model.blur="lastname" type="text" name="lastname"
                                id="lastname" autocomplete="lastname"
                                class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
@@ -299,7 +299,7 @@
                         address</label>
                     <div class="mt-2">
                         <input id="email" name="email" type="email"
-                               readonly disabled wire:model="email"
+                               readonly disabled wire:model.live="email"
                                autocomplete="email"
                                class="disabled:opacity-50 disabled:cursor-not-allowed px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
@@ -310,7 +310,7 @@
                            class="block text-sm font-medium leading-6 text-gray-900">Street
                         address</label>
                     <div class="mt-2">
-                        <input wire:model.lazy="streetAddress" type="text" name="streetAddress"
+                        <input wire:model.blur="streetAddress" type="text" name="streetAddress"
                                id="streetAddress"
                                autocomplete="streetAddress"
                                class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -324,7 +324,7 @@
                     <label for="city"
                            class="block text-sm font-medium leading-6 text-gray-900">City</label>
                     <div class="mt-2">
-                        <input wire:model.lazy="city" type="text" name="city" id="city"
+                        <input wire:model.blur="city" type="text" name="city" id="city"
                                autocomplete="city"
                                class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
@@ -338,7 +338,7 @@
                         /
                         Province</label>
                     <div class="mt-2">
-                        <input wire:model.lazy="region" type="text" name="region" id="region"
+                        <input wire:model.blur="region" type="text" name="region" id="region"
                                autocomplete="region"
                                class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
@@ -352,7 +352,7 @@
                            class="block text-sm font-medium leading-6 text-gray-900">ZIP /
                         Postal code</label>
                     <div class="mt-2">
-                        <input wire:model.lazy="postalCode" type="text" name="postalCode"
+                        <input wire:model.blur="postalCode" type="text" name="postalCode"
                                id="postalCode" autocomplete="postalCode"
                                class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>

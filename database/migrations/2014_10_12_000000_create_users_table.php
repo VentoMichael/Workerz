@@ -14,16 +14,17 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
-            $table->string('username');
-            $table->string('about');
-            $table->json('avatarUpload');
-            $table->json('backgroundUpload');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('streetAddress');
-            $table->string('city');
-            $table->string('region');
-            $table->string('postalCode');
+            $table->string('username')->nullable();
+            $table->string('about')->nullable();
+            $table->json('avatarUpload')->nullable();
+            $table->json('backgroundUpload')->nullable();
+            $table->string('name')->nullable();
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
+            $table->string('streetAddress')->nullable();
+            $table->string('city')->nullable();
+            $table->string('region')->nullable();
+            $table->string('postalCode')->nullable();
             $table->boolean('tutorial_shown')->default(false);
             $table->boolean('hiring')->default(false);
             $table->boolean('private')->default(false);

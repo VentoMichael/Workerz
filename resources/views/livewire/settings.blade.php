@@ -1,7 +1,7 @@
 <div class="divide-y divide-gray-200 lg:col-span-12">
     <!-- Profile section -->
     <div aria-labelledby="payment-details-heading">
-        <form wire:submit.prevent="updatePassword" action="{{ route('password.update') }}" method="POST">
+        <form wire:submit="updatePassword" action="{{ route('password.update') }}" method="POST">
             @csrf
             @include('components.success-message', ['message' => $successMessagePassword,'clearProperty' => 'successMessagePassword'])
 
@@ -20,7 +20,7 @@
                         <div class="col-span-4 sm:col-span-2">
                             <label for="currentPassword" class="block text-sm font-medium text-gray-700">Current Password</label>
                             <div class="relative">
-                            <input type="{{ $passwordVisible ? 'text' : 'password' }}" wire:model="currentPassword"
+                            <input type="{{ $passwordVisible ? 'text' : 'password' }}" wire:model.live="currentPassword"
                                    id="currentPassword" autocomplete="currentPassword"
                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:indigo-900 focus:border-indigo-900 sm:text-sm">
                                 <div wire:click="togglePasswordVisibility"
@@ -56,7 +56,7 @@
                             <label for="newPassword" class="block text-sm font-medium text-gray-700">New
                                 Password</label>
                             <div class="relative">
-                                <input type="{{ $newPasswordVisible ? 'text' : 'password' }}" wire:model="newPassword"
+                                <input type="{{ $newPasswordVisible ? 'text' : 'password' }}" wire:model.live="newPassword"
                                        id="newPassword" autocomplete="newPassword"
                                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:indigo-900 focus:border-indigo-900 sm:text-sm">
                                 <div wire:click="toggleNewPasswordVisibility"
@@ -107,7 +107,7 @@
                         class="text-lg leading-6 font-medium text-gray-900">Privacy</h2>
                     <p class="mt-1 text-sm text-gray-500">Update profile visibility.</p>
                 </div>
-                <form wire:submit.prevent="submitForm" method="POST">
+                <form wire:submit="submitForm" method="POST">
                     @csrf
                     <div>
                         <ul role="list" class="mt-2 divide-y divide-gray-200">
@@ -184,7 +184,7 @@
                                 </div>
                                 <!-- Delete Button -->
 
-                                <x-button onclick="Livewire.emit('openModal', 'confirm-delete')" kind="danger"
+                                <x-button onclick="Livewire.dispatch('openModal', { component: 'confirm-delete' })" kind="danger"
                                           class="disabled:opacity-50" wire:loading.attr="disabled"
                                           wire:target="deleteAccount" wire:click="deleteBtn">
                                     Delete
@@ -229,6 +229,6 @@
 </div>
 @section('scripts')
 
-    @livewire('livewire-ui-modal')
+    @livewire('wire-elements-modal')
 
 @endsection
