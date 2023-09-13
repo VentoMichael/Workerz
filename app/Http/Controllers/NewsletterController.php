@@ -6,12 +6,17 @@ use Illuminate\Http\Request;
 
 class NewsletterController extends Controller
 {
-    public function storeNewsletterEmail(){
-        request()->validate([
-            'newsletter' => 'email',
+    public function subscribe(Request $request)
+    {
+        // Validate the email address (add validation rules as needed)
+        $request->validate([
+            'newsletter' => 'required|email',
         ]);
-        //return Redirect::to(URL::previous() . "#createMsg")->with('success', 'Votre message a été envoyé avec succès.
-        //Nous vous contacterons bientôt !');
-        return request('newsletter');
+
+        // Subscribe the user to the newsletter (you can implement this logic here)
+        // You can use a mailing service or save the email to your newsletter list
+
+        // Redirect back with a success message or return a JSON response
+        return redirect()->back()->with('success', 'You are now subscribed to our newsletter!');
     }
 }

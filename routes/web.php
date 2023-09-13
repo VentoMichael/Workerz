@@ -145,7 +145,7 @@ Route::get('/terms', function () {
 // Newsletter
 
 Route::get('/newsletter',
-    [\App\Http\Controllers\NewsletterController::class, 'storeNewsletterEmail'])->name('newsletter');
+    [\App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter');
 
 // Routes accessible only to authenticated users
  Route::middleware(['auth'])->group(function () {
