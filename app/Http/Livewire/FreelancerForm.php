@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Plan;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -116,10 +117,9 @@ class FreelancerForm extends Component
         $user = session('user', []);
         $user['account'] = $userData;
         session(['user' => $user]);
-
-        if (!request()->has('changePlan')) {
-            User::create($userData);
-        }
+        $newUser = User::create($userData);
+        $newUser->role()->associate(Role::find($user['role']));
+        $newUser->save();
         sleep(1);
         return redirect()->route('sign-up.confirmation');
     }

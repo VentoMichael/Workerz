@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Cashier\Subscription;
+use Laravel\Cashier\SubscriptionBuilder;
 use Stripe\Stripe;
 
 class RegistrationController extends Controller
 {
     public function showRoleForm()
     {
-        return view('connexion.sign-up.first-step');
+        $roles = Role::whereNot('name','Admin')->get();
+        return view('connexion.sign-up.first-step', compact('roles'));
     }
 
     public function storeRole(Request $request)
@@ -57,8 +61,12 @@ class RegistrationController extends Controller
 
         try {
 
-            $user->newSubscription($productSelected['name'], $planId)->create($paymentMethod);
+            $subscription = $user->newSubscription($productSelected['name'], $planId)->create($paymentMethod);
 
+            $subscription->price = $planPayment;
+            $subscription->is_annualy = (bool)session('productSelected')['paymentYearly'];
+            $subscription->save();
+            dd($subscription);
             $user->addPaymentMethod($paymentMethod);
 
             Auth::login($user);

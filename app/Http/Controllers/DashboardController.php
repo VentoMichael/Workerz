@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDashboardRequest;
 use App\Http\Requests\UpdateDashboardRequest;
 use App\Models\Dashboard;
+use App\Models\Plan;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -19,11 +21,11 @@ class DashboardController extends Controller
         //Session::flush();
         //mettre un message de bonjour ou rebonjour et bouger avec la session apres 10m
 // Set the tutorial_shown column for the authenticated user
-        if (request()->has('nevermind')){
+        if (request()->has('nevermind')) {
             $user->update(['tutorial_shown' => true]);
         }
 
-        return view('dashboard.home',compact('user'));
+        return view('dashboard.home', compact('user'));
 
     }
 
@@ -34,7 +36,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        return view('dashboard.profil',compact('user'));
+        return view('dashboard.profil', compact('user'));
     }
 
     /**
@@ -50,7 +52,25 @@ class DashboardController extends Controller
      */
     public function plans()
     {
-            return view('dashboard.plans');
+        $user = Auth::user();
+        $plans = Plan::all();
+        $stripePlanNames = [];
+        $matchedPlan = null;
+        foreach ($plans as $plan) {
+            $stripePlanNames[] = $plan->name;
+        }
+
+        foreach ($stripePlanNames as $planName) {
+            $subscription = $user->subscription($planName);
+            if ($subscription) {
+                $matchedPlan = $planName;
+                break;
+            }
+        }
+        $interval = $subscription->asStripeSubscription()->plan->interval === 'month' ? 'Month' : 'Annual';
+        $lastDay = Carbon::createFromTimestamp($subscription->asStripeSubscription()->current_period_end)->format('d-m-Y');
+        $invoices = $user->invoices();
+        return view('dashboard.plans', compact('matchedPlan','invoices','interval','lastDay','plans','subscription'));
 
     }
 
@@ -60,7 +80,7 @@ class DashboardController extends Controller
     public function settings()
     {
 
-            return view('dashboard.settings');
+        return view('dashboard.settings');
 
     }
 
@@ -69,17 +89,20 @@ class DashboardController extends Controller
      */
     public function updateSettings()
     {
-        if (request()->has('nevermind')){
+        if (request()->has('nevermind')) {
             Auth::user()->update(['tutorial_shown' => true]);
         }
         //update
-            return view('dashboard.settings');
+        return view('dashboard.settings');
     }
-    public function updatePassword(){
+
+    public function updatePassword()
+    {
         dd('f');
     }
 
 
-    public function deleteAccount(){
+    public function deleteAccount()
+    {
     }
 }

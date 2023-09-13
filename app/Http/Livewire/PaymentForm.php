@@ -56,7 +56,6 @@ class PaymentForm extends Component
         $product = $newProductData['product'];
         $this->planPayment = $newProductData['paymentYearly'] ? $product['price_yearly'] : $product['price_monthly'];
         session('price', $this->planPayment);
-        //TODO:STILL TWO PAYMENT
     }
     public function render()
     {

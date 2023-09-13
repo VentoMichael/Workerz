@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+ @extends('layouts.layout')
 @section('title', 'Create an Account - Step 1: Select Role')
 @section('description', 'Create an account to access our platform and connect with freelancers or clients. Select your role - freelancer or client - to get started.')
 @section('keywords', 'account creation, freelancer, client, platform')
@@ -25,60 +25,22 @@
                     <legend class="text-base font-medium text-gray-900">Select your role</legend>
 
                     <div class="mt-4 grid grid-cols-1 gap-y-6 lg:grid-cols-2 sm:gap-3">
-                        <!--
-                          Checked: "border-transparent", Not Checked: "border-gray-300"
-                          Active: "border-indigo-500 ring-2 ring-indigo-500"
-                        -->
-                        <label class="input_radio relative bg-white border-gray-300 border rounded-lg shadow-sm p-4 flex cursor-pointer focus:outline-none">
-                            <input type="radio" name="role" value="Worker" class="sr-only" aria-labelledby="role-0-label" aria-describedby="role-0-description-0 role-0-description-1">
-                            <div class="flex-1 flex">
-                                <div class="flex flex-col">
-                                    <span id="role-0-label" class="block text-sm font-medium text-gray-900"> I am a freelancer </span>
-                                    <span id="role-0-description-0" class="mt-1 flex items-center text-sm text-gray-500"> If you are an independent professional or self-employed individual offering your services to others, select this option. </span>
+                        @foreach($roles as $role)
+                            <label class="input_radio relative bg-white border-gray-300 border rounded-lg shadow-sm p-4 flex cursor-pointer focus:outline-none">
+                                <input type="radio" name="role" value="{{ $role->id }}" class="sr-only" aria-labelledby="role-{{ $role->id }}-label" aria-describedby="role-{{ $role->id }}-description-{{ $role->id }}">
+                                <div class="flex-1 flex">
+                                    <div class="flex flex-col">
+                                        <span id="role-{{ $role->id }}-label" class="block text-sm font-medium text-gray-900">{{ $role->title }}</span>
+                                        <span id="role-{{ $role->id }}-description-{{ $role->id }}" class="mt-1 flex items-center text-sm text-gray-500">{{ $role->description }}</span>
+                                    </div>
                                 </div>
-                            </div>
+                                <svg class="invisible h-5 w-5 text-indigo-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <div class="border_radio border-2 border-transparent  absolute -inset-px rounded-lg border-2 pointer-events-none" aria-hidden="true"></div>
+                            </label>
 
-                            <!--
-                              Not Checked: "invisible"
-
-                              Heroicon name: solid/check-circle
-                            -->
-                            <svg class="invisible h-5 w-5 text-indigo-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <!--
-                              Active: "border", Not Active: "border-2"
-                              Checked: "border-indigo-500", Not Checked: "border-transparent"
-                            -->
-                            <div class="border_radio border-2 border-transparent  absolute -inset-px rounded-lg border-2 pointer-events-none" aria-hidden="true"></div>
-                        </label>
-
-                        <!--
-                          Checked: "border-transparent", Not Checked: "border-gray-300"
-                          Active: "border-indigo-500 ring-2 ring-indigo-500"
-                        -->
-                        <label class="input_radio relative bg-white border-gray-300 border rounded-lg shadow-sm p-4 flex cursor-pointer focus:outline-none">
-                            <input type="radio" name="role" value="User" class="sr-only" aria-labelledby="role-1-label" aria-describedby="role-1-description-0 role-1-description-1">
-                            <div class="flex-1 flex">
-                                <div class="flex flex-col">
-                                    <span id="role-1-label" class="block text-sm font-medium text-gray-900"> I want freelancers services</span>
-                                    <span id="role-1-description-0" class="mt-1 flex items-center text-sm text-gray-500"> If you need help with a project or task and want to hire an independent professional or self-employed individual to assist you, select this option. </span>
-                                </div>
-                            </div>
-                            <!--
-                              Not Checked: "invisible"
-
-                              Heroicon name: solid/check-circle
-                            -->
-                            <svg class="invisible h-5 w-5 text-indigo-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                            </svg>
-                            <!--
-                              Active: "border", Not Active: "border-2"
-                              Checked: "border-indigo-500", Not Checked: "border-transparent"
-                            -->
-                            <div class="border_radio border-2 border-transparent absolute -inset-px rounded-lg border-2 pointer-events-none" aria-hidden="true"></div>
-                        </label>
+                        @endforeach
                         @error('role')
                         <p class="text-red-500 mt-1">{{ $message }}</p>
                         @enderror
@@ -98,7 +60,6 @@
                     <li class="relative pb-10">
                         <div class="-ml-px absolute mt-0.5 top-4 left-4 w-0.5 h-full bg-gray-300"
                              aria-hidden="true"></div>
-                        <!-- Complete Step -->
                         <div class="relative flex items-start group">
         <span class="h-9 flex items-center" aria-hidden="true">
           <span
@@ -114,7 +75,6 @@
                     </li>
 
                     <li class="relative pb-10">
-                        <!-- Current Step -->
                         <div class="relative flex items-start group" aria-current="step">
         <span class="h-9 flex items-center" aria-hidden="true">
           <span
@@ -137,13 +97,10 @@
 @endsection
 @section('scripts')
     <script>
-        // Get all label elements
         const labels = document.querySelectorAll('label.input_radio');
 
-        // Add click event listener to each label
         labels.forEach(label => {
             label.addEventListener('click', () => {
-                // Remove "border-indigo-500 ring-2 ring-indigo-500" class from all labels
                 labels.forEach(l => {
                     l.classList.remove('border-indigo-500', 'ring-2', 'ring-indigo-500');
                     l.querySelector('svg').classList.add('invisible');
@@ -151,7 +108,6 @@
                     l.querySelector('.border_radio').classList.add('border-2');
                 });
 
-                // Add "border-indigo-500 ring-2 ring-indigo-500" class to clicked label
                 label.classList.add('border-indigo-500', 'ring-2', 'ring-indigo-500');
                 label.querySelector('svg').classList.remove('invisible');
                 label.querySelector('.border_radio').classList.add('border');

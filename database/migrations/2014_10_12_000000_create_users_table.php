@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->string('username')->nullable();
+            $table->unsignedBigInteger('role_id')->nullable();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
             $table->string('about')->nullable();
             $table->json('avatarUpload')->nullable();
             $table->json('backgroundUpload')->nullable();
@@ -29,6 +31,7 @@ return new class extends Migration
             $table->boolean('hiring')->default(false);
             $table->boolean('private')->default(false);
             $table->boolean('allow_commenting')->default(false);
+            $table->boolean('banned')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
