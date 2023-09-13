@@ -10,7 +10,7 @@
                 <label for="email_contact" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
                 <input wire:model.blur="email_contact" value="{{ old('email_contact') }}" type="email" id="email_contact" name="email_contact"
                        class="@error('email_contact')border border-red-500 @enderror placeholder:text-gray-400 shadow-sm bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
-                       placeholder="your-email@hotmail.com" >
+                       placeholder="your-email@hotmail.com">
                  @error('email_contact')
                     <p class="text-red-500 mt-1">{{ $message }}</p>
                 @enderror

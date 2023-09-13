@@ -13,7 +13,10 @@ class NewsletterSubscription extends Component
     protected $rules = [
         'email' => 'required|email|unique:newsletters',
     ];
-
+    public function mount()
+    {
+        $this->email = '';
+    }
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
@@ -27,18 +30,14 @@ class NewsletterSubscription extends Component
             'subscribed' => true,
         ]);
         sleep(1);
-        $this->resetForm();
+        $this->email = '';
         $this->clearProperty = 'successMessage';
         $this->successMessage = 'You have successfully subscribed to our newsletter!';
-
     }
 
     public function clearMessage($property)
     {
         $this->$property = null;
-    }
-    private function resetForm(){
-        $this->email = '';
     }
     public function render()
     {
