@@ -40,9 +40,12 @@ class FreelancerForm extends Component
     public $annualBilling = false;
     protected $avatarSizes = ['32x32', '160x160', '128x128'];
     protected $backgroundSizes = ['1980x192', '1280x192', '680x192'];
-    protected $listeners = [
-        'phoneNumbers'
-    ];
+    public $filter = '';
+    public $showSkillsList = false;
+    public $filteredSkills = [];
+    public $selectedSkills = [];
+    public $skills = ['Web Development', 'Mobile App Development', 'Graphic Design', 'Data Analysis'];
+
 
     protected $rules = [
         'username' => 'required|unique:users',
@@ -56,6 +59,7 @@ class FreelancerForm extends Component
         'streetAddress' => 'required',
         'city' => 'required',
         'region' => 'required',
+
         'postalCode' => 'required|integer',
         'plan' => 'required',
         'phoneNumber1' => 'nullable|numeric|regex:/^\(\d{3}\) \d{3}-\d{4}$/|unique:phone_numbers',
@@ -94,6 +98,45 @@ class FreelancerForm extends Component
         $this->phoneNumber2 = null;
         $this->showPhoneNumber2 = false;
     }
+    public function toggleSkillsList()
+    {
+        $this->showSkillsList = !$this->showSkillsList;
+
+        if ($this->showSkillsList) {
+            $this->filteredSkills = $this->skills;
+        } else {
+
+            $this->filter = '';
+            $this->filteredSkills = $this->skills;
+        }
+    }
+
+
+    public function removeSkill($index)
+    {
+        if (isset($this->selectedSkills[$index])) {
+            unset($this->selectedSkills[$index]);
+            $this->selectedSkills = array_values($this->selectedSkills);
+        }
+    }
+    public function addSkill($skill)
+    {
+        if (!in_array($skill, $this->selectedSkills)) {
+            $this->selectedSkills[] = $skill;
+            $this->showSkillsList = false;
+            $this->filter = '';
+        }
+    }
+    public function updatedFilter()
+    {
+        $this->filteredSkills = array_filter($this->skills, function ($skill) {
+            return stripos($skill, $this->filter) !== false && !in_array($skill, $this->selectedSkills);
+        });
+
+        $this->showSkillsList = true;
+    }
+
+
 
     public function removePhoneNumber3()
     {
@@ -223,7 +266,11 @@ class FreelancerForm extends Component
 
     public function render()
     {
+        $filteredSkills = array_filter($this->skills, function ($skill) {
+            return str_contains(strtolower($skill), strtolower($this->filter));
+        });
+
         $plans = Plan::all();
-        return view('livewire.freelancer-form', compact('plans'));
+        return view('livewire.freelancer-form', compact('plans','filteredSkills'));
     }
 }

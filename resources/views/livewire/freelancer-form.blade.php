@@ -111,7 +111,40 @@
                 <p class="text-red-500 mt-1">{{ $message }}</p>
                 @enderror
             </div>
-            //TODO::skills + button to add phone number
+            <div>
+                <label for="skills" class="block text-sm font-medium leading-5 text-gray-700">Skills</label>
+                <div class="relative">
+                    <input wire:model="filter" type="text" id="skills" class="form-input mt-1 block w-full"
+                           placeholder="Select or filter skills" wire:click="toggleSkillsList">
+                    @if ($showSkillsList)
+                        <div class="absolute mt-1 w-full z-10 bg-white border border-gray-300 rounded-md shadow-lg">
+                            @foreach($filteredSkills as $skill)
+                                @unless(in_array($skill, $selectedSkills))
+                                    <div wire:click="addSkill('{{ $skill }}')" class="cursor-pointer hover:bg-indigo-100 p-2">
+                                        {{ $skill }}
+                                    </div>
+                                @endunless
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+
+                <div class="mt-2">
+                    @foreach($selectedSkills as $index => $skill)
+                        <div class="inline-flex items-center bg-indigo-100 rounded-lg p-1 m-1">
+                            <span class="ml-2 mr-1 font-semibold text-gray-800">{{ $skill }}</span>
+                            <div wire:click="removeSkill({{ $index }})" class="cursor-pointer text-red-600 hover:text-red-800 focus:outline-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                     class="h-4 w-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
 
 
         </div>
