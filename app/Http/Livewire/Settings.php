@@ -20,10 +20,6 @@ class Settings extends Component
     public $changesMade = false;
     protected $listeners = ['confirmedDeletion' => 'deleteAccount'];
     public $deleteActivation =false;
-    public $currentPassword;
-    public $passwordVisible;
-    public $newPassword;
-    public $newPasswordVisible;
 
     public function mount()
     {
@@ -79,6 +75,8 @@ public function deleteBtn()
                 $this->infoMessage = 'No changes made to update.';
             }
         }
+        $this->changesMade = false;
+
     }
 
 
@@ -87,31 +85,7 @@ public function deleteBtn()
         $this->$property = null;
     }
 
-    public function togglePasswordVisibility()
-    {
-        $this->passwordVisible = !$this->passwordVisible;
-    }
-    public function toggleNewPasswordVisibility()
-    {
-        $this->newPasswordVisible = !$this->newPasswordVisible;
-    }
 
-    public function updatePassword()
-    {
-        $user = Auth::user();
-        if (!Hash::check($this->currentPassword, $user->password)) {
-            $this->addError('currentPassword', 'The current password is incorrect.');
-            return;
-        }
-
-        $user->update([
-            'password' => Hash::make($this->newPassword),
-        ]);
-
-        $this->reset(['currentPassword', 'newPassword']);
-
-        session()->flash('successMessagePassword', 'Password updated successfully.');
-    }
 
 
     public function render()

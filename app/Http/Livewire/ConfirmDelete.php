@@ -15,12 +15,9 @@ class ConfirmDelete extends ModalComponent
         sleep(2);
         Auth::user()->delete();
 
-        // Log the user out/Auth::logout();
 
-        // Clear the session
         Session::flush();
         session()->flash('successMessage', 'Account deleted successfully!');
-        // Redirect with a success message or wherever you want to go after deletion
         return redirect()->route('home');
     }
 
@@ -35,7 +32,7 @@ class ConfirmDelete extends ModalComponent
 
     public function cancelDelete()
     {
-        $this->closeModal(); // Close the confirmation modal
+        $this->closeModal();
     }
 
     public function render()

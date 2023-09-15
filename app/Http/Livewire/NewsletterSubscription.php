@@ -13,6 +13,11 @@ class NewsletterSubscription extends Component
     protected $rules = [
         'email' => 'required|email|unique:newsletters',
     ];
+    protected $messages = [
+        'email.required' => 'The email address cannot be empty.',
+        'email.email' => 'The email address format is not valid.',
+        'email.unique' => 'The email address is already registered.',
+    ];
     public function mount()
     {
         $this->email = '';

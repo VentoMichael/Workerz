@@ -20,6 +20,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Role::class);
     }
+    public function phoneNumbers()
+    {
+        return $this->hasMany(PhoneNumber::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

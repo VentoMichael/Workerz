@@ -56,7 +56,7 @@ class ProfilUpdates extends Component
         foreach ($user->backgroundUpload as $value) {
             if (strpos($value, 'covers/default_background') !== false) {
                 $this->containsDefaultBackground = true;
-                break; // Exit the loop if we find the default_background
+                break;
             }
         }
         $this->about = $user->about ?? '';
@@ -107,7 +107,6 @@ class ProfilUpdates extends Component
         }
 
         if ($this->hasChanges) {
-
             $userData = [
                 'about' => $this->about,
                 'firstname' => ucfirst($this->firstname),
@@ -146,9 +145,8 @@ class ProfilUpdates extends Component
             $this->infoMessage = 'No changes made to update.';
             $this->anchor = 'infoMsg';
         }
-
-        // Use Livewire's built-in function to emit a client-side event
-        $this->dispatch('delayed-action', ['delay' => 1000]); // Delay for 1 second
+$this->hasChanges = false;
+        $this->dispatch('delayed-action', ['delay' => 1000]);
     }
 
 

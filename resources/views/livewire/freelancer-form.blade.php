@@ -111,6 +111,8 @@
                 <p class="text-red-500 mt-1">{{ $message }}</p>
                 @enderror
             </div>
+            //TODO::skills + button to add phone number
+
 
         </div>
     </div>
@@ -161,14 +163,30 @@
             <div class="sm:col-span-3">
                 <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                 <div class="mt-2 relative">
-                    <input wire:model.blur="password" id="password" name="password" type="{{ $passwordVisible ? 'text' : 'password' }}"
+                    <input wire:model.blur="password" id="password" name="password"
+                           type="{{ $passwordVisible ? 'text' : 'password' }}"
                            autocomplete="password"
                            class="@error('password')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    <div wire:click="togglePasswordVisibility" class="absolute inset-y-0 right-2 flex items-center cursor-pointer">
+                    <div wire:click="togglePasswordVisibility"
+                         class="absolute inset-y-0 right-2 flex items-center cursor-pointer">
                         @if ($passwordVisible)
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#5850ec}</style><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>
+                            <svg class="svg" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
+                                <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                <style>.svg {
+                                        fill: #5850ec
+                                    }</style>
+                                <path
+                                    d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/>
+                            </svg>
                         @else
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#5850ec}</style><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c8.4-19.3 10.6-41.4 4.8-63.3c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zM373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5L373 389.9z"/></svg>
+                            <svg class="svg" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512">
+                                <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                <style>.svg {
+                                        fill: #5850ec
+                                    }</style>
+                                <path
+                                    d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c8.4-19.3 10.6-41.4 4.8-63.3c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zM373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5L373 389.9z"/>
+                            </svg>
                         @endif
                     </div>
                 </div>
@@ -228,6 +246,62 @@
                 @enderror
 
             </div>
+                <div class="sm:col-span-2">
+                    <label for="phoneNumber1" class="block text-sm font-medium leading-6 text-gray-900">Phone number 1</label>
+                    <input wire:model="phoneNumber1" type="number" name="phoneNumber1" id="phoneNumber1"
+                           autocomplete="phoneNumber1"
+                           class="@error('phoneNumber1')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    @error('phoneNumber1')
+                    <p class="text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
+                    @if(!$showPhoneNumber3 || $showPhoneNumber3 && !$showPhoneNumber2)
+                    <p wire:click="addPhoneNumbers" class="cursor-pointer text-blue-500 hover:underline">
+                        Add another
+                    </p>
+                        @endif
+                </div>
+
+                @if ($showPhoneNumber2)
+                    <div class="sm:col-span-2">
+                        <label for="phoneNumber2" class="block text-sm font-medium leading-6 text-gray-900">Phone number 2</label>
+                        <div class="relative">
+                        <input wire:model="phoneNumber2" type="number" name="phoneNumber2" id="phoneNumber2"
+                               autocomplete="phoneNumber2"
+                               class="@error('phoneNumber2')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <button type="button" wire:click="removePhoneNumber2"
+                                class="absolute top-1.5 right-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 p-0.5 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </button>
+                            @error('phoneNumber2')
+                            <p class="text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                    </div>
+                @endif
+
+                @if ($showPhoneNumber3)
+                    <div class="sm:col-span-2">
+                        <label for="phoneNumber3" class="block text-sm font-medium leading-6 text-gray-900">Phone number @if($showPhoneNumber2)3 @else 2 @endif</label>
+                        <div class="relative">
+                        <input wire:model="phoneNumber3" type="number" name="phoneNumber3" id="phoneNumber3"
+                               autocomplete="phoneNumber3"
+                               class="@error('phoneNumber3')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                        <button type="button" wire:click="removePhoneNumber3"
+                                class="absolute top-1.5 right-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 p-0.5 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </button>
+                            @error('phoneNumber3')
+                            <p class="text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                    </div>
+                @endif
         </div>
     </div>
 
@@ -278,7 +352,8 @@
                         <p class="text-red-500 mt-2">{{ $message }}</p>
                         @enderror
                         <label class="relative ml-auto mt-4 inline-flex mb-4 items-center cursor-pointer">
-                            <input wire:click="toggleAnnualBilling()" type="checkbox" x-model="annualBilling" name="annualBilling" class="sr-only peer">
+                            <input wire:click="toggleAnnualBilling()" type="checkbox" x-model="annualBilling"
+                                   name="annualBilling" class="sr-only peer">
                             <div
                                 class="mr-4 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 dark:peer-focus:ring-indigo-800 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full peer-checked:after:border-purple-700 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-purple-700 after:border-purple-700 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-indigo-600 peer-checked:bg-indigo-300"></div>
                             <span class="mr-2 text-sm font-medium text-gray-900">Annual billing </span>

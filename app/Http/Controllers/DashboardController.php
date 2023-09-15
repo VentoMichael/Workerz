@@ -20,7 +20,6 @@ class DashboardController extends Controller
         $user = Auth::user();
         //Session::flush();
         //mettre un message de bonjour ou rebonjour et bouger avec la session apres 10m
-// Set the tutorial_shown column for the authenticated user
         if (request()->has('nevermind')) {
             $user->update(['tutorial_shown' => true]);
         }
@@ -92,7 +91,6 @@ class DashboardController extends Controller
         if (request()->has('nevermind')) {
             Auth::user()->update(['tutorial_shown' => true]);
         }
-        //update
         return view('dashboard.settings');
     }
 

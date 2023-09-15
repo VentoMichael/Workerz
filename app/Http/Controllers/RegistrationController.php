@@ -29,9 +29,7 @@ class RegistrationController extends Controller
             'role' => $request->input('role')
         ];
 
-        // Store the user array in the session
         session(['user' => $user]);
-        // Store user role information (in session or database)
         return redirect()->route('sign-up.account');
     }
 
@@ -66,7 +64,6 @@ class RegistrationController extends Controller
             $subscription->price = $planPayment;
             $subscription->is_annualy = (bool)session('productSelected')['paymentYearly'];
             $subscription->save();
-            dd($subscription);
             $user->addPaymentMethod($paymentMethod);
 
             Auth::login($user);

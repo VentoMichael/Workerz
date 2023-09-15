@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\PhoneNumber;
 use App\Models\Plan;
 use App\Models\Role;
 use App\Models\User;
@@ -20,6 +21,11 @@ class FreelancerForm extends Component
     public $username;
     public $about;
     public $avatarUpload;
+    public $phoneNumber1;
+    public $phoneNumber2;
+    public $phoneNumber3;
+    public $showPhoneNumber2 = false;
+    public $showPhoneNumber3 = false;
     public $backgroundUpload;
     public $firstname;
     public $lastname;
@@ -34,7 +40,9 @@ class FreelancerForm extends Component
     public $annualBilling = false;
     protected $avatarSizes = ['32x32', '160x160', '128x128'];
     protected $backgroundSizes = ['1980x192', '1280x192', '680x192'];
-
+    protected $listeners = [
+        'phoneNumbers'
+    ];
 
     protected $rules = [
         'username' => 'required|unique:users',
@@ -50,6 +58,9 @@ class FreelancerForm extends Component
         'region' => 'required',
         'postalCode' => 'required|integer',
         'plan' => 'required',
+        'phoneNumber1' => 'nullable|numeric|regex:/^\(\d{3}\) \d{3}-\d{4}$/|unique:phone_numbers',
+        'phoneNumber2' => 'nullable|numeric|regex:/^\(\d{3}\) \d{3}-\d{4}$/|unique:phone_numbers',
+        'phoneNumber3' => 'nullable|numeric|regex:/^\(\d{3}\) \d{3}-\d{4}$/|unique:phone_numbers',
     ];
 
     public function mount()
@@ -69,9 +80,31 @@ class FreelancerForm extends Component
         $this->plan = $userData['account']['plan'] ?? '';
     }
 
+    public function addPhoneNumbers()
+    {
+        if (!$this->showPhoneNumber2) {
+            $this->showPhoneNumber2 = true;
+        } elseif ($this->showPhoneNumber2 && !$this->showPhoneNumber3) {
+            $this->showPhoneNumber3 = true;
+        }
+    }
+
+    public function removePhoneNumber2()
+    {
+        $this->phoneNumber2 = null;
+        $this->showPhoneNumber2 = false;
+    }
+
+    public function removePhoneNumber3()
+    {
+        $this->phoneNumber3 = null;
+        $this->showPhoneNumber3 = false;
+    }
+
     public function updated($property)
     {
         $this->validateOnly($property);
+
     }
 
     public function toggleAnnualBilling()
@@ -112,7 +145,7 @@ class FreelancerForm extends Component
         if ($this->backgroundUpload) {
             $userData['backgroundUpload'] = $this->processAndStoreImage($this->backgroundUpload, 'covers', $this->username, false);
         } else {
-            $userData['backgroundUpload'] = ["covers/default_background_320.jpg", "covers/default_background_320.webp", "covers/default_background_680.jpg", "covers/default_background_680.webp", "covers/default_background_1280.jpg", "covers/default_background_1280.webp","covers/default_background_1980.jpg", "covers/default_background_1980.webp"];
+            $userData['backgroundUpload'] = ["covers/default_background_320.jpg", "covers/default_background_320.webp", "covers/default_background_680.jpg", "covers/default_background_680.webp", "covers/default_background_1280.jpg", "covers/default_background_1280.webp", "covers/default_background_1980.jpg", "covers/default_background_1980.webp"];
         }
         $user = session('user', []);
         $user['account'] = $userData;
@@ -120,11 +153,22 @@ class FreelancerForm extends Component
         $newUser = User::create($userData);
         $newUser->role()->associate(Role::find($user['role']));
         $newUser->save();
+        $phoneNumbers = [$this->phoneNumber1, $this->phoneNumber2, $this->phoneNumber3,
+        ];
+        $phoneNumbers = array_filter($phoneNumbers, function ($value) {
+            return !is_null($value);
+        });
+        foreach ($phoneNumbers as $phoneNumber) {
+            $newUser->phoneNumbers()->create(['number' => $phoneNumber]);
+        }
+        $phoneNumbers = [];
+        dd($phoneNumbers);
         sleep(1);
         return redirect()->route('sign-up.confirmation');
     }
 
-    public function generateInitialsImage($folder,$username)
+
+    public function generateInitialsImage($folder, $username)
     {
         $name = $this->username;
         $initials = strtoupper($name[0]);
@@ -135,15 +179,15 @@ class FreelancerForm extends Component
     </svg>';
 
         $filename = 'initial';
-        Storage::disk('public')->put($folder.'/'.$username.'/initials/' . $filename . '.svg', $svgImage);
+        Storage::disk('public')->put($folder . '/' . $username . '/initials/' . $filename . '.svg', $svgImage);
 
-        return $folder.'/'.$username.'/initials/' . $filename;
+        return $folder . '/' . $username . '/initials/' . $filename;
     }
 
 
     protected function processAndStoreImage($uploadedImage, $folder, $filename, $isAvatar)
     {
-            $initialsPath = $this->generateInitialsImage($folder,$filename);
+        $initialsPath = $this->generateInitialsImage($folder, $filename);
         if (!$uploadedImage) {
             return $initialsPath;
         }
