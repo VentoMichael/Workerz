@@ -111,18 +111,20 @@
                 <p class="text-red-500 mt-1">{{ $message }}</p>
                 @enderror
             </div>
-            <div>
-                <label for="skills" class="block text-sm font-medium leading-5 text-gray-700">Skills</label>
+            <div class="col-span-full mt-8">
+                <label for="skills" class="block text-sm font-medium leading-6 text-gray-900">Skills</label>
                 <div class="relative">
-                    <input wire:model="filter" type="text" id="skills" class="form-input mt-1 block w-full"
-                           placeholder="Select or filter skills" wire:click="toggleSkillsList">
-                    @if ($showSkillsList)
-                        <div class="absolute mt-1 w-full z-10 bg-white border border-gray-300 rounded-md shadow-lg">
+                    <input wire:model="filter" type="text" id="skills" class="border-0 ring-gray-300 ring-1 px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6""
+                           placeholder="Select or filter skills" wire:keydown="filterSkills" wire:click="toggleSkillsList">
+                    @if ($showSkillsList && count($filteredSkills) !== 0)
+                        <div class="skills-list absolute mt-1 w-full z-10 bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-x-auto" id="listSkills">
                             @foreach($filteredSkills as $skill)
                                 @unless(in_array($skill, $selectedSkills))
-                                    <div wire:click="addSkill('{{ $skill }}')" class="cursor-pointer hover:bg-indigo-100 p-2">
+                                    <span wire:click="addSkill('{{ $skill }}')" wire:click="toggleSkillsList"
+                                          x-data="{ inputValue: '' }"
+                                          x-on:input.debounce.5000ms="inputValue = $event.target.value; $wire.set('filter', inputValue)" class="cursor-pointer hover:bg-indigo-100 block text-sm font-medium leading-6 text-gray-900 p-2">
                                         {{ $skill }}
-                                    </div>
+                                    </span>
                                 @endunless
                             @endforeach
                         </div>
@@ -130,9 +132,12 @@
                 </div>
 
                 <div class="mt-2">
+                    @if (count($filteredSkills) === 0 && $showSkillsList)
+                        <div class="text-gray-500">No results found.</div>
+                    @else
                     @foreach($selectedSkills as $index => $skill)
-                        <div class="inline-flex items-center bg-indigo-100 rounded-lg p-1 m-1">
-                            <span class="ml-2 mr-1 font-semibold text-gray-800">{{ $skill }}</span>
+                        <div class="inline-flex items-center bg-purple-100 rounded-lg p-1 m-1">
+                            <span class="inline-flex items-center px-2 py-1 text-sm font-medium text-purple-800 rounded">{{ $skill }}</span>
                             <div wire:click="removeSkill({{ $index }})" class="cursor-pointer text-red-600 hover:text-red-800 focus:outline-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                                      class="h-4 w-4">
@@ -142,6 +147,7 @@
                             </div>
                         </div>
                     @endforeach
+                    @endif
                 </div>
             </div>
 
@@ -150,7 +156,7 @@
         </div>
     </div>
 
-    <div class="border-b border-gray-900/10 pb-12">
+    <div class="border-b border-gray-900/10 pb-12 pt-4">
         <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
         <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive
             mail.</p>

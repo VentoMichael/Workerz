@@ -44,7 +44,114 @@ class FreelancerForm extends Component
     public $showSkillsList = false;
     public $filteredSkills = [];
     public $selectedSkills = [];
-    public $skills = ['Web Development', 'Mobile App Development', 'Graphic Design', 'Data Analysis'];
+    public $skills = [
+'3D Modeling and Animation',
+'3D Printing and Prototyping',
+'Accounting and Bookkeeping',
+'Architecture and Interior Design',
+'Augmented Reality (AR) Development',
+'Automotive Repair and Maintenance',
+'Biotechnology Consulting',
+'Branding and Identity',
+'Business Plan Writing',
+'Business Planning and Consulting',
+'Carpentry and Woodworking',
+'Cleaning and Housekeeping',
+'Content Writing',
+'Copywriting',
+'Cybersecurity Consulting',
+'Data Analysis and Visualization',
+'Data Cleaning and Preprocessing',
+'Data Entry and Excel Services',
+'Data Entry Automation',
+'Data Science and Analytics',
+'Database Administration',
+'Database Development',
+'Database Optimization',
+'E-commerce Services',
+'Email Marketing',
+'Environmental Consulting',
+'Event Coordination and Planning',
+'Event Photography',
+'Event Planning and Coordination',
+'Fashion Design',
+'Financial Consulting',
+'Financial Planning',
+'Game Design',
+'Game Development',
+'Graphic Design',
+'Health and Medical Consultation',
+'Home Appliance Repair',
+'Home Improvement and Handyman Services',
+'HVAC Services',
+'Illustration and Art',
+'Information Technology (IT) Support',
+'Interior Design',
+'Inventory Management',
+'IT Support and Troubleshooting',
+'Landscaping and Gardening',
+'Legal Consulting',
+'Legal Document Preparation',
+'Legal Services',
+'Life Coaching',
+'Logo Design',
+'Machine Learning',
+'Market Analysis',
+'Market Research',
+'Market Research Analysis',
+'Market Trend Analysis',
+'Marketing',
+'Mobile App Design',
+'Mobile App Development',
+'Mobile App Maintenance',
+'Mobile App Testing',
+'Music Composition',
+'Natural Language Processing',
+'Nutrition and Diet Planning',
+'Online Course Creation',
+'Pest Control',
+'Pet Services and Pet Care',
+'Photography',
+'Plumbing and Electrical Services',
+'Podcast Production',
+'Project Management',
+'Public Relations',
+'Public Speaking Coaching',
+'Real Estate Services',
+'Research and Development',
+'Resume Writing',
+'Sales',
+'Search Engine Marketing',
+'SEO and Digital Marketing',
+'Social Media Advertising',
+'Social Media Content Creation',
+'Social Media Management',
+'Social Media Strategy',
+'Software Development',
+'Sustainability Consulting',
+'Tax Preparation',
+'Technical Support',
+'Time Management',
+'Translation and Localization',
+'Travel Photography',
+'Travel Planning and Booking',
+'UI/UX Design',
+'Video Editing',
+'Video Production',
+'Virtual Assistance',
+'Virtual Event Management',
+'Virtual Reality (VR) Development',
+'Voice Acting',
+'Voiceover and Audio Services',
+'Voiceover Script Writing',
+'Web and Mobile Design',
+'Web Development',
+'Wedding Planning',
+'Woodworking',
+'Writing and Editing',
+'Yoga and Wellness Coaching'
+];
+
 
 
     protected $rules = [
@@ -59,7 +166,6 @@ class FreelancerForm extends Component
         'streetAddress' => 'required',
         'city' => 'required',
         'region' => 'required',
-
         'postalCode' => 'required|integer',
         'plan' => 'required',
         'phoneNumber1' => 'nullable|numeric|regex:/^\(\d{3}\) \d{3}-\d{4}$/|unique:phone_numbers',
@@ -121,19 +227,21 @@ class FreelancerForm extends Component
     }
     public function addSkill($skill)
     {
-        if (!in_array($skill, $this->selectedSkills)) {
+        $skill = trim($skill); // Remove leading and trailing spaces
+
+        if (!empty($skill) && !in_array($skill, $this->selectedSkills)) {
             $this->selectedSkills[] = $skill;
             $this->showSkillsList = false;
             $this->filter = '';
         }
     }
-    public function updatedFilter()
+    public function filterSkills()
     {
         $this->filteredSkills = array_filter($this->skills, function ($skill) {
             return stripos($skill, $this->filter) !== false && !in_array($skill, $this->selectedSkills);
         });
 
-        $this->showSkillsList = true;
+        $this->showSkillsList = true; // Show the skills list
     }
 
 
