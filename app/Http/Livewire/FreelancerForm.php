@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\PhoneNumber;
 use App\Models\Plan;
 use App\Models\Role;
+use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -40,125 +41,19 @@ class FreelancerForm extends Component
     public $annualBilling = false;
     protected $avatarSizes = ['32x32', '160x160', '128x128'];
     protected $backgroundSizes = ['1980x192', '1280x192', '680x192'];
-    public $filter = '';
+    public $typeSkill;
     public $showSkillsList = false;
     public $filteredSkills = [];
     public $selectedSkills = [];
-    public $skills = [
-'3D Modeling and Animation',
-'3D Printing and Prototyping',
-'Accounting and Bookkeeping',
-'Architecture and Interior Design',
-'Augmented Reality (AR) Development',
-'Automotive Repair and Maintenance',
-'Biotechnology Consulting',
-'Branding and Identity',
-'Business Plan Writing',
-'Business Planning and Consulting',
-'Carpentry and Woodworking',
-'Cleaning and Housekeeping',
-'Content Writing',
-'Copywriting',
-'Cybersecurity Consulting',
-'Data Analysis and Visualization',
-'Data Cleaning and Preprocessing',
-'Data Entry and Excel Services',
-'Data Entry Automation',
-'Data Science and Analytics',
-'Database Administration',
-'Database Development',
-'Database Optimization',
-'E-commerce Services',
-'Email Marketing',
-'Environmental Consulting',
-'Event Coordination and Planning',
-'Event Photography',
-'Event Planning and Coordination',
-'Fashion Design',
-'Financial Consulting',
-'Financial Planning',
-'Game Design',
-'Game Development',
-'Graphic Design',
-'Health and Medical Consultation',
-'Home Appliance Repair',
-'Home Improvement and Handyman Services',
-'HVAC Services',
-'Illustration and Art',
-'Information Technology (IT) Support',
-'Interior Design',
-'Inventory Management',
-'IT Support and Troubleshooting',
-'Landscaping and Gardening',
-'Legal Consulting',
-'Legal Document Preparation',
-'Legal Services',
-'Life Coaching',
-'Logo Design',
-'Machine Learning',
-'Market Analysis',
-'Market Research',
-'Market Research Analysis',
-'Market Trend Analysis',
-'Marketing',
-'Mobile App Design',
-'Mobile App Development',
-'Mobile App Maintenance',
-'Mobile App Testing',
-'Music Composition',
-'Natural Language Processing',
-'Nutrition and Diet Planning',
-'Online Course Creation',
-'Pest Control',
-'Pet Services and Pet Care',
-'Photography',
-'Plumbing and Electrical Services',
-'Podcast Production',
-'Project Management',
-'Public Relations',
-'Public Speaking Coaching',
-'Real Estate Services',
-'Research and Development',
-'Resume Writing',
-'Sales',
-'Search Engine Marketing',
-'SEO and Digital Marketing',
-'Social Media Advertising',
-'Social Media Content Creation',
-'Social Media Management',
-'Social Media Strategy',
-'Software Development',
-'Sustainability Consulting',
-'Tax Preparation',
-'Technical Support',
-'Time Management',
-'Translation and Localization',
-'Travel Photography',
-'Travel Planning and Booking',
-'UI/UX Design',
-'Video Editing',
-'Video Production',
-'Virtual Assistance',
-'Virtual Event Management',
-'Virtual Reality (VR) Development',
-'Voice Acting',
-'Voiceover and Audio Services',
-'Voiceover Script Writing',
-'Web and Mobile Design',
-'Web Development',
-'Wedding Planning',
-'Woodworking',
-'Writing and Editing',
-'Yoga and Wellness Coaching'
-];
-
+    public $skills = [];
+    public $maxSkills = 3;
 
 
     protected $rules = [
         'username' => 'required|unique:users',
         'about' => 'required|min:10',
-        'avatarUpload' => 'nullable|image|mimes:jpeg,png|max:1024',
-        'backgroundUpload' => 'nullable|image|mimes:jpeg,png|max:1024',
+        'avatarUpload' => 'nullable|image|mimes:jpeg,png,svg,webp|max:1024',
+        'backgroundUpload' => 'nullable|image|mimes:jpeg,png,svg,webp|max:1024',
         'firstname' => 'required',
         'lastname' => 'required',
         'email' => 'required|email|unique:users',
@@ -188,6 +83,7 @@ class FreelancerForm extends Component
         $this->region = $userData['account']['region'] ?? '';
         $this->postalCode = $userData['account']['postalCode'] ?? '';
         $this->plan = $userData['account']['plan'] ?? '';
+        $this->skills = Skill::all()->toArray();
     }
 
     public function addPhoneNumbers()
@@ -212,38 +108,46 @@ class FreelancerForm extends Component
             $this->filteredSkills = $this->skills;
         } else {
 
-            $this->filter = '';
+            $this->typeSkill = '';
             $this->filteredSkills = $this->skills;
         }
     }
 
-
-    public function removeSkill($index)
+    public function removeSkill($skillId)
     {
-        if (isset($this->selectedSkills[$index])) {
-            unset($this->selectedSkills[$index]);
-            $this->selectedSkills = array_values($this->selectedSkills);
+        if (($key = array_search($skillId, $this->selectedSkills)) !== false) {
+            unset($this->selectedSkills[$key]);
         }
+        $this->selectedSkills = array_values($this->selectedSkills);
     }
     public function addSkill($skill)
     {
-        $skill = trim($skill); // Remove leading and trailing spaces
 
-        if (!empty($skill) && !in_array($skill, $this->selectedSkills)) {
+        $skill = trim($skill);
+
+        $selectedSkillsLower = array_map('strtolower', $this->selectedSkills);
+
+        if (
+            !empty($skill) &&
+            !in_array(strtolower($skill), $selectedSkillsLower) &&
+            count($this->selectedSkills) < $this->maxSkills
+        ) {
             $this->selectedSkills[] = $skill;
             $this->showSkillsList = false;
-            $this->filter = '';
+            $this->highlightedSkill = null;
+            $this->reset('typeSkill');
         }
     }
+
     public function filterSkills()
     {
-        $this->filteredSkills = array_filter($this->skills, function ($skill) {
-            return stripos($skill, $this->filter) !== false && !in_array($skill, $this->selectedSkills);
-        });
 
-        $this->showSkillsList = true; // Show the skills list
+        $this->filteredSkills = array_values(array_filter($this->skills, function ($skill) {
+            return !in_array(strtolower($skill['name']), array_map('strtolower', $this->selectedSkills))
+                && stripos($skill['name'], strtolower($this->typeSkill)) !== false;
+        }));
+        $this->showSkillsList = true;
     }
-
 
 
     public function removePhoneNumber3()
@@ -267,7 +171,30 @@ class FreelancerForm extends Component
     {
         $this->passwordVisible = !$this->passwordVisible;
     }
+    public function getSelectedSkillNames()
+    {
+        return collect($this->skills)->filter(function ($skill) {
+            return in_array($skill['id'], $this->selectedSkills);
+        })->pluck('name');
+    }
+    public function getSelectedSkillNameId()
+    {
+        $selectedSkills = collect($this->skills)->filter(function ($skill) {
+            return in_array($skill['id'], $this->selectedSkills);
+        });
 
+        return $selectedSkills->pluck('name', 'id');
+    }
+    public function saveSkillsForUser($user)
+    {
+        $selectedSkillNames = $this->getSelectedSkillNames();
+
+        // Assuming you have a 'skills' table with a 'name' column
+        $skills = Skill::whereIn('name', $selectedSkillNames)->get();
+
+        // Attach the skills to the user
+        $user->skills()->sync($skills);
+    }
     public function submitForm()
     {
         $products = Plan::all();
@@ -312,8 +239,8 @@ class FreelancerForm extends Component
         foreach ($phoneNumbers as $phoneNumber) {
             $newUser->phoneNumbers()->create(['number' => $phoneNumber]);
         }
+        $this->saveSkillsForUser($newUser);
         $phoneNumbers = [];
-        dd($phoneNumbers);
         sleep(1);
         return redirect()->route('sign-up.confirmation');
     }
@@ -374,11 +301,11 @@ class FreelancerForm extends Component
 
     public function render()
     {
-        $filteredSkills = array_filter($this->skills, function ($skill) {
-            return str_contains(strtolower($skill), strtolower($this->filter));
+        $this->filteredSkills = array_filter($this->skills, function ($skill) {
+            return stripos($skill['name'], $this->typeSkill) !== false && !in_array($skill['name'], $this->selectedSkills);
         });
 
         $plans = Plan::all();
-        return view('livewire.freelancer-form', compact('plans','filteredSkills'));
+        return view('livewire.freelancer-form', compact('plans'));
     }
 }

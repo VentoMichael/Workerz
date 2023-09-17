@@ -111,20 +111,31 @@
                 <p class="text-red-500 mt-1">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="col-span-full mt-8">
-                <label for="skills" class="block text-sm font-medium leading-6 text-gray-900">Skills</label>
-                <div class="relative">
-                    <input wire:model="filter" type="text" id="skills" class="border-0 ring-gray-300 ring-1 px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6""
-                           placeholder="Select or filter skills" wire:keydown="filterSkills" wire:click="toggleSkillsList">
-                    @if ($showSkillsList && count($filteredSkills) !== 0)
+            <div class="mt-6">
+                <label for="skills" class="block text-sm font-medium leading-6 text-gray-900">
+                    Skills <span class="text-gray-500 text-xs">(limited to {{ $maxSkills }})</span>
+                </label>
+                <div class="relative mt-2">
+                    <input
+                        wire:model.blur="typeSkill"
+                        type="text"
+                        id="skills"
+                        class="border-0 ring-gray-300 ring-1 px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        placeholder="Select or filter skills"
+                        wire:keyup="filterSkills"
+                        wire:click="toggleSkillsList"
+                    >
+
+                    @if ($showSkillsList && count($filteredSkills) !== 0 && count($selectedSkills) < $maxSkills)
                         <div class="skills-list absolute mt-1 w-full z-10 bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-x-auto" id="listSkills">
                             @foreach($filteredSkills as $skill)
-                                @unless(in_array($skill, $selectedSkills))
-                                    <span wire:click="addSkill('{{ $skill }}')" wire:click="toggleSkillsList"
-                                          x-data="{ inputValue: '' }"
-                                          x-on:input.debounce.5000ms="inputValue = $event.target.value; $wire.set('filter', inputValue)" class="cursor-pointer hover:bg-indigo-100 block text-sm font-medium leading-6 text-gray-900 p-2">
-                                        {{ $skill }}
-                                    </span>
+                                @unless(in_array($skill['id'], $selectedSkills))
+                                    <span wire:key="skill-{{ $skill['id'] }}"
+                                          wire:click="addSkill('{{ $skill['id'] }}')"
+                                          class="cursor-pointer hover:bg-indigo-100 block text-sm font-medium leading-6 text-gray-900 p-2"
+                                    >
+                            {{ $skill['name'] }}
+                        </span>
                                 @endunless
                             @endforeach
                         </div>
@@ -135,21 +146,21 @@
                     @if (count($filteredSkills) === 0 && $showSkillsList)
                         <div class="text-gray-500">No results found.</div>
                     @else
-                    @foreach($selectedSkills as $index => $skill)
-                        <div class="inline-flex items-center bg-purple-100 rounded-lg p-1 m-1">
-                            <span class="inline-flex items-center px-2 py-1 text-sm font-medium text-purple-800 rounded">{{ $skill }}</span>
-                            <div wire:click="removeSkill({{ $index }})" class="cursor-pointer text-red-600 hover:text-red-800 focus:outline-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                     class="h-4 w-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                                    </path>
-                                </svg>
+                        @foreach($this->getSelectedSkillNameId() as $skillId => $skillName)
+                            <div wire:key="skill-{{ $skillId }}" class="inline-flex items-center bg-purple-100 rounded-lg p-1 my-1">
+                                <span class="inline-flex items-center px-2 py-1 text-sm font-medium text-purple-800 rounded">{{ $skillName }}</span>
+                                <div wire:click="removeSkill('{{ $skillId }}')" class="cursor-pointer text-red-600 hover:text-red-800 focus:outline-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
                     @endif
                 </div>
             </div>
+
+
 
 
 
