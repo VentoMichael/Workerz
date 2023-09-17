@@ -120,7 +120,8 @@
                         wire:model.blur="typeSkill"
                         type="text"
                         id="skills"
-                        class="border-0 ring-gray-300 ring-1 px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        @if(count($selectedSkills) === $maxSkills) disabled @endif
+                        class="@if(count($selectedSkills) === $maxSkills) bg-gray-100 cursor-not-allowed focus:ring-0 @else ring-inset ring-gray-300 ring-1 focus:ring-2 focus:ring-inset focus:ring-indigo-600  @endif border-0 px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
                         placeholder="Select or filter skills"
                         wire:keyup="filterSkills"
                         wire:click="toggleSkillsList"

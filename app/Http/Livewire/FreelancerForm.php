@@ -63,9 +63,10 @@ class FreelancerForm extends Component
         'region' => 'required',
         'postalCode' => 'required|integer',
         'plan' => 'required',
-        'phoneNumber1' => 'nullable|numeric|regex:/^\(\d{3}\) \d{3}-\d{4}$/|unique:phone_numbers',
-        'phoneNumber2' => 'nullable|numeric|regex:/^\(\d{3}\) \d{3}-\d{4}$/|unique:phone_numbers',
-        'phoneNumber3' => 'nullable|numeric|regex:/^\(\d{3}\) \d{3}-\d{4}$/|unique:phone_numbers',
+        'phoneNumber1' => 'nullable|numeric|unique:phone_numbers,number|phone:BE',
+        'phoneNumber2' => 'nullable|numeric|unique:phone_numbers,number|phone:BE',
+        'phoneNumber3' => 'nullable|numeric|unique:phone_numbers,number|phone:BE',
+
     ];
 
     public function mount()
@@ -112,7 +113,11 @@ class FreelancerForm extends Component
             $this->filteredSkills = $this->skills;
         }
     }
-
+    public function removePhoneNumber3()
+    {
+        $this->phoneNumber3 = null;
+        $this->showPhoneNumber3 = false;
+    }
     public function removeSkill($skillId)
     {
         if (($key = array_search($skillId, $this->selectedSkills)) !== false) {
@@ -150,11 +155,7 @@ class FreelancerForm extends Component
     }
 
 
-    public function removePhoneNumber3()
-    {
-        $this->phoneNumber3 = null;
-        $this->showPhoneNumber3 = false;
-    }
+
 
     public function updated($property)
     {
