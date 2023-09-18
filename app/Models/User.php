@@ -16,6 +16,17 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable, TwoFactorAuthenticatable;
     use Billable;
 
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+    public function scopeByRoleId($query, $roleId)
+    {
+        return $query->whereHas('role', function ($query) use ($roleId) {
+            $query->where('id', $roleId);
+        });
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);
@@ -26,7 +37,11 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function skills()
     {
-        return $this->belongsToMany(Skill::class, 'user_skills')->withTimestamps();
+        return $this->belongsToMany(Skill::class, 'user_subskills')->withTimestamps();
+    }
+    public function skill()
+    {
+        return $this->belongsTo(Skill::class, 'mainSkill');
     }
     /**
      * The attributes that are mass assignable.

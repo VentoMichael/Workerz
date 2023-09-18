@@ -33,9 +33,8 @@ Route::get('/ads/details', function () {
     return view('ads.show');
 })->name('ads.show');
 
-Route::get('/workers', function () {
-    return view('workers.workers');
-})->name('workers');
+
+Route::get('/workers', [\App\Http\Controllers\WorkerController::class, 'index'])->name('workers');
 
 Route::get('/workers/{username}', function () {
     return view('workers.show');
