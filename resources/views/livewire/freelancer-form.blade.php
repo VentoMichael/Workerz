@@ -5,11 +5,10 @@
             <h2 class="text-base font-semibold leading-7 text-gray-900">Profile</h2>
             <p class="mt-1 text-sm leading-6 text-gray-600">This information will be displayed publicly so
                 be careful what you share.</p>
-
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div class="sm:col-span-4">
                     <label for="username"
-                           class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                           class="block text-sm font-medium leading-6 text-gray-900">Username <span class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <div
                             class="@error('username')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror flex rounded-md shadow-sm ring-inset focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -17,9 +16,10 @@
                             <input wire:model.live="username" type="text" name="username"
                                    id="username" autocomplete="username"
                                    class="block flex-1 border-0 bg-transparent py-1.5 pl-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                   placeholder="janesmith">
+                                   placeholder="workezSRL">
                         </div>
                     </div>
+                    <p class="mt-1 text-sm leading-6 text-gray-600">It may represent the name of your company</p>
                     @error('username')
                     <p class="text-red-500 mt-1">{{ $message }}</p>
                     @enderror
@@ -27,7 +27,7 @@
 
                 <div class="col-span-full">
                     <label for="about"
-                           class="block text-sm font-medium leading-6 text-gray-900">About</label>
+                           class="block text-sm font-medium leading-6 text-gray-900">About <span class="text-red-500">*</span></label>
                     <div class="mt-2">
                                     <textarea id="about" wire:model.blur="about" name="about" rows="3"
                                               class="@error('about')border border-red-500 @else border-0 ring-gray-300 ring-1 @enderror p-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
@@ -111,9 +111,44 @@
                 <p class="text-red-500 mt-1">{{ $message }}</p>
                 @enderror
             </div>
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div class="sm:col-span-3">
+                    <label for="jobTitle" class="block text-sm font-medium leading-6 text-gray-900">Main Job
+                        Title <span class="text-red-500">*</span></label>
+                    <div class="mt-2">
+                        <input wire:model.blur="jobTitle" type="text" name="jobTitle" id="jobTitle"
+                               autocomplete="jobTitle"
+                               class="@error('jobTitle')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
+                    <p class="mt-1 text-sm leading-6 text-gray-600">Enter your primary job title or role.</p>
+                    @error('jobTitle')
+                    <p class="text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="sm:col-span-3">
+                    <label for="mainSkill" class="block text-sm font-medium leading-6 text-gray-900">General
+                        Skill <span class="text-red-500">*</span></label>
+                    <div class="mt-2">
+                        <select wire:model.blur="mainSkill" id="mainSkill"
+                                class="@error('mainSkill')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <option selected>Choose a skill</option>
+                            @foreach($skills as $mainSkill)
+                                <option value="{{$mainSkill['id']}}">{{$mainSkill['name']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <p class="mt-1 text-sm leading-6 text-gray-600">Enter a general skill or area of expertise.</p>
+                    @error('mainSkill')
+                    <p class="text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+
+
             <div class="mt-6">
                 <label for="skills" class="block text-sm font-medium leading-6 text-gray-900">
-                    Skills <span class="text-gray-500 text-xs">(limited to {{ $maxSkills }})</span>
+                    Sub skills <span class="text-gray-500 text-xs">(limited to {{ $maxSkills }})</span>
                 </label>
                 <div class="relative mt-2">
                     <input
@@ -128,7 +163,9 @@
                     >
 
                     @if ($showSkillsList && count($filteredSkills) !== 0 && count($selectedSkills) < $maxSkills)
-                        <div class="skills-list absolute mt-1 w-full z-10 bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-x-auto" id="listSkills">
+                        <div
+                            class="skills-list absolute mt-1 w-full z-10 bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-x-auto"
+                            id="listSkills">
                             @foreach($filteredSkills as $skill)
                                 @unless(in_array($skill['id'], $selectedSkills))
                                     <span wire:key="skill-{{ $skill['id'] }}"
@@ -148,11 +185,16 @@
                         <div class="text-gray-500">No results found.</div>
                     @else
                         @foreach($this->getSelectedSkillNameId() as $skillId => $skillName)
-                            <div wire:key="skill-{{ $skillId }}" class="inline-flex items-center bg-purple-100 rounded-lg p-1 my-1">
-                                <span class="inline-flex items-center px-2 py-1 text-sm font-medium text-purple-800 rounded">{{ $skillName }}</span>
-                                <div wire:click="removeSkill('{{ $skillId }}')" class="cursor-pointer text-red-600 hover:text-red-800 focus:outline-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            <div wire:key="skill-{{ $skillId }}"
+                                 class="inline-flex items-center bg-purple-100 rounded-lg p-1 my-1">
+                                <span
+                                    class="inline-flex items-center px-2 py-1 text-sm font-medium text-purple-800 rounded">{{ $skillName }}</span>
+                                <div wire:click="removeSkill('{{ $skillId }}')"
+                                     class="cursor-pointer text-red-600 hover:text-red-800 focus:outline-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         stroke="currentColor" class="h-4 w-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M6 18L18 6M6 6l12 12"></path>
                                     </svg>
                                 </div>
                             </div>
@@ -160,9 +202,6 @@
                     @endif
                 </div>
             </div>
-
-
-
 
 
         </div>
@@ -176,7 +215,7 @@
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div class="sm:col-span-3">
                 <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">First
-                    name</label>
+                    name <span class="text-red-500">*</span></label>
                 <div class="mt-2">
                     <input wire:model.blur="firstname" type="text" name="firstname" id="firstname"
                            autocomplete="firstname"
@@ -188,7 +227,7 @@
             </div>
             <div class="sm:col-span-3">
                 <label for="lastname" class="block text-sm font-medium leading-6 text-gray-900">Last
-                    name</label>
+                    name <span class="text-red-500">*</span></label>
                 <div class="mt-2">
                     <input wire:model.blur="lastname" type="text" name="lastname" id="lastname"
                            autocomplete="lastname"
@@ -201,7 +240,7 @@
 
             <div class="sm:col-span-3">
                 <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
-                    address</label>
+                    address <span class="text-red-500">*</span></label>
                 <div class="mt-2">
                     <input wire:model.blur="email" id="email" name="email" type="email"
                            autocomplete="email"
@@ -212,7 +251,7 @@
                 @enderror
             </div>
             <div class="sm:col-span-3">
-                <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password <span class="text-red-500">*</span></label>
                 <div class="mt-2 relative">
                     <input wire:model.blur="password" id="password" name="password"
                            type="{{ $passwordVisible ? 'text' : 'password' }}"
@@ -249,7 +288,7 @@
             <!-- TODO:add a password visibility -->
             <div class="col-span-full">
                 <label for="streetAddress" class="block text-sm font-medium leading-6 text-gray-900">Street
-                    address</label>
+                    address <span class="text-red-500">*</span></label>
                 <div class="mt-2">
                     <input wire:model.blur="streetAddress" type="text" name="streetAddress" id="streetAddress"
                            autocomplete="streetAddress"
@@ -261,7 +300,7 @@
             </div>
 
             <div class="sm:col-span-2 sm:col-start-1">
-                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City</label>
+                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City <span class="text-red-500">*</span></label>
                 <div class="mt-2">
                     <input wire:model.blur="city" type="text" name="city" id="city" autocomplete="city"
                            class="@error('city')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -273,7 +312,7 @@
 
             <div class="sm:col-span-2">
                 <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State /
-                    Province</label>
+                    Province <span class="text-red-500">*</span></label>
                 <div class="mt-2">
                     <input wire:model.blur="region" type="text" name="region" id="region"
                            autocomplete="region"
@@ -286,7 +325,7 @@
 
             <div class="sm:col-span-2">
                 <label for="postalCode" class="block text-sm font-medium leading-6 text-gray-900">ZIP /
-                    Postal code</label>
+                    Postal code <span class="text-red-500">*</span></label>
                 <div class="mt-2">
                     <input wire:model.blur="postalCode" type="text" name="postalCode" id="postalCode"
                            autocomplete="postalCode"
@@ -297,67 +336,74 @@
                 @enderror
 
             </div>
-                <div class="sm:col-span-2">
-                    <label for="phoneNumber1" class="block text-sm font-medium leading-6 text-gray-900">Phone number 1</label>
-                    <input wire:model="phoneNumber1" type="number" name="phoneNumber1" id="phoneNumber1"
-                           autocomplete="phoneNumber1"
-                           class="@error('phoneNumber1')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                    @error('phoneNumber1')
-                    <p class="text-red-500 mt-1">{{ $message }}</p>
-                    @enderror
-                    @if(!$showPhoneNumber3 || $showPhoneNumber3 && !$showPhoneNumber2)
+            <div class="sm:col-span-2">
+                <label for="phoneNumber1" class="block text-sm font-medium leading-6 text-gray-900">Phone number
+                    1</label>
+                <input wire:model="phoneNumber1" type="number" name="phoneNumber1" id="phoneNumber1"
+                       autocomplete="phoneNumber1"
+                       class="@error('phoneNumber1')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                @error('phoneNumber1')
+                <p class="text-red-500 mt-1">{{ $message }}</p>
+                @enderror
+                @if(!$showPhoneNumber3 || $showPhoneNumber3 && !$showPhoneNumber2)
                     <p wire:click="addPhoneNumbers" class="cursor-pointer text-blue-500 hover:underline">
                         Add another
                     </p>
-                        @endif
-                </div>
+                @endif
+            </div>
 
-                @if ($showPhoneNumber2)
-                    <div class="sm:col-span-2">
-                        <label for="phoneNumber2" class="block text-sm font-medium leading-6 text-gray-900">Phone number 2</label>
-                        <div class="relative">
+            @if ($showPhoneNumber2)
+                <div class="sm:col-span-2">
+                    <label for="phoneNumber2" class="block text-sm font-medium leading-6 text-gray-900">Phone number
+                        2</label>
+                    <div class="relative">
                         <input wire:model="phoneNumber2" type="number" name="phoneNumber2" id="phoneNumber2"
                                autocomplete="phoneNumber2"
                                class="@error('phoneNumber2')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         <button type="button" wire:click="removePhoneNumber2"
                                 class="absolute top-1.5 right-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 p-0.5 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" class="text-white w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </button>
-                            @error('phoneNumber2')
-                            <p class="text-red-500 mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
+                        @error('phoneNumber2')
+                        <p class="text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
-                @endif
 
-                @if ($showPhoneNumber3)
-                    <div class="sm:col-span-2">
-                        <label for="phoneNumber3" class="block text-sm font-medium leading-6 text-gray-900">Phone number @if($showPhoneNumber2)3 @else 2 @endif</label>
-                        <div class="relative">
+                </div>
+            @endif
+
+            @if ($showPhoneNumber3)
+                <div class="sm:col-span-2">
+                    <label for="phoneNumber3" class="block text-sm font-medium leading-6 text-gray-900">Phone
+                        number @if($showPhoneNumber2)3 @else 2 @endif</label>
+                    <div class="relative">
                         <input wire:model="phoneNumber3" type="number" name="phoneNumber3" id="phoneNumber3"
                                autocomplete="phoneNumber3"
                                class="@error('phoneNumber3')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         <button type="button" wire:click="removePhoneNumber3"
                                 class="absolute top-1.5 right-2 focus:outline-none text-white bg-red-700 hover:bg-red-800 p-0.5 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-5 h-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" class="text-white w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </button>
-                            @error('phoneNumber3')
-                            <p class="text-red-500 mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
+                        @error('phoneNumber3')
+                        <p class="text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
-                @endif
+
+                </div>
+            @endif
         </div>
     </div>
 
     <div class="border-b border-gray-900/10 pb-12 mt-4">
-        <h2 class="text-base font-semibold leading-7 text-gray-900">Plans</h2>
+        <h2 class="text-base font-semibold leading-7 text-gray-900">Plans <span class="text-red-500">*</span></h2>
         <p class="mt-1 text-sm mx-auto leading-6 text-gray-600">We'll always let you know about important
             changes, but you pick what else you want to hear about.</p>
 

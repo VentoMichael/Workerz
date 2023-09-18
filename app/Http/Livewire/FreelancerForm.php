@@ -30,6 +30,8 @@ class FreelancerForm extends Component
     public $backgroundUpload;
     public $firstname;
     public $lastname;
+    public $jobTitle;
+    public $mainSkill;
     public $email;
     public $password;
     public $passwordVisible;
@@ -63,6 +65,8 @@ class FreelancerForm extends Component
         'region' => 'required',
         'postalCode' => 'required|integer',
         'plan' => 'required',
+        'jobTitle' => 'required',
+        'mainSkill' => 'required',
         'phoneNumber1' => 'nullable|numeric|unique:phone_numbers,number|phone:BE',
         'phoneNumber2' => 'nullable|numeric|unique:phone_numbers,number|phone:BE',
         'phoneNumber3' => 'nullable|numeric|unique:phone_numbers,number|phone:BE',
@@ -84,6 +88,8 @@ class FreelancerForm extends Component
         $this->region = $userData['account']['region'] ?? '';
         $this->postalCode = $userData['account']['postalCode'] ?? '';
         $this->plan = $userData['account']['plan'] ?? '';
+        $this->jobTitle = $userData['account']['jobTitle'] ?? '';
+        $this->mainSkill = $userData['account']['mainSkill'] ?? '';
         $this->skills = Skill::all()->toArray();
     }
 
@@ -198,6 +204,7 @@ class FreelancerForm extends Component
     }
     public function submitForm()
     {
+        $this->validate();
         $products = Plan::all();
         foreach ($products as $product) {
             if ($this->plan === $product['name']) {
@@ -220,6 +227,8 @@ class FreelancerForm extends Component
             'city' => $this->city,
             'region' => $this->region,
             'postalCode' => $this->postalCode,
+            'jobTitle' => ucfirst($this->jobTitle),
+            'mainSkill' => $this->mainSkill,
         ];
         if ($this->backgroundUpload) {
             $userData['backgroundUpload'] = $this->processAndStoreImage($this->backgroundUpload, 'covers', $this->username, false);
