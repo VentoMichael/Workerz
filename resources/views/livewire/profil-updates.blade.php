@@ -3,12 +3,20 @@
     <div class="shadow sm:rounded-md sm:overflow-hidden">
 
         <div class="py-6 px-4 sm:p-6 lg:pb-8">
-            @if($successMessage)
-                @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
-            @endif
-            @if($infoMessage)
-                @include('components.info-message', ['message' => $infoMessage,'clearProperty' => 'infoMessage'])
-            @endif
+            <div x-data="{ showMessage: @if($successMessage) true @else false @endif }">
+                @if($successMessage)
+                    <div x-show="showMessage" x-init="setTimeout(() => showMessage = false, 5000)">
+                        @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
+                    </div>
+                @endif
+            </div>
+            <div x-data="{ showMessage: @if($infoMessage) true @else false @endif }">
+                @if($infoMessage)
+                    <div x-show="showMessage" x-init="setTimeout(() => showMessage = false, 5000)">
+                        @include('components.info-message', ['message' => $infoMessage,'clearProperty' => 'infoMessage'])
+                    </div>
+                @endif
+            </div>
             <div class="mb-6">
                 <h1 class="text-lg leading-6 font-medium text-gray-900">Profile</h1>
                 <p class="mt-1 text-sm text-gray-500">This information will be displayed

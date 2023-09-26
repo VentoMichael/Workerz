@@ -42,7 +42,6 @@ class ContactForm extends Component
             'subject' => $this->subject,
             'message' => $this->message,
         ]);
-        sleep(1);
         $this->resetForm();
         $this->clearProperty = 'successMessage';
         $this->successMessage = 'We received your message successfully and will get back to you shortly!';

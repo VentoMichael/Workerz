@@ -57,7 +57,8 @@
                                             <input id="filter-mobile-category-0" name="category[]" value="tees"
                                                    type="checkbox"
                                                    class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-mobile-category-0" class="ml-3 text-sm text-gray-500"> Tees
+                                            <label for="filter-mobile-category-0" class="ml-3 text-sm text-gray-500">
+                                                Tees
                                                 (31)</label>
                                         </div>
 
@@ -74,7 +75,8 @@
                                             <input id="filter-mobile-category-2" name="category[]" value="hats"
                                                    type="checkbox"
                                                    class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-mobile-category-2" class="ml-3 text-sm text-gray-500"> Hats
+                                            <label for="filter-mobile-category-2" class="ml-3 text-sm text-gray-500">
+                                                Hats
                                                 (31) </label>
                                         </div>
                                     </fieldset>
@@ -111,7 +113,8 @@
                                             <input id="filter-mobile-brand-0" name="brand[]" value="clothing-company"
                                                    type="checkbox"
                                                    class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-mobile-brand-0" class="ml-3 text-sm text-gray-500"> Clothing
+                                            <label for="filter-mobile-brand-0" class="ml-3 text-sm text-gray-500">
+                                                Clothing
                                                 Company </label>
                                         </div>
 
@@ -119,7 +122,8 @@
                                             <input id="filter-mobile-brand-1" name="brand[]" value="fashion-inc"
                                                    type="checkbox"
                                                    class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-mobile-brand-1" class="ml-3 text-sm text-gray-500"> Fashion
+                                            <label for="filter-mobile-brand-1" class="ml-3 text-sm text-gray-500">
+                                                Fashion
                                                 Inc. </label>
                                         </div>
 
@@ -142,8 +146,12 @@
 
             <section class="max-w-7xl mx-auto px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
                 <div class="py-16">
-                    <h2 class="text-4xl font-extrabold tracking-tight text-gray-900">Find the Right Worker for Your Needs</h2>
-                    <p class="mt-4 max-w-7xl mx-auto text-base text-gray-500">Looking for a skilled and reliable worker for your project? Our platform connects you with a diverse range of independent professionals who are ready to get the job done. With just a few clicks, you can find the perfect match for your needs and get started on your project right away.</p>
+                    <h2 class="text-4xl font-extrabold tracking-tight text-gray-900">Find the Right Worker for Your
+                        Needs</h2>
+                    <p class="mt-4 max-w-7xl mx-auto text-base text-gray-500">Looking for a skilled and reliable worker
+                        for your project? Our platform connects you with a diverse range of independent professionals
+                        who are ready to get the job done. With just a few clicks, you can find the perfect match for
+                        your needs and get started on your project right away.</p>
                 </div>
 
 
@@ -157,7 +165,6 @@
                                         class="filter_sort group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
                                         id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
                                     Sort
-                                    <!-- Heroicon name: solid/chevron-down -->
                                     <svg
                                         class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -168,44 +175,31 @@
                                     </svg>
                                 </button>
                             </div>
-
-                            <!--
-                              Dropdown menu, show/hide based on menu state.
-
-                              Entering: "transition ease-out duration-100"
-                                From: "transform opacity-0 scale-95"
-                                To: "transform opacity-100 scale-100"
-                              Leaving: "transition ease-in duration-75"
-                                From: "transform opacity-100 scale-100"
-                                To: "transform opacity-0 scale-95"
-                            -->
                             <fieldset>
 
-                                        <legend class="sr-only">Category</legend>
-                            <div
-                                class="filter_sort_content hidden origin-top-left absolute left-0 z-10 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                                role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button"
-                                tabindex="-1">
-                                <div class="py-1" role="none">
-                                    <!-- Active: "bg-gray-100", Not Active: "" -->
-                                    <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
-                                       role="menuitem"
-                                       tabindex="-1" id="mobile-menu-item-0"> Most Popular </a>
+                                <legend class="sr-only">Category</legend>
+                                <div
+                                    class="filter_sort_content hidden origin-top-left absolute left-0 z-10 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                    role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button"
+                                    tabindex="-1">
+                                    <div class="py-1" role="none">
+                                        <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
+                                           role="menuitem"
+                                           tabindex="-1" id="mobile-menu-item-0"> Most Popular </a>
 
-                                    <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
-                                       role="menuitem"
-                                       tabindex="-1" id="mobile-menu-item-1"> Best Rating </a>
+                                        <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
+                                           role="menuitem"
+                                           tabindex="-1" id="mobile-menu-item-1"> Best Rating </a>
 
-                                    <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
-                                       role="menuitem"
-                                       tabindex="-1" id="mobile-menu-item-2"> Newest </a>
+                                        <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
+                                           role="menuitem"
+                                           tabindex="-1" id="mobile-menu-item-2"> Newest </a>
 
+                                    </div>
                                 </div>
-                            </div>
                             </fieldset>
                         </div>
 
-                        <!-- Mobile filter dialog toggle, controls the 'mobileFilterDialogOpen' state. -->
                         <button type="button"
                                 class="button_filters_mobile_open inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden">
                             Filters
@@ -221,7 +215,6 @@
 
                                         <span
                                             class="ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs font-semibold text-gray-700 tabular-nums">1</span>
-                                        <!-- Heroicon name: solid/chevron-down -->
                                         <svg
                                             class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -238,32 +231,34 @@
                                     <fieldset>
 
                                         <legend class="sr-only">Category</legend>
-                                    <form class="space-y-4">
-                                        <div class="flex items-center mt-0">
-                                            <input id="filter-category-0" name="category[]" value="tees" type="checkbox"
-                                                   class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-category-0"
-                                                   class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                Tees (31) </label>
-                                        </div>
+                                        <form class="space-y-4">
+                                            <div class="flex items-center mt-0">
+                                                <input id="filter-category-0" name="category[]" value="tees"
+                                                       type="checkbox"
+                                                       class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                                                <label for="filter-category-0"
+                                                       class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    Tees (31) </label>
+                                            </div>
 
-                                        <div class="flex items-center">
-                                            <input id="filter-category-1" name="category[]" value="crewnecks"
-                                                   type="checkbox"
-                                                   class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-category-1"
-                                                   class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                Crewnecks (31) </label>
-                                        </div>
+                                            <div class="flex items-center">
+                                                <input id="filter-category-1" name="category[]" value="crewnecks"
+                                                       type="checkbox"
+                                                       class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                                                <label for="filter-category-1"
+                                                       class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    Crewnecks (31) </label>
+                                            </div>
 
-                                        <div class="flex items-center">
-                                            <input id="filter-category-2" name="category[]" value="hats" type="checkbox"
-                                                   class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-category-2"
-                                                   class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                Hats (31) </label>
-                                        </div>
-                                    </form>
+                                            <div class="flex items-center">
+                                                <input id="filter-category-2" name="category[]" value="hats"
+                                                       type="checkbox"
+                                                       class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                                                <label for="filter-category-2"
+                                                       class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    Hats (31) </label>
+                                            </div>
+                                        </form>
                                     </fieldset>
                                 </div>
                             </div>
@@ -274,7 +269,6 @@
                                             class="filter_regions group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
                                             aria-expanded="false">
                                         <span>Regions</span>
-                                        <!-- Heroicon name: solid/chevron-down -->
                                         <svg
                                             class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -285,48 +279,39 @@
                                         </svg>
                                     </button>
                                 </div>
-
-                                <!--
-                                  Entering: "transition ease-out duration-100"
-                                    From: "transform opacity-0 scale-95"
-                                    To: "transform opacity-100 scale-100"
-                                  Leaving: "transition ease-in duration-75"
-                                    From: "transform opacity-100 scale-100"
-                                    To: "transform opacity-0 scale-95"
-                                -->
                                 <div
                                     class="filter_content_regions hidden origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <fieldset>
 
                                         <legend class="sr-only">Category</legend>
-                                    <form class="space-y-4">
-                                        <div class="flex items-center mt-0">
-                                            <input id="filter-brand-0" name="brand[]" value="clothing-company"
-                                                   type="checkbox"
-                                                   class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-brand-0"
-                                                   class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                Clothing Company </label>
-                                        </div>
+                                        <form class="space-y-4">
+                                            <div class="flex items-center mt-0">
+                                                <input id="filter-brand-0" name="brand[]" value="clothing-company"
+                                                       type="checkbox"
+                                                       class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                                                <label for="filter-brand-0"
+                                                       class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    Clothing Company </label>
+                                            </div>
 
-                                        <div class="flex items-center">
-                                            <input id="filter-brand-1" name="brand[]" value="fashion-inc"
-                                                   type="checkbox"
-                                                   class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-brand-1"
-                                                   class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                Fashion Inc. </label>
-                                        </div>
+                                            <div class="flex items-center">
+                                                <input id="filter-brand-1" name="brand[]" value="fashion-inc"
+                                                       type="checkbox"
+                                                       class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                                                <label for="filter-brand-1"
+                                                       class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    Fashion Inc. </label>
+                                            </div>
 
-                                        <div class="flex items-center">
-                                            <input id="filter-brand-2" name="brand[]" value="shoes-n-more"
-                                                   type="checkbox"
-                                                   class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-brand-2"
-                                                   class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                                                Shoes &#039;n More </label>
-                                        </div>
-                                    </form>
+                                            <div class="flex items-center">
+                                                <input id="filter-brand-2" name="brand[]" value="shoes-n-more"
+                                                       type="checkbox"
+                                                       class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
+                                                <label for="filter-brand-2"
+                                                       class="ml-3 pr-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                                                    Shoes &#039;n More </label>
+                                            </div>
+                                        </form>
                                     </fieldset>
                                 </div>
                             </div>
@@ -335,21 +320,37 @@
                 </section>
             </section>
         </div>
-                <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 ">
-        <section>
-            <h3 style="z-index: -10" class="sr-only">Most popular workers</h3>
-            <p class="text-xs mb-2">Environ 148 000 résultats</p>
-            <div id="workers-section" role="list" class="hidden flex md:grid md:grid-cols-500px flex-col gap-4">
-                @include('components.worker')
-            </div>
-        </section>
+        <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 ">
 
+            <section>
+                <h3 style="z-index: -10" class="sr-only">Most popular workers</h3>
+                <p class="text-xs mb-2">Environ {{ count($workers) }} résultats</p>
+                <div id="workers-section" role="list" class="flex md:grid md:grid-cols-500px flex-col gap-4">
+
+                @foreach($workers as $worker)
+                        @include('components.worker', ['worker' => $worker])
+                    @endforeach
                 </div>
+            </section>
+
+        </div>
     </section>
 @endsection
 @section('scripts')
 
-@vite('resources/js/filters.js')
-@vite('resources/js/sharing-reporting.js')
 
+    @vite('resources/js/filters.js')
+
+    <script>
+        function copyUrl(url) {
+            const input = document.createElement('input');
+            input.value = url;
+            document.body.appendChild(input);
+
+            input.select();
+            document.execCommand('copy');
+
+            document.body.removeChild(input);
+        }
+    </script>
 @endsection

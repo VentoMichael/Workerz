@@ -1,7 +1,11 @@
     <section class="mt-12 xl:mt-0">
-        @if($successMessage)
-            @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
-        @endif
+        <div x-data="{ showMessage: @if($successMessage) true @else false @endif }">
+            @if($successMessage)
+                <div x-show="showMessage" x-init="setTimeout(() => showMessage = false, 5000)">
+                    @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
+                </div>
+            @endif
+        </div>
         <h3 class="text-sm font-semibold text-gray-700 tracking-wider uppercase">Subscribe to our
             newsletter</h3>
         <p class="mt-4 text-base text-gray-500">The latest news, articles, and resources, sent to your inbox

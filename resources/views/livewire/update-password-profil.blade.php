@@ -1,5 +1,11 @@
 <div aria-labelledby="payment-details-heading">
-    @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
+    <div x-data="{ showMessage: @if($successMessage) true @else false @endif }">
+        @if($successMessage)
+            <div x-show="showMessage" x-init="setTimeout(() => showMessage = false, 5000)">
+                @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
+            </div>
+        @endif
+    </div>
     <form wire:submit="updatePassword" method="POST">
         @csrf
 
