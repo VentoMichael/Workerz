@@ -8,7 +8,8 @@
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div class="sm:col-span-4">
                     <label for="username"
-                           class="block text-sm font-medium leading-6 text-gray-900">Username <span class="text-red-500">*</span></label>
+                           class="block text-sm font-medium leading-6 text-gray-900">Username <span
+                            class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <div
                             class="@error('username')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror flex rounded-md shadow-sm ring-inset focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -27,7 +28,8 @@
 
                 <div class="col-span-full">
                     <label for="about"
-                           class="block text-sm font-medium leading-6 text-gray-900">About <span class="text-red-500">*</span></label>
+                           class="block text-sm font-medium leading-6 text-gray-900">About <span
+                            class="text-red-500">*</span></label>
                     <div class="mt-2">
                                     <textarea id="about" wire:model.blur="about" name="about" rows="3"
                                               class="@error('about')border border-red-500 @else border-0 ring-gray-300 ring-1 @enderror p-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
@@ -251,7 +253,8 @@
                 @enderror
             </div>
             <div class="sm:col-span-3">
-                <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password <span class="text-red-500">*</span></label>
+                <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password <span
+                        class="text-red-500">*</span></label>
                 <div class="mt-2 relative">
                     <input wire:model.blur="password" id="password" name="password"
                            type="{{ $passwordVisible ? 'text' : 'password' }}"
@@ -261,7 +264,6 @@
                          class="absolute inset-y-0 right-2 flex items-center cursor-pointer">
                         @if ($passwordVisible)
                             <svg class="svg" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
-                                <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                 <style>.svg {
                                         fill: #5850ec
                                     }</style>
@@ -270,7 +272,6 @@
                             </svg>
                         @else
                             <svg class="svg" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512">
-                                <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                 <style>.svg {
                                         fill: #5850ec
                                     }</style>
@@ -285,7 +286,6 @@
                 @enderror
             </div>
 
-            <!-- TODO:add a password visibility -->
             <div class="col-span-full">
                 <label for="streetAddress" class="block text-sm font-medium leading-6 text-gray-900">Street
                     address <span class="text-red-500">*</span></label>
@@ -300,7 +300,8 @@
             </div>
 
             <div class="sm:col-span-2 sm:col-start-1">
-                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City <span class="text-red-500">*</span></label>
+                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">City <span
+                        class="text-red-500">*</span></label>
                 <div class="mt-2">
                     <input wire:model.blur="city" type="text" name="city" id="city" autocomplete="city"
                            class="@error('city')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
@@ -311,12 +312,59 @@
             </div>
 
             <div class="sm:col-span-2">
-                <label for="region" class="block text-sm font-medium leading-6 text-gray-900">State /
-                    Province <span class="text-red-500">*</span></label>
+                <label for="regions" class="block text-sm font-medium leading-6 text-gray-900">
+                    State / Province <span class="text-gray-500 text-xs">(limited to {{ $maxRegions }})</span>
+                </label>
+                <div class="relative mt-2">
+                    <input
+                        wire:model.blur="typeRegion"
+                        type="text"
+                        id="regions"
+                        @if(count($selectedRegions) === $maxRegions) disabled @endif
+                        class="@if(count($selectedRegions) === $maxRegions) bg-gray-100 cursor-not-allowed focus:ring-0 @else ring-inset ring-gray-300 ring-1 focus:ring-2 focus:ring-inset focus:ring-indigo-600  @endif border-0 px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                        placeholder="Select or filter regions"
+                        wire:keyup="filterRegions"
+                        wire:click="toggleRegionsList"
+                    >
+
+                    @if ($showRegionsList && count($filteredRegions) !== 0 && count($selectedRegions) < $maxRegions)
+                        <div
+                            class="regions-list absolute mt-1 w-full z-10 bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-x-auto"
+                            id="listRegions">
+                            @foreach($filteredRegions as $region)
+                                @unless(in_array($region['id'], $selectedRegions))
+                                    <span wire:key="region-{{ $region['id'] }}"
+                                          wire:click="addRegion('{{ $region['id'] }}')"
+                                          class="cursor-pointer hover:bg-indigo-100 block text-sm font-medium leading-6 text-gray-900 p-2"
+                                    >
+                            {{ $region['name'] }}
+                        </span>
+                                @endunless
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+
                 <div class="mt-2">
-                    <input wire:model.blur="region" type="text" name="region" id="region"
-                           autocomplete="region"
-                           class="@error('region')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    @if (count($filteredRegions) === 0 && $showRegionsList)
+                        <div class="text-gray-500">No results found.</div>
+                    @else
+                        @foreach($this->getSelectedRegionNameId() as $regionId => $regionName)
+                            <div wire:key="region-{{ $regionId }}"
+                                 class="inline-flex items-center bg-purple-100 rounded-lg p-1 my-1">
+                                <span
+                                    class="inline-flex items-center px-2 py-1 text-sm font-medium text-purple-800 rounded">{{ $regionName }}</span>
+                                <div wire:click="removeRegion('{{ $regionId }}')"
+                                     class="cursor-pointer text-red-600 hover:text-red-800 focus:outline-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                         stroke="currentColor" class="h-4 w-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
                 @error('region')
                 <p class="text-red-500 mt-1">{{ $message }}</p>

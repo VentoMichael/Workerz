@@ -26,7 +26,10 @@ class User extends Authenticatable implements MustVerifyEmail
             $query->where('id', $roleId);
         });
     }
-
+    public function regions()
+    {
+        return $this->belongsToMany(Region::class, 'user_region');
+    }
     public function role()
     {
         return $this->belongsTo(Role::class);

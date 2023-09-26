@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\PhoneNumber;
 use App\Models\Plan;
+use App\Models\Region;
 use App\Models\Role;
 use App\Models\Skill;
 use App\Models\User;
@@ -37,7 +38,6 @@ class FreelancerForm extends Component
     public $passwordVisible;
     public $streetAddress;
     public $city;
-    public $region;
     public $postalCode;
     public $plan;
     public $annualBilling = false;
@@ -49,6 +49,13 @@ class FreelancerForm extends Component
     public $selectedSkills = [];
     public $skills = [];
     public $maxSkills = 3;
+
+    public $typeRegion;
+    public $showRegionsList = false;
+    public $filteredRegions = [];
+    public $selectedRegions = [];
+    public $regions = [];
+    public $maxRegions = 2;
 
 
     protected $rules = [
@@ -62,7 +69,6 @@ class FreelancerForm extends Component
         'password' => 'required|min:8',
         'streetAddress' => 'required',
         'city' => 'required',
-        'region' => 'required',
         'postalCode' => 'required|integer',
         'plan' => 'required',
         'jobTitle' => 'required',
@@ -85,12 +91,12 @@ class FreelancerForm extends Component
         $this->password = $userData['account']['password'] ?? '';
         $this->streetAddress = $userData['account']['streetAddress'] ?? '';
         $this->city = $userData['account']['city'] ?? '';
-        $this->region = $userData['account']['region'] ?? '';
         $this->postalCode = $userData['account']['postalCode'] ?? '';
         $this->plan = $userData['account']['plan'] ?? '';
         $this->jobTitle = $userData['account']['jobTitle'] ?? '';
         $this->mainSkill = $userData['account']['mainSkill'] ?? '';
         $this->skills = Skill::all()->toArray();
+        $this->regions = Region::all()->toArray();
     }
 
     public function addPhoneNumbers()
@@ -107,6 +113,7 @@ class FreelancerForm extends Component
         $this->phoneNumber2 = null;
         $this->showPhoneNumber2 = false;
     }
+
     public function toggleSkillsList()
     {
         $this->showSkillsList = !$this->showSkillsList;
@@ -119,11 +126,13 @@ class FreelancerForm extends Component
             $this->filteredSkills = $this->skills;
         }
     }
+
     public function removePhoneNumber3()
     {
         $this->phoneNumber3 = null;
         $this->showPhoneNumber3 = false;
     }
+
     public function removeSkill($skillId)
     {
         if (($key = array_search($skillId, $this->selectedSkills)) !== false) {
@@ -131,6 +140,7 @@ class FreelancerForm extends Component
         }
         $this->selectedSkills = array_values($this->selectedSkills);
     }
+
     public function addSkill($skill)
     {
 
@@ -161,6 +171,56 @@ class FreelancerForm extends Component
     }
 
 
+    public function toggleRegionsList()
+    {
+        $this->showRegionsList = !$this->showRegionsList;
+
+        if ($this->showRegionsList) {
+            $this->filteredRegions = $this->regions;
+        } else {
+
+            $this->typeRegion = '';
+            $this->filteredRegions = $this->regions;
+        }
+    }
+    public function removeRegion($regionId)
+    {
+        if (($key = array_search($regionId, $this->selectedRegions)) !== false) {
+            unset($this->selectedRegions[$key]);
+        }
+        $this->selectedRegions = array_values($this->selectedRegions);
+    }
+
+    public function addRegion($region)
+    {
+
+        $region = trim($region);
+
+        $selectedRegionsLower = array_map('strtolower', $this->selectedRegions);
+
+        if (
+            !empty($region) &&
+            !in_array(strtolower($region), $selectedRegionsLower) &&
+            count($this->selectedRegions) < $this->maxRegions
+        ) {
+            $this->selectedRegions[] = $region;
+            $this->showRegionsList = false;
+            $this->highlightedRegion = null;
+            $this->reset('typeRegion');
+        }
+    }
+
+    public function filterRegions()
+    {
+
+        $this->filteredRegions = array_values(array_filter($this->regions, function ($region) {
+            return !in_array(strtolower($region['name']), array_map('strtolower', $this->selectedRegions))
+                && stripos($region['name'], strtolower($this->typeRegion)) !== false;
+        }));
+        $this->showRegionsList = true;
+    }
+
+
 
 
     public function updated($property)
@@ -178,12 +238,14 @@ class FreelancerForm extends Component
     {
         $this->passwordVisible = !$this->passwordVisible;
     }
+
     public function getSelectedSkillNames()
     {
         return collect($this->skills)->filter(function ($skill) {
             return in_array($skill['id'], $this->selectedSkills);
         })->pluck('name');
     }
+
     public function getSelectedSkillNameId()
     {
         $selectedSkills = collect($this->skills)->filter(function ($skill) {
@@ -192,16 +254,41 @@ class FreelancerForm extends Component
 
         return $selectedSkills->pluck('name', 'id');
     }
+
     public function saveSkillsForUser($user)
     {
         $selectedSkillNames = $this->getSelectedSkillNames();
 
-        // Assuming you have a 'skills' table with a 'name' column
         $skills = Skill::whereIn('name', $selectedSkillNames)->get();
 
-        // Attach the skills to the user
         $user->skills()->sync($skills);
     }
+
+
+    public function getSelectedRegionNames()
+    {
+        return collect($this->regions)->filter(function ($region) {
+            return in_array($region['id'], $this->selectedRegions);
+        })->pluck('name');
+    }
+
+    public function getSelectedRegionNameId()
+    {
+        $selectedRegions = collect($this->regions)->filter(function ($region) {
+            return in_array($region['id'], $this->selectedRegions);
+        });
+
+        return $selectedRegions->pluck('name', 'id');
+    }
+
+    public function saveRegionsForUser($user)
+    {
+        $selectedRegionNames = $this->getSelectedRegionNames();
+
+        $regions = Region::whereIn('name', $selectedRegionNames)->get();
+        $user->regions()->sync($regions);
+    }
+
     public function submitForm()
     {
         $this->validate();
@@ -225,7 +312,6 @@ class FreelancerForm extends Component
             'avatarUpload' => $this->processAndStoreImage($this->avatarUpload, 'avatars', $this->username, true),
             'streetAddress' => $this->streetAddress,
             'city' => $this->city,
-            'region' => $this->region,
             'postalCode' => $this->postalCode,
             'jobTitle' => ucfirst($this->jobTitle),
             'mainSkill' => $this->mainSkill,
@@ -250,7 +336,7 @@ class FreelancerForm extends Component
             $newUser->phoneNumbers()->create(['number' => $phoneNumber]);
         }
         $this->saveSkillsForUser($newUser);
-        $phoneNumbers = [];
+        $this->saveRegionsForUser($newUser);
         sleep(1);
         return redirect()->route('sign-up.confirmation');
     }
@@ -313,6 +399,10 @@ class FreelancerForm extends Component
     {
         $this->filteredSkills = array_filter($this->skills, function ($skill) {
             return stripos($skill['name'], $this->typeSkill) !== false && !in_array($skill['name'], $this->selectedSkills);
+        });
+
+        $this->filteredRegions = array_filter($this->regions, function ($region) {
+            return stripos($region['name'], $this->typeRegion) !== false && !in_array($region['name'], $this->selectedRegions);
         });
 
         $plans = Plan::all();
