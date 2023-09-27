@@ -26,7 +26,7 @@
                     </div>
 
                     <!-- Filters -->
-                    <form  class="mt-4">
+                    <form class="mt-4">
                         <section class="border-t border-gray-200 px-4 py-6">
                             <h3 @click="openCategory = !openCategory"class="-mx-2 -my-3 flow-root">
                                 <!-- Expand/collapse question button -->
@@ -57,7 +57,7 @@
                                                 <input id="filter-mobile-category-{{ $loop->index }}" name="category[]" value="{{ $category }}"
                                                        type="checkbox"
                                                        class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                                <label for="filter-mobile-category-{{ $loop->index }}" class="ml-3 text-sm text-gray-500">
+                                                <label for="filter-mobile-category-{{ $loop->index }}" class="ml-3 text-sm font-medium text-gray-700">
                                                     {{ $category }} ({{ $count }})</label>
                                             </div>
                                         @endforeach
@@ -93,7 +93,7 @@
                                                 <input id="filter-mobile-region-{{ $loop->index }}" name="region[]" value="{{ $region }}"
                                                        type="checkbox"
                                                        class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                                <label for="filter-mobile-region-{{ $loop->index }}" class="ml-3 text-sm text-gray-500">
+                                                <label for="filter-mobile-region-{{ $loop->index }}" class="ml-3 text-sm font-medium text-gray-700">
                                                     {{ $region }} ({{ $count }})</label>
                                             </div>
                                         @endforeach
@@ -143,15 +143,15 @@
                                     role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button"
                                     tabindex="-1">
                                     <div class="py-1" role="none">
-                                        <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
+                                        <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-700"
                                            role="menuitem"
                                            tabindex="-1" id="mobile-menu-item-0"> Most Popular </a>
 
-                                        <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
+                                        <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-700"
                                            role="menuitem"
                                            tabindex="-1" id="mobile-menu-item-1"> Best Rating </a>
 
-                                        <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-900"
+                                        <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-700"
                                            role="menuitem"
                                            tabindex="-1" id="mobile-menu-item-2"> Newest </a>
 
@@ -165,7 +165,7 @@
                             Filters
                         </button>
 
-                        <div x-data="{ openCategory: false, openRegions: false }" class="sm:flex hidden sm:items-baseline sm:space-x-8">
+                        <div x-data="{ openCategory: false, openRegions: false }" class="z-20 sm:flex hidden sm:items-baseline sm:space-x-8">
                             <div id="desktop-menu" class="relative z-10 inline-block text-left">
                                 <div class="filter_sort">
                                     <button @click="openCategory = !openCategory" type="button"
@@ -197,7 +197,7 @@
                                                     <input id="filter-category-{{ $loop->index }}" name="category[]" value="{{ $category }}"
                                                            type="checkbox"
                                                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                                    <label for="filter-category-{{ $loop->index }}" class="ml-3 text-sm text-gray-700">
+                                                    <label for="filter-category-{{ $loop->index }}" class="ml-3 text-sm font-medium text-gray-700">
                                                         {{ $category }} ({{ $count }})</label>
                                                 </div>
                                             @endforeach
@@ -232,7 +232,7 @@
                                                            type="checkbox"
                                                            class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
                                                     <label for="filter-region-{{ $loop->index }}"
-                                                           class="ml-3 pr-6 text-sm font-medium text-gray-700 whitespace-nowrap">
+                                                           class="ml-3 pr-6 text-sm font-medium text-gray-700">
                                                         {{ $region }} ({{ $count }})</label>
                                                 </div>
                                             @endforeach

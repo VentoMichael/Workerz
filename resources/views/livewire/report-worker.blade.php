@@ -1,4 +1,4 @@
-<div class="top-5 absolute right-6 inline-block text-left"
+<div class="z-10 top-5 absolute right-6 inline-block text-left"
      x-data="{ isSharingOpen{{ $id }}: false, isReportingOpen{{ $id }}: false }">
     <div x-data="{ showMessage: @if($successMessage) true @else false @endif }">
         @if($successMessage)
