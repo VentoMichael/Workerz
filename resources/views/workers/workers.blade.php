@@ -120,10 +120,10 @@
                     <h3 id="filter-heading" class="sr-only">Product filters</h3>
 
                     <div x-data="{ openFilter: false, openCategory: false, openRegions: false }" class="flex items-center justify-between">
-                        <div class="relative z-10 inline-block text-left">
+                        <div class=" relative z-10 inline-block text-left">
                             <div >
-                                <button @click="openFilter = !openFilter" type="button"
-                                        class="filter_sort group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                                <button @if(count($workers) > 0) @click="openFilter = !openFilter" @endif type="button"
+                                        class="@if(count($workers) === 0) opacity-70 cursor-not-allowed @endif filter_sort group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
                                         id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
                                     Sort
                                     <svg x-bind:class="{ 'rotate-0': !openFilter, '-rotate-180': openFilter }"
@@ -139,7 +139,7 @@
                             <fieldset>
                                 <legend class="sr-only">Sort</legend>
                                 <div x-cloak x-show="openFilter" @click.away="openFilter = false"
-                                    class="filter_sort_content origin-top-left absolute left-0 z-10 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                class="filter_sort_content origin-top-left absolute left-0 z-10 mt-2 w-40 rounded-md shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                                     role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button"
                                     tabindex="-1">
                                     <div class="py-1" role="none">
@@ -168,8 +168,8 @@
                         <div x-data="{ openCategory: false, openRegions: false }" class="z-20 sm:flex hidden sm:items-baseline sm:space-x-8">
                             <div id="desktop-menu" class="relative z-10 inline-block text-left">
                                 <div class="filter_sort">
-                                    <button @click="openCategory = !openCategory" type="button"
-                                            class="filter_category group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                                    <button @if(count($workers) > 0) @click="openCategory = !openCategory" @endif type="button"
+                                            class="@if(count($workers) === 0) opacity-70 cursor-not-allowed @endif filter_category group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
                                             aria-expanded="false">
                                         <span>Category</span>
 
@@ -208,8 +208,8 @@
 
                             <div x-data="{ openRegions: false }" id="desktop-menu" class="relative z-10 inline-block text-left">
                                 <div>
-                                    <button @click="openRegions = !openRegions" type="button"
-                                            class="filter_regions group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                                    <button @if(count($workers) > 0) @click="openRegions = !openRegions" @endif type="button"
+                                            class="@if(count($workers) === 0) opacity-70 cursor-not-allowed @endif filter_regions group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
                                             aria-expanded="false">
                                         <span>Regions</span>
                                         <svg x-bind:class="{ 'rotate-0': !openRegions, '-rotate-180': openRegions }"
@@ -249,12 +249,16 @@
 
             <section>
                 <h3 style="z-index: -10" class="sr-only">Most popular workers</h3>
-                <p class="text-xs mb-2">About {{ count($workers) }} result{{ count($workers) > 1 ? 's': '' }}</p>
-                <div id="workers-section" role="list" class="flex md:grid md:grid-cols-500px flex-col gap-4">
-                    @foreach($workers as $worker)
-                        @include('components.worker', ['worker' => $worker])
-                    @endforeach
-                </div>
+                @if(count($workers) > 0)
+                    <p class="text-xs mb-2">About {{ count($workers) }} result{{ count($workers) > 1 ? 's': '' }}</p>
+                    <div id="workers-section" role="list" class="flex md:grid md:grid-cols-500px flex-col gap-4">
+                        @foreach($workers as $worker)
+                            @include('components.worker', ['worker' => $worker])
+                        @endforeach
+                    </div>
+                @else
+                    <p class="text-sm text-gray-500">No workers found.</p>
+                @endif
             </section>
 
         </div>

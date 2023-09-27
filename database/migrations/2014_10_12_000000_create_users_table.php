@@ -28,7 +28,6 @@ return new class extends Migration
             $table->unsignedBigInteger('mainSkill')->nullable();
             $table->foreign('mainSkill')->references('id')->on('skills')->onDelete('cascade');
             $table->string('city')->nullable();
-            $table->string('region')->nullable();
             $table->string('postalCode')->nullable();
             $table->boolean('tutorial_shown')->default(false);
             $table->boolean('hiring')->default(false);

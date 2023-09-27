@@ -22,7 +22,11 @@
     </div>
     <div class="min-h-full flex max-w-screen-xl gap-12 m-4 sm:m-12 2xl:mx-auto">
         <div class=" md:block relative w-0 flex-1">
-            <livewire:freelancer-form/>
+            @if(session()->get('user')['role'] == 1)
+                <livewire:freelancer-form/>
+            @else
+                <livewire:customer-form/>
+            @endif
 
         </div>
 
@@ -53,9 +57,12 @@
         </span>
                         </div>
                     </li>
+                    <li class="relative pb-10">                    @if(session()->get('user')['role'] == 1)
+                            <div class="-ml-px absolute mt-0.5 top-4 left-4 w-0.5 h-full bg-gray-300"
+                                 aria-hidden="true"></div>
+                    @endif
 
-                    <li class="relative pb-10">
-                        <!-- Current Step -->
+                    <!-- Current Step -->
                         <div class="relative flex items-start group" aria-current="step">
         <span class="h-9 flex items-center" aria-hidden="true">
           <span
@@ -69,7 +76,22 @@
         </span>
                         </div>
                     </li>
-
+                    @if(session()->get('user')['role'] == 1)
+                        <li class="relative pb-10">
+                            <div class="relative flex items-start group" aria-current="step">
+        <span class="h-9 flex items-center" aria-hidden="true">
+          <span
+              class="relative z-10 w-8 h-8 flex items-center justify-center bg-white border-2 border-gray-300 rounded-full">
+            <span class="h-2.5 w-2.5 bg-transparent rounded-full"></span>
+          </span>
+        </span>
+                                <span class="ml-4 min-w-0 flex flex-col">
+          <span class="text-xs font-semibold tracking-wide uppercase text-gray-500">Payment Details</span>
+          <span class="text-sm text-gray-500">Enter your payment information</span>
+        </span>
+                            </div>
+                        </li>
+                    @endif
                 </ol>
             </nav>
 

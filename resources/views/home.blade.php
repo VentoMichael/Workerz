@@ -199,7 +199,6 @@
                 <div>
                     <div class="block" id="tabs-section">
                         <nav class="flex space-x-4 p-4 justify-center" aria-label="Tabs">
-                            <!-- Add an "id" attribute to each tab link to match with their corresponding tab content section "id" attribute -->
                             <a x-on:click="activeTab = 'workers'"
                                x-bind:class="[activeTab === 'workers' ? 'bg-purple-600 text-white' : 'text-gray-600']"
                                data-tab="workers" aria-current="page"
@@ -357,12 +356,16 @@
         <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 ">
             <section x-show="activeTab === 'workers'">
                 <h3 style="z-index: -10" class="sr-only">Most popular workers</h3>
-                <p class="text-xs mb-2">About {{ count($workers) }} result{{ count($workers) > 1 ? 's': '' }}</p>
-                <div id="workers-section" role="list" class="flex md:grid md:grid-cols-500px flex-col gap-4">
-                    @foreach($workers as $worker)
-                        @include('components.worker', ['worker' => $worker])
-                    @endforeach
-                </div>
+                @if(count($workers) > 0)
+                    <p class="text-xs mb-2">About {{ count($workers) }} result{{ count($workers) > 1 ? 's': '' }}</p>
+                    <div id="workers-section" role="list" class="flex md:grid md:grid-cols-500px flex-col gap-4">
+                        @foreach($workers as $worker)
+                            @include('components.worker', ['worker' => $worker])
+                        @endforeach
+                    </div>
+                @else
+                    <p class="text-sm text-gray-500">No workers found.</p>
+                @endif
             </section>
 
             <section x-show="activeTab === 'ads'"

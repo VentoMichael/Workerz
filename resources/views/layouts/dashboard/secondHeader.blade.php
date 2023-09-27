@@ -54,15 +54,16 @@
 
                         <span class="truncate"> Messages </span>
                     </a>
-
-                    <a href="{{route('dashboard.plans')}}" class="{{ request()->is('dashboard/plans') || request()->is('dashboard/plans/*') ? 'bg-gray-50 text-indigo-600' : 'text-gray-900 hover:text-gray-900 hover:bg-gray-50' }} group rounded-md px-3 py-2 flex items-center text-sm font-medium" aria-current="page">
-                        <!-- Heroicon name: outline/credit-card -->
-                        <svg class="{{ request()->is('dashboard/plans') || request()->is('dashboard/plans/*') ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500' }} flex-shrink-0 -ml-1 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                        </svg>
-                        <span class="truncate"> Plan &amp; Billing </span>
-                    </a>
-
+                    @if(auth()->user()->hasRole(1))
+                        <!-- Your code for users with role ID 1 -->
+                            <a href="{{route('dashboard.plans')}}" class="{{ request()->is('dashboard/plans') || request()->is('dashboard/plans/*') ? 'bg-gray-50 text-indigo-600' : 'text-gray-900 hover:text-gray-900 hover:bg-gray-50' }} group rounded-md px-3 py-2 flex items-center text-sm font-medium" aria-current="page">
+                                <!-- Heroicon name: outline/credit-card -->
+                                <svg class="{{ request()->is('dashboard/plans') || request()->is('dashboard/plans/*') ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500' }} flex-shrink-0 -ml-1 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                                </svg>
+                                <span class="truncate"> Plan &amp; Billing </span>
+                            </a>
+                        @endif
 
                     <a href="{{route('dashboard.settings')}}" class="{{ request()->is('dashboard/settings') || request()->is('dashboard/settings/*') ? 'bg-gray-50 text-indigo-600' : 'text-gray-900 hover:text-gray-900 hover:bg-gray-50' }} group rounded-md px-3 py-2 flex items-center text-sm font-medium">
                         <!-- Heroicon name: outline/cog -->
@@ -74,7 +75,7 @@
                     </a>
                     </div>
             <!-- Current: "bg-gray-50 text-indigo-600 hover:bg-white", Default: "text-gray-900 hover:text-gray-900 hover:bg-gray-50" -->
-            <a href="{{ route('workers.show',['username' => auth()->user()->username]) }}" class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium">
+            <a href="{{ route('home') }}" class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium">
                 <!--
                   Heroicon name: outline/user-circle
 
@@ -127,7 +128,7 @@
 
                 <span class="truncate"> Messages </span>
             </a>
-
+@if(auth()->user()->hasRole(1))
             <a href="{{route('dashboard.plans')}}" class="{{ request()->is('dashboard/plans') || request()->is('dashboard/plans/*') ? 'bg-gray-50 text-indigo-600' : 'text-gray-900 hover:text-gray-900 hover:bg-gray-50' }} group rounded-md px-3 py-2 flex items-center text-sm font-medium" aria-current="page">
                 <!-- Heroicon name: outline/credit-card -->
                 <svg class="{{ request()->is('dashboard/plans') || request()->is('dashboard/plans/*') ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500' }} flex-shrink-0 -ml-1 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -135,7 +136,7 @@
                 </svg>
                 <span class="truncate"> Plan &amp; Billing </span>
             </a>
-
+@endif
 
             <a href="{{route('dashboard.settings')}}" class="{{ request()->is('dashboard/settings') || request()->is('dashboard/settings/*') ? 'bg-gray-50 text-indigo-600' : 'text-gray-900 hover:text-gray-900 hover:bg-gray-50' }} group rounded-md px-3 py-2 flex items-center text-sm font-medium">
                 <!-- Heroicon name: outline/cog -->
@@ -147,7 +148,7 @@
             </a>
         </div>
         <!-- Current: "bg-gray-50 text-indigo-600 hover:bg-white", Default: "text-gray-900 hover:text-gray-900 hover:bg-gray-50" -->
-        <a href="{{ route('workers.show',['username' => auth()->user()->username]) }}" class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium">
+        <a href="{{ route('home') }}" class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium">
             <!--
               Heroicon name: outline/user-circle
 
