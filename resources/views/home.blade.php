@@ -350,14 +350,6 @@
                                     </button>
                                 </div>
 
-                                <!--
-                                  Entering: "transition ease-out duration-100"
-                                    From: "transform opacity-0 scale-95"
-                                    To: "transform opacity-100 scale-100"
-                                  Leaving: "transition ease-in duration-75"
-                                    From: "transform opacity-100 scale-100"
-                                    To: "transform opacity-0 scale-95"
-                                -->
                                 <div
                                     class="filter_content_regions hidden origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <form class="space-y-4">
@@ -395,13 +387,13 @@
                 </section>
             </section>
         </section>
-        <!-- This example requires Tailwind CSS v2.0+ -->
         <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 ">
             <section>
                 <h3 style="z-index: -10" class="text-transparent absolute">Most popular workers</h3>
                 <div id="workers-section" class="section-tab-content hidden flex md:grid md:grid-cols-500px flex-col gap-4">
-                    @include('components.worker')
-
+                    @foreach($workers as $worker)
+                        @include('components.worker', ['worker' => $worker])
+                    @endforeach
                 </div>
             </section>
 

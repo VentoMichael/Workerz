@@ -101,7 +101,7 @@
                             <span class="text-left">Signaler ce travailleur</span>
                         </button>
                     </div>
-                    <div x-data="{ url: '{{ request()->url() . '/' . $username  }}' }"
+                    <div wire:click="copyUrl" x-data="{ url: '{{ url()->current() . '/' . $username  }}' }"
                          class="block px-4 py-2 hover:bg-gray-100 hover:text-gray-900">
                         <button @click="copyUrl(url)" type="button"
                                 class="flex text-sm text-gray-700 items-center gap-4"

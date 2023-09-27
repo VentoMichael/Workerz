@@ -53,6 +53,10 @@ class ReportWorker extends Component
     {
         $this->isReportingOpen = !$this->isReportingOpen;
     }
+    public function copyUrl(){
+        $this->clearProperty = 'successMessage';
+        $this->successMessage = 'Url copied successfully';
+    }
     public function submitReport()
     {
         $this->validate();

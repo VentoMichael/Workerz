@@ -6,7 +6,7 @@
 
     <a href="{{ route('workers.show',['username']) }}" class="block hover:bg-indigo-50">
 
-        <div class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 sm:grid-cols-48-1">
+        <div class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 sm:grid-cols-48-1 relative">
 
             <div class="flex-shrink-0 self-center">
                 @if(!is_array($worker->avatarUpload) && strpos($worker->avatarUpload, 'initials') !== false)
@@ -28,11 +28,19 @@
                 <div class="flex items-center justify-between">
                     <div>
 
-                        <div class="flex text-sm sm:items-end flex-col sm:flex-row">
+                        <div class="flex text-sm sm:items-end sm:flex-row gap-2 items-end">
                             <h4 class="text-xl font-medium text-indigo-600 truncate">{{ $worker->jobTitle }}</h4>
                             <p class="sm:ml-1 flex-shrink-0 text-md font-normal text-gray-500">
                                 &bull; {{ $worker->skill->name }}
                             </p>
+                            <div class="absolute top-4 left-16 flex items-center sm:relative sm:-top-2 sm:left-2">
+                                <svg class="w-4 h-4 text-yellow-300" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path
+                                        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                </svg>
+                                <p class="ml-1 text-xs font-bold text-gray-900">4.95</p>
+                            </div>
                         </div>
                     </div>
 

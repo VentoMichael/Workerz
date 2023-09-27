@@ -4,6 +4,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RegistrationController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Stripe\Stripe;
 
@@ -19,7 +20,17 @@ use Stripe\Stripe;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $workers = User::byRoleId(1)->with('skill', 'regions')->get();
+    $userRegions = [];
+    $userSkills = [];
+
+    foreach ($workers as $worker) {
+        $userRegions = array_merge($userRegions, $worker->regions->pluck('name', 'id')->toArray());
+        $userSkills = array_merge($userSkills, $worker->skills->pluck('name', 'id')->toArray());
+    }
+    $userRegionsWithCount = array_count_values($userRegions);
+    $userSkillsWithCount = array_count_values($userSkills);
+    return view('home', compact('workers', 'userRegionsWithCount', 'userSkillsWithCount'));
 })->name('home');
 
 Route::get('/how-it-works', function () {
@@ -99,7 +110,6 @@ Route::get('/pricing', function () {
 })->name('pricing');
 
 
-
 // Step 1: User role selection
 Route::get('/sign-up', [RegistrationController::class, 'showRoleForm'])->name('sign-up.role');
 Route::post('/sign-up', [RegistrationController::class, 'storeRole'])->name('post.sign-up.role');
@@ -113,16 +123,10 @@ Route::get('/sign-up/confirmation', [RegistrationController::class, 'showConfirm
 Route::post('/sign-up/confirmation', [RegistrationController::class, 'storeConfirmation'])->name('post.sign-up.confirmation');
 
 
-
-
-
-
 //
 //Route::get('/sign-in', function () {
 //    return view('connexion.sign-in');
 //})->name('sign-in');
-
-
 
 
 // Legal views
@@ -147,7 +151,7 @@ Route::get('/newsletter',
     [\App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter');
 
 // Routes accessible only to authenticated users
- Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     // Dashboard views
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.dashboard');
 
@@ -161,7 +165,7 @@ Route::get('/newsletter',
     Route::put('/dashboard/password', [DashboardController::class, 'updatePassword'])->middleware(['auth'])->name('password.update');
     Route::post('/dashboard/settings', [\App\Http\Controllers\DashboardController::class, 'updateSettings'])->name('dashboard.settings.privacy');
     Route::delete('/dashboard/delete', [\App\Http\Controllers\DashboardController::class, 'deleteAccount'])->name('dashboard.settings.delete');
- });
+});
 
 
 

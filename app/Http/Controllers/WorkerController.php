@@ -14,8 +14,17 @@ class WorkerController extends Controller
      */
     public function index()
     {
-        $workers = User::byRoleId(1)->with('skill')->get();
-        return view('workers.workers',compact('workers'));
+        $workers = User::byRoleId(1)->with('skill','regions')->get();
+        $userRegions = [];
+        $userSkills = [];
+
+        foreach ($workers as $worker) {
+            $userRegions = array_merge($userRegions, $worker->regions->pluck('name','id')->toArray());
+            $userSkills = array_merge($userSkills, $worker->skills->pluck('name','id')->toArray());
+        }
+        $userRegionsWithCount = array_count_values($userRegions);
+        $userSkillsWithCount = array_count_values($userSkills);
+        return view('workers.workers',compact('workers','userRegionsWithCount','userSkillsWithCount'));
 
     }
 
