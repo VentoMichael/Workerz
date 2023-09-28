@@ -78,7 +78,7 @@ class FreelancerForm extends Component
         'phoneNumber3' => 'nullable|numeric|unique:phone_numbers,number|phone:BE',
 
     ];
-
+//TODO:doesn't redirect to the error if there is error
     public function mount()
     {
         $userData = session('user', []);

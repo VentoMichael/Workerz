@@ -16,4 +16,8 @@ class Ad extends Model
     {
         return $this->belongsTo(Region::class);
     }
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class, 'ad_skills');
+    }
 }

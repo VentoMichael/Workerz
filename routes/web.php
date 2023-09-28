@@ -37,9 +37,7 @@ Route::get('/how-it-works', function () {
     return view('how-it-works');
 })->name('how-it-works');
 
-Route::get('/ads', function () {
-    return view('ads.ads');
-})->name('ads');
+Route::get('/ads', [\App\Http\Controllers\AdController::class, 'index'])->name('ads');
 Route::get('/ads/details', function () {
     return view('ads.show');
 })->name('ads.show');

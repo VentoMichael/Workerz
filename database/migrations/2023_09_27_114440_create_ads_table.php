@@ -21,8 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('region_id');
             $table->foreign('region_id')->references('id')->on('regions');
             $table->date('start_date');
-            $table->decimal('budget', 10, 2);
-            $table->integer('experience_years');
+            $table->decimal('budget', 10, 2)->nullable();
             $table->timestamp('posted_at');
             $table->timestamps();
         });
