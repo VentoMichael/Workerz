@@ -1,0 +1,8 @@
+<div class="flex px-4 py-4 sm:px-6">
+    <svg class="mr-2  w-5 h-5 text-purple-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="14" fill="currentColor" viewBox="0 0 20 14">
+        <path d="M18.7 4.531 14.866.84A2.985 2.985 0 0 0 12.784 0H1.969A1.987 1.987 0 0 0 0 2v10a1.987 1.987 0 0 0 1.969 2h10.736a3.004 3.004 0 0 0 2.221-.983l3.912-4.309a3.023 3.023 0 0 0-.138-4.177Z"/>
+    </svg>
+
+    <span
+        class="bg-purple-100 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">We are hiring</span>
+</div>

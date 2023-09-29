@@ -18,9 +18,8 @@ class AdController extends Controller
         $ads = Ad::with('skills','region','user')->get();
         $adRegions = [];
         $adSkills = [];
-
         foreach ($ads as $ad) {
-            $adRegions = array_merge($adRegions, $ad->region->pluck('name','id')->toArray());
+            $adRegions[] = $ad->region->name;
             $adSkills = array_merge($adSkills, $ad->skills->pluck('name','id')->toArray());
             $difference = now()->diffInMinutes($ad->posted_at);
 
@@ -36,6 +35,7 @@ class AdController extends Controller
             $date = Carbon::parse($ad->start_date);
             $ad->formattedStartedAt = $date->isoFormat('DD MMMM YY');
         }
+
         $adRegionsWithCount = array_count_values($adRegions);
         $adSkillsWithCount = array_count_values($adSkills);
         return view('ads.ads',compact('ads','adRegionsWithCount','adSkillsWithCount'));

@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('subject')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
-            //$table->unsignedBigInteger('ad_id')->nullable();
+            $table->unsignedBigInteger('ad_id')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            //$table->foreign('ad_id')->references('id')->on('ads')->onDelete('cascade');
+            $table->foreign('ad_id')->references('id')->on('ads')->onDelete('cascade');
         });
     }
 

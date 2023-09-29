@@ -266,13 +266,207 @@
         </div>
         <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 ">
             <section>
-                <h3 style="z-index: -10" class="sr-only">Most popular ads</h3>
                 @if(count($ads) > 0)
                     <p class="text-xs mb-2">About {{ count($ads) }} result{{ count($ads) > 1 ? 's': '' }}</p>
-                    <div id="ads-section" role="list" class="flex md:grid md:grid-cols-500px flex-col gap-4">
-                        @foreach($ads as $ad)
-                            @include('components.ad', ['ad' => $ad])
-                        @endforeach
+                    <div x-data="{ selectedPreview: window.innerWidth > 768 ? {{ $ads[0]->id }} : null }"
+                         class="grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3">
+                        <div
+                            class="max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1">
+                            @foreach($ads as $ad)
+
+                                <div @click="selectedPreview = {{ $ad->id }}" id="preview-ad-{{ $ad->id }}">
+                                    <section id="title-of-ad-{{ $ad->id }}"
+                                             class="cursor-pointer title-of-ad bg-white shadow sm:rounded-md block overflow-visible hover:bg-indigo-50"
+                                             :class="{ 'border-indigo-500 ring-2 ring-indigo-500 bg-indigo-50': activeAd === {{ $ad->id }} }">
+
+                                        <div
+                                            class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-48-1">
+
+                                            <div class="flex-shrink-0 self-center">
+                                                @if(!is_array($ad->user->avatarUpload) && strpos($ad->user->avatarUpload, 'initials') !== false)
+                                                    <img class="h-12 w-12 rounded-full"
+                                                         src="{{ $ad->user->avatarUpload . '.svg' }}"
+                                                         alt="Profile Picture of {{ $ad->user->firstname . $ad->user->lastname }}"/>
+                                                @else
+                                                    <img class="h-12 w-12 rounded-full"
+                                                         srcset="
+                 @foreach($ad->user->avatarUpload as $imagePath)
+                                                         {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                 @endforeach "
+                                                         src="{{ asset('storage/' . $ad->user->avatarUpload[0]) }}"
+                                                         alt="Profile Picture of {{ $ad->user->firstname . $ad->user->lastname }}"/>
+                                                @endif
+                                            </div>
+                                            <div class="flex justify-between flex-col w-full gap-2">
+
+                                                <div class="flex items-center justify-between">
+                                                    <div>
+                                                        <div class="flex text-sm">
+                                                            <p class="text-indigo-600 text-xl font-medium">{{ $ad->title }}</p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="flex md:grid md:grid-cols-100px gap-6 sm:gap-2 ">
+                                                    <div
+                                                        class="mt-2 gap-1 flex items-center text-sm text-indigo-500 sm:mt-0">
+                                                        <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
+                                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path
+                                                                d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"></path>
+                                                        </svg>
+                                                        <p class="flex items-center text-sm text-gray-500 sm:mt-0">
+                                                            {{ $ad->user->firstname . ' ' . $ad->user->lastname }}
+                                                        </p>
+                                                    </div>
+                                                    <div
+                                                        class="mt-2 gap-1 flex items-center text-sm text-indigo-500 sm:mt-0">
+                                                        <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
+                                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                                                  d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"></path>
+                                                        </svg>
+                                                        <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 gap-1">
+                                                            {{ $ad->region['name'] }}
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex flex-col px-4 py-4 sm:px-6 flex gap-4">
+                                            <p class="text-gray-500">{{ $ad->small_description }}</p>
+                                        </div>
+
+                                        @include('components.badge')
+                                        <div class="flex px-4 py-4 sm:px-6">
+
+                                            <svg class="w-4" fill="bg-gray-500" viewBox="0 0 20 20"
+                                                 xmlns="http://www.w3.org/2000/svg"
+                                                 aria-hidden="true">
+                                                <path clip-rule="evenodd" fill-rule="evenodd"
+                                                      d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
+                                            </svg>
+                                            <p class="ml-2 text-gray-500 text-sm">Posted {{ $ad->formattedCreatedAt }}
+                                                ago</p>
+
+                                        </div>
+                                    </section>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="max-h-screen overflow-y-hidden sm:overflow-y-auto lg:col-start-2 md:col-span-3">
+                            @foreach($ads as $ad)
+                                <div x-cloak x-show="selectedPreview === {{ $ad->id }}">
+
+                                    <section id="content-of-ad-{{ $ad->id }}"
+                                             class="m-px overflow-y-scroll sm:overflow-hidden bottom-0 z-10 bg-white shadow sm:rounded-md block overflow-hidden">
+                                        <div class="bg-white px-4 py-5 sm:px-6">
+
+                                            <svg x-data="{ isHidden: window.innerWidth > 768 }" x-bind:hidden="isHidden"
+                                                 class="cursor-pointer w-6 icon-back mb-8" id="icon-back-1"
+                                                 fill="currentColor"
+                                                 viewBox="0 0 20 20"
+                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path clip-rule="evenodd" fill-rule="evenodd"
+                                                      d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"></path>
+                                            </svg>
+
+                                            <div class="max-w-screen-lg mx-auto relative">
+                                                <div class="flex justify-between ">
+                                                    <h3 class="text-2xl font-semibold mb-4">{{ $ad->title }}</h3>
+
+                                                    <livewire:report-ad :ad="$ad"/>
+
+                                                </div>
+                                                <div class="flex flex-wrap mb-4">
+                                                    <div class="w-full md:w-1/3 mt-2">
+                                                        <p class="font-semibold">Location:</p>
+                                                        <p class="text-gray-700">{{ $ad->region['name'] }}</p>
+                                                    </div>
+                                                    <div class="w-full md:w-1/3 mt-2">
+                                                        <p class="font-semibold">Timeline:</p>
+                                                        <p class="text-gray-700">{{ $ad->formattedStartedAt }}</p>
+                                                    </div>
+                                                    <div class="w-full md:w-1/3 mt-2">
+                                                        <p class="font-semibold">Budget:</p>
+                                                        <p class="text-gray-700">{{ floatval($ad->budget) }} €</p>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <p class="font-semibold">Job Description:</p>
+                                                    <p class="text-gray-700 leading-normal">{{ $ad->description }}</p>
+                                                </div>
+                                                <div class="mb-4 flex justify-between">
+                                                    <div class="flex items-end">
+                                                        <svg class="w-4 relative -top-0.5" fill="bg-gray-500"
+                                                             viewBox="0 0 20 20"
+                                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                                                  d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
+                                                        </svg>
+                                                        <p class="ml-2 text-gray-500 text-sm">
+                                                            Posted {{ $ad->formattedCreatedAt }} ago <span>&bull;  {{ $ad->employees }} candidats</span>
+                                                        </p>
+                                                    </div>
+                                                    <a href="{{route('ads.show')}}">
+                                                        <x-button kind="primary">Chat now</x-button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            @if($ad->user->hasRole(1))
+                                                <div class="max-w-screen-lg mx-auto relative border-t-2 pt-6 mt-12">
+                                                    <div class="flex justify-between ">
+
+                                                        <p class="text-2xl font-semibold mb-4">Info sur l'entreprise</p>
+
+                                                    </div>
+                                                    <div class="flex gap-2 align-middle items-center">
+                                                        @if(!is_array($ad->user->avatarUpload) && strpos($ad->user->avatarUpload, 'initials') !== false)
+                                                            <img class="h-12 w-12 rounded-full"
+                                                                 src="{{ $ad->user->avatarUpload . '.svg' }}"
+                                                                 alt="Profile Picture of {{ $ad->user->firstname . $ad->user->lastname }}"/>
+                                                        @else
+                                                            <img class="h-12 w-12 rounded-full"
+                                                                 srcset="
+                 @foreach($ad->user->avatarUpload as $imagePath)
+                                                                 {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                 @endforeach "
+                                                                 src="{{ asset('storage/' . $ad->user->avatarUpload[0]) }}"
+                                                                 alt="Profile Picture of {{ $ad->user->firstname . $ad->user->lastname }}"/>
+                                                        @endif
+                                                        <span
+                                                            class="text-gray-700 leading-normal">{{ $ad->user->username }}</span>
+                                                    </div>
+                                                    <div class="flex flex-col flex-wrap mb-4">
+                                                        <div class="mb-4 mt-4">
+                                                            <p class="text-gray-700 leading-normal">{{ $ad->user->about }}</p>
+                                                        </div>
+                                                        <div class="mb-4 flex justify-between">
+                                                            <div class="flex items-end">
+                                                                <svg class="w-4 relative -top-0.5" fill="bg-gray-500"
+                                                                     viewBox="0 0 20 20"
+                                                                     xmlns="http://www.w3.org/2000/svg"
+                                                                     aria-hidden="true">
+                                                                    <path clip-rule="evenodd" fill-rule="evenodd"
+                                                                          d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
+                                                                </svg>
+                                                                <p class="ml-2 text-gray-500 text-sm">
+                                                                    Posted {{ $ad->formattedCreatedAt }} ago <span>&bull; 5-10 employees</span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </section>
+
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 @else
                     <p class="text-sm text-gray-500">No ads found.</p>
@@ -281,91 +475,4 @@
         </div>
     </section>
 @endsection
-@section('scripts')
-    <script>
-        // Get all elements with the class 'title-of-ad'
-        const titles = document.querySelectorAll('[id^="title-of-ad-"]');
-        const firstTitle = titles[0];
-        const contents = document.querySelectorAll('[id^="content-of-ad-"]');
-        const firstContent = contents[0];
-        const firstContentSection = document.querySelectorAll('[id^="content-of-ad-"]');
-        const icons = document.querySelectorAll('[id^="icon-back-"]');
-        const screenWidth = window.innerWidth;
 
-        if (screenWidth < 768) {
-            contents.forEach(content => {
-                content.classList.add('hidden', 'fixed', 'top-0', 'left-0', 'w-full')
-            })
-        } else {
-            firstTitle.classList.add('border-indigo-500', 'ring-2', 'ring-indigo-500', 'bg-indigo-50');
-            firstContent.classList.remove('hidden');
-        }
-        // Loop through each title and add a click event listener
-        // Loop through each title and add a click event listener
-        titles.forEach(title => {
-            title.addEventListener('click', () => {
-                const id = title.getAttribute('id').replace('title', 'content');
-                const contentSection = document.getElementById(id);
-
-                // Remove 'border-indigo-500', 'ring-2', and 'ring-indigo-500' from all titles
-                titles.forEach(t => {
-                    t.classList.remove('border-indigo-500', 'ring-2', 'ring-indigo-500', 'bg-indigo-50', 'bg-white');
-                });
-
-                if (screenWidth > 768) {
-                    title.classList.add('border-indigo-500', 'ring-2', 'ring-indigo-500', 'bg-indigo-50');
-                }
-
-                // Add 'border-indigo-500', 'ring-2', and 'ring-indigo-500' to the clicked title
-                title.classList.add('border-indigo-500', 'ring-2', 'ring-indigo-500', 'bg-indigo-50');
-
-                // Hide all 'content-of-ad' sections
-                const contentSections = document.querySelectorAll('[id^="content-of-ad-"]');
-                contentSections.forEach(section => {
-                    section.classList.add('hidden');
-                });
-
-                if (screenWidth < 768) {
-                    document.body.classList.add('overflow-hidden');
-                }
-
-                // Show the corresponding 'content-of-ad' section for the clicked title
-                contentSection.classList.remove('hidden');
-
-                // Set the current tab link as active
-                tabLinks.forEach(tabLink => {
-                    tabLink.setAttribute('aria-current', 'false');
-                    tabLink.classList.remove('bg-purple-600', 'text-white');
-                    tabLink.classList.add('text-gray-600');
-                });
-
-                if (id.includes('worker')) {
-                    const workersTab = document.querySelector('[data-tab="workers"]');
-                    workersTab.setAttribute('aria-current', 'page');
-                    workersTab.classList.add('bg-purple-600', 'text-white');
-                    workersTab.classList.remove('text-gray-600');
-                } else if (id.includes('ad')) {
-                    const adsTab = document.querySelector('[data-tab="ads"]');
-                    adsTab.setAttribute('aria-current', 'page');
-                    adsTab.classList.add('bg-purple-600', 'text-white');
-                    adsTab.classList.remove('text-gray-600');
-                }
-            });
-        });
-
-
-        // Loop through each 'icon-back' element and add a click event listener
-        icons.forEach(icon => {
-            icon.addEventListener('click', () => {
-                const id = icon.getAttribute('id').replace('icon-back-', '');
-                const contentSection = document.getElementById(`content-of-ad-${id}`);
-                contentSection.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden')
-            });
-            if (screenWidth > 768) {
-                icon.classList.add('hidden');
-            }
-
-        });
-    </script>
-@endsection

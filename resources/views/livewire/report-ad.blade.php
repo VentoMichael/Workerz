@@ -1,5 +1,5 @@
 <div class="z-10 top-5 absolute right-6 inline-block text-left"
-     x-data="{ isSharingOpen{{ $user_id }}: false, isReportingOpen{{ $user_id }}: false }">
+     x-data="{ isSharingOpen{{ $ad_id }}: false, isReportingOpen{{ $ad_id }}: false }">
     <div x-data="{ showMessage: @if($successMessage) true @else false @endif }">
         @if($successMessage)
             <div x-show="showMessage" x-init="setTimeout(() => showMessage = false, 5000)">
@@ -9,7 +9,7 @@
     </div>
     <div class="flex gap-1">
 
-        <button wire:click="toggleSharing" @click="isSharingOpen{{ $user_id }} = true" type="button"
+        <button wire:click="toggleSharing" @click="isSharingOpen{{ $ad_id }} = true" type="button"
                 class="inline-flex items-center justify-center w-full px-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 id="dropdown-menu-button" aria-expanded="true" aria-haspopup="true">
             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" height="1em"
@@ -19,14 +19,14 @@
             </svg>
 
         </button>
-        <button wire:click="toggleReporting" @click="isReportingOpen{{ $user_id }} = true" type="button"
+        <button wire:click="toggleReporting" @click="isReportingOpen{{ $ad_id }} = true" type="button"
                 class="inline-flex items-center justify-center w-full px-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 id="dropdown-menu-button" aria-expanded="true" aria-haspopup="true">
             <span class="text-2xl">...</span>
         </button>
     </div>
     @if($isSharingOpen)
-        <div x-show="isSharingOpen{{ $user_id }}" @click.away="isSharingOpen{{ $user_id }} = false"
+        <div x-show="isSharingOpen{{ $ad_id }}" @click.away="isSharingOpen{{ $ad_id }} = false"
              class="z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
              role="menu" aria-orientation="vertical"
              aria-labelledby="dropdown-menu-button" tabindex="-1">
@@ -81,8 +81,8 @@
         </div>
     @endif
     @if($isReportingOpen)
-        <div x-show="isReportingOpen{{ $user_id }}" @click.away="isReportingOpen{{ $user_id }} = false"
-             class="content-signal-worker-{{ $user_id }} z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+        <div x-show="isReportingOpen{{ $ad_id }}" @click.away="isReportingOpen{{ $ad_id }} = false"
+             class="content-signal-ad-{{ $ad_id }} z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
              role="menu" aria-orientation="vertical"
              aria-labelledby="dropdown-menu-button" tabindex="-1">
             <div class="py-1" role="none">
@@ -98,21 +98,7 @@
                                 <path
                                     d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32V64 368 480c0 17.7 14.3 32 32 32s32-14.3 32-32V352l64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48V32z"/>
                             </svg>
-                            <span class="text-left">Signaler ce travailleur</span>
-                        </button>
-                    </div>
-                    <div wire:click="copyUrl" x-data="{ url: '{{ url()->current() . '/' . $username  }}' }"
-                         class="block px-4 py-2 hover:bg-gray-100 hover:text-gray-900">
-                        <button @click="copyUrl(url)" type="button"
-                                class="flex text-sm text-gray-700 items-center gap-4"
-                                id="dropdown-menu-button" aria-expanded="true"
-                                aria-haspopup="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
-                                 height="1em" viewBox="0 0 640 512">
-                                <path
-                                    d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/>
-                            </svg>
-                            <span class="text-left">Copier le lien</span>
+                            <span class="text-left">Signaler cette annonce</span>
                         </button>
                     </div>
                     @if($reportSubmitted)
@@ -139,12 +125,12 @@
                                                 </div>
                                                 <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                                     <h3 class="text-base font-semibold leading-6 text-gray-900"
-                                                        id="modal-title">Report {{$username}}
+                                                        id="modal-title">Report {{$ad->title}}
                                                     </h3>
                                                     <div class="mt-2">
                                                         <p class="text-sm text-gray-500">Are you sure you want to report
                                                             this
-                                                            worker? Please provide details about the issue you are
+                                                            ad? Please provide details about the issue you are
                                                             reporting.</p>
                                                     </div>
                                                 </div>
