@@ -1,9 +1,15 @@
 <div class="z-10 top-5 absolute right-6 inline-block text-left"
      x-data="{ isSharingOpen{{ $ad_id }}: false, isReportingOpen{{ $ad_id }}: false }">
-    <div x-data="{ showMessage: @if($successMessage) true @else false @endif }">
+    <div x-data="{ showMessage: @if($successMessage || $errorMessage) true @else false @endif }">
         @if($successMessage)
-            <div x-show="showMessage" x-init="setTimeout(() => showMessage = false, 5000)">
+            <div x-show="showMessage">
                 @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
+            </div>
+        @endif
+
+        @if($errorMessage)
+            <div x-show="showMessage">
+                @include('components.error-message', ['message' => $errorMessage,'clearProperty' => 'errorMessage'])
             </div>
         @endif
     </div>

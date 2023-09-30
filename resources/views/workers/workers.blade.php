@@ -14,7 +14,7 @@
                     <div class="px-4 flex items-center justify-between">
                         <h2 class="text-lg font-medium text-gray-900">Filters</h2>
                         <button @click="openFilterMobile = false" type="button"
-                                class="button_filter_mobile mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                class="button_filter_mobile w-10 h-10 bg-white pl-2 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                             <span class="sr-only">Close menu</span>
                             <!-- Heroicon name: outline/x -->
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -279,4 +279,5 @@
             document.body.removeChild(input);
         }
     </script>
+
 @endsection

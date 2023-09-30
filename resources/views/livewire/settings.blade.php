@@ -1,29 +1,25 @@
-<div x-data="{ showMessage: @if($successMessage) true @else false @endif }">
+<div x-data="{ showMessage: @if($successMessage || $errorMessage || $infoMessage) true @else false @endif }">
     @if($successMessage)
-        <div x-show="showMessage" x-init="setTimeout(() => showMessage = false, 5000)">
+        <div x-show="showMessage" >
             @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
         </div>
     @endif
+        @if($errorMessage)
+            <div x-show="showMessage">
+                @include('components.error-message', ['message' => $errorMessage,'clearProperty' => 'errorMessage'])
+            </div>
+        @endif
+        @if($infoMessage)
+            <div x-show="showMessage" >
+                @include('components.info-message', ['message' => $infoMessage,'clearProperty' => 'infoMessage'])
+            </div>
+        @endif
 </div>
     <!-- Profile section -->
 
     <section class="mt-6" aria-labelledby="payment-details-heading">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
             <div class="bg-white py-6 px-4 sm:p-6">
-                <div x-data="{ showMessage: @if($successMessage) true @else false @endif }">
-                    @if($successMessage)
-                        <div x-show="showMessage" x-init="setTimeout(() => showMessage = false, 5000)">
-                            @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
-                        </div>
-                    @endif
-                </div>
-                <div x-data="{ showMessage: @if($infoMessage) true @else false @endif }">
-                    @if($infoMessage)
-                        <div x-show="showMessage" x-init="setTimeout(() => showMessage = false, 5000)">
-                            @include('components.info-message', ['message' => $infoMessage,'clearProperty' => 'infoMessage'])
-                        </div>
-                    @endif
-                </div>
                 <div>
                     <h2 id="payment-details-heading"
                         class="text-lg leading-6 font-medium text-gray-900">Privacy</h2>

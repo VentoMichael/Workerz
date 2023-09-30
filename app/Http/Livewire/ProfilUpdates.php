@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Region;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
@@ -15,11 +17,11 @@ class ProfilUpdates extends Component
 {
     use WithFileUploads;
 
-    public $username;
+    public $name;
     public $about;
     public $showBackgroundImage = true;
     public $showAvatarImage = true;
-    public $avatarUpload;
+    public $logoUpload;
     public $backgroundUpload;
     public $firstname;
     public $lastname;
@@ -30,15 +32,23 @@ class ProfilUpdates extends Component
     public $postalCode;
     public $hasChanges = false;
     public $successMessage = '';
+    public $errorMessage = '';
     public $infoMessage = '';
     public $anchor = '';
     public $containsDefaultBackground = false;
     public $containsDefaultAvatar = false;
-    public $defaultBackgrounds = ["covers/default_background_320.jpg", "covers/default_background_320.webp", "covers/default_background_680.jpg", "covers/default_background_680.webp", "covers/default_background_1280.jpg", "covers/default_background_1280.webp", "covers/default_background_1980.jpg", "covers/default_background_1980.webp"];
-    public $defaultAvatar;
+    public $defaultBackgrounds = ["default_cover/default_background_320.jpg", "default_cover/default_background_320.webp", "default_cover/default_background_680.jpg", "default_cover/default_background_680.webp", "default_cover/default_background_1280.jpg", "default_cover/default_background_1280.webp", "default_cover/default_background_1980.jpg", "default_cover/default_background_1980.webp"];
+    public $defaultLogo;
 
-    protected $avatarSizes = ['32x32', '160x160', '128x128'];
+    protected $logoSizes = ['32x32', '160x160', '128x128'];
     protected $backgroundSizes = ['1980x192', '1280x192', '680x192'];
+
+    public $typeRegion;
+    public $showRegionsList = false;
+    public $filteredRegions = [];
+    public $selectedRegions = [];
+    public $regions = [];
+    public $maxRegions = 2;
 
     protected $rules = [
         'about' => 'required|min:10',
@@ -53,22 +63,24 @@ class ProfilUpdates extends Component
     public function mount()
     {
         $user = Auth::user();
-        foreach ($user->backgroundUpload as $value) {
-            if (strpos($value, 'covers/default_background') !== false) {
+        foreach ($user->company->backgroundUpload as $value) {
+            if (strpos($value, 'default_cover/default_background_') !== false) {
                 $this->containsDefaultBackground = true;
                 break;
             }
         }
-        $this->about = $user->about ?? '';
-        $this->username = $user->username ?? '';
+        $this->about = $user->company->about ?? '';
+        $this->name = $user->company->name ?? '';
         $this->email = $user->email ?? '';
         $this->firstname = $user->firstname ?? '';
         $this->lastname = $user->lastname ?? '';
         $this->streetAddress = $user->streetAddress ?? '';
         $this->city = $user->city ?? '';
-        $this->region = $user->region ?? '';
+        $this->selectedRegion = $user->company->regions ?? '';
         $this->postalCode = $user->postalCode ?? '';
-        $this->defaultAvatar = 'avatars/' . $this->username . '/initials/initial';
+        $this->selectedRegions = $user->company->regions->pluck('id', 'name')->toArray() ?? '';
+        $this->defaultLogo = 'freelancer/logos/' . $this->name . '/initials/initial';
+        $this->regions = Region::all()->toArray();
     }
 
     public function updated($propertyName)
@@ -89,64 +101,161 @@ class ProfilUpdates extends Component
 
     }
 
+    public function toggleRegionsList()
+    {
+        $this->showRegionsList = !$this->showRegionsList;
+
+        if ($this->showRegionsList) {
+            $this->filteredRegions = $this->regions;
+        } else {
+
+            $this->typeRegion = '';
+            $this->filteredRegions = $this->regions;
+        }
+    }
+
+    public function removeRegion($regionId)
+    {
+        if (($key = array_search($regionId, $this->selectedRegions)) !== false) {
+            unset($this->selectedRegions[$key]);
+        }
+        $this->selectedRegions = array_values($this->selectedRegions);
+        $this->hasChanges = true;
+
+    }
+
+    public function addRegion($region)
+    {
+
+        $region = trim($region);
+
+        $selectedRegionsLower = array_map('strtolower', $this->selectedRegions);
+
+        if (
+            !empty($region) &&
+            !in_array(strtolower($region), $selectedRegionsLower) &&
+            count($this->selectedRegions) < $this->maxRegions
+        ) {
+            $this->selectedRegions[] = $region;
+            $this->showRegionsList = false;
+            $this->highlightedRegion = null;
+            $this->reset('typeRegion');
+            $this->hasChanges = true;
+        }
+    }
+
+    public function filterRegions()
+    {
+
+        $this->filteredRegions = array_values(array_filter($this->regions, function ($region) {
+            return !in_array(strtolower($region['name']), array_map('strtolower', $this->selectedRegions))
+                && stripos($region['name'], strtolower($this->typeRegion)) !== false;
+        }));
+        $this->showRegionsList = true;
+    }
+
     public function removeAvatarImage()
     {
         $this->showAvatarImage = false;
-        $this->avatarUpload = false;
+        $this->logoUpload = false;
         $this->hasChanges = true;
+    }
+
+    public function getSelectedRegionNames()
+    {
+        return collect($this->regions)->filter(function ($region) {
+            return in_array($region['id'], $this->selectedRegions);
+        })->pluck('name');
+    }
+
+    public function getSelectedRegionNameId()
+    {
+        $selectedRegions = collect($this->regions)->filter(function ($region) {
+            return in_array($region['id'], $this->selectedRegions);
+        });
+
+        return $selectedRegions->pluck('name', 'id');
+    }
+
+    public function saveRegionsForCompany($company)
+    {
+        $selectedRegionNames = $this->getSelectedRegionNames();
+
+        $selectedRegionIds = Region::whereIn('name', $selectedRegionNames)->pluck('id')->toArray();
+
+        $company->regions()->sync($selectedRegionIds);
     }
 
     public function submitForm()
     {
-        if (!$this->showBackgroundImage) {
-            $userData['backgroundUpload'] = $this->defaultBackgrounds;
-        }
 
-        if (!$this->showAvatarImage) {
-            $userData['avatarUpload'] = $this->defaultAvatar;
-        }
+        try {
+            $selectedRegionNames = array_keys($this->selectedRegions);
+            $companyRegionNames = Auth::user()->company->regions->pluck('name')->toArray();
 
-        if ($this->hasChanges) {
-            $userData = [
-                'about' => $this->about,
-                'firstname' => ucfirst($this->firstname),
-                'lastname' => ucfirst($this->lastname),
-                'streetAddress' => $this->streetAddress,
-                'city' => $this->city,
-                'region' => $this->region,
-                'postalCode' => $this->postalCode,
-            ];
-            if ($this->avatarUpload || $this->backgroundUpload) {
-                $this->validate(['backgroundUpload' => 'nullable|image|max:1024'], ['avatarUpload' => 'nullable|image|max:1024']);
+            if (count(array_diff($selectedRegionNames, $companyRegionNames)) > 0) {
+                $company = Auth::user()->company;
+                $this->saveRegionsForCompany($company);
+                //TODO:saving but error temporary url
             }
-            if ($this->avatarUpload) {
-                Storage::deleteDirectory('avatars/' . $this->username);
-                $userData['avatarUpload'] = $this->processAndStoreImage($this->avatarUpload, 'avatars', $this->username, true);
+
+            if (!$this->showBackgroundImage) {
+                $companyData['backgroundUpload'] = $this->defaultBackgrounds;
+            }
+
+            if (!$this->showAvatarImage) {
+                $companyData['logoUpload'] = $this->defaultLogo;
+            }
+
+            if ($this->hasChanges) {
+
+                $companyData = [
+                    'about' => $this->about,
+                ];
+                $userData = [
+                    'firstname' => ucfirst($this->firstname),
+                    'lastname' => ucfirst($this->lastname),
+                    'streetAddress' => $this->streetAddress,
+                    'city' => $this->city,
+                    'postalCode' => $this->postalCode,
+                ];
+                if ($this->logoUpload || $this->backgroundUpload) {
+                    $this->validate(['backgroundUpload' => 'nullable|image|max:1024'], ['logoUpload' => 'nullable|image|max:1024']);
+                }
+                if ($this->logoUpload) {
+                    $companyData['logoUpload'] = $this->processAndStoreImage($this->logoUpload, 'logos', $this->name, true);
+                } else {
+                    $companyData['logoUpload'] = $this->defaultLogo;
+                }
+
+                if ($this->backgroundUpload) {
+                    $companyData['backgroundUpload'] = $this->processAndStoreImage($this->backgroundUpload, 'covers', $this->name, false);
+                } else {
+                    $companyData['backgroundUpload'] = $this->defaultBackgrounds;
+                }
+
+                $this->successMessage = 'Profile updated successfully!';
+                $this->infoMessage = null;
+                $this->clearProperty = 'successMessage';
+                $company = Auth::user()->company;
+                Auth::user()->update($userData);
+                $company->update($companyData);
+                $this->saveRegionsForCompany($company);
+                $this->anchor = 'successMsg';
             } else {
-                $userData['avatarUpload'] = $this->defaultAvatar;
+                $this->successMessage = null;
+                $this->clearProperty = 'infoMessage';
+                $this->infoMessage = 'No changes made to update.';
+                $this->anchor = 'infoMsg';
             }
-
-            if ($this->backgroundUpload) {
-                Storage::deleteDirectory('covers/' . $this->username);
-                $userData['backgroundUpload'] = $this->processAndStoreImage($this->backgroundUpload, 'covers', $this->username, false);
-            } else {
-                $userData['backgroundUpload'] = $this->defaultBackgrounds;
-            }
-
-
-            $this->successMessage = 'Profile updated successfully!';
-            $this->infoMessage = null;
-            $this->clearProperty = 'successMessage';
-            Auth::user()->update($userData);
-            $this->anchor = 'successMsg';
-        } else {
+            $this->hasChanges = false;
+            $this->dispatch('delayed-action', ['delay' => 1000]);
+        } catch (Exception $e) {
             $this->successMessage = null;
-            $this->clearProperty = 'infoMessage';
-            $this->infoMessage = 'No changes made to update.';
-            $this->anchor = 'infoMsg';
+            $this->clearProperty = 'errorMessage';
+            $this->errorMessage = 'There is an error, please try again later.';
+            //$this->errorMessage = 'There is an error, please try again later.';
         }
-$this->hasChanges = false;
-        $this->dispatch('delayed-action', ['delay' => 1000]);
     }
 
 
@@ -155,25 +264,9 @@ $this->hasChanges = false;
         $this->$property = null;
     }
 
-    public function generateInitialsImage($folder, $username)
-    {
-        $name = $this->username;
-        $initials = strtoupper($name[0]);
-
-        $svgImage = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <rect width="100%" height="100%" fill="#5850EC" />
-        <text x="50" y="54" font-family="Ubuntu, sans-serif" font-size="48" fill="#FFFFFF" text-anchor="middle" alignment-baseline="middle">' . $initials . '</text>
-    </svg>';
-
-        $filename = uniqid('', true);
-        Storage::disk('public')->put($folder . '/' . $username . '/initials/' . $filename . '.svg', $svgImage);
-
-        return $folder . '/' . $username . '/initials/' . $filename;
-    }
-
     protected function processAndStoreImage($uploadedImage, $folder, $filename, $isAvatar)
     {
-            $initialsPath = $this->generateInitialsImage($folder, $filename);
+        $initialsPath = 'freelancer/' . $folder . '/' . $filename . '/initials/' . $filename;
         if (!$uploadedImage) {
             return $initialsPath;
         }
@@ -186,20 +279,20 @@ $this->hasChanges = false;
     protected function createImages($uploadedImage, $folder, $filename, $isAvatar)
     {
         $imagePath = [];
-        foreach (($isAvatar ? $this->avatarSizes : $this->backgroundSizes) as $size) {
+        foreach (($isAvatar ? $this->logoSizes : $this->backgroundSizes) as $size) {
             list($width, $height) = explode('x', $size);
 
             $image = Image::make($uploadedImage)
                 ->fit($width, $height)
                 ->encode('jpg', 80);
 
-            $imagePath[] = $folder . '/' . $filename . '/' . $size . '.jpg';
-            Storage::disk('public')->put($folder . '/' . $filename . '/' . $size . '.jpg', $image);
+            $imagePath[] = 'freelancer/' . $folder . '/' . $filename . '/' . $size . '.jpg';
+            Storage::disk('public')->put('freelancer/' . $folder . '/' . $filename . '/' . $size . '.jpg', $image);
 
             $webpImage = clone $image;
             $webpImage->encode('webp', 80);
-            $imagePath[] = $folder . '/' . $filename . '/' . $size . '.webp';
-            Storage::disk('public')->put($folder . '/' . $filename . '/' . $size . '.webp', $webpImage);
+            $imagePath[] = 'freelancer/' . $folder . '/' . $filename . '/' . $size . '.webp';
+            Storage::disk('public')->put('freelancer/' . $folder . '/' . $filename . '/' . $size . '.webp', $webpImage);
         }
 
         return $imagePath;

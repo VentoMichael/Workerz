@@ -46,7 +46,6 @@ class CustomerForm extends Component
 
     protected $rules = [
         'avatarUpload' => 'nullable|image|mimes:jpeg,png,svg,webp|max:1024',
-        'backgroundUpload' => 'nullable|image|mimes:jpeg,png,svg,webp|max:1024',
         'firstname' => 'required',
         'lastname' => 'required',
         'email' => 'required|email|unique:users',
@@ -193,11 +192,6 @@ class CustomerForm extends Component
             'city' => $this->city,
             'postalCode' => $this->postalCode,
         ];
-        if ($this->backgroundUpload) {
-            $userData['backgroundUpload'] = $this->processAndStoreImage($this->backgroundUpload, 'covers', $this->firstname . "_" .$this->lastname, false);
-        } else {
-            $userData['backgroundUpload'] = ["covers/default_background_320.jpg", "covers/default_background_320.webp", "covers/default_background_680.jpg", "covers/default_background_680.webp", "covers/default_background_1280.jpg", "covers/default_background_1280.webp", "covers/default_background_1980.jpg", "covers/default_background_1980.webp"];
-        }
         $user = session('user', []);
         $user['account'] = $userData;
         session(['user' => $user]);
@@ -259,12 +253,12 @@ class CustomerForm extends Component
                 ->fit($width, $height)
                 ->encode('jpg', 80);
 
-            $imagePath[] = $folder . '/' . $filename . '/' . $size . '.jpg';
+            $imagePath[] = 'customer/'. $folder . '/' . $filename . '/' . $size . '.jpg';
             Storage::disk('public')->put('customer/'. $folder . '/' . $filename . '/' . $size . '.jpg', $image);
 
             $webpImage = clone $image;
             $webpImage->encode('webp', 80);
-            $imagePath[] = $folder . '/' . $filename . '/' . $size . '.webp';
+            $imagePath[] = 'customer/'. $folder . '/' . $filename . '/' . $size . '.webp';
             Storage::disk('public')->put('customer/'. $folder . '/' . $filename . '/' . $size . '.webp', $webpImage);
         }
 

@@ -1,5 +1,5 @@
 @if($message)
-    <div class="flex gap-5 fixed right-8 bottom-4 bg-blue-100 border-t-4 border-blue-500 rounded-b text-teal-900 px-5 py-4 shadow-md" role="alert">
+    <div class="z-50 flex gap-5 fixed right-8 bottom-4 bg-blue-100 border-t-4 border-blue-500 rounded-b text-teal-900 px-5 py-4 shadow-md" role="alert">
         <div class="flex gap-2">
 
             <div class="py-1">

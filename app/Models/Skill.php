@@ -13,9 +13,9 @@ class Skill extends Model
     {
         return self::where('name', 'LIKE', '%' . $searchKey . '%');
     }
-    public function users()
+    public function companies()
     {
-        return $this->belongsToMany(User::class, 'user_subskills');
+        return $this->belongsToMany(Company::class, 'company_subskills');
     }
     public function ads()
     {

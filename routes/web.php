@@ -20,7 +20,7 @@ use Stripe\Stripe;
 */
 
 Route::get('/', function () {
-    $workers = User::byRoleId(1)->with('skill', 'regions')->get();
+    $workers = User::byRoleId(1)->with('skill', 'company')->get();
     $userRegions = [];
     $userSkills = [];
 
@@ -45,7 +45,7 @@ Route::get('/ads/details', function () {
 
 Route::get('/workers', [\App\Http\Controllers\WorkerController::class, 'index'])->name('workers');
 
-Route::get('/workers/{username}', function () {
+Route::get('/workers/{name}', function () {
     return view('workers.show');
 })->name('workers.show');
 

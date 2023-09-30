@@ -14,13 +14,15 @@ class WorkerController extends Controller
      */
     public function index()
     {
-        $workers = User::byRoleId(1)->with('skill','regions')->get();
+        $workers = User::byRoleId(1)->with('company.skills','company.regions')->get();
         $userRegions = [];
         $userSkills = [];
+        $companySkills = [];
 
         foreach ($workers as $worker) {
-            $userRegions = array_merge($userRegions, $worker->regions->pluck('name','id')->toArray());
-            $userSkills = array_merge($userSkills, $worker->skills->pluck('name','id')->toArray());
+            $companySkills = $worker->company->skills->pluck('name', 'id')->toArray();
+            $userSkills = array_merge($userSkills, $companySkills);
+            $userRegions = $worker->company->regions->pluck('name','id')->toArray();
         }
         $userRegionsWithCount = array_count_values($userRegions);
         $userSkillsWithCount = array_count_values($userSkills);

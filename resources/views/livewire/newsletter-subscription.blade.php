@@ -1,10 +1,15 @@
     <section class="mt-12 xl:mt-0">
-        <div x-data="{ showMessage: @if($successMessage) true @else false @endif }">
+        <div x-data="{ showMessage: @if($successMessage || $errorMessage) true @else false @endif }">
             @if($successMessage)
-                <div x-show="showMessage" x-init="setTimeout(() => showMessage = false, 5000)">
+                <div x-show="showMessage" >
                     @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
                 </div>
             @endif
+                @if($errorMessage)
+                    <div x-show="showMessage">
+                        @include('components.error-message', ['message' => $errorMessage,'clearProperty' => 'errorMessage'])
+                    </div>
+                @endif
         </div>
         <h3 class="text-sm font-semibold text-gray-700 tracking-wider uppercase">Subscribe to our
             newsletter</h3>

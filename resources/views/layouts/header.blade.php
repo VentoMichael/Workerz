@@ -36,36 +36,25 @@
                                         aria-expanded="false" aria-haspopup="true">
                                     <span class="sr-only">Open user menu</span>
 
-                                        @if (is_string(\Illuminate\Support\Facades\Auth::user()->avatarUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->avatarUpload, 'initials') !== false)
+                                        @if (is_string(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->company->logoUpload, 'initials') !== false)
                                             <img class="w-12 h-12 rounded-full"
-                                                 src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
+                                                 src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->company->logoUpload . '.svg') }}"
                                                  alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
                                         @else
                                             <img class="w-12 h-12 rounded-full"
                                                  srcset="
-            @if (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
-                                                 @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+            @if (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload))
+                                                 @foreach(\Illuminate\Support\Facades\Auth::user()->company->logoUpload as $imagePath)
                                                  {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                 @endforeach
                                                  @endif
                                                      "
-                                                 src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                                 src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) ? \Illuminate\Support\Facades\Auth::user()->company->logoUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->logoUpload)) }}"
                                                  alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
                                         @endif
 
                                 </button>
                             </div>
-
-                            <!--
-                              Dropdown menu, show/hide based on menu state.
-
-                              Entering: "transition ease-out duration-100"
-                                From: "transform opacity-0 scale-95"
-                                To: "transform opacity-100 scale-100"
-                              Leaving: "transition ease-in duration-75"
-                                From: "transform opacity-100 scale-100"
-                                To: "transform opacity-0 scale-95"
-                            -->
                             <div
                                  class="dropdown-menu-notification hidden shadow origin-top-right absolute right-0 mt-2 w-80 rounded-md bg-white py-1 focus:outline-none"
                                  aria-orientation="vertical" tabindex="-1">
@@ -102,20 +91,20 @@
                                          class="cursor-pointer hover:bg-indigo-100 w-full max-w-lg p-4 text-gray-500 bg-white"
                                          role="alert">
                                         <div class="flex">
-                                            @if (is_string(\Illuminate\Support\Facades\Auth::user()->avatarUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->avatarUpload, 'initials') !== false)
+                                            @if (is_string(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->company->logoUpload, 'initials') !== false)
                                                 <img class="w-8 h-8 rounded-full"
-                                                     src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
+                                                     src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->company->logoUpload . '.svg') }}"
                                                      alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
                                             @else
                                                 <img class="w-8 h-8 rounded-full"
                                                      srcset="
-            @if (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
-                                                     @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+            @if (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload))
+                                                     @foreach(\Illuminate\Support\Facades\Auth::user()->company->logoUpload as $imagePath)
                                                      {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                 @endforeach
                                                      @endif
                                                          "
-                                                     src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                                     src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) ? \Illuminate\Support\Facades\Auth::user()->company->logoUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->logoUpload)) }}"
                                                      alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
                                             @endif
                                             <div class="ml-3 text-sm font-normal">
@@ -209,20 +198,20 @@
                                     class="user-menu-button bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:indigo-900"
                                     aria-expanded="false" aria-haspopup="true">
                                 <span class="sr-only">Open user menu</span>
-                                @if (is_string(\Illuminate\Support\Facades\Auth::user()->avatarUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->avatarUpload, 'initials') !== false)
+                                @if (is_string(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->company->logoUpload, 'initials') !== false)
                                     <img class="w-8 h-8 rounded-full"
-                                         src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
+                                         src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->company->logoUpload . '.svg') }}"
                                          alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
                                 @else
                                     <img class="w-8 h-8 rounded-full"
                                          srcset="
-            @if (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
-                                         @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+            @if (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload))
+                                         @foreach(\Illuminate\Support\Facades\Auth::user()->company->logoUpload as $imagePath)
                                          {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                 @endforeach
                                          @endif
                                              "
-                                         src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                         src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) ? \Illuminate\Support\Facades\Auth::user()->company->logoUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->logoUpload)) }}"
                                          alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
                                 @endif
                             </button>

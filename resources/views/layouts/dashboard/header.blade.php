@@ -68,37 +68,44 @@
                                     class="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:indigo-900"
                                     aria-expanded="false" id="user-menu-button" aria-haspopup="true">
                                 <span class="sr-only">Open user menu</span>
-
-                                @if (is_string(\Illuminate\Support\Facades\Auth::user()->avatarUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->avatarUpload, 'initials') !== false)
-                                    <img class="w-8 h-8 rounded-full"
-                                         src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
-                                         alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
-                                @else
-                                    <img class="w-8 h-8 rounded-full"
-                                         srcset="
-            @if (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
-                                         @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
-                                         {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                                @if(\Illuminate\Support\Facades\Auth::user()->hasRole(1))
+                                    @if (is_string(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->company->logoUpload, 'initials') !== false)
+                                        <img class="w-8 h-8 rounded-full"
+                                             src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->company->logoUpload . '.svg') }}"
+                                             alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                    @else
+                                        <img class="w-8 h-8 rounded-full"
+                                             srcset="
+            @if (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload))
+                                             @foreach(\Illuminate\Support\Facades\Auth::user()->company->logoUpload as $imagePath)
+                                             {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                 @endforeach
-                                         @endif
-                                             "
-                                         src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
-                                         alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                             @endif
+                                                 "
+                                             src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) ? \Illuminate\Support\Facades\Auth::user()->company->logoUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                             alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                    @endif
+                                @else
+                                    @if (is_string(\Illuminate\Support\Facades\Auth::user()->avatarUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->avatarUpload, 'initials') !== false)
+                                        <img class="w-8 h-8 rounded-full"
+                                             src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
+                                             alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                    @else
+                                        <img class="w-8 h-8 rounded-full"
+                                             srcset="
+            @if (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
+                                             @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+                                             {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                @endforeach
+                                             @endif
+                                                 "
+                                             src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                             alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                    @endif
                                 @endif
 
                             </button>
                         </div>
-
-                        <!--
-                          Dropdown menu, show/hide based on menu state.
-
-                          Entering: "transition ease-out duration-100"
-                            From: "transform opacity-0 scale-95"
-                            To: "transform opacity-100 scale-100"
-                          Leaving: "transition ease-in duration-75"
-                            From: "transform opacity-100 scale-100"
-                            To: "transform opacity-0 scale-95"
-                        -->
                         <div id="dropdown-menu-notification"
                              class="dropdown-menu-notification hidden shadow origin-top-right absolute right-0 mt-2 w-80 rounded-md bg-white py-1 focus:outline-none"
                              aria-orientation="vertical" tabindex="-1">
@@ -160,23 +167,32 @@
                             </a>
                         </div>
                         <div id="dropdown-menu-dashboard"
-                            class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
-                            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                             class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
+                             role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                             <!-- Active: "bg-gray-100", Not Active: "" -->
-                            <a href="{{route('dashboard.dashboard') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                            <a href="{{route('dashboard.dashboard') }}"
+                               class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem"
+                               tabindex="-1"
                                id="user-menu-item-0">Dashboard</a>
 
-                            <a href="{{route('dashboard.profil') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                            <a href="{{route('dashboard.profil') }}"
+                               class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem"
+                               tabindex="-1"
                                id="user-menu-item-0">Profil</a>
 
-                            <a href="{{ route('dashboard.settings') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                            <a href="{{ route('dashboard.settings') }}"
+                               class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem"
+                               tabindex="-1"
                                id="user-menu-item-1">Settings</a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
 
-                                <button type="submit" href="{{ route('logout') }}" class="text-left w-full hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                                        id="user-menu-item-2">Sign out</button>
+                                <button type="submit" href="{{ route('logout') }}"
+                                        class="text-left w-full hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700"
+                                        role="menuitem" tabindex="-1"
+                                        id="user-menu-item-2">Sign out
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -191,32 +207,42 @@
                     <div id="user-menu-button-mobile" class="px-2 flex cursor-pointer">
 
                         <div class="flex-shrink-0">
-                            @if (is_string(\Illuminate\Support\Facades\Auth::user()->avatarUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->avatarUpload, 'initials') !== false)
-                                <img class="w-10 h-10 rounded-full"
-                                     src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
-                                     alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
-                            @else
-                                <img class="w-10 h-10 rounded-full"
-                                     srcset="
-            @if (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
-                                     @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
-                                     {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                            @if(\Illuminate\Support\Facades\Auth::user()->hasRole(1))
+                                @if (is_string(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->company->logoUpload, 'initials') !== false)
+                                    <img class="w-10 h-10 rounded-full"
+                                         src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->company->logoUpload . '.svg') }}"
+                                         alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                @else
+                                    <img class="w-10 h-10 rounded-full"
+                                         srcset="
+            @if (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload))
+                                         @foreach(\Illuminate\Support\Facades\Auth::user()->company->logoUpload as $imagePath)
+                                         {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                 @endforeach
-                                     @endif
-                                         "
-                                     src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
-                                     alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                         @endif
+                                             "
+                                         src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) ? \Illuminate\Support\Facades\Auth::user()->company->logoUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                         alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                @endif
+                            @else
+                                @if (is_string(\Illuminate\Support\Facades\Auth::user()->avatarUpload) && strpos(\Illuminate\Support\Facades\Auth::user()->avatarUpload, 'initials') !== false)
+                                    <img class="w-10 h-10 rounded-full"
+                                         src="{{ asset('storage/' . \Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
+                                         alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                @else
+                                    <img class="w-10 h-10 rounded-full"
+                                         srcset="
+            @if (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
+                                         @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+                                         {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                @endforeach
+                                         @endif
+                                             "
+                                         src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                         alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                @endif
                             @endif
                         </div>
-                        <!-- TODO: put LM in the background if no image
-
-
-                        <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                            <span class="font-medium text-gray-600 dark:text-gray-300">JL</span>
-                        </div>
-
-
-                         -->
                         <div class="ml-3">
                             <div class="text-base font-medium text-gray-800">Lisa Marie</div>
                             <div class="text-sm font-medium text-gray-500">lisamarie@example.com</div>
@@ -301,20 +327,29 @@
                      class="hidden mt-3 px-2 space-y-1"
                      role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                     <!-- Active: "bg-gray-100", Not Active: "" -->
-                    <a href="{{route('dashboard.dashboard') }}" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900" role="menuitem" tabindex="-1"
+                    <a href="{{route('dashboard.dashboard') }}"
+                       class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                       role="menuitem" tabindex="-1"
                        id="user-menu-item-0">Dashboard</a>
 
-                    <a href="{{route('dashboard.profil') }}" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900" role="menuitem" tabindex="-1"
+                    <a href="{{route('dashboard.profil') }}"
+                       class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                       role="menuitem" tabindex="-1"
                        id="user-menu-item-0">Profil</a>
 
-                    <a href="{{ route('dashboard.settings') }}" class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900" role="menuitem" tabindex="-1"
+                    <a href="{{ route('dashboard.settings') }}"
+                       class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                       role="menuitem" tabindex="-1"
                        id="user-menu-item-1">Settings</a>
 
                     <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST">
                         @csrf
 
-                        <button type="submit" href="{{ route('logout') }}" class="text-left w-full hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
-                                id="user-menu-item-2-mobile">Sign out</button>
+                        <button type="submit" href="{{ route('logout') }}"
+                                class="text-left w-full hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700"
+                                role="menuitem" tabindex="-1"
+                                id="user-menu-item-2-mobile">Sign out
+                        </button>
                     </form>
                 </div>
             </div>

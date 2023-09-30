@@ -1,16 +1,21 @@
-<div class="z-10 top-5 absolute right-6 inline-block text-left"
-     x-data="{ isSharingOpen{{ $user_id }}: false, isReportingOpen{{ $user_id }}: false }">
-    <div x-data="{ showMessage: @if($successMessage) true @else false @endif }">
+<div class="top-5 absolute right-6 inline-block text-left"
+     x-data="{ isSharingOpen{{ $user }}: false, isReportingOpen{{ $user }}: false }">
+    <div x-data="{ showMessage: @if($successMessage || $errorMessage) true @else false @endif }">
         @if($successMessage)
-            <div x-show="showMessage" x-init="setTimeout(() => showMessage = false, 5000)">
+            <div x-show="showMessage" >
                 @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
+            </div>
+        @endif
+        @if($errorMessage)
+            <div x-show="showMessage">
+                @include('components.error-message', ['message' => $errorMessage,'clearProperty' => 'errorMessage'])
             </div>
         @endif
     </div>
     <div class="flex gap-1">
 
-        <button wire:click="toggleSharing" @click="isSharingOpen{{ $user_id }} = true" type="button"
-                class="inline-flex items-center justify-center w-full px-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        <button @click="isSharingOpen{{ $user }} = true" type="button"
+                class="z-10 inline-flex items-center justify-center w-full px-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 id="dropdown-menu-button" aria-expanded="true" aria-haspopup="true">
             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" height="1em"
                  viewBox="0 0 512 512">
@@ -19,15 +24,14 @@
             </svg>
 
         </button>
-        <button wire:click="toggleReporting" @click="isReportingOpen{{ $user_id }} = true" type="button"
-                class="inline-flex items-center justify-center w-full px-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        <button @click="isReportingOpen{{ $user }} = true" type="button"
+                class="z-10 inline-flex items-center justify-center w-full px-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 id="dropdown-menu-button" aria-expanded="true" aria-haspopup="true">
             <span class="text-2xl">...</span>
         </button>
     </div>
-    @if($isSharingOpen)
-        <div x-show="isSharingOpen{{ $user_id }}" @click.away="isSharingOpen{{ $user_id }} = false"
-             class="z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+        <div x-cloak x-show="isSharingOpen{{ $user }}" @click.away="isSharingOpen{{ $user }} = false"
+             class="z-20 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
              role="menu" aria-orientation="vertical"
              aria-labelledby="dropdown-menu-button" tabindex="-1">
             <div class="py-1" role="none">
@@ -79,10 +83,8 @@
                 </a>
             </div>
         </div>
-    @endif
-    @if($isReportingOpen)
-        <div x-show="isReportingOpen{{ $user_id }}" @click.away="isReportingOpen{{ $user_id }} = false"
-             class="content-signal-worker-{{ $user_id }} z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+        <div x-cloak x-show="isReportingOpen{{ $user }}" @click.away="isReportingOpen{{ $user }} = false"
+             class="content-signal-worker-{{ $user }} z-20 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
              role="menu" aria-orientation="vertical"
              aria-labelledby="dropdown-menu-button" tabindex="-1">
             <div class="py-1" role="none">
@@ -101,7 +103,7 @@
                             <span class="text-left">Signaler ce travailleur</span>
                         </button>
                     </div>
-                    <div wire:click="copyUrl" x-data="{ url: '{{ url()->current() . '/' . $username  }}' }"
+                    <div wire:click="copyUrl" x-data="{ url: '{{ url()->current() . '/' . $name  }}' }"
                          class="block px-4 py-2 hover:bg-gray-100 hover:text-gray-900">
                         <button @click="copyUrl(url)" type="button"
                                 class="flex text-sm text-gray-700 items-center gap-4"
@@ -117,7 +119,7 @@
                     </div>
                     @if($reportSubmitted)
                         <div x-show="showModal"
-                             class="fixed absolute z-10 z-50"
+                             class="fixed absolute z-50"
                              @click="showModal = false">
                             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
@@ -128,6 +130,9 @@
                                          class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:max-w-lg">
                                         <div @click.stop class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                                             <div @click.stop class="sm:flex sm:items-start">
+                                                <svg @click="showModal = false" class="absolute cursor-pointer right-6 w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                </svg>
                                                 <div
                                                     class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
                                                     <svg class="text-blue-800 inline w-5 h-5" aria-hidden="true"
@@ -138,8 +143,9 @@
                                                     </svg>
                                                 </div>
                                                 <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+
                                                     <h3 class="text-base font-semibold leading-6 text-gray-900"
-                                                        id="modal-title">Report {{$username}}
+                                                        id="modal-title">Report {{$name}}
                                                     </h3>
                                                     <div class="mt-2">
                                                         <p class="text-sm text-gray-500">Are you sure you want to report
@@ -202,9 +208,6 @@
                                                                 fill="currentFill"/>
                                                         </svg>
                                                     </x-button>
-                                                    <x-button @click="showModal = false" type="submit" kind="secondary">
-                                                        Cancel
-                                                    </x-button>
                                                 </div>
                                             </form>
 
@@ -219,6 +222,5 @@
                 </div>
             </div>
         </div>
-    @endif
 
 </div>

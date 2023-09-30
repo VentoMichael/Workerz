@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Company;
 use App\Models\PhoneNumber;
 use App\Models\Plan;
 use App\Models\Region;
@@ -20,9 +21,9 @@ class FreelancerForm extends Component
 {
     use WithFileUploads;
 
-    public $username;
+    public $name;
     public $about;
-    public $avatarUpload;
+    public $logoUpload;
     public $phoneNumber1;
     public $phoneNumber2;
     public $phoneNumber3;
@@ -41,7 +42,7 @@ class FreelancerForm extends Component
     public $postalCode;
     public $plan;
     public $annualBilling = false;
-    protected $avatarSizes = ['32x32', '160x160', '128x128'];
+    protected $logoSizes = ['32x32', '160x160', '128x128'];
     protected $backgroundSizes = ['1980x192', '1280x192', '680x192'];
     public $typeSkill;
     public $showSkillsList = false;
@@ -59,9 +60,9 @@ class FreelancerForm extends Component
 
 
     protected $rules = [
-        'username' => 'required|unique:users',
+        'name' => 'required|unique:companies',
         'about' => 'required|min:10',
-        'avatarUpload' => 'nullable|image|mimes:jpeg,png,svg,webp|max:1024',
+        'logoUpload' => 'nullable|image|mimes:jpeg,png,svg,webp|max:1024',
         'backgroundUpload' => 'nullable|image|mimes:jpeg,png,svg,webp|max:1024',
         'firstname' => 'required',
         'lastname' => 'required',
@@ -78,13 +79,14 @@ class FreelancerForm extends Component
         'phoneNumber3' => 'nullable|numeric|unique:phone_numbers,number|phone:BE',
 
     ];
+
 //TODO:doesn't redirect to the error if there is error
     public function mount()
     {
         $userData = session('user', []);
 
-        $this->username = $userData['account']['username'] ?? '';
-        $this->about = $userData['account']['about'] ?? '';
+        $this->name = $companyData['name'] ?? '';
+        $this->about = $companyData['about'] ?? '';
         $this->firstname = $userData['account']['firstname'] ?? '';
         $this->lastname = $userData['account']['lastname'] ?? '';
         $this->email = $userData['account']['email'] ?? '';
@@ -93,7 +95,7 @@ class FreelancerForm extends Component
         $this->postalCode = $userData['account']['postalCode'] ?? '';
         $this->plan = $userData['account']['plan'] ?? '';
         $this->jobTitle = $userData['account']['jobTitle'] ?? '';
-        $this->mainSkill = $userData['account']['mainSkill'] ?? '';
+        $this->mainSkill = $companyData['mainSkill'] ?? '';
         $this->skills = Skill::all()->toArray();
         $this->regions = Region::all()->toArray();
     }
@@ -169,7 +171,6 @@ class FreelancerForm extends Component
         $this->showSkillsList = true;
     }
 
-
     public function toggleRegionsList()
     {
         $this->showRegionsList = !$this->showRegionsList;
@@ -182,6 +183,7 @@ class FreelancerForm extends Component
             $this->filteredRegions = $this->regions;
         }
     }
+
     public function removeRegion($regionId)
     {
         if (($key = array_search($regionId, $this->selectedRegions)) !== false) {
@@ -219,9 +221,6 @@ class FreelancerForm extends Component
         $this->showRegionsList = true;
     }
 
-
-
-
     public function updated($property)
     {
         $this->validateOnly($property);
@@ -254,15 +253,14 @@ class FreelancerForm extends Component
         return $selectedSkills->pluck('name', 'id');
     }
 
-    public function saveSkillsForUser($user)
+    public function saveSkillsForCompany($company)
     {
         $selectedSkillNames = $this->getSelectedSkillNames();
 
         $skills = Skill::whereIn('name', $selectedSkillNames)->get();
 
-        $user->skills()->sync($skills);
+        $company->skills()->sync($skills);
     }
-
 
     public function getSelectedRegionNames()
     {
@@ -280,70 +278,80 @@ class FreelancerForm extends Component
         return $selectedRegions->pluck('name', 'id');
     }
 
-    public function saveRegionsForUser($user)
+    public function saveRegionsForCompany($company)
     {
         $selectedRegionNames = $this->getSelectedRegionNames();
 
         $regions = Region::whereIn('name', $selectedRegionNames)->get();
-        $user->regions()->sync($regions);
+        $company->regions()->sync($regions);
     }
 
     public function submitForm()
     {
-        $this->validate();
-        $products = Plan::all();
-        foreach ($products as $product) {
-            if ($this->plan === $product['name']) {
-                $productData = [
-                    'product' => $product,
-                    'paymentYearly' => $this->annualBilling,
-                ];
-                session(['productSelected' => $productData]);
+        try {
+            $this->validate();
+            $products = Plan::all();
+            foreach ($products as $product) {
+                if ($this->plan === $product['name']) {
+                    $productData = [
+                        'product' => $product,
+                        'paymentYearly' => $this->annualBilling,
+                    ];
+                    session(['productSelected' => $productData]);
+                }
             }
+            $userData = [
+                'firstname' => ucfirst($this->firstname),
+                'lastname' => ucfirst($this->lastname),
+                'email' => $this->email,
+                'password' => Hash::make($this->password),
+                'streetAddress' => $this->streetAddress,
+                'city' => $this->city,
+                'postalCode' => $this->postalCode,
+            ];
+            $user = session('user', []);
+            $user['account'] = $userData;
+            session(['user' => $user]);
+            $newUser = User::create($userData);
+            $newUser->role()->associate(Role::find($user['role']));
+            $newUser->save();
+            $companyData = [
+                'name' => $this->name,
+                'about' => $this->about,
+                'logoUpload' => $this->processAndStoreImage($this->logoUpload, 'logos', $this->name, true),
+                'jobTitle' => ucfirst($this->jobTitle),
+                'mainSkill' => $this->mainSkill,
+            ];
+
+            if ($this->backgroundUpload) {
+                $companyData['backgroundUpload'] = $this->processAndStoreImage($this->backgroundUpload, 'covers', $this->name, false);
+            } else {
+                $companyData['backgroundUpload'] = ["default_cover/default_background_320.jpg", "default_cover/default_background_320.webp", "default_cover/default_background_680.jpg", "default_cover/default_background_680.webp", "default_cover/default_background_1280.jpg", "default_cover/default_background_1280.webp", "default_cover/default_background_1980.jpg", "default_cover/default_background_1980.webp"];
+            }
+            $company = new Company($companyData);
+            $newUser->company()->save($company);
+            $phoneNumbers = [
+                $this->phoneNumber1, $this->phoneNumber2, $this->phoneNumber3,
+            ];
+            $phoneNumbers = array_filter($phoneNumbers, function ($value) {
+                return !is_null($value);
+            });
+            foreach ($phoneNumbers as $phoneNumber) {
+                $newUser->phoneNumbers()->create(['number' => $phoneNumber]);
+            }
+            $this->saveSkillsForCompany($company);
+            $this->saveRegionsForCompany($company);
+            sleep(1);
+            return redirect()->route('sign-up.confirmation');
+        } catch (Exception $e) {
+            return $e->getBody();
         }
-        $userData = [
-            'username' => $this->username,
-            'about' => $this->about,
-            'firstname' => ucfirst($this->firstname),
-            'lastname' => ucfirst($this->lastname),
-            'email' => $this->email,
-            'password' => Hash::make($this->password),
-            'avatarUpload' => $this->processAndStoreImage($this->avatarUpload, 'avatars', $this->username, true),
-            'streetAddress' => $this->streetAddress,
-            'city' => $this->city,
-            'postalCode' => $this->postalCode,
-            'jobTitle' => ucfirst($this->jobTitle),
-            'mainSkill' => $this->mainSkill,
-        ];
-        if ($this->backgroundUpload) {
-            $userData['backgroundUpload'] = $this->processAndStoreImage($this->backgroundUpload, 'covers', $this->username, false);
-        } else {
-            $userData['backgroundUpload'] = ["covers/default_background_320.jpg", "covers/default_background_320.webp", "covers/default_background_680.jpg", "covers/default_background_680.webp", "covers/default_background_1280.jpg", "covers/default_background_1280.webp", "covers/default_background_1980.jpg", "covers/default_background_1980.webp"];
-        }
-        $user = session('user', []);
-        $user['account'] = $userData;
-        session(['user' => $user]);
-        $newUser = User::create($userData);
-        $newUser->role()->associate(Role::find($user['role']));
-        $newUser->save();
-        $phoneNumbers = [$this->phoneNumber1, $this->phoneNumber2, $this->phoneNumber3,
-        ];
-        $phoneNumbers = array_filter($phoneNumbers, function ($value) {
-            return !is_null($value);
-        });
-        foreach ($phoneNumbers as $phoneNumber) {
-            $newUser->phoneNumbers()->create(['number' => $phoneNumber]);
-        }
-        $this->saveSkillsForUser($newUser);
-        $this->saveRegionsForUser($newUser);
-        sleep(1);
-        return redirect()->route('sign-up.confirmation');
     }
 
 
-    public function generateInitialsImage($folder, $username)
+    public function generateInitialsImage($folder, $name)
     {
-        $name = $this->username;
+        $nameLink = $this->name;
         $initials = strtoupper($name[0]);
 
         $svgImage = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -352,11 +360,10 @@ class FreelancerForm extends Component
     </svg>';
 
         $filename = 'initial';
-        Storage::disk('public')->put('freelancer/' . $folder . '/' . $username . '/initials/' . $filename . '.svg', $svgImage);
+        Storage::disk('public')->put('freelancer/' . $folder . '/' . $nameLink . '/initials/' . $filename . '.svg', $svgImage);
 
-        return 'freelancer/'.$folder . '/' . $username . '/initials/' . $filename;
+        return 'freelancer/' . $folder . '/' . $nameLink . '/initials/' . $filename;
     }
-
 
     protected function processAndStoreImage($uploadedImage, $folder, $filename, $isAvatar)
     {
@@ -374,25 +381,24 @@ class FreelancerForm extends Component
     {
         $imagePath = [];
 
-        foreach (($isAvatar ? $this->avatarSizes : $this->backgroundSizes) as $size) {
+        foreach (($isAvatar ? $this->logoSizes : $this->backgroundSizes) as $size) {
             list($width, $height) = explode('x', $size);
 
             $image = Image::make($uploadedImage)
                 ->fit($width, $height)
                 ->encode('jpg', 80);
 
-            $imagePath[] = $folder . '/' . $filename . '/' . $size . '.jpg';
+            $imagePath[] = 'freelancer/' . $folder . '/' . $filename . '/' . $size . '.jpg';
             Storage::disk('public')->put('freelancer/' . $folder . '/' . $filename . '/' . $size . '.jpg', $image);
 
             $webpImage = clone $image;
             $webpImage->encode('webp', 80);
-            $imagePath[] = $folder . '/' . $filename . '/' . $size . '.webp';
+            $imagePath[] = 'freelancer/' . $folder . '/' . $filename . '/' . $size . '.webp';
             Storage::disk('public')->put('freelancer/' . $folder . '/' . $filename . '/' . $size . '.webp', $webpImage);
         }
 
         return $imagePath;
     }
-
 
     public function render()
     {

@@ -7,21 +7,20 @@
                 be careful what you share.</p>
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div class="sm:col-span-4">
-                    <label for="username"
-                           class="block text-sm font-medium leading-6 text-gray-900">Username <span
+                    <label for="name"
+                           class="block text-sm font-medium leading-6 text-gray-900">Company name <span
                             class="text-red-500">*</span></label>
                     <div class="mt-2">
                         <div
-                            class="@error('username')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror flex rounded-md shadow-sm ring-inset focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                            class="@error('name')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror flex rounded-md shadow-sm ring-inset focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                             <span class="flex select-none items-center pl-3 text-gray-500 sm:text-sm">workerz.be/workers/</span>
-                            <input wire:model.live="username" type="text" name="username"
-                                   id="username" autocomplete="username"
+                            <input wire:model.live="name" type="text" name="name"
+                                   id="name" autocomplete="name"
                                    class="block flex-1 border-0 bg-transparent py-1.5 pl-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                    placeholder="workezSRL">
                         </div>
                     </div>
-                    <p class="mt-1 text-sm leading-6 text-gray-600">It may represent the name of your company</p>
-                    @error('username')
+                    @error('name')
                     <p class="text-red-500 mt-1">{{ $message }}</p>
                     @enderror
                 </div>
@@ -43,11 +42,11 @@
 
                 <div class="col-span-full">
 
-                    <label class="block text-sm font-medium leading-6" for="avatarUpload">Upload
+                    <label class="block text-sm font-medium leading-6" for="logoUpload">Upload
                         file</label>
                     <div class="relative">
-                        @if ($avatarUpload)
-                            <button wire:click.lazy="$set('avatarUpload',null)" type="button"
+                        @if($logoUpload)
+                            <button wire:click.lazy="$set('logoUpload',null)" type="button"
                                     class="inset-y-1/2 mt-[-16px] right-3 absolute ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
                                     data-dismiss-target="#alert-3" aria-label="Close">
                                 <span class="sr-only">Close</span>
@@ -58,13 +57,13 @@
                                 </svg>
                             </button>
                         @endif
-                        <input wire:model.blur="avatarUpload"
+                        <input wire:model.blur="logoUpload"
                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white focus:outline-none"
-                               aria-describedby="avatarUpload" id="avatarUpload" type="file">
+                               aria-describedby="logoUpload" id="logoUpload" type="file">
                     </div>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF
                         (MAX. 800x400px).</p>
-                    @error('avatarUpload')
+                    @error('logoUpload')
                     <p class="text-red-500 mt-1">{{ $message }}</p>
                     @enderror
                 </div>

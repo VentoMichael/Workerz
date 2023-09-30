@@ -26,6 +26,10 @@ class User extends Authenticatable implements MustVerifyEmail
             $query->where('id', $roleId);
         });
     }
+    public function company()
+    {
+        return $this->hasOne(Company::class);
+    }
     public function hasRole($roleId)
     {
         return $this->role->id === $roleId;
@@ -33,10 +37,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function ads()
     {
         return $this->hasMany(Ad::class);
-    }
-    public function regions()
-    {
-        return $this->belongsToMany(Region::class, 'user_region');
     }
 
     public function role()
@@ -46,14 +46,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function phoneNumbers()
     {
         return $this->hasMany(PhoneNumber::class);
-    }
-    public function skills()
-    {
-        return $this->belongsToMany(Skill::class, 'user_subskills')->withTimestamps();
-    }
-    public function skill()
-    {
-        return $this->belongsTo(Skill::class, 'mainSkill');
     }
     /**
      * The attributes that are mass assignable.
