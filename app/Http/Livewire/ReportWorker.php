@@ -61,7 +61,7 @@ class ReportWorker extends Component
         $this->successMessage = 'Url copied successfully';
         }catch(Exception $e){
             $this->clearProperty = 'errorMessage';
-            $this->successMessage = $e->getMessage();
+            $this->errorMessage = 'There is an error, please try again later.';
         }
     }
     public function submitReport()
@@ -73,7 +73,6 @@ class ReportWorker extends Component
                 'subject' => $this->subject,
                 'description' => $this->description,
                 'user_id' => $this->user,
-                'ad_id' => $this->ad,
             ]);
             sleep(1);
             $this->isReportingOpen = false;
@@ -93,6 +92,7 @@ class ReportWorker extends Component
     private function resetForm(){
         $this->subject = '';
         $this->description = '';
+        $this->reportSubmitted = false;
     }
     public function render()
     {

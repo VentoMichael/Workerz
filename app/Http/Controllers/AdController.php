@@ -15,7 +15,7 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ads = Ad::with('skills','region','user')->get();
+        $ads = Ad::with('skills','region','user.company')->get();
         $adRegions = [];
         $adSkills = [];
         foreach ($ads as $ad) {
@@ -34,11 +34,16 @@ class AdController extends Controller
             }
             $date = Carbon::parse($ad->start_date);
             $ad->formattedStartedAt = $date->isoFormat('DD MMMM YY');
+            if ($ad->user->hasRole(1)){
+                $image = $ad->user->company->logoUpload;
+            }else{
+                $image = $ad->user->avatarUpload;
+            }
         }
 
         $adRegionsWithCount = array_count_values($adRegions);
         $adSkillsWithCount = array_count_values($adSkills);
-        return view('ads.ads',compact('ads','adRegionsWithCount','adSkillsWithCount'));
+        return view('ads.ads',compact('ads','image','adRegionsWithCount','adSkillsWithCount'));
     }
 
     /**

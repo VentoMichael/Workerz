@@ -84,6 +84,7 @@ class ReportAd extends Component
             $this->clearProperty = 'successMessage';
             $this->successMessage = 'We will review your report and take appropriate action if necessary. Thank you for your feedback.';
         } catch (Exception $e) {
+            $this->resetForm();
             $this->clearProperty = 'errorMessage';
             $this->errorMessage = 'There is an error, please try again later.';
         }
@@ -98,6 +99,7 @@ class ReportAd extends Component
     {
         $this->subject = '';
         $this->description = '';
+        $this->reportSubmitted = false;
     }
 
     public function render()

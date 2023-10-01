@@ -1,4 +1,4 @@
-<div class="z-10 top-5 absolute right-6 inline-block text-left"
+<div class="top-5 absolute right-6 inline-block text-left"
      x-data="{ isSharingOpen{{ $ad_id }}: false, isReportingOpen{{ $ad_id }}: false }">
     <div x-data="{ showMessage: @if($successMessage || $errorMessage) true @else false @endif }">
         @if($successMessage)
@@ -25,14 +25,13 @@
             </svg>
 
         </button>
-        <button wire:click="toggleReporting" @click="isReportingOpen{{ $ad_id }} = true" type="button"
+        <button @click="isReportingOpen{{ $ad_id }} = true" type="button"
                 class="inline-flex items-center justify-center w-full px-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 id="dropdown-menu-button" aria-expanded="true" aria-haspopup="true">
             <span class="text-2xl">...</span>
         </button>
     </div>
-    @if($isSharingOpen)
-        <div x-show="isSharingOpen{{ $ad_id }}" @click.away="isSharingOpen{{ $ad_id }} = false"
+        <div x-cloak x-show="isSharingOpen{{ $ad_id }}" @click.away="isSharingOpen{{ $ad_id }} = false"
              class="z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
              role="menu" aria-orientation="vertical"
              aria-labelledby="dropdown-menu-button" tabindex="-1">
@@ -85,9 +84,7 @@
                 </a>
             </div>
         </div>
-    @endif
-    @if($isReportingOpen)
-        <div x-show="isReportingOpen{{ $ad_id }}" @click.away="isReportingOpen{{ $ad_id }} = false"
+        <div x-cloak x-show="isReportingOpen{{ $ad_id }}" @click.away="isReportingOpen{{ $ad_id }} = false"
              class="content-signal-ad-{{ $ad_id }} z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
              role="menu" aria-orientation="vertical"
              aria-labelledby="dropdown-menu-button" tabindex="-1">
@@ -109,7 +106,7 @@
                     </div>
                     @if($reportSubmitted)
                         <div x-show="showModal"
-                             class="fixed absolute z-10 z-50"
+                             class="fixed absolute z-50"
                              @click="showModal = false">
                             <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
@@ -120,6 +117,9 @@
                                          class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:max-w-lg">
                                         <div @click.stop class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                                             <div @click.stop class="sm:flex sm:items-start">
+                                                <svg @click="showModal = false" class="absolute cursor-pointer right-6 w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                </svg>
                                                 <div
                                                     class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
                                                     <svg class="text-blue-800 inline w-5 h-5" aria-hidden="true"
@@ -194,9 +194,6 @@
                                                                 fill="currentFill"/>
                                                         </svg>
                                                     </x-button>
-                                                    <x-button @click="showModal = false" type="submit" kind="secondary">
-                                                        Cancel
-                                                    </x-button>
                                                 </div>
                                             </form>
 
@@ -211,6 +208,5 @@
                 </div>
             </div>
         </div>
-    @endif
 
 </div>

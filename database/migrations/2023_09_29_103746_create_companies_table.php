@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('jobTitle')->nullable();
             $table->unsignedBigInteger('mainSkill')->nullable();
             $table->foreign('mainSkill')->references('id')->on('skills')->onDelete('cascade');
+            $table->string('employees')->nullable();
             $table->string('website')->nullable();
             $table->boolean('hiring')->default(false);
             $table->boolean('allow_commenting')->default(false);

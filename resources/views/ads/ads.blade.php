@@ -156,7 +156,7 @@
                                     <div class="py-1" role="none">
                                         <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-700"
                                            role="menuitem"
-                                           tabindex="-1" id="mobile-menu-item-0"> Most Popular </a>
+                                           tabindex="-1" id="mobile-menu-item-0"> Cheaper </a>
 
                                         <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-700"
                                            role="menuitem"
@@ -177,7 +177,7 @@
                         </button>
 
                         <div x-data="{ openCategory: false, openRegions: false }"
-                             class="z-20 sm:flex hidden sm:items-baseline sm:space-x-8">
+                             class="sm:flex hidden sm:items-baseline sm:space-x-8">
                             <div id="desktop-menu" class="relative z-10 inline-block text-left">
                                 <div class="filter_sort">
                                     <button @if(count($ads) > 0) @click="openCategory = !openCategory"
@@ -268,32 +268,32 @@
             <section>
                 @if(count($ads) > 0)
                     <p class="text-xs mb-2">About {{ count($ads) }} result{{ count($ads) > 1 ? 's': '' }}</p>
-                    <div x-data="{ selectedPreview: window.innerWidth > 768 ? {{ $ads[0]->id }} : null }"
+                    <div x-data="{ activeAd: window.innerWidth > 768 ? {{ $ads[0]->id }} : null,selectedPreview: window.innerWidth > 768 ? {{ $ads[0]->id }} : null }"
                          class="grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3">
                         <div
                             class="max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1">
                             @foreach($ads as $ad)
 
-                                <div @click="selectedPreview = {{ $ad->id }}" id="preview-ad-{{ $ad->id }}">
+                                <div @click="selectedPreview = {{ $ad->id }},activeAd = {{ $ad->id }}" id="preview-ad-{{ $ad->id }}">
                                     <section id="title-of-ad-{{ $ad->id }}"
                                              class="cursor-pointer title-of-ad bg-white shadow sm:rounded-md block overflow-visible hover:bg-indigo-50"
-                                             :class="{ 'border-indigo-500 ring-2 ring-indigo-500 bg-indigo-50': activeAd === {{ $ad->id }} }">
+                                             :class="{ 'border-indigo-500 ring-2 ring-indigo-500 bg-indigo-100': activeAd === {{ $ad->id }} }">
 
                                         <div
                                             class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-48-1">
 
                                             <div class="flex-shrink-0 self-center">
-                                                @if(!is_array($ad->user->avatarUpload) && strpos($ad->user->avatarUpload, 'initials') !== false)
+                                                @if(!is_array($image) && strpos($image, 'initials') !== false)
                                                     <img class="h-12 w-12 rounded-full"
-                                                         src="{{ $ad->user->avatarUpload . '.svg' }}"
+                                                         src="{{ $image . '.svg' }}"
                                                          alt="Profile Picture of {{ $ad->user->firstname . $ad->user->lastname }}"/>
                                                 @else
                                                     <img class="h-12 w-12 rounded-full"
                                                          srcset="
-                 @foreach($ad->user->avatarUpload as $imagePath)
+                 @foreach($image as $imagePath)
                                                          {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                  @endforeach "
-                                                         src="{{ asset('storage/' . $ad->user->avatarUpload[0]) }}"
+                                                         src="{{ asset('storage/' . $image[0]) }}"
                                                          alt="Profile Picture of {{ $ad->user->firstname . $ad->user->lastname }}"/>
                                                 @endif
                                             </div>
@@ -337,7 +337,7 @@
                                         </div>
 
                                         <div class="flex flex-col px-4 py-4 sm:px-6 flex gap-4">
-                                            <p class="text-gray-500">{{ $ad->small_description }}</p>
+                                            <p class="text-gray-500">{{ Str::limit($ad->description, 120) }}</p>
                                         </div>
 
                                         @include('components.badge')
@@ -408,7 +408,7 @@
                                                                   d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
                                                         </svg>
                                                         <p class="ml-2 text-gray-500 text-sm">
-                                                            Posted {{ $ad->formattedCreatedAt }} ago <span>&bull;  {{ $ad->employees }} candidats</span>
+                                                            Posted {{ $ad->formattedCreatedAt }} ago <span>&bull; {{ $ad->candidats }} candidats</span>
                                                         </p>
                                                     </div>
                                                     <a href="{{route('ads.show')}}">
@@ -423,26 +423,26 @@
                                                         <p class="text-2xl font-semibold mb-4">Info sur l'entreprise</p>
 
                                                     </div>
-                                                    <div class="flex gap-2 align-middle items-center">
-                                                        @if(!is_array($ad->user->avatarUpload) && strpos($ad->user->avatarUpload, 'initials') !== false)
+                                                    <a href="{{ route('workers.show',['name' => $ad->user->company->name]) }}" class="flex gap-2 align-middle items-center">
+                                                        @if(!is_array($image) && strpos($image, 'initials') !== false)
                                                             <img class="h-12 w-12 rounded-full"
-                                                                 src="{{ $ad->user->avatarUpload . '.svg' }}"
+                                                                 src="{{ $image . '.svg' }}"
                                                                  alt="Profile Picture of {{ $ad->user->firstname . $ad->user->lastname }}"/>
                                                         @else
                                                             <img class="h-12 w-12 rounded-full"
                                                                  srcset="
-                 @foreach($ad->user->avatarUpload as $imagePath)
+                 @foreach($image as $imagePath)
                                                                  {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                  @endforeach "
-                                                                 src="{{ asset('storage/' . $ad->user->avatarUpload[0]) }}"
+                                                                 src="{{ asset('storage/' . $image[0]) }}"
                                                                  alt="Profile Picture of {{ $ad->user->firstname . $ad->user->lastname }}"/>
                                                         @endif
                                                         <span
-                                                            class="text-gray-700 leading-normal">{{ $ad->user->username }}</span>
-                                                    </div>
+                                                            class="text-gray-700 leading-normal font-bold text-lg">{{ $ad->user->company->name }}</span>
+                                                    </a>
                                                     <div class="flex flex-col flex-wrap mb-4">
                                                         <div class="mb-4 mt-4">
-                                                            <p class="text-gray-700 leading-normal">{{ $ad->user->about }}</p>
+                                                            <p class="text-gray-700 leading-normal">{{ $ad->user->company->about }}</p>
                                                         </div>
                                                         <div class="mb-4 flex justify-between">
                                                             <div class="flex items-end">
@@ -454,7 +454,7 @@
                                                                           d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
                                                                 </svg>
                                                                 <p class="ml-2 text-gray-500 text-sm">
-                                                                    Posted {{ $ad->formattedCreatedAt }} ago <span>&bull; 5-10 employees</span>
+                                                                    Joined the {{ $ad->user->company->created_at->format('d/m/y') }}
                                                                 </p>
                                                             </div>
                                                         </div>
