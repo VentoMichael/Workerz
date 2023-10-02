@@ -15,10 +15,12 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ads = Ad::with('skills','region','user.company')->get();
+        $ads = Ad::with('skills','region','user.company')->orderBy('created_at', 'desc')->paginate(2);
         $adRegions = [];
         $adSkills = [];
-        foreach ($ads as $ad) {
+        $image=null;
+        $adsCount=Ad::with('skills','region','user.company')->get();
+        foreach ($adsCount as $ad) {
             $adRegions[] = $ad->region->name;
             $adSkills = array_merge($adSkills, $ad->skills->pluck('name','id')->toArray());
             $difference = now()->diffInMinutes($ad->posted_at);
@@ -43,7 +45,7 @@ class AdController extends Controller
 
         $adRegionsWithCount = array_count_values($adRegions);
         $adSkillsWithCount = array_count_values($adSkills);
-        return view('ads.ads',compact('ads','image','adRegionsWithCount','adSkillsWithCount'));
+        return view('ads.ads',compact('ads','adsCount','image','adRegionsWithCount','adSkillsWithCount'));
     }
 
     /**
