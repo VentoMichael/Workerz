@@ -12,7 +12,7 @@ class ReportAd extends Component
     public $subject = '';
     public $description = '';
     public $title;
-    public $ad;
+    public $selectedAd;
     public $isSharingOpen = false;
     public $isReportingOpen = false;
     public $ad_id;
@@ -31,11 +31,11 @@ class ReportAd extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function mount($ad)
+    public function mount($selectedAd)
     {
         $this->subject = '';
-        $this->ad_id = $ad->id;
-        $this->title = $ad->title;
+        $this->ad_id = $selectedAd->id;
+        $this->title = $selectedAd->title;
     }
 
     public function openModal()
