@@ -80,7 +80,6 @@ class PreviewList extends Component
 
     public function mount()
     {
-        // Get the first ad and set it as the initially selected ad
         $this->selectedAd = Ad::first();
         $this->subject = '';
     }
@@ -88,10 +87,11 @@ class PreviewList extends Component
     {
             $this->validate();
         try {
-            Reports::create([
+            $re = Reports::create([
                 'subject' => $this->subject,
                 'description' => $this->description,
-                'ad_id' => $this->ad_id,
+                'ad_id' => $this->selectedAd->id,
+                'user_id' => $this->selectedAd->user->id,
             ]);
             sleep(1);
             $this->isReportingOpen = false;
@@ -101,7 +101,7 @@ class PreviewList extends Component
         } catch (Exception $e) {
             $this->resetForm();
             $this->clearProperty = 'errorMessage';
-            $this->errorMessage = $e->getMessage();
+            $this->errorMessage = 'There was an error processing your report. Please try again later.';
         }
     }
 
@@ -118,10 +118,9 @@ class PreviewList extends Component
     }
     public function render()
     {
-        // Fetch ads with skills, regions, and user companies and paginate them
         $ads = Ad::with('skills', 'region', 'user.company')
             ->orderBy('created_at', 'desc')
-            ->paginate(2); // Adjust the number of items per page as needed
+            ->paginate(2);
 
         $this->adRegions = [];
         $this->adSkills = [];
@@ -159,6 +158,11 @@ class PreviewList extends Component
     {
         $this->selectedAd = Ad::find($adId);
 
+    }
+
+    public function paginationView()
+    {
+        return 'components/pagination';
     }
 }
 

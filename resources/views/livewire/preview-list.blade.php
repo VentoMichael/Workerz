@@ -345,7 +345,7 @@
                                 </section>
                             </div>
                         @endforeach
-                        {{ $ads->links() }}
+                            {{ $ads->links('components/pagination') }}
                     </div>
                     @if ($selectedAd)
                         <div class="max-h-screen overflow-y-hidden sm:overflow-y-auto lg:col-start-2 md:col-span-3">
@@ -378,7 +378,7 @@
 
 
                                                 <div class="top-5 absolute right-6 inline-block text-left"
-                                                     x-data="{ isSharingOpen{{ $ad_id }}: false, isReportingOpen{{ $ad_id }}: false }">
+                                                     x-data="{ isSharingOpen{{ $selectedAd->id }}: false, isReportingOpen{{ $selectedAd->id }}: false }">
                                                     <div x-data="{ showMessage: @if($successMessage || $errorMessage) true @else false @endif }">
                                                         @if($successMessage)
                                                             <div x-show="showMessage">
@@ -394,7 +394,7 @@
                                                     </div>
                                                     <div class="flex gap-1">
 
-                                                        <button wire:click="toggleSharing" @click="isSharingOpen{{ $ad_id }} = true" type="button"
+                                                        <button wire:click="toggleSharing" @click="isSharingOpen{{ $selectedAd->id }} = true" type="button"
                                                                 class="inline-flex items-center justify-center w-full px-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                                 id="dropdown-menu-button" aria-expanded="true" aria-haspopup="true">
                                                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" height="1em"
@@ -404,13 +404,13 @@
                                                             </svg>
 
                                                         </button>
-                                                        <button @click="isReportingOpen{{ $ad_id }} = true" type="button"
+                                                        <button @click="isReportingOpen{{ $selectedAd->id }} = true" type="button"
                                                                 class="inline-flex items-center justify-center w-full px-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                                 id="dropdown-menu-button" aria-expanded="true" aria-haspopup="true">
                                                             <span class="text-2xl">...</span>
                                                         </button>
                                                     </div>
-                                                    <div x-cloak x-show="isSharingOpen{{ $ad_id }}" @click.away="isSharingOpen{{ $ad_id }} = false"
+                                                    <div x-cloak x-show="isSharingOpen{{ $selectedAd->id }}" @click.away="isSharingOpen{{ $selectedAd->id }} = false"
                                                          class="z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                                                          role="menu" aria-orientation="vertical"
                                                          aria-labelledby="dropdown-menu-button" tabindex="-1">
@@ -463,8 +463,8 @@
                                                             </a>
                                                         </div>
                                                     </div>
-                                                    <div x-cloak x-show="isReportingOpen{{ $ad_id }}" @click.away="isReportingOpen{{ $ad_id }} = false"
-                                                         class="content-signal-ad-{{ $ad_id }} z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                                    <div x-cloak x-show="isReportingOpen{{ $selectedAd->id }}" @click.away="isReportingOpen{{ $selectedAd->id }} = false"
+                                                         class="content-signal-ad-{{ $selectedAd->id }} z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                                                          role="menu" aria-orientation="vertical"
                                                          aria-labelledby="dropdown-menu-button" tabindex="-1">
                                                         <div class="py-1" role="none">
