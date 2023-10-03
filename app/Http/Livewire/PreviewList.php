@@ -80,8 +80,26 @@ class PreviewList extends Component
 
     public function mount()
     {
-        $this->selectedAd = Ad::first();
+        $currentPage = request()->input('page', 1);
+
+        $adsPerPage = 2;
+        $offset = ($currentPage - 1) * $adsPerPage;
+        $this->selectedAd = Ad::orderBy('created_at', 'desc')
+            ->skip($offset)
+            ->take(1)
+            ->get()
+            ->first();
         $this->subject = '';
+    }
+    public function updatedPage($page)
+    {
+        $adsPerPage = 2;
+        $offset = ($page - 1) * $adsPerPage;
+        $this->selectedAd = Ad::orderBy('created_at', 'desc')
+            ->skip($offset)
+            ->take(1)
+            ->get()
+            ->first();
     }
     public function submitReport()
     {
@@ -118,10 +136,10 @@ class PreviewList extends Component
     }
     public function render()
     {
+
         $ads = Ad::with('skills', 'region', 'user.company')
             ->orderBy('created_at', 'desc')
             ->paginate(2);
-
         $this->adRegions = [];
         $this->adSkills = [];
 
@@ -129,7 +147,6 @@ class PreviewList extends Component
             $this->adRegions[] = $ad->region->name;
             $this->adSkills = array_merge($this->adSkills, $ad->skills->pluck('name', 'id')->toArray());
             $this->difference = now()->diffInMinutes($ad->posted_at);
-
             if ($this->difference < 60) {
                 $ad->formattedCreatedAt = $this->difference . ' ' . Str::plural('minute', $this->difference);
             } elseif ($this->difference < 1440) {
@@ -153,13 +170,27 @@ class PreviewList extends Component
         return view('livewire.preview-list', compact('ads')
         );
     }
-
     public function showPreview($adId)
     {
         $this->selectedAd = Ad::find($adId);
-
+        $this->initializeSelectedAdProperties();
     }
+    private function initializeSelectedAdProperties()
+    {
+        $this->difference = now()->diffInMinutes($this->selectedAd->posted_at);
+        if ($this->difference < 60) {
+            $this->selectedAd->formattedCreatedAt = $this->difference . ' ' . Str::plural('minute', $this->difference);
+        } elseif ($this->difference < 1440) {
+            $this->selectedAd->formattedCreatedAt = floor($this->difference / 60) . ' ' . Str::plural('hour', floor($this->difference / 60));
+        } elseif ($this->difference < 43200) {
+            $this->selectedAd->formattedCreatedAt = now()->diffInDays($this->selectedAd->posted_at) . ' ' . Str::plural('day', now()->diffInDays($this->selectedAd->posted_at));
+        } else {
+            $this->selectedAd->formattedCreatedAt = '30+ days';
+        }
 
+        $date = Carbon::parse($this->selectedAd->start_date);
+        $this->selectedAd->formattedStartedAt = $date->isoFormat('DD MMMM YY');
+    }
     public function paginationView()
     {
         return 'components/pagination';

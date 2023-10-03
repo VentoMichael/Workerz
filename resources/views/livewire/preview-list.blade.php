@@ -347,7 +347,7 @@
                         @endforeach
                             {{ $ads->links('components/pagination') }}
                     </div>
-                    @if ($selectedAd)
+                    @if($selectedAd)
                         <div class="max-h-screen overflow-y-hidden sm:overflow-y-auto lg:col-start-2 md:col-span-3">
                             <div>
 
@@ -367,15 +367,6 @@
                                         <div class="max-w-screen-lg mx-auto relative">
                                             <div class="flex justify-between ">
                                                 <h3 class="text-2xl font-semibold mb-4">{{ $selectedAd->title }}</h3>
-
-
-
-
-
-
-
-
-
 
                                                 <div class="top-5 absolute right-6 inline-block text-left"
                                                      x-data="{ isSharingOpen{{ $selectedAd->id }}: false, isReportingOpen{{ $selectedAd->id }}: false }">
@@ -594,12 +585,6 @@
                                                     </div>
 
                                                 </div>
-
-
-
-
-
-
 
                                             </div>
                                             <div class="flex flex-wrap mb-4">

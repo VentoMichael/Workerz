@@ -41,7 +41,7 @@
                     @if ($page == $paginator->currentPage())
                         <li aria-current="page">
                             <span
-                                class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 bg-blue-50 border border-blue-300 hover:bg-blue-100">
+                                class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-purple-600 bg-purple-50 border border-purple-300 hover:bg-purple-100">
                                 {{ $page }}
                             </span>
                         </li>
