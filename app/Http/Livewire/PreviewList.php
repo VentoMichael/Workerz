@@ -7,12 +7,14 @@ use App\Models\Reports;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Str;
+use Jenssegers\Agent\Agent;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class PreviewList extends Component
 {
     use WithPagination;
+
     public $selectedAd;
     public $image;
     public $adRegions;
@@ -21,8 +23,6 @@ class PreviewList extends Component
     public $date;
     public $adRegionsWithCount;
     public $adSkillsWithCount;
-
-
 
 
     public $showModal = false;
@@ -80,30 +80,39 @@ class PreviewList extends Component
 
     public function mount()
     {
-        $currentPage = request()->input('page', 1);
+        $agent = new Agent();
+        if ($agent->isDesktop()) {
+            $currentPage = request()->input('page', 1);
 
-        $adsPerPage = 2;
-        $offset = ($currentPage - 1) * $adsPerPage;
-        $this->selectedAd = Ad::orderBy('created_at', 'desc')
-            ->skip($offset)
-            ->take(1)
-            ->get()
-            ->first();
+            $adsPerPage = 2;
+            $offset = ($currentPage - 1) * $adsPerPage;
+            $this->selectedAd = Ad::orderBy('created_at', 'desc')
+                ->skip($offset)
+                ->take(1)
+                ->get()
+                ->first();
+            $this->initializeSelectedAdProperties();
+        }
         $this->subject = '';
     }
+
     public function updatedPage($page)
     {
-        $adsPerPage = 2;
-        $offset = ($page - 1) * $adsPerPage;
-        $this->selectedAd = Ad::orderBy('created_at', 'desc')
-            ->skip($offset)
-            ->take(1)
-            ->get()
-            ->first();
+        $agent = new Agent();
+        if ($agent->isDesktop()) {
+            $adsPerPage = 2;
+            $offset = ($page - 1) * $adsPerPage;
+            $this->selectedAd = Ad::orderBy('created_at', 'desc')
+                ->skip($offset)
+                ->take(1)
+                ->get()
+                ->first();
+        }
     }
+
     public function submitReport()
     {
-            $this->validate();
+        $this->validate();
         try {
             $re = Reports::create([
                 'subject' => $this->subject,
@@ -133,6 +142,10 @@ class PreviewList extends Component
     public function clearMessage($property)
     {
         $this->$property = null;
+    }
+
+    public function closeAd(){
+        $this->selectedAd = false;
     }
     public function render()
     {
@@ -166,15 +179,20 @@ class PreviewList extends Component
         }
         $this->adRegionsWithCount = array_count_values($this->adRegions);
         $this->adSkillsWithCount = array_count_values($this->adSkills);
-
-        return view('livewire.preview-list', compact('ads')
+        $agent = new Agent();
+        if ($agent->isDesktop()) {
+            $this->initializeSelectedAdProperties();
+        }
+        return view('livewire.preview-list', compact('ads','agent')
         );
     }
+
     public function showPreview($adId)
     {
         $this->selectedAd = Ad::find($adId);
         $this->initializeSelectedAdProperties();
     }
+
     private function initializeSelectedAdProperties()
     {
         $this->difference = now()->diffInMinutes($this->selectedAd->posted_at);
@@ -191,6 +209,7 @@ class PreviewList extends Component
         $date = Carbon::parse($this->selectedAd->start_date);
         $this->selectedAd->formattedStartedAt = $date->isoFormat('DD MMMM YY');
     }
+
     public function paginationView()
     {
         return 'components/pagination';

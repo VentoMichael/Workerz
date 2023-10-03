@@ -260,117 +260,118 @@
             @if(count($ads) > 0)
                 <p class="text-xs mb-2">About {{ count($ads) }} result{{ count($ads) > 1 ? 's': '' }}</p>
 
-                <div class="grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3">
-                    <div
-                        class="max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1">
-                        @foreach($ads as $ad)
-                            <div wire:click="showPreview({{ $ad->id }})" wire:key="{{ $ad->id }}">
-                                <section
-                                    class="cursor-pointer title-of-ad bg-white shadow sm:rounded-md block overflow-visible hover:bg-indigo-50 @if($ad->id === $selectedAd->id) border-indigo-500 ring-2 ring-indigo-500 bg-indigo-100 @endif">
-                                    <div
-                                        class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-48-1">
+                <div class="grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3 relative">
+                    @if($agent->isMobile() && !$selectedAd || $agent->isDesktop())
+                        <div
+                            class="max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1">
+                            @foreach($ads as $ad)
+                                <div wire:click="showPreview({{ $ad->id }})" wire:key="{{ $ad->id }}">
+                                    <section
+                                        class="cursor-pointer title-of-ad bg-white shadow sm:rounded-md block overflow-visible hover:bg-indigo-50 @if($selectedAd && $ad->id === $selectedAd->id) border-indigo-500 ring-2 ring-indigo-500 bg-indigo-100 @endif">
+                                        <div
+                                            class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-48-1">
 
-                                        <div class="flex-shrink-0 self-center">
-                                            @if(!is_array($image) && strpos($image, 'initials') !== false)
-                                                <img class="h-12 w-12 rounded-full"
-                                                     src="{{ $image . '.svg' }}"
-                                                     alt="Profile Picture of {{ $ad->user->firstname . $ad->user->lastname }}"/>
-                                            @else
-                                                <img class="h-12 w-12 rounded-full"
-                                                     srcset="
-                         @foreach($image as $imagePath)
-                                                     {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
-                         @endforeach "
-                                                     src="{{ asset('storage/' . $image[0]) }}"
-                                                     alt="Profile Picture of {{ $ad->user->firstname . $ad->user->lastname }}"/>
-                                            @endif
-                                        </div>
-                                        <div class="flex justify-between flex-col w-full gap-2">
+                                            <div class="flex-shrink-0 self-center">
+                                                @if(!is_array($image) && strpos($image, 'initials') !== false)
+                                                    <img class="h-12 w-12 rounded-full"
+                                                         src="{{ $image . '.svg' }}"
+                                                         alt="Profile Picture of {{ $ad->user->firstname . $ad->user->lastname }}"/>
+                                                @else
+                                                    <img class="h-12 w-12 rounded-full"
+                                                         srcset="
+                             @foreach($image as $imagePath)
+                                                         {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                             @endforeach "
+                                                         src="{{ asset('storage/' . $image[0]) }}"
+                                                         alt="Profile Picture of {{ $ad->user->firstname . $ad->user->lastname }}"/>
+                                                @endif
+                                            </div>
+                                            <div class="flex justify-between flex-col w-full gap-2">
 
-                                            <div class="flex items-center justify-between">
-                                                <div>
-                                                    <div class="flex text-sm">
-                                                        <p class="text-indigo-600 text-xl font-medium">{{ $ad['title'] }}</p>
+                                                <div class="flex items-center justify-between">
+                                                    <div>
+                                                        <div class="flex text-sm">
+                                                            <p class="text-indigo-600 text-xl font-medium">{{ $ad['title'] }}</p>
+                                                        </div>
                                                     </div>
+
                                                 </div>
 
-                                            </div>
+                                                <div class="flex md:grid md:grid-cols-100px gap-6 sm:gap-2 ">
+                                                    <div
+                                                        class="mt-2 gap-1 flex items-center text-sm text-indigo-500 sm:mt-0">
+                                                        <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
+                                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path
+                                                                d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"></path>
+                                                        </svg>
+                                                        <p class="flex items-center text-sm text-gray-500 sm:mt-0">
+                                                            {{ $ad['user']['firstname'] . ' ' . $ad['user']['lastname'] }}
+                                                        </p>
+                                                    </div>
+                                                    <div
+                                                        class="mt-2 gap-1 flex items-center text-sm text-indigo-500 sm:mt-0">
+                                                        <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
+                                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                                                  d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"></path>
+                                                        </svg>
+                                                        <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 gap-1">
+                                                            {{ $ad['region']['name'] }}
+                                                        </p>
+                                                    </div>
 
-                                            <div class="flex md:grid md:grid-cols-100px gap-6 sm:gap-2 ">
-                                                <div
-                                                    class="mt-2 gap-1 flex items-center text-sm text-indigo-500 sm:mt-0">
-                                                    <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
-                                                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                        <path
-                                                            d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"></path>
-                                                    </svg>
-                                                    <p class="flex items-center text-sm text-gray-500 sm:mt-0">
-                                                        {{ $ad['user']['firstname'] . ' ' . $ad['user']['lastname'] }}
-                                                    </p>
                                                 </div>
-                                                <div
-                                                    class="mt-2 gap-1 flex items-center text-sm text-indigo-500 sm:mt-0">
-                                                    <svg fill="currentColor" class="w-5" viewBox="0 0 20 20"
-                                                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                        <path clip-rule="evenodd" fill-rule="evenodd"
-                                                              d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"></path>
-                                                    </svg>
-                                                    <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 gap-1">
-                                                        {{ $ad['region']['name'] }}
-                                                    </p>
-                                                </div>
-
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="flex flex-col px-4 py-4 sm:px-6 flex gap-4">
-                                        <p class="text-gray-500">{{ Str::limit($ad['description'], 120) }}</p>
-                                    </div>
-                                    @if($ad['user']['company']['hiring'])
-                                        @include('components.badge')
-                                    @endif
-                                    <div class="flex px-4 py-4 sm:px-6">
+                                        <div class="flex flex-col px-4 py-4 sm:px-6 flex gap-4">
+                                            <p class="text-gray-500">{{ Str::limit($ad['description'], 120) }}</p>
+                                        </div>
+                                        @if($ad['user']['company']['hiring'])
+                                            @include('components.badge')
+                                        @endif
+                                        <div class="flex px-4 py-4 sm:px-6">
 
-                                        <svg class="w-4" fill="bg-gray-500" viewBox="0 0 20 20"
-                                             xmlns="http://www.w3.org/2000/svg"
-                                             aria-hidden="true">
-                                            <path clip-rule="evenodd" fill-rule="evenodd"
-                                                  d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
-                                        </svg>
-                                        <p class="ml-2 text-gray-500 text-sm">Posted {{ $ad['formattedCreatedAt'] }}
-                                            ago</p>
+                                            <svg class="w-4" fill="bg-gray-500" viewBox="0 0 20 20"
+                                                 xmlns="http://www.w3.org/2000/svg"
+                                                 aria-hidden="true">
+                                                <path clip-rule="evenodd" fill-rule="evenodd"
+                                                      d="M5.75 2a.75.75 0 01.75.75V4h7V2.75a.75.75 0 011.5 0V4h.25A2.75 2.75 0 0118 6.75v8.5A2.75 2.75 0 0115.25 18H4.75A2.75 2.75 0 012 15.25v-8.5A2.75 2.75 0 014.75 4H5V2.75A.75.75 0 015.75 2zm-1 5.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h10.5c.69 0 1.25-.56 1.25-1.25v-6.5c0-.69-.56-1.25-1.25-1.25H4.75z"></path>
+                                            </svg>
+                                            <p class="ml-2 text-gray-500 text-sm">Posted {{ $ad['formattedCreatedAt'] }}
+                                                ago</p>
 
-                                    </div>
-                                </section>
-                            </div>
-                        @endforeach
+                                        </div>
+                                    </section>
+                                </div>
+                            @endforeach
                             {{ $ads->links('components/pagination') }}
-                    </div>
+                        </div>
+                    @endif
                     @if($selectedAd)
-                        <div class="max-h-screen overflow-y-hidden sm:overflow-y-auto lg:col-start-2 md:col-span-3">
+                        <div class="overflow-y-hidden sm:overflow-y-auto lg:col-start-2 md:col-span-3">
                             <div>
 
                                 <section id="content-of-ad-{{ $selectedAd->id }}"
                                          class="m-px overflow-y-scroll sm:overflow-hidden bottom-0 z-10 bg-white shadow sm:rounded-md block overflow-hidden">
                                     <div class="bg-white px-4 py-5 sm:px-6">
-
-                                        <svg x-data="{ isHidden: window.innerWidth > 768 }" x-bind:hidden="isHidden"
-                                             class="cursor-pointer w-6 icon-back mb-8" id="icon-back-1"
-                                             fill="currentColor"
-                                             viewBox="0 0 20 20"
-                                             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                            <path clip-rule="evenodd" fill-rule="evenodd"
-                                                  d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"></path>
-                                        </svg>
-
+                                        @if($agent->isMobile())
+                                            <svg wire:click="closeAd" class="cursor-pointer w-6 icon-back mb-8"
+                                                 id="icon-back-1" fill="currentColor" viewBox="0 0 20 20"
+                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path clip-rule="evenodd" fill-rule="evenodd"
+                                                      d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"></path>
+                                            </svg>
+                                        @endif
                                         <div class="max-w-screen-lg mx-auto relative">
                                             <div class="flex justify-between ">
                                                 <h3 class="text-2xl font-semibold mb-4">{{ $selectedAd->title }}</h3>
 
                                                 <div class="top-5 absolute right-6 inline-block text-left"
                                                      x-data="{ isSharingOpen{{ $selectedAd->id }}: false, isReportingOpen{{ $selectedAd->id }}: false }">
-                                                    <div x-data="{ showMessage: @if($successMessage || $errorMessage) true @else false @endif }">
+                                                    <div
+                                                        x-data="{ showMessage: @if($successMessage || $errorMessage) true @else false @endif }">
                                                         @if($successMessage)
                                                             <div x-show="showMessage">
                                                                 @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
@@ -385,23 +386,30 @@
                                                     </div>
                                                     <div class="flex gap-1">
 
-                                                        <button wire:click="toggleSharing" @click="isSharingOpen{{ $selectedAd->id }} = true" type="button"
+                                                        <button wire:click="toggleSharing"
+                                                                @click="isSharingOpen{{ $selectedAd->id }} = true"
+                                                                type="button"
                                                                 class="inline-flex items-center justify-center w-full px-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                                                id="dropdown-menu-button" aria-expanded="true" aria-haspopup="true">
-                                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" height="1em"
+                                                                id="dropdown-menu-button" aria-expanded="true"
+                                                                aria-haspopup="true">
+                                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                                                 height="1em"
                                                                  viewBox="0 0 512 512">
                                                                 <path
                                                                     d="M307 34.8c-11.5 5.1-19 16.6-19 29.2v64H176C78.8 128 0 206.8 0 304C0 417.3 81.5 467.9 100.2 478.1c2.5 1.4 5.3 1.9 8.1 1.9c10.9 0 19.7-8.9 19.7-19.7c0-7.5-4.3-14.4-9.8-19.5C108.8 431.9 96 414.4 96 384c0-53 43-96 96-96h96v64c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7 10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4z"/>
                                                             </svg>
 
                                                         </button>
-                                                        <button @click="isReportingOpen{{ $selectedAd->id }} = true" type="button"
+                                                        <button @click="isReportingOpen{{ $selectedAd->id }} = true"
+                                                                type="button"
                                                                 class="inline-flex items-center justify-center w-full px-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                                                                id="dropdown-menu-button" aria-expanded="true" aria-haspopup="true">
+                                                                id="dropdown-menu-button" aria-expanded="true"
+                                                                aria-haspopup="true">
                                                             <span class="text-2xl">...</span>
                                                         </button>
                                                     </div>
-                                                    <div x-cloak x-show="isSharingOpen{{ $selectedAd->id }}" @click.away="isSharingOpen{{ $selectedAd->id }} = false"
+                                                    <div x-cloak x-show="isSharingOpen{{ $selectedAd->id }}"
+                                                         @click.away="isSharingOpen{{ $selectedAd->id }} = false"
                                                          class="z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                                                          role="menu" aria-orientation="vertical"
                                                          aria-labelledby="dropdown-menu-button" tabindex="-1">
@@ -412,10 +420,14 @@
                                                                         class="flex text-sm text-gray-700 items-center gap-4"
                                                                         id="dropdown-menu-button" aria-expanded="true"
                                                                         aria-haspopup="true">
-                                                                    <svg fill="#000000" class="w-8 h-8" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                                         xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve"><g
+                                                                    <svg fill="#000000" class="w-8 h-8" version="1.1"
+                                                                         xmlns="http://www.w3.org/2000/svg"
+                                                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                         viewBox="0 0 512 512" xml:space="preserve"><g
                                                                             id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                                        <g id="SVGRepo_tracerCarrier"
+                                                                           stroke-linecap="round"
+                                                                           stroke-linejoin="round"></g>
                                                                         <g id="SVGRepo_iconCarrier">
                                                                             <g id="7935ec95c421cee6d86eb22ecd11b7e3">
                                                                                 <path style="display: inline;"
@@ -426,21 +438,31 @@
                                                                 </button>
                                                             </a>
                                                             <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(request()->url()) }}"
-                                                               target="_blank" class="block px-4 py-2 hover:bg-gray-100 hover:text-gray-900">
+                                                               target="_blank"
+                                                               class="block px-4 py-2 hover:bg-gray-100 hover:text-gray-900">
                                                                 <button type="button"
                                                                         class="flex text-sm text-gray-700 items-center gap-4"
                                                                         id="dropdown-menu-button" aria-expanded="true"
                                                                         aria-haspopup="true">
-                                                                    <svg viewBox="0 0 20 20" class="w-7 h-7" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                                         xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+                                                                    <svg viewBox="0 0 20 20" class="w-7 h-7"
+                                                                         version="1.1"
+                                                                         xmlns="http://www.w3.org/2000/svg"
+                                                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                         fill="#000000">
                                                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                                                        <g id="SVGRepo_tracerCarrier"
+                                                                           stroke-linecap="round"
+                                                                           stroke-linejoin="round"></g>
                                                                         <g id="SVGRepo_iconCarrier">
                                                                             <defs></defs>
-                                                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                                                <g id="Dribbble-Light-Preview" transform="translate(-180.000000, -7479.000000)"
+                                                                            <g id="Page-1" stroke="none"
+                                                                               stroke-width="1" fill="none"
+                                                                               fill-rule="evenodd">
+                                                                                <g id="Dribbble-Light-Preview"
+                                                                                   transform="translate(-180.000000, -7479.000000)"
                                                                                    fill="#000000">
-                                                                                    <g id="icons" transform="translate(56.000000, 160.000000)">
+                                                                                    <g id="icons"
+                                                                                       transform="translate(56.000000, 160.000000)">
                                                                                         <path
                                                                                             d="M144,7339 L140,7339 L140,7332.001 C140,7330.081 139.153,7329.01 137.634,7329.01 C135.981,7329.01 135,7330.126 135,7332.001 L135,7339 L131,7339 L131,7326 L135,7326 L135,7327.462 C135,7327.462 136.255,7325.26 139.083,7325.26 C141.912,7325.26 144,7326.986 144,7330.558 L144,7339 L144,7339 Z M126.442,7323.921 C125.093,7323.921 124,7322.819 124,7321.46 C124,7320.102 125.093,7319 126.442,7319 C127.79,7319 128.883,7320.102 128.883,7321.46 C128.884,7322.819 127.79,7323.921 126.442,7323.921 L126.442,7323.921 Z M124,7339 L129,7339 L129,7326 L124,7326 L124,7339 Z"
                                                                                             id="linkedin-[#161]"></path>
@@ -454,87 +476,135 @@
                                                             </a>
                                                         </div>
                                                     </div>
-                                                    <div x-cloak x-show="isReportingOpen{{ $selectedAd->id }}" @click.away="isReportingOpen{{ $selectedAd->id }} = false"
+                                                    <div x-cloak x-show="isReportingOpen{{ $selectedAd->id }}"
+                                                         @click.away="isReportingOpen{{ $selectedAd->id }} = false"
                                                          class="content-signal-ad-{{ $selectedAd->id }} z-10 origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                                                          role="menu" aria-orientation="vertical"
                                                          aria-labelledby="dropdown-menu-button" tabindex="-1">
                                                         <div class="py-1" role="none">
                                                             <div x-data="{ showModal: false }">
-                                                                <div wire:click="$set('reportSubmitted', true)" @click="showModal = !showModal"
+                                                                <div wire:click="$set('reportSubmitted', true)"
+                                                                     @click="showModal = !showModal"
                                                                      class="block px-4 py-2 hover:bg-gray-100 hover:text-gray-900">
                                                                     <button type="button"
                                                                             class="flex text-sm text-gray-700 items-center gap-4"
-                                                                            id="dropdown-menu-button" aria-expanded="true"
+                                                                            id="dropdown-menu-button"
+                                                                            aria-expanded="true"
                                                                             aria-haspopup="true">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                             class="w-5 h-5"
                                                                              height="1em" viewBox="0 0 448 512">
                                                                             <path
                                                                                 d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32V64 368 480c0 17.7 14.3 32 32 32s32-14.3 32-32V352l64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30V66.1c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48V32z"/>
                                                                         </svg>
-                                                                        <span class="text-left">Signaler cette annonce</span>
+                                                                        <span
+                                                                            class="text-left">Signaler cette annonce</span>
                                                                     </button>
                                                                 </div>
                                                                 @if($reportSubmitted)
                                                                     <div x-show="showModal"
                                                                          class="fixed absolute z-50"
                                                                          @click="showModal = false">
-                                                                        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+                                                                        <div
+                                                                            class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
-                                                                        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                                                                        <div
+                                                                            class="fixed inset-0 z-10 w-screen overflow-y-auto">
                                                                             <div
                                                                                 class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                                                                                 <div @click.stop
                                                                                      class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:max-w-lg">
-                                                                                    <div @click.stop class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                                                                                        <div @click.stop class="sm:flex sm:items-start">
-                                                                                            <svg @click="showModal = false"
-                                                                                                 class="absolute cursor-pointer right-6 w-4 h-4 text-gray-800 dark:text-white"
-                                                                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                                                 viewBox="0 0 14 14">
-                                                                                                <path stroke="currentColor" stroke-linecap="round"
-                                                                                                      stroke-linejoin="round" stroke-width="2"
-                                                                                                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                                                    <div @click.stop
+                                                                                         class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                                                                                        <div @click.stop
+                                                                                             class="sm:flex sm:items-start">
+                                                                                            <svg
+                                                                                                @click="showModal = false"
+                                                                                                class="absolute cursor-pointer right-6 w-4 h-4 text-gray-800 dark:text-white"
+                                                                                                aria-hidden="true"
+                                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                                fill="none"
+                                                                                                viewBox="0 0 14 14">
+                                                                                                <path
+                                                                                                    stroke="currentColor"
+                                                                                                    stroke-linecap="round"
+                                                                                                    stroke-linejoin="round"
+                                                                                                    stroke-width="2"
+                                                                                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                                                                             </svg>
                                                                                             <div
                                                                                                 class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
-                                                                                                <svg class="text-blue-800 inline w-5 h-5" aria-hidden="true"
-                                                                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                                                                     viewBox="0 0 20 20">
+                                                                                                <svg
+                                                                                                    class="text-blue-800 inline w-5 h-5"
+                                                                                                    aria-hidden="true"
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    fill="currentColor"
+                                                                                                    viewBox="0 0 20 20">
                                                                                                     <path
                                                                                                         d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                                                                                 </svg>
                                                                                             </div>
-                                                                                            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                                                                                            <div
+                                                                                                class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                                                                                 <h3 class="text-base font-semibold leading-6 text-gray-900"
-                                                                                                    id="modal-title">Report {{$selectedAd->title}}
+                                                                                                    id="modal-title">
+                                                                                                    Report {{$selectedAd->title}}
                                                                                                 </h3>
                                                                                                 <div class="mt-2">
-                                                                                                    <p class="text-sm text-gray-500">Are you sure you want to report
+                                                                                                    <p class="text-sm text-gray-500">
+                                                                                                        Are you sure you
+                                                                                                        want to report
                                                                                                         this
-                                                                                                        ad? Please provide details about the issue you are
+                                                                                                        ad? Please
+                                                                                                        provide details
+                                                                                                        about the issue
+                                                                                                        you are
                                                                                                         reporting.</p>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <form wire:submit.prevent="submitReport" @click.stop>
+                                                                                        <form
+                                                                                            wire:submit.prevent="submitReport"
+                                                                                            @click.stop>
                                                                                             <div class="mt-4">
                                                                                                 <label for="subject"
                                                                                                        class="block text-sm font-medium text-gray-700">Subject</label>
-                                                                                                <select wire:model.lazy="subject" id="subject" name="subject"
-                                                                                                        class="@error('subject') border border-red-500 @enderror mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                                                                                    <option wire:ignore value="" selected disabled>Choose a
+                                                                                                <select
+                                                                                                    wire:model.lazy="subject"
+                                                                                                    id="subject"
+                                                                                                    name="subject"
+                                                                                                    class="@error('subject') border border-red-500 @enderror mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                                                                    <option wire:ignore
+                                                                                                            value=""
+                                                                                                            selected
+                                                                                                            disabled>
+                                                                                                        Choose a
                                                                                                         reporting
                                                                                                         subject
                                                                                                     </option>
-                                                                                                    <option value="Harassment">Harassment</option>
-                                                                                                    <option value="Unprofessional behavior">Unprofessional behavior
+                                                                                                    <option
+                                                                                                        value="Harassment">
+                                                                                                        Harassment
                                                                                                     </option>
-                                                                                                    <option value="Non-compliance with guidelines">Non-compliance
+                                                                                                    <option
+                                                                                                        value="Unprofessional behavior">
+                                                                                                        Unprofessional
+                                                                                                        behavior
+                                                                                                    </option>
+                                                                                                    <option
+                                                                                                        value="Non-compliance with guidelines">
+                                                                                                        Non-compliance
                                                                                                         with
                                                                                                         guidelines
                                                                                                     </option>
-                                                                                                    <option value="Security concern">Security concern</option>
-                                                                                                    <option value="Other">Other</option>
+                                                                                                    <option
+                                                                                                        value="Security concern">
+                                                                                                        Security concern
+                                                                                                    </option>
+                                                                                                    <option
+                                                                                                        value="Other">
+                                                                                                        Other
+                                                                                                    </option>
                                                                                                 </select>
                                                                                                 @error('subject')
                                                                                                 <p class="text-red-500 mt-1">{{ $message }}</p>
@@ -555,11 +625,15 @@
                                                                                             <div
                                                                                                 class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 full-w mt-4 -mb-4 -mx-6">
                                                                                                 <x-button type="submit"
-                                                                                                          kind="primary" class="disabled:opacity-50 ml-3">
+                                                                                                          kind="primary"
+                                                                                                          class="disabled:opacity-50 ml-3">
                                                                                                     Send
-                                                                                                    <svg wire:loading wire:target="submitReport" aria-hidden="true"
+                                                                                                    <svg wire:loading
+                                                                                                         wire:target="submitReport"
+                                                                                                         aria-hidden="true"
                                                                                                          class="inline w-5 h-5 ml-2 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"
-                                                                                                         viewBox="0 0 100 101" fill="none"
+                                                                                                         viewBox="0 0 100 101"
+                                                                                                         fill="none"
                                                                                                          xmlns="http://www.w3.org/2000/svg">
                                                                                                         <path
                                                                                                             d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
@@ -605,7 +679,7 @@
                                                 <p class="font-semibold">Job Description:</p>
                                                 <p class="text-gray-700 leading-normal">{{ $selectedAd->description }}</p>
                                             </div>
-                                            <div class="mb-4 flex justify-between">
+                                            <div class="mb-4 flex justify-between flex-col gap-6 sm:gap-1 sm:flex-row">
                                                 <div class="flex items-end">
                                                     <svg class="w-4 relative -top-0.5" fill="bg-gray-500"
                                                          viewBox="0 0 20 20"
