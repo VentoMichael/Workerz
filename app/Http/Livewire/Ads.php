@@ -14,7 +14,7 @@ class Ads extends Component
 
     public function render()
     {
-        $ads = Ad::paginate(1); // Change 10 to your desired number of items per page
+        $ads = Ad::paginate(2);
 
         return view('livewire.ads', [
             'ads' => $ads,

@@ -17,6 +17,8 @@ class PreviewList extends Component
 
     public $selectedAd;
     public $image;
+    public $selectedCategories = [];
+    public $selectedRegions = [];
     public $adRegions;
     public $adSkills;
     public $difference;
@@ -132,6 +134,32 @@ class PreviewList extends Component
         }
     }
 
+    public function updFilters()
+    {
+        $ads = Ad::with(['skills', 'region', 'user.company']);
+
+        if (!empty($this->selectedCategories)) {
+            $ads->whereHas('skills', function ($query) {
+                $query->whereIn('name', $this->selectedCategories);
+            });
+        }
+
+        if (!empty($this->selectedRegions)) {
+            $ads->whereHas('region', function ($query) {
+                $query->whereIn('name', $this->selectedRegions);
+            });
+        }
+
+        $filteredAds = $ads->orderBy('created_at', 'desc')->paginate(2);
+        if ($filteredAds->isEmpty()) {
+            return null;
+        }
+        $this->resetPage();
+        $this->selectedAd = $ads->orderBy('created_at', 'desc')->first();
+
+        return $filteredAds;
+    }
+
     private function resetForm()
     {
         $this->subject = '';
@@ -144,21 +172,39 @@ class PreviewList extends Component
         $this->$property = null;
     }
 
-    public function closeAd(){
+    public function closeAd()
+    {
         $this->selectedAd = false;
     }
+
     public function render()
     {
-
-        $ads = Ad::with('skills', 'region', 'user.company')
+        $ads = Ad::with(['skills', 'region', 'user.company'])
+            ->when($this->selectedCategories, function ($query) {
+                $query->whereHas('skills', function ($subQuery) {
+                    $subQuery->whereIn('name', $this->selectedCategories);
+                });
+            })
+            ->when($this->selectedRegions, function ($query) {
+                $query->whereHas('region', function ($subQuery) {
+                    $subQuery->whereIn('name', $this->selectedRegions);
+                });
+            })
             ->orderBy('created_at', 'desc')
             ->paginate(2);
+
+        $allAds = Ad::with('skills', 'region', 'user.company')
+            ->get();
+        $countAds = Ad::count();
         $this->adRegions = [];
         $this->adSkills = [];
 
+        foreach ($allAds as $allAd) {
+            $this->adRegions[] = $allAd->region->name;
+            $this->adSkills = array_merge($this->adSkills, $allAd->skills->pluck('name', 'id')->toArray());
+        }
+
         foreach ($ads as $ad) {
-            $this->adRegions[] = $ad->region->name;
-            $this->adSkills = array_merge($this->adSkills, $ad->skills->pluck('name', 'id')->toArray());
             $this->difference = now()->diffInMinutes($ad->posted_at);
             if ($this->difference < 60) {
                 $ad->formattedCreatedAt = $this->difference . ' ' . Str::plural('minute', $this->difference);
@@ -179,11 +225,12 @@ class PreviewList extends Component
         }
         $this->adRegionsWithCount = array_count_values($this->adRegions);
         $this->adSkillsWithCount = array_count_values($this->adSkills);
+
         $agent = new Agent();
         if ($agent->isDesktop()) {
             $this->initializeSelectedAdProperties();
         }
-        return view('livewire.preview-list', compact('ads','agent')
+        return view('livewire.preview-list', compact('ads', 'agent', 'countAds')
         );
     }
 

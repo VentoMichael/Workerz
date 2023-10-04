@@ -50,7 +50,8 @@
                                     <legend class="sr-only">Category</legend>
                                     @foreach($adSkillsWithCount as $category => $count)
                                         <div class="flex items-center mt-0">
-                                            <input id="filter-mobile-category-{{ $loop->index }}" name="category[]"
+                                            <input wire:click="updFilters" wire:model="selectedCategories"
+                                                   id="filter-mobile-category-{{ $loop->index }}" name="category[]"
                                                    value="{{ $category }}"
                                                    type="checkbox"
                                                    class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
@@ -88,8 +89,9 @@
                                     <legend class="sr-only">Region</legend>
                                     @foreach($adRegionsWithCount as $region => $count)
                                         <div class="flex items-center mt-0">
-                                            <input id="filter-mobile-region-{{ $loop->index }}" name="region[]"
-                                                   value="{{ $region }}"
+                                            <input wire:click="updFilters" wire:model="selectedRegions"
+                                                   id="filter-mobile-region-{{ $loop->index }}" name="region[]"
+                                                   value="{{$region}}"
                                                    type="checkbox"
                                                    class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
                                             <label for="filter-mobile-region-{{ $loop->index }}"
@@ -123,8 +125,8 @@
                      class="flex items-center justify-between">
                     <div class=" relative z-10 inline-block text-left">
                         <div>
-                            <button @if(count($ads) > 0) @click="openFilter = !openFilter" @endif type="button"
-                                    class="@if(count($ads) === 0) opacity-70 cursor-not-allowed @endif filter_sort group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                            <button @click="openFilter = !openFilter" type="button"
+                                    class="filter_sort group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
                                     id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
                                 Sort
                                 <svg x-bind:class="{ 'rotate-0': !openFilter, '-rotate-180': openFilter }"
@@ -170,9 +172,9 @@
                          class="sm:flex hidden sm:items-baseline sm:space-x-8">
                         <div id="desktop-menu" class="relative z-10 inline-block text-left">
                             <div class="filter_sort">
-                                <button @if(count($ads) > 0) @click="openCategory = !openCategory"
-                                        @endif type="button"
-                                        class="@if(count($ads) === 0) opacity-70 cursor-not-allowed @endif filter_category group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                                <button @click="openCategory = !openCategory"
+                                        type="button"
+                                        class="filter_category group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
                                         aria-expanded="false">
                                     <span>Category</span>
 
@@ -197,7 +199,8 @@
                                     <form class="space-y-4">
                                         @foreach($adSkillsWithCount as $category => $count)
                                             <div class="flex items-center mt-0">
-                                                <input id="filter-category-{{ $loop->index }}" name="category[]"
+                                                <input wire:click="updFilters" wire:model="selectedCategories"
+                                                       id="filter-category-{{ $loop->index }}" name="category[]"
                                                        value="{{ $category }}"
                                                        type="checkbox"
                                                        class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
@@ -214,9 +217,9 @@
                         <div x-data="{ openRegions: false }" id="desktop-menu"
                              class="relative z-10 inline-block text-left">
                             <div>
-                                <button @if(count($ads) > 0) @click="openRegions = !openRegions"
-                                        @endif type="button"
-                                        class="@if(count($ads) === 0) opacity-70 cursor-not-allowed @endif filter_regions group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
+                                <button @click="openRegions = !openRegions"
+                                        type="button"
+                                        class="filter_regions group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
                                         aria-expanded="false">
                                     <span>Regions</span>
                                     <svg x-bind:class="{ 'rotate-0': !openRegions, '-rotate-180': openRegions }"
@@ -236,7 +239,8 @@
                                     <form class="space-y-4">
                                         @foreach($adRegionsWithCount as $region => $count)
                                             <div class="flex items-center mt-0">
-                                                <input id="filter-region-{{ $loop->index }}" name="region[]"
+                                                <input wire:click="updFilters" wire:model="selectedRegions"
+                                                       id="filter-region-{{ $loop->index }}" name="region[]"
                                                        value="{{$region}}"
                                                        type="checkbox"
                                                        class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
@@ -256,14 +260,17 @@
     </div>
 
     <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 ">
-        <section>
-            @if(count($ads) > 0)
-                <p class="text-xs mb-2">About {{ count($ads) }} result{{ count($ads) > 1 ? 's': '' }}</p>
 
-                <div class="grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3 relative">
-                    @if($agent->isMobile() && !$selectedAd || $agent->isDesktop())
-                        <div
-                            class="max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1">
+        <section>
+            <p class="text-xs mb-2">About {{ $countAds }} result{{ $countAds > 1 ? 's': '' }}</p>
+
+            <div class="grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3 relative">
+                @if($agent->isMobile() && !$selectedAd || $agent->isDesktop())
+                    <div
+                        class="max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1">
+                        @if ($ads->isEmpty())
+                            <p>No ads found.</p>
+                        @else
                             @foreach($ads as $ad)
                                 <div wire:click="showPreview({{ $ad->id }})" wire:key="{{ $ad->id }}">
                                     <section
@@ -346,9 +353,14 @@
                                     </section>
                                 </div>
                             @endforeach
+                        @endif
+                        @if(!$ads->isEmpty())
                             {{ $ads->links('components/pagination') }}
-                        </div>
-                    @endif
+                        @endif
+                    </div>
+                @endif
+
+                @if(!$ads->isEmpty())
                     @if($selectedAd)
                         <div class="overflow-y-hidden sm:overflow-y-auto lg:col-start-2 md:col-span-3">
                             <div>
@@ -750,8 +762,8 @@
                             </div>
                         </div>
                     @endif
-                </div>
-            @endif
+                @endif
+            </div>
         </section>
     </div>
 </div>
