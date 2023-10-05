@@ -146,18 +146,14 @@
                                  role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button"
                                  tabindex="-1">
                                 <div class="py-1" role="none">
-                                    <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-700"
+                                    <a wire:click="updFilters('cheaper')" class="block px-4 py-2 text-sm font-medium text-gray-700"
                                        role="menuitem"
                                        tabindex="-1" id="mobile-menu-item-0"> Cheaper </a>
 
-                                    <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-700"
-                                       role="menuitem"
-                                       tabindex="-1" id="mobile-menu-item-1"> Best Rating </a>
 
-                                    <a href="#" class="block px-4 py-2 text-sm font-medium text-gray-700"
+                                    <a wire:click="updFilters('newest')" class="block px-4 py-2 text-sm font-medium text-gray-700"
                                        role="menuitem"
                                        tabindex="-1" id="mobile-menu-item-2"> Newest </a>
-
                                 </div>
                             </div>
                         </fieldset>
@@ -369,12 +365,17 @@
                                          class="m-px overflow-y-scroll sm:overflow-hidden bottom-0 z-10 bg-white shadow sm:rounded-md block overflow-hidden">
                                     <div class="bg-white px-4 py-5 sm:px-6">
                                         @if($agent->isMobile())
-                                            <svg wire:click="closeAd" class="cursor-pointer w-6 icon-back mb-8"
+                                            <div class="flex gap-2"  wire:click="closeAd">
+                                            <svg class="cursor-pointer w-6 icon-back mb-8"
                                                  id="icon-back-1" fill="currentColor" viewBox="0 0 20 20"
                                                  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                                 <path clip-rule="evenodd" fill-rule="evenodd"
                                                       d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"></path>
                                             </svg>
+                                                <p>
+                                            Back to the list
+                                                </p>
+                                            </div>
                                         @endif
                                         <div class="max-w-screen-lg mx-auto relative">
                                             <div class="flex justify-between ">

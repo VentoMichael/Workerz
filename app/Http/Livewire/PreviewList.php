@@ -25,6 +25,7 @@ class PreviewList extends Component
     public $date;
     public $adRegionsWithCount;
     public $adSkillsWithCount;
+    public $sortingOrder = 'created_at';
 
 
     public $showModal = false;
@@ -116,7 +117,7 @@ class PreviewList extends Component
     {
         $this->validate();
         try {
-            $re = Reports::create([
+            Reports::create([
                 'subject' => $this->subject,
                 'description' => $this->description,
                 'ad_id' => $this->selectedAd->id,
@@ -136,6 +137,9 @@ class PreviewList extends Component
 
     public function updFilters()
     {
+        $agent = new Agent();
+
+
         $ads = Ad::with(['skills', 'region', 'user.company']);
 
         if (!empty($this->selectedCategories)) {
@@ -155,11 +159,16 @@ class PreviewList extends Component
             return null;
         }
         $this->resetPage();
-        $this->selectedAd = $ads->orderBy('created_at', 'desc')->first();
-
+        if ($agent->isDesktop()) {
+            $this->selectedAd = $ads->orderBy('created_at', 'desc')->first();
+        }
         return $filteredAds;
-    }
 
+    }
+    public function setSortingOrder($order)
+    {
+        // Implement the sorting logic here
+    }
     private function resetForm()
     {
         $this->subject = '';
