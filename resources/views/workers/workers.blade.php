@@ -9,7 +9,7 @@
         <h1 class="sr-only">
             Workers page
         </h1>
-        <livewire:preview-list-workers />
+        <livewire:preview-list-workers :notHome="true" />
 @endsection
 @section('scripts')
 

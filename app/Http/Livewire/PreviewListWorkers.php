@@ -23,6 +23,7 @@ class PreviewListWorkers extends Component
     public $selectedRegions = [];
     public $userRegions;
     public $userSkills;
+    public $notHome;
     public $difference;
     public $date;
     public $userRegionsWithCount;
@@ -132,7 +133,7 @@ class PreviewListWorkers extends Component
         if ($users->isEmpty()) {
             return null;
         }
-
+//TODO:popular sorting not working
         $this->selectedCategoryCount = count($this->selectedCategories);
         $this->selectedRegionCount = count($this->selectedRegions);
 

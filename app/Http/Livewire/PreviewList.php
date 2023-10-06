@@ -23,6 +23,7 @@ class PreviewList extends Component
     public $selectedRegions = [];
     public $adRegions;
     public $adSkills;
+    public $notHome;
     public $difference;
     public $date;
     public $adRegionsWithCount;

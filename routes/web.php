@@ -4,8 +4,11 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RegistrationController;
+use App\Models\Ad;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Stripe\Stripe;
 
 /*
@@ -20,19 +23,7 @@ use Stripe\Stripe;
 */
 
 Route::get('/', function () {
-    $workers = User::byRoleId(1)->with('company.skills','company.regions')->get();
-    $userRegions = [];
-    $userSkills = [];
-    $companySkills = [];
-
-    foreach ($workers as $worker) {
-        $companySkills = $worker->company->skills->pluck('name', 'id')->toArray();
-        $userSkills = array_merge($userSkills, $companySkills);
-        $userRegions = $worker->company->regions->pluck('name','id')->toArray();
-    }
-    $userRegionsWithCount = array_count_values($userRegions);
-    $userSkillsWithCount = array_count_values($userSkills);
-    return view('home', compact('workers', 'userRegionsWithCount', 'userSkillsWithCount'));
+    return view('home');
 })->name('home');
 
 Route::get('/how-it-works', function () {

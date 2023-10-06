@@ -9,6 +9,6 @@
         <h1 class="sr-only">
             Ads page
         </h1>
-        <livewire:preview-list />
+        <livewire:preview-list :notHome="true"/>
 @endsection
 

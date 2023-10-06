@@ -109,15 +109,16 @@
         </div>
 
         <section class="max-w-7xl mx-auto px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
-            <div class="py-16">
-                <h2 class="text-4xl font-extrabold tracking-tight text-gray-900">Find the Right Job Today</h2>
-                <p class="mt-4 max-w-7xl mx-auto text-base text-gray-500">Explore a wide range of job opportunities
-                    posted by
-                    people and businesses in your area. Our platform makes it easy to discover and apply for jobs
-                    that match your
-                    skills and interests.</p>
-            </div>
-
+            @if($notHome)
+                <div class="py-16">
+                    <h2 class="text-4xl font-extrabold tracking-tight text-gray-900">Find the Right Job Today</h2>
+                    <p class="mt-4 max-w-7xl mx-auto text-base text-gray-500">Explore a wide range of job opportunities
+                        posted by
+                        people and businesses in your area. Our platform makes it easy to discover and apply for jobs
+                        that match your
+                        skills and interests.</p>
+                </div>
+            @endif
             <section aria-labelledby="filter-heading" class="border-t border-gray-200 py-6">
                 <h3 id="filter-heading" class="sr-only">Product filters</h3>
 
@@ -141,11 +142,13 @@
                                                   d="M5 1v12m0 0 4-4m-4 4L1 9"/>
                                         </svg>
                                     </span>
-                                    @else
+                                @else
                                     <span
                                         class="ml-1.5 rounded py-1 px-1 bg-gray-200 text-xs font-semibold text-gray-700 tabular-nums">
-<svg class="w-3 h-3 text-purple-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+<svg class="w-3 h-3 text-purple-600 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+     fill="currentColor" viewBox="0 0 22 20">
+    <path
+        d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
   </svg>
 
                                     </span>
@@ -316,7 +319,7 @@
                                 <div class="flex gap-1">
 
                                     <button wire:click="toggleSharing"
-                                                                @click="isSharingOpen{{ $user->id }} = true"
+                                            @click="isSharingOpen{{ $user->id }} = true"
                                             class="z-1 inline-flex items-center justify-center w-full px-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                             id="dropdown-menu-button" aria-expanded="true" aria-haspopup="true">
                                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" height="1em"
@@ -457,7 +460,8 @@
                                                                         <div
                                                                             class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                                                             <h3 class="text-base font-semibold leading-6 text-gray-900"
-                                                                                id="modal-title">Report {{$user->company->name}}
+                                                                                id="modal-title">
+                                                                                Report {{$user->company->name}}
                                                                             </h3>
                                                                             <div class="mt-2">
                                                                                 <p class="text-sm text-gray-500">Are you
@@ -469,8 +473,9 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <form wire:submit.prevent="submitReport({{$user->id}})"
-                                                                          @click.stop>
+                                                                    <form
+                                                                        wire:submit.prevent="submitReport({{$user->id}})"
+                                                                        @click.stop>
                                                                         <div class="mt-4">
                                                                             <label for="subject"
                                                                                    class="block text-sm font-medium text-gray-700">Subject</label>
@@ -642,7 +647,7 @@
             </div>
             @if(!$users->isEmpty())
                 <div class="mt-4">
-                {{ $users->links('components/pagination') }}
+                    {{ $users->links('components/pagination') }}
                 </div>
             @endif
         </section>

@@ -109,15 +109,17 @@
         </div>
 
         <section class="max-w-7xl mx-auto px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
-            <div class="py-16">
-                <h2 class="text-4xl font-extrabold tracking-tight text-gray-900">Find the Right Job Today</h2>
-                <p class="mt-4 max-w-7xl mx-auto text-base text-gray-500">Explore a wide range of job opportunities
-                    posted by
-                    people and businesses in your area. Our platform makes it easy to discover and apply for jobs
-                    that match your
-                    skills and interests.</p>
-            </div>
+            @if($notHome)
+                <div class="py-16">
+                    <h2 class="text-4xl font-extrabold tracking-tight text-gray-900">Find the Right Job Today</h2>
+                    <p class="mt-4 max-w-7xl mx-auto text-base text-gray-500">Explore a wide range of job opportunities
+                        posted by
+                        people and businesses in your area. Our platform makes it easy to discover and apply for jobs
+                        that match your
+                        skills and interests.</p>
+                </div>
 
+            @endif
             <section aria-labelledby="filter-heading" class="border-t border-gray-200 py-6">
                 <h3 id="filter-heading" class="sr-only">Product filters</h3>
 
@@ -136,15 +138,19 @@
                                         class="ml-1.5 rounded py-1 px-1 bg-gray-200 text-xs font-semibold text-gray-700 tabular-nums">
                                         <svg class="w-3 h-3 text-purple-600" aria-hidden="true"
                                              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                  stroke-width="2"
                                                   d="M5 1v12m0 0 4-4m-4 4L1 9"/>
                                         </svg>
                                     </span>
                                 @else
                                     <span
                                         class="ml-1.5 rounded py-1 px-1 bg-gray-200 text-xs font-semibold text-gray-700 tabular-nums">
-                                    <svg class="w-3 h-3 text-purple-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 7h9.231M1 11h9.231M13 2.086A5.95 5.95 0 0 0 9.615 1C5.877 1 2.846 4.582 2.846 9s3.031 8 6.769 8A5.94 5.94 0 0 0 13 15.916"/>
+                                    <svg class="w-3 h-3 text-purple-600" aria-hidden="true"
+                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 18">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                              stroke-width="2"
+                                              d="M1 7h9.231M1 11h9.231M13 2.086A5.95 5.95 0 0 0 9.615 1C5.877 1 2.846 4.582 2.846 9s3.031 8 6.769 8A5.94 5.94 0 0 0 13 15.916"/>
                                     </svg>
                                     </span>
                                 @endif
@@ -291,7 +297,7 @@
             <div class="grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3 relative">
                 @if($agent->isMobile() && !$selectedAd || $agent->isDesktop())
                     <div
-                        class="sm:absolute inset-0 sm:overflow-y-auto sm:w-2/6 sm:max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1 pr-3">
+                        class="sm:absolute inset-0 sm:overflow-y-auto sm:w-2/6 sm:max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1 sm:pr-3">
                         @if ($ads->isEmpty())
                             <p>No ads found.</p>
                         @else
