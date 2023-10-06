@@ -146,16 +146,18 @@
                                  role="menu" aria-orientation="vertical" aria-labelledby="mobile-menu-button"
                                  tabindex="-1">
                                 <div class="py-1" role="none">
-                                    <a wire:click="updFilters('cheaper')" class="block px-4 py-2 text-sm font-medium text-gray-700"
+                                    <a wire:click="updFilters('cheaper')"
+                                       class="block px-4 py-2 text-sm font-medium text-gray-700"
                                        role="menuitem"
                                        tabindex="-1" id="mobile-menu-item-0"> Cheaper </a>
 
-
-                                    <a wire:click="updFilters('newest')" class="block px-4 py-2 text-sm font-medium text-gray-700"
+                                    <a wire:click="updFilters('newest')"
+                                       class="block px-4 py-2 text-sm font-medium text-gray-700"
                                        role="menuitem"
                                        tabindex="-1" id="mobile-menu-item-2"> Newest </a>
                                 </div>
                             </div>
+
                         </fieldset>
                     </div>
 
@@ -174,8 +176,10 @@
                                         aria-expanded="false">
                                     <span>Category</span>
 
-                                    <span
-                                        class="ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs font-semibold text-gray-700 tabular-nums">1</span>
+                                    @if($selectedCategoryCount)
+                                        <span
+                                            class="ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs font-semibold text-gray-700 tabular-nums">{{ $selectedCategoryCount }}</span>
+                                    @endif
                                     <svg x-bind:class="{ 'rotate-0': !openCategory, '-rotate-180': openCategory }"
                                          class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -218,6 +222,10 @@
                                         class="filter_regions group inline-flex items-center justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
                                         aria-expanded="false">
                                     <span>Regions</span>
+                                    @if($selectedRegionCount)
+                                        <span
+                                            class="ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs font-semibold text-gray-700 tabular-nums">{{ $selectedRegionCount }}</span>
+                                    @endif
                                     <svg x-bind:class="{ 'rotate-0': !openRegions, '-rotate-180': openRegions }"
                                          class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -365,15 +373,15 @@
                                          class="m-px overflow-y-scroll sm:overflow-hidden bottom-0 z-10 bg-white shadow sm:rounded-md block overflow-hidden">
                                     <div class="bg-white px-4 py-5 sm:px-6">
                                         @if($agent->isMobile())
-                                            <div class="flex gap-2"  wire:click="closeAd">
-                                            <svg class="cursor-pointer w-6 icon-back mb-8"
-                                                 id="icon-back-1" fill="currentColor" viewBox="0 0 20 20"
-                                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                <path clip-rule="evenodd" fill-rule="evenodd"
-                                                      d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"></path>
-                                            </svg>
+                                            <div class="flex gap-2" wire:click="closeAd">
+                                                <svg class="cursor-pointer w-6 icon-back mb-8"
+                                                     id="icon-back-1" fill="currentColor" viewBox="0 0 20 20"
+                                                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                    <path clip-rule="evenodd" fill-rule="evenodd"
+                                                          d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"></path>
+                                                </svg>
                                                 <p>
-                                            Back to the list
+                                                    Back to the list
                                                 </p>
                                             </div>
                                         @endif

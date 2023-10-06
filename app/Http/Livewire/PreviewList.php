@@ -17,6 +17,8 @@ class PreviewList extends Component
 
     public $selectedAd;
     public $image;
+    public $sortingOption = 'newest';
+
     public $selectedCategories = [];
     public $selectedRegions = [];
     public $adRegions;
@@ -24,8 +26,9 @@ class PreviewList extends Component
     public $difference;
     public $date;
     public $adRegionsWithCount;
+
     public $adSkillsWithCount;
-    public $sortingOrder = 'created_at';
+    public $sortingOrder = 'posted_at';
 
 
     public $showModal = false;
@@ -39,6 +42,8 @@ class PreviewList extends Component
     public $clearProperty;
     public $successMessage;
     public $errorMessage;
+    public $selectedCategoryCount;
+    public $selectedRegionCount;
 
     protected $rules = [
         'subject' => 'required|not_in:""',
@@ -85,15 +90,20 @@ class PreviewList extends Component
     {
         $agent = new Agent();
         if ($agent->isDesktop()) {
-            $currentPage = request()->input('page', 1);
-
-            $adsPerPage = 2;
-            $offset = ($currentPage - 1) * $adsPerPage;
-            $this->selectedAd = Ad::orderBy('created_at', 'desc')
-                ->skip($offset)
-                ->take(1)
+            $this->selectedAd = Ad::with(['skills', 'region', 'user.company'])
+                ->when($this->selectedCategories, function ($query) {
+                    $query->whereHas('skills', function ($subQuery) {
+                        $subQuery->whereIn('name', $this->selectedCategories);
+                    });
+                })
+                ->when($this->selectedRegions, function ($query) {
+                    $query->whereHas('region', function ($subQuery) {
+                        $subQuery->whereIn('name', $this->selectedRegions);
+                    });
+                })
+                ->orderBy($this->sortingOption === 'cheaper' ? 'budget' : 'posted_at', $this->sortingOption === 'cheaper' ? 'asc' : 'desc')
                 ->get()
-                ->first();
+            ->first();
             $this->initializeSelectedAdProperties();
         }
         $this->subject = '';
@@ -103,9 +113,9 @@ class PreviewList extends Component
     {
         $agent = new Agent();
         if ($agent->isDesktop()) {
-            $adsPerPage = 2;
+            $adsPerPage = 11;
             $offset = ($page - 1) * $adsPerPage;
-            $this->selectedAd = Ad::orderBy('created_at', 'desc')
+            $this->selectedAd = Ad::orderBy($this->sortingOption === 'cheaper' ? 'budget' : 'posted_at', $this->sortingOption === 'cheaper' ? 'asc' : 'desc')
                 ->skip($offset)
                 ->take(1)
                 ->get()
@@ -135,40 +145,54 @@ class PreviewList extends Component
         }
     }
 
-    public function updFilters()
+    public function updFilters($sortingOption = null)
     {
         $agent = new Agent();
 
-
-        $ads = Ad::with(['skills', 'region', 'user.company']);
-
-        if (!empty($this->selectedCategories)) {
-            $ads->whereHas('skills', function ($query) {
-                $query->whereIn('name', $this->selectedCategories);
+        $adsQuery = Ad::with(['skills', 'region', 'user.company'])
+            ->when(!empty($this->selectedCategories), function ($query) {
+                $query->whereHas('skills', function ($subQuery) {
+                    $subQuery->whereIn('name', $this->selectedCategories);
+                });
+            })
+            ->when(!empty($this->selectedRegions), function ($query) {
+                $query->whereHas('region', function ($subQuery) {
+                    $subQuery->whereIn('name', $this->selectedRegions);
+                });
             });
+
+        if ($sortingOption !== null) {
+            $this->sortingOption = $sortingOption;
+            $this->sortingOrder = $sortingOption;
+
         }
 
-        if (!empty($this->selectedRegions)) {
-            $ads->whereHas('region', function ($query) {
-                $query->whereIn('name', $this->selectedRegions);
-            });
+        if ($this->sortingOrder === 'cheaper') {
+            $adsQuery->orderBy('budget', 'asc');
+        } else {
+            $adsQuery->orderBy('posted_at', 'desc');
         }
 
-        $filteredAds = $ads->orderBy('created_at', 'desc')->paginate(2);
-        if ($filteredAds->isEmpty()) {
+        $ads = $adsQuery->paginate(11);
+
+        if ($ads->isEmpty()) {
             return null;
         }
-        $this->resetPage();
-        if ($agent->isDesktop()) {
-            $this->selectedAd = $ads->orderBy('created_at', 'desc')->first();
-        }
-        return $filteredAds;
 
+        $this->resetPage();
+
+        if ($agent->isDesktop()) {
+            $this->selectedAd = $ads->first();
+        }
+
+        $this->selectedCategoryCount = count($this->selectedCategories);
+        $this->selectedRegionCount = count($this->selectedRegions);
+
+
+        return $ads;
     }
-    public function setSortingOrder($order)
-    {
-        // Implement the sorting logic here
-    }
+
+
     private function resetForm()
     {
         $this->subject = '';
@@ -199,9 +223,8 @@ class PreviewList extends Component
                     $subQuery->whereIn('name', $this->selectedRegions);
                 });
             })
-            ->orderBy('created_at', 'desc')
-            ->paginate(2);
-
+            ->orderBy($this->sortingOption === 'cheaper' ? 'budget' : 'posted_at', $this->sortingOption === 'cheaper' ? 'asc' : 'desc')
+            ->paginate(11);
         $allAds = Ad::with('skills', 'region', 'user.company')
             ->get();
         $countAds = Ad::count();
@@ -234,7 +257,8 @@ class PreviewList extends Component
         }
         $this->adRegionsWithCount = array_count_values($this->adRegions);
         $this->adSkillsWithCount = array_count_values($this->adSkills);
-
+        $this->selectedCategoryCount = count($this->selectedCategories);
+        $this->selectedRegionCount = count($this->selectedRegions);
         $agent = new Agent();
         if ($agent->isDesktop()) {
             $this->initializeSelectedAdProperties();
