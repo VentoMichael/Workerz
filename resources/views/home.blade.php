@@ -371,7 +371,12 @@
             <section x-show="activeTab === 'ads'"
                      class="section-tab-content hidden">
                 <h3 style="z-index: -10" class="text-transparent absolute">Most popular ads</h3>
-                @include('components.ad')
+                <div id="ads-section" role="list" class="flex md:grid md:grid-cols-500px flex-col gap-4">
+
+                <livewire:preview-list />
+                </div>
+
+
 
             </section>
 
