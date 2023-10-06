@@ -161,6 +161,9 @@ class PreviewList extends Component
                 });
             });
 
+        $this->resetPage();
+
+
         if ($sortingOption !== null) {
             $this->sortingOption = $sortingOption;
             $this->sortingOrder = $sortingOption;
@@ -179,7 +182,6 @@ class PreviewList extends Component
             return null;
         }
 
-        $this->resetPage();
 
         if ($agent->isDesktop()) {
             $this->selectedAd = $ads->first();

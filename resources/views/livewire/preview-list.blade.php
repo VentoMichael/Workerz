@@ -125,10 +125,29 @@
                      class="flex items-center justify-between">
                     <div class=" relative z-10 inline-block text-left">
                         <div>
+
                             <button @click="openFilter = !openFilter" type="button"
                                     class="filter_sort group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900"
                                     id="mobile-menu-button" aria-expanded="false" aria-haspopup="true">
                                 Sort
+
+                                @if($sortingOption === 'newest')
+                                    <span
+                                        class="ml-1.5 rounded py-1 px-1 bg-gray-200 text-xs font-semibold text-gray-700 tabular-nums">
+                                        <svg class="w-3 h-3 text-purple-600" aria-hidden="true"
+                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 14">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                  d="M5 1v12m0 0 4-4m-4 4L1 9"/>
+                                        </svg>
+                                    </span>
+                                @else
+                                    <span
+                                        class="ml-1.5 rounded py-1 px-1 bg-gray-200 text-xs font-semibold text-gray-700 tabular-nums">
+                                    <svg class="w-3 h-3 text-purple-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 18">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 7h9.231M1 11h9.231M13 2.086A5.95 5.95 0 0 0 9.615 1C5.877 1 2.846 4.582 2.846 9s3.031 8 6.769 8A5.94 5.94 0 0 0 13 15.916"/>
+                                    </svg>
+                                    </span>
+                                @endif
                                 <svg x-bind:class="{ 'rotate-0': !openFilter, '-rotate-180': openFilter }"
                                      class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
                                      xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -137,6 +156,7 @@
                                           d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                           clip-rule="evenodd"/>
                                 </svg>
+
                             </button>
                         </div>
                         <fieldset>
@@ -147,12 +167,12 @@
                                  tabindex="-1">
                                 <div class="py-1" role="none">
                                     <a wire:click="updFilters('cheaper')"
-                                       class="block px-4 py-2 text-sm font-medium text-gray-700"
+                                       class="cursor-pointer hover:bg-purple-50 @if($sortingOption === 'cheaper') bg-purple-50 @endif block px-4 py-2 text-sm font-medium text-gray-700"
                                        role="menuitem"
                                        tabindex="-1" id="mobile-menu-item-0"> Cheaper </a>
 
                                     <a wire:click="updFilters('newest')"
-                                       class="block px-4 py-2 text-sm font-medium text-gray-700"
+                                       class="cursor-pointer hover:bg-purple-50 @if($sortingOption === 'newest') bg-purple-50 @endif block px-4 py-2 text-sm font-medium text-gray-700"
                                        role="menuitem"
                                        tabindex="-1" id="mobile-menu-item-2"> Newest </a>
                                 </div>
@@ -178,7 +198,7 @@
 
                                     @if($selectedCategoryCount)
                                         <span
-                                            class="ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs font-semibold text-gray-700 tabular-nums">{{ $selectedCategoryCount }}</span>
+                                            class="ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs font-semibold text-purple-600 tabular-nums">{{ $selectedCategoryCount }}</span>
                                     @endif
                                     <svg x-bind:class="{ 'rotate-0': !openCategory, '-rotate-180': openCategory }"
                                          class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
@@ -224,7 +244,7 @@
                                     <span>Regions</span>
                                     @if($selectedRegionCount)
                                         <span
-                                            class="ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs font-semibold text-gray-700 tabular-nums">{{ $selectedRegionCount }}</span>
+                                            class="ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs font-semibold text-purple-600 tabular-nums">{{ $selectedRegionCount }}</span>
                                     @endif
                                     <svg x-bind:class="{ 'rotate-0': !openRegions, '-rotate-180': openRegions }"
                                          class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
@@ -271,14 +291,14 @@
             <div class="grid grid-cols-1 gap-2 md:max-w-7xl md:grid-flow-col-dense md:grid-cols-3 relative">
                 @if($agent->isMobile() && !$selectedAd || $agent->isDesktop())
                     <div
-                        class="max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1">
+                        class="sm:absolute inset-0 sm:overflow-y-auto sm:w-2/6 sm:max-h-screen overflow-y-hidden sm:overflow-y-auto space-y-6 md:col-start-1 sm:overflow-hidden p-1 pr-3">
                         @if ($ads->isEmpty())
                             <p>No ads found.</p>
                         @else
                             @foreach($ads as $ad)
                                 <div wire:click="showPreview({{ $ad->id }})" wire:key="{{ $ad->id }}">
                                     <section
-                                        class="cursor-pointer title-of-ad bg-white shadow sm:rounded-md block overflow-visible hover:bg-indigo-50 @if($selectedAd && $ad->id === $selectedAd->id) border-indigo-500 ring-2 ring-indigo-500 bg-indigo-100 @endif">
+                                        class="cursor-pointer title-of-ad shadow sm:rounded-md block overflow-visible hover:bg-indigo-50 @if($selectedAd && $ad->id === $selectedAd->id) border-indigo-500 ring-2 ring-indigo-500 bg-indigo-50 @else bg-white @endif">
                                         <div
                                             class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 md:grid-cols-1 lg:grid-cols-48-1">
 
