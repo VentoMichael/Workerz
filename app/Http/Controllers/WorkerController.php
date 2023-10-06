@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreWorkerRequest;
-use App\Http\Requests\UpdateWorkerRequest;
+use App\Models\Company;
 use App\Models\User;
-use App\Models\Worker;
 
 class WorkerController extends Controller
 {
@@ -17,7 +15,6 @@ class WorkerController extends Controller
         $workers = User::byRoleId(1)->with('company.skills','company.regions')->get();
         $userRegions = [];
         $userSkills = [];
-        $companySkills = [];
 
         foreach ($workers as $worker) {
             $companySkills = $worker->company->skills->pluck('name', 'id')->toArray();
@@ -29,52 +26,13 @@ class WorkerController extends Controller
         return view('workers.workers',compact('workers','userRegionsWithCount','userSkillsWithCount'));
 
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show( $worker)
     {
-        //
+
+        $worker = User::with('company.skills','company.regions','phoneNumbers')->whereHas('company', function ($query) use ($worker) {
+            $query->where('name', $worker);
+        })->first();
+        return view('workers.show', compact('worker'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreWorkerRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Worker $worker)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Worker $worker)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateWorkerRequest $request, Worker $worker)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Worker $worker)
-    {
-        //
-    }
 }

@@ -15,6 +15,11 @@ class Company extends Model
     protected $table = 'companies';
     protected $guarded;
 
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

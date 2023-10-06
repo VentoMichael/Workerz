@@ -18,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getRouteKeyName()
     {
-        return 'username';
+        return 'company.name';
     }
     public function scopeByRoleId($query, $roleId)
     {

@@ -9,34 +9,52 @@
 @endsection
 @section('content')
     <div class="min-h-full">
-
         <!-- Page header -->
         <div>
             <div>
                 <img class="h-32 w-full object-cover lg:h-48"
-                     src="https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-                     alt="">
+                     srcset="
+                                     @if (is_array($worker->company->backgroundUpload))
+                     @foreach($worker->company->backgroundUpload as $imagePath)
+                     {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                @endforeach
+                     @endif
+                         "
+                     src="{{ asset('storage/' . (is_array($worker->company->backgroundUpload) ? $worker->company->backgroundUpload[0] : $worker->company->backgroundUpload)) }}"
+                     alt="Logo of {{ $worker->company->name }}"/>
             </div>
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="-mt-12 sm:-mt-16 sm:flex sm:items-end sm:space-x-5">
                     <div class="flex">
-                        <img class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32"
-                             src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
-                             alt="">
+                        @if (is_string($worker->company->logoUpload) && strpos($worker->company->logoUpload, 'initials') !== false)
+                            <img
+                                class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32"
+                                src="{{ asset('storage/' . $worker->company->logoUpload . '.svg') }}"
+                                alt="Logo of {{ $worker->company->name }}"/>
+                        @else
+                            <img
+                                class="h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32"
+                                srcset="
+            @if (is_array($worker->company->logoUpload))
+                                @foreach($worker->company->logoUpload as $imagePath)
+                                {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                @endforeach
+                                @endif
+                                    "
+                                src="{{ asset('storage/' . (is_array($worker->company->logoUpload) ? $worker->company->logoUpload[0] : $worker->company->logoUpload)) }}"
+                                alt="Logo of {{ $worker->company->name }}"/>
+                        @endif
                     </div>
-
 
                     <div class="mt-4 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
                         <div class="sm:hidden md:block min-w-0 flex-1">
                             <div class="flex gap-4 items-center">
-                                <h1 class="text-2xl font-bold text-gray-900 truncate">Ricardo Cooper</h1></div>
+                                <h1 class="text-2xl font-bold text-gray-900 truncate">{{ $worker->company->name }}</h1></div>
                         </div>
-                        <!-- Following/follower count -->
 
                         <div class="flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
                             <button type="button"
                                     class="whitespace-nowrap inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700">
-                                <!-- Heroicon name: solid/mail -->
                                 <svg class="-ml-1 mr-2 h-5 w-5 text-white-400" xmlns="http://www.w3.org/2000/svg"
                                      viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
@@ -48,7 +66,7 @@
                     </div>
                 </div>
                 <div class="hidden sm:block md:hidden mt-6 min-w-0 flex-1">
-                    <h1 class="text-2xl font-bold text-gray-900 truncate">Ricardo Cooper</h1>
+                    <h1 class="text-2xl font-bold text-gray-900 truncate">{{ $worker->company->name }}</h1>
                 </div>
             </div>
         </div>
@@ -68,97 +86,29 @@
                             <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                                 <div class="sm:col-span-1">
                                     <dt class="text-sm font-medium text-gray-500">Email address</dt>
-                                    <dd class="mt-1 text-sm text-gray-900"><a href="mailto:ricardocooper@example.com"
-                                                                              class="font-medium text-blue-600 hover:text-blue-500">ricardocooper@example.com</a>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                        <a href="mailto:{{ $worker->email }}" class="font-medium text-blue-600 hover:text-blue-500">{{ $worker->email }}</a>
                                     </dd>
                                 </div>
                                 <div class="sm:col-span-1">
                                     <dt class="text-sm font-medium text-gray-500">Phone</dt>
-                                    <dd class="mt-1 text-sm text-gray-900"><a href="tel:+0494827265"
-                                                                              class="font-medium text-blue-600 hover:text-blue-500">0494/82.72.65</a>
+                                    <dd class="mt-1 text-sm text-gray-900">
+                                    @foreach($worker->phoneNumbers as $phoneNumber)
+                                        <a href="tel:{{$phoneNumber->number}}" class="font-medium text-blue-600 hover:text-blue-500">{{$phoneNumber->number}}</a>@if(!$loop->last),@endif
+                                    @endforeach
                                     </dd>
                                 </div>
                                 <div class="sm:col-span-2">
                                     <dt class="text-sm font-medium text-gray-500">Skills</dt>
-                                    <dd class="mt-1 text-sm text-gray-900 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                        Data science
-                                    </dd>
-                                    <dd class="mt-1 text-sm text-gray-900 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                        Data science
-                                    </dd>
-                                    <dd class="mt-1 text-sm text-gray-900 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                        Data science
-                                    </dd>
-
-                                    <dd class="mt-1 text-sm text-gray-900 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                        Data science
-                                    </dd>
-                                    <dd class="mt-1 text-sm text-gray-900 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                        Data science
-                                    </dd>
-                                    <dd class="mt-1 text-sm text-gray-900 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                        Data science
-                                    </dd>
-
-                                    <dd class="mt-1 text-sm text-gray-900 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                        Data science
-                                    </dd>
-                                    <dd class="mt-1 text-sm text-gray-900 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                        Data science
-                                    </dd>
-                                    <dd class="mt-1 text-sm text-gray-900 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
-                                        Data science
-                                    </dd>
+                                    @foreach($worker->company->skills as $skill)
+                                        <dd class="mt-1 text-sm text-gray-900 inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                                            {{ $skill->name }}
+                                        </dd>
+                                    @endforeach
                                 </div>
                                 <div class="sm:col-span-2">
                                     <dt class="text-sm font-medium text-gray-500">About</dt>
-                                    <dd class="mt-1 text-sm text-gray-900">Fugiat ipsum ipsum deserunt culpa aute sint
-                                        do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip
-                                        consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure
-                                        nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
-                                    </dd>
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <dt class="text-sm font-medium text-gray-500">Attachments</dt>
-                                    <dd class="mt-1 text-sm text-gray-900">
-                                        <ul role="list"
-                                            class="border border-gray-200 rounded-md divide-y divide-gray-200">
-                                            <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                                                <div class="w-0 flex-1 flex items-center">
-                                                    <!-- Heroicon name: solid/paper-clip -->
-                                                    <svg class="flex-shrink-0 h-5 w-5 text-gray-400"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                         fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd"
-                                                              d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                                                              clip-rule="evenodd"/>
-                                                    </svg>
-                                                    <span class="ml-2 flex-1 w-0 truncate"> resume_front_end_developer.pdf </span>
-                                                </div>
-                                                <div class="ml-4 flex-shrink-0">
-                                                    <a href="#" class="font-medium text-blue-600 hover:text-blue-500">
-                                                        Download </a>
-                                                </div>
-                                            </li>
-
-                                            <li class="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                                                <div class="w-0 flex-1 flex items-center">
-                                                    <!-- Heroicon name: solid/paper-clip -->
-                                                    <svg class="flex-shrink-0 h-5 w-5 text-gray-400"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                         fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd"
-                                                              d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z"
-                                                              clip-rule="evenodd"/>
-                                                    </svg>
-                                                    <span class="ml-2 flex-1 w-0 truncate"> coverletter_front_end_developer.pdf </span>
-                                                </div>
-                                                <div class="ml-4 flex-shrink-0">
-                                                    <a href="#" class="font-medium text-blue-600 hover:text-blue-500">
-                                                        Download </a>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                    <dd class="mt-1 text-sm text-gray-900">{{ $worker->company->about }}
                                     </dd>
                                 </div>
                             </dl>

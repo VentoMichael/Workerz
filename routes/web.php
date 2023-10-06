@@ -38,9 +38,7 @@ Route::get('/ads/details', function () {
 
 Route::get('/workers', [\App\Http\Controllers\WorkerController::class, 'index'])->name('workers');
 
-Route::get('/workers/{name}', function () {
-    return view('workers.show');
-})->name('workers.show');
+Route::get('/workers/{name}',[\App\Http\Controllers\WorkerController::class, 'show'])->name('workers.show');
 
 
 Route::get('/contact-us', function () {
