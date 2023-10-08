@@ -24,7 +24,7 @@ class WorkerController extends Controller
         $userRegionsWithCount = array_count_values($userRegions);
         $userSkillsWithCount = array_count_values($userSkills);
         return view('workers.workers', compact('workers', 'userRegionsWithCount', 'userSkillsWithCount'));
-
+        //TODO: reset filters after clicking on tabs
     }
 
     public function show($worker)

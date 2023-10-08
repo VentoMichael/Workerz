@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title', 'Hire [worker name] - Freelancer Profile')
+@section('title', 'Hire '. $worker->company->name .' - Freelancer Profile')
 @section('description', 'Find the perfect freelancer for your project. Discover the skills, portfolio, and experience of [worker name] on our platform. Contact [worker name] now to start your collaboration.')
 @section('keywords', 'freelancer, [worker name], portfolio, skills, experience, collaboration')
 @section('class-html', 'class="h-full bg-gray-100"')
@@ -48,8 +48,11 @@
 
                     <div class="mt-4 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
                         <div class="sm:hidden md:block min-w-0 flex-1">
-                            <div class="flex gap-4 items-center">
-                                <h1 class="text-2xl font-bold text-gray-900 truncate">{{ $worker->company->name }}</h1></div>
+                            <div class="flex gap-1 items-baseline">
+                                <h1 class="text-2xl font-bold text-gray-900 truncate">{{ $worker->company->name }}</h1>
+                                <p class="text-md text-gray-900">&bull; {{ $worker->company->jobTitle }}</p>
+                            </div>
+
                         </div>
 
                         <div class="flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
@@ -66,7 +69,7 @@
                     </div>
                 </div>
                 <div class="hidden sm:block md:hidden mt-6 min-w-0 flex-1">
-                    <h1 class="text-2xl font-bold text-gray-900 truncate">{{ $worker->company->name }}</h1>
+                    <h1 class="text-2xl font-bold text-gray-900">{{ $worker->company->name }}</h1>
                 </div>
             </div>
         </div>
@@ -90,6 +93,7 @@
                                         <a href="mailto:{{ $worker->email }}" class="font-medium text-blue-600 hover:text-blue-500">{{ $worker->email }}</a>
                                     </dd>
                                 </div>
+                                @if(count($worker->phoneNumbers))
                                 <div class="sm:col-span-1">
                                     <dt class="text-sm font-medium text-gray-500">Phone</dt>
                                     <dd class="mt-1 text-sm text-gray-900">
@@ -98,6 +102,8 @@
                                     @endforeach
                                     </dd>
                                 </div>
+                                @endif
+                                @if(count($worker->company->skills))
                                 <div class="sm:col-span-2">
                                     <dt class="text-sm font-medium text-gray-500">Skills</dt>
                                     @foreach($worker->company->skills as $skill)
@@ -106,6 +112,7 @@
                                         </dd>
                                     @endforeach
                                 </div>
+                                @endif
                                 <div class="sm:col-span-2">
                                     <dt class="text-sm font-medium text-gray-500">About</dt>
                                     <dd class="mt-1 text-sm text-gray-900">{{ $worker->company->about }}

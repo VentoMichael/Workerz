@@ -103,7 +103,9 @@ class PreviewListWorkers extends Component
 
     public function updFilters($sortingOption = null)
     {
-        $usersQuery = User::byRoleId(1)->with('company.skills','company.regions')
+        $usersQuery = User::byRoleId(1)->whereHas('subscriptions', function ($query) {
+            $query->where('stripe_status', 'active');
+        })->with('company.skills','company.regions')
             ->when(!empty($this->selectedCategories), function ($query) {
                 $query->whereHas('company.skills', function ($subQuery) {
                     $subQuery->whereIn('name', $this->selectedCategories);
@@ -155,7 +157,9 @@ class PreviewListWorkers extends Component
 
     public function render()
     {
-        $users = User::byRoleId(1)->with('company.skills','company.regions')
+        $users = User::byRoleId(1)->whereHas('subscriptions', function ($query) {
+            $query->where('stripe_status', 'active');
+        })->with('company.skills','company.regions')
             ->when(!empty($this->selectedCategories), function ($query) {
                 $query->whereHas('company.skills', function ($subQuery) {
                     $subQuery->whereIn('name', $this->selectedCategories);

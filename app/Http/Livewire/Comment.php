@@ -24,6 +24,9 @@ class Comment extends Component
     public $isUserVoted;
     public $commentVotesCount;
     public $userHasVoted;
+    public $successMessage;
+    public $clearProperty;
+    public $errorMessage;
     public $commentVotes = [];
 
     public function mount(Company $company, User $user)
@@ -33,10 +36,12 @@ class Comment extends Component
         $date = $user->created_at;
         $this->joinedAt = $date->format('F Y');
         $this->totalRating = number_format($this->company->comments->avg('rating'), 1);
+
+        $this->commentVotesCount = [];
+
         foreach ($this->company->comments as $comment) {
             $this->commentVotesCount[$comment->id] = $comment->votes->where('is_upvote', true)->count();
-            $this->userHasVoted = $comment->votes->where('is_upvote', true)->contains('user_id', $user->id);
-            $this->commentVotes[$comment->id] = $this->userHasVoted;
+            $this->userHasVoted[$comment->id] = $comment->votes->where('is_upvote', true)->contains('user_id', Auth::user()->id);
         }
     }
 
@@ -46,22 +51,26 @@ class Comment extends Component
             'commentText' => 'required',
             'rating' => 'required|integer|min:1|max:5',
         ]);
-
-        \App\Models\Comment::create([
-            'company_id' => $this->company->id,
-            'name' => $this->company->name ?: Auth::user()->firstname . ' ' . Auth::user()->lastname,
-            'comment_text' => $this->commentText,
-            'rating' => $this->rating,
-        ]);
-        $this->totalRating = number_format($this->company->comments->avg('rating'), 1);
-
-        $this->reset(['name', 'commentText', 'rating']);
+        try {
+            \App\Models\Comment::create([
+                'company_id' => $this->company->id,
+                'name' => $this->company->name ?: Auth::user()->firstname . ' ' . Auth::user()->lastname,
+                'comment_text' => $this->commentText,
+                'rating' => $this->rating,
+            ]);
+            $this->totalRating = number_format($this->company->comments->avg('rating'), 1);
+            $this->resetForm();
+            $this->clearProperty = 'successMessage';
+            $this->successMessage = 'Your comment has been posted successfully!';
+        } catch (Exception $e) {
+            $this->clearProperty = 'errorMessage';
+            $this->errorMessage = 'There is an error, please try again later.';
+        }
     }
 
     public function render()
     {
-        $comments = $this->company->comments()->orderBy('created_at','desc')->paginate(5);
-
+        $comments = $this->company->comments()->orderBy('created_at', 'desc')->paginate(3);
         return view('livewire.comment', compact('comments'));
     }
 
@@ -79,16 +88,14 @@ class Comment extends Component
                     $existingVote->is_upvote = !$existingVote->is_upvote;
                     $existingVote->save();
                     $this->commentVotesCount[$commentId] = $comment->votes->where('is_upvote', true)->count();
-                    $this->userHasVoted = $comment->votes->where('is_upvote', true)->contains('user_id', $user->id);
-                    $this->commentVotes[$comment->id] = $this->userHasVoted;
+                    $this->userHasVoted[$commentId] = $existingVote->is_upvote;
                 } else {
                     $comment->votes()->create([
                         'user_id' => $user->id,
                         'is_upvote' => true,
                     ]);
                     $this->commentVotesCount[$commentId] = $comment->votes->where('is_upvote', true)->count();
-                    $this->userHasVoted = $comment->votes->where('is_upvote', true)->contains('user_id', $user->id);
-                    $this->commentVotes[$comment->id] = $this->userHasVoted;
+                    $this->userHasVoted[$commentId] = true;
                 }
 
                 $comment->refresh();
@@ -96,6 +103,17 @@ class Comment extends Component
         }
     }
 
+    public function clearMessage($property)
+    {
+        $this->$property = null;
+    }
+
+    private function resetForm()
+    {
+        $this->name = '';
+        $this->commentText = '';
+        $this->rating = '';
+    }
 
     public function votesCount()
     {
