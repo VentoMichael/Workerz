@@ -24,6 +24,10 @@ module.exports = {
             },
             zIndex:{
                 '1':'1'
+            },
+            maxWidth:{
+                '25vw':'25vw',
+                '80vw':'80vw'
             }
         },
     },

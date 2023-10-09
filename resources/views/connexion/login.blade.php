@@ -1,7 +1,7 @@
 @extends('layouts.layout')
-@section('title', '')
-@section('description', '')
-@section('keywords', '')
+@section('title', 'Login')
+@section('description', 'Login to your account')
+@section('keywords', 'login, authentication')
 @section('class-html', 'class="h-full bg-white"')
 
 
@@ -11,7 +11,7 @@
         <div class="flex-1 flex flex-col justify-center py-40 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div class="mx-auto w-full max-w-sm lg:w-96">
                 <div>
-                    <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
+                    <h1 class="mt-6 text-3xl font-extrabold text-gray-900">Sign in to your account</h1>
                     <p class="mt-2 text-sm text-gray-600">
                         Or
                         <x-nav-link kind="secondary" href="{{route('sign-up.role')}}">create an account</x-nav-link>

@@ -22,8 +22,8 @@
 
                 <!-- Filters -->
                 <form class="mt-4">
-                    <section class="border-t border-gray-200 px-4 py-6">
-                        <h3 @click="openCategory = !openCategory" class="-mx-2 -my-3 flow-root">
+                    <div class="border-t border-gray-200 px-4 py-6">
+                        <p @click="openCategory = !openCategory" class="-mx-2 -my-3 flow-root">
                             <!-- Expand/collapse question button -->
                             <button type="button"
                                     class="button_filter_category px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400"
@@ -41,7 +41,7 @@
                                     </svg>
                                   </span>
                             </button>
-                        </h3>
+                        </p>
                         <div x-show="openCategory" class="content_filter_category pt-6" id="filter-section-0">
                             <div class="space-y-6">
 
@@ -63,10 +63,10 @@
                                 </fieldset>
                             </div>
                         </div>
-                    </section>
+                    </div>
 
-                    <section class="border-t border-gray-200 px-4 py-6">
-                        <h3 @click="openRegions = !openRegions" class="-mx-2 -my-3 flow-root">
+                    <div class="border-t border-gray-200 px-4 py-6">
+                        <p @click="openRegions = !openRegions" class="-mx-2 -my-3 flow-root">
                             <button type="button"
                                     class="filter_region px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400"
                                     aria-controls="filter-section-1" aria-expanded="false">
@@ -81,7 +81,7 @@
                     </svg>
                   </span>
                             </button>
-                        </h3>
+                        </p>
                         <div x-show="openRegions" class="content_filter_regions pt-6" id="filter-section-1">
                             <div class="space-y-6">
                                 <fieldset>
@@ -103,7 +103,7 @@
 
                             </div>
                         </div>
-                    </section>
+                    </div>
                 </form>
             </div>
         </div>
@@ -111,7 +111,7 @@
         <section class="max-w-7xl mx-auto px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
             @if($notHome)
                 <div class="py-16">
-                    <h2 class="text-4xl font-extrabold tracking-tight text-gray-900">Find the Right Job Today</h2>
+                    <h2 class="text-4xl font-extrabold tracking-tight text-gray-900">Find the right job today</h2>
                     <p class="mt-4 max-w-7xl mx-auto text-base text-gray-500">Explore a wide range of job opportunities
                         posted by
                         people and businesses in your area. Our platform makes it easy to discover and apply for jobs
@@ -120,8 +120,8 @@
                 </div>
 
             @endif
-            <section aria-labelledby="filter-heading" class="border-t border-gray-200 py-6">
-                <h3 id="filter-heading" class="sr-only">Product filters</h3>
+            <div aria-labelledby="filter-heading" class="border-t border-gray-200 py-6">
+                <p id="filter-heading" class="sr-only">Product filters</p>
 
                 <div x-data="{ openFilter: false, openCategory: false, openRegions: false }"
                      class="flex items-center justify-between">
@@ -285,7 +285,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </section>
     </div>
 
@@ -767,7 +767,7 @@
                                                              alt="Profile Picture of {{ $selectedAd->user->firstname . $selectedAd->user->lastname }}"/>
                                                     @endif
                                                     <span
-                                                        class="text-gray-700 leading-normal font-bold text-lg">{{ $selectedAd->user->company->name }}</span>
+                                                        class="text-gray-900 leading-normal font-bold text-lg">{{ $selectedAd->user->company->name }}</span>
                                                 </a>
                                                 <div class="flex flex-col flex-wrap mb-4">
                                                     <div class="mb-4 mt-4">

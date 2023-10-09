@@ -450,7 +450,8 @@
     </div>
 
     <div class="border-b border-gray-900/10 pb-12 mt-4">
-        <h2 class="text-base font-semibold leading-7 text-gray-900">Plans <span class="text-red-500">*</span></h2>
+        <div class="flex">
+        <h2 class="text-base font-semibold leading-7 text-gray-900">Plans</h2>  <span class="text-red-500">*</span></div>
         <p class="mt-1 text-sm mx-auto leading-6 text-gray-600">We'll always let you know about important
             changes, but you pick what else you want to hear about.</p>
 

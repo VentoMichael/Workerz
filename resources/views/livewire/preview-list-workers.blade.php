@@ -22,8 +22,8 @@
 
                 <!-- Filters -->
                 <form class="mt-4">
-                    <section class="border-t border-gray-200 px-4 py-6">
-                        <h3 @click="openCategory = !openCategory" class="-mx-2 -my-3 flow-root">
+                    <div class="border-t border-gray-200 px-4 py-6">
+                        <p @click="openCategory = !openCategory" class="-mx-2 -my-3 flow-root">
                             <!-- Expand/collapse question button -->
                             <button type="button"
                                     class="button_filter_category px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400"
@@ -41,7 +41,7 @@
                                     </svg>
                                   </span>
                             </button>
-                        </h3>
+                        </p>
                         <div x-show="openCategory" class="content_filter_category pt-6" id="filter-section-0">
                             <div class="space-y-6">
 
@@ -63,10 +63,10 @@
                                 </fieldset>
                             </div>
                         </div>
-                    </section>
+                    </div>
 
-                    <section class="border-t border-gray-200 px-4 py-6">
-                        <h3 @click="openRegions = !openRegions" class="-mx-2 -my-3 flow-root">
+                    <div class="border-t border-gray-200 px-4 py-6">
+                        <p @click="openRegions = !openRegions" class="-mx-2 -my-3 flow-root">
                             <button type="button"
                                     class="filter_region px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400"
                                     aria-controls="filter-section-1" aria-expanded="false">
@@ -81,7 +81,7 @@
                     </svg>
                   </span>
                             </button>
-                        </h3>
+                        </p>
                         <div x-show="openRegions" class="content_filter_regions pt-6" id="filter-section-1">
                             <div class="space-y-6">
                                 <fieldset>
@@ -103,7 +103,7 @@
 
                             </div>
                         </div>
-                    </section>
+                    </div>
                 </form>
             </div>
         </div>
@@ -111,7 +111,7 @@
         <section class="max-w-7xl mx-auto px-4 text-center sm:px-6 lg:max-w-7xl lg:px-8">
             @if($notHome)
                 <div class="py-16">
-                    <h2 class="text-4xl font-extrabold tracking-tight text-gray-900">Find the Right Job Today</h2>
+                    <h2 class="text-4xl font-extrabold tracking-tight text-gray-900">Find the right worker today</h2>
                     <p class="mt-4 max-w-7xl mx-auto text-base text-gray-500">Explore a wide range of job opportunities
                         posted by
                         people and businesses in your area. Our platform makes it easy to discover and apply for jobs
@@ -119,8 +119,8 @@
                         skills and interests.</p>
                 </div>
             @endif
-            <section aria-labelledby="filter-heading" class="border-t border-gray-200 py-6">
-                <h3 id="filter-heading" class="sr-only">Product filters</h3>
+            <div aria-labelledby="filter-heading" class="border-t border-gray-200 py-6">
+                <p id="filter-heading" class="sr-only">Product filters</p>
 
                 <div x-data="{ openFilter: false, openCategory: false, openRegions: false }"
                      class="flex items-center justify-between">
@@ -284,7 +284,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </section>
     </div>
     <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 ">
@@ -560,7 +560,7 @@
                             <a href="{{ route('workers.show',['name' => $user->company->name]) }}"
                                class="block hover:bg-indigo-50">
 
-                                <div class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 sm:grid-cols-48-1 relative">
+                                <section class="px-4 pt-4 sm:px-6 grid gap-4 grid-cols-1 sm:grid-cols-48-1 relative">
 
                                     <div class="flex-shrink-0 self-center">
                                         @if(!is_array($user->company->logoUpload) && strpos($user->company->logoUpload, 'initials') !== false)
@@ -577,26 +577,31 @@
                                                  alt="Profile Picture of {{ $user->firstname . $user->lastname }}"/>
                                         @endif
                                     </div>
-                                    <div class="flex justify-between flex-col w-full">
+                                    <div class="flex justify-between flex-col w-full gap-3 sm:gap-1">
 
-                                        <div class="flex items-center justify-between">
+                                        <div class="sm:flex sm:items-center sm:justify-between">
                                             <div>
 
                                                 <div
-                                                    class="flex text-sm sm:items-end sm:flex-row gap-1 items-end relative">
-                                                    <h4 class="text-xl font-medium text-indigo-600 truncate">{{ $user->company->jobTitle }}</h4>
+                                                    class="sm:max-w-25vw flex-col sm:flex-row vw flex text-sm sm:items-end sm:flex-row gap-1 sm:items-end relative">
+                                                    <h3 class="text-xl font-medium text-indigo-600 sm:truncate">{{ $user->company->jobTitle }}</h3>
+
                                                     <span
-                                                        class="sm:ml-1 flex-shrink-0 text-md font-normal text-gray-500">&bull; {{ $user->company->skill->name }}
+                                                        class="sm:ml-1 flex-shrink-0 text-md font-normal text-gray-500"><span
+                                                            class="sm:inline hidden">&bull;</span> {{ $user->company->skill->name }}
                             </span>
-                                                    <div class="absolute -top-2 -right-10 flex items-center">
-                                                        <svg class="w-4 h-4 text-yellow-300" aria-hidden="true"
-                                                             xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                             viewBox="0 0 22 20">
-                                                            <path
-                                                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                                                        </svg>
-                                                        <p class="ml-1 text-xs font-bold text-gray-900">4.95</p>
-                                                    </div>
+                                                    @if(count($user->company->comments))
+                                                        <div
+                                                            class="absolute sm:-top-2 -top-3 sm:-right-10 right-0 flex items-center">
+                                                            <svg class="w-4 h-4 text-yellow-300" aria-hidden="true"
+                                                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                                                 viewBox="0 0 22 20">
+                                                                <path
+                                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                                                            </svg>
+                                                            <p class="ml-1 text-xs font-bold text-gray-900">{{ number_format($user->company->comments->avg('rating')) }}</p>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -611,7 +616,8 @@
                                                         d="M10 8a3 3 0 100-6 3 3 0 000 6zM3.465 14.493a1.23 1.23 0 00.41 1.412A9.957 9.957 0 0010 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 00-13.074.003z"></path>
                                                 </svg>
                                                 <p class="flex items-center text-sm text-gray-500 sm:mt-0">
-                                                    {{ $user->firstname . ' ' . $user->lastname }} | {{ $user->company->name }}
+                                                    {{ $user->firstname . ' ' . $user->lastname }}
+                                                    | {{ $user->company->name }}
                                                 </p>
                                             </div>
                                             <div
@@ -631,7 +637,7 @@
 
                                         </div>
                                     </div>
-                                </div>
+                                </section>
 
                                 <div class="flex flex-col sm:pl-24 px-4 py-4 sm:px-6 flex gap-4">
                                     <p class="text-gray-500 truncate">{{ $user->company->about }}</p>

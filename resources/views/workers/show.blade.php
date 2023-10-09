@@ -131,7 +131,7 @@
 
             <section aria-labelledby="timeline-title" class="lg:col-start-3 lg:col-span-1">
                 <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
-                    <h2 id="timeline-title" class="text-lg font-medium text-gray-900">My realisations</h2>
+                    <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Realisations</h2>
 
                     <div>
                         <!-- Activity Feed -->

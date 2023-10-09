@@ -1,4 +1,5 @@
-<nav aria-label="Page navigation example">
+@if ($paginator->hasMorePages())
+    <nav aria-label="Page navigation example">
     <ul class="flex items-center -space-x-px h-8 text-sm">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
@@ -83,3 +84,4 @@
         @endif
     </ul>
 </nav>
+@endif

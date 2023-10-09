@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Reports;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Jenssegers\Agent\Agent;
 use Livewire\Component;
@@ -78,6 +79,7 @@ class PreviewListWorkers extends Component
     {
         $this->subject = '';
     }
+
     public function submitReport($userId)
     {
         $this->validate();
@@ -105,7 +107,7 @@ class PreviewListWorkers extends Component
     {
         $usersQuery = User::byRoleId(1)->whereHas('subscriptions', function ($query) {
             $query->where('stripe_status', 'active');
-        })->with('company.skills','company.regions')
+        })->with('company.skills', 'company.regions')
             ->when(!empty($this->selectedCategories), function ($query) {
                 $query->whereHas('company.skills', function ($subQuery) {
                     $subQuery->whereIn('name', $this->selectedCategories);
@@ -125,7 +127,11 @@ class PreviewListWorkers extends Component
         }
 
         if ($this->sortingOrder === 'popular') {
-            $usersQuery->orderBy('popular', 'asc');
+            $usersQuery->select('users.*', DB::raw('AVG(comments.rating) as avg_rating'))
+                ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+                ->leftJoin('comments', 'companies.id', '=', 'comments.company_id')
+                ->groupBy('users.id')
+                ->orderBy('avg_rating', 'desc');
         } else {
             $usersQuery->orderBy('created_at', 'desc');
         }
@@ -135,7 +141,6 @@ class PreviewListWorkers extends Component
         if ($users->isEmpty()) {
             return null;
         }
-//TODO:popular sorting not working
         $this->selectedCategoryCount = count($this->selectedCategories);
         $this->selectedRegionCount = count($this->selectedRegions);
 
@@ -157,23 +162,45 @@ class PreviewListWorkers extends Component
 
     public function render()
     {
-        $users = User::byRoleId(1)->whereHas('subscriptions', function ($query) {
-            $query->where('stripe_status', 'active');
-        })->with('company.skills','company.regions')
+        $query = User::byRoleId(1)
+            ->with('company.skills', 'company.regions')
+            ->whereHas('subscriptions', function ($query) {
+                $query->where('stripe_status', 'active');
+            })
             ->when(!empty($this->selectedCategories), function ($query) {
                 $query->whereHas('company.skills', function ($subQuery) {
                     $subQuery->whereIn('name', $this->selectedCategories);
                 });
-            })->when(!empty($this->selectedRegions), function ($query) {
+            })
+            ->when(!empty($this->selectedRegions), function ($query) {
                 $query->whereHas('company.regions', function ($subQuery) {
                     $subQuery->whereIn('name', $this->selectedRegions);
                 });
-            })
-            ->orderBy($this->sortingOption === 'cheaper' ? 'budget' : 'created_at', $this->sortingOption === 'cheaper' ? 'asc' : 'desc')
-            ->paginate(11);
-        $allUsers = User::with('company.skills', 'company.regions')
-            ->get();
+            });
+$orderBySubscription = "
+        CASE
+            WHEN (select name from subscriptions where user_id = users.id and stripe_status = 'active') = 'Business' THEN 1
+            WHEN (select name from subscriptions where user_id = users.id and stripe_status = 'active') = 'Premium' THEN 2
+            WHEN (select name from subscriptions where user_id = users.id and stripe_status = 'active') = 'Starter' THEN 3
+            ELSE 3
+        END
+    ";
+        if ($this->sortingOrder === 'popular') {
+            $query->select('users.*', DB::raw('AVG(comments.rating) as avg_rating'))
+                ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+                ->leftJoin('comments', 'companies.id', '=', 'comments.company_id')
+                ->groupBy('users.id')
+                ->orderBy('avg_rating', 'desc')
+                ->orderByRaw($orderBySubscription);
+        } else {
+            $query->orderByRaw($orderBySubscription)->orderBy('created_at', 'desc');
+        }
+
+        $users = $query->paginate(11);
+
+        $allUsers = User::with('company.skills', 'company.regions')->get();
         $countUsers = User::count();
+
         $this->userRegions = [];
         $this->userSkills = [];
 
@@ -189,13 +216,15 @@ class PreviewListWorkers extends Component
                 $this->image = $user->avatarUpload;
             }
         }
+
         $this->userRegionsWithCount = array_count_values($this->userRegions);
         $this->userSkillsWithCount = array_count_values($this->userSkills);
         $this->selectedCategoryCount = count($this->selectedCategories);
         $this->selectedRegionCount = count($this->selectedRegions);
         $agent = new Agent();
-        return view('livewire.preview-list-workers', compact('users', 'agent', 'countUsers')
-        );
+
+        return view('livewire.preview-list-workers', compact('users', 'agent', 'countUsers'));
+
     }
 
     public function paginationView()

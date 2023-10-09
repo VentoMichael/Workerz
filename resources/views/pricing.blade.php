@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('title', 'Pricing Plans for Freelancers')
 @section('description', 'Discover the perfect pricing plan for your needs and budget. Choose from our Basic, Premium, and Star plans to unlock exclusive features and benefits for freelancers.')
-@section('keywords', 'Workerz, pricing plans, Basic plan, Premium plan, Star plan, exclusive features, freelancers')
+@section('keywords', 'Workerz, pricing plans, Basic plan, Premium plan, Starter plan, exclusive features, freelancers')
 
 
 @section('content')
@@ -9,8 +9,8 @@
     <section class="bg-white">
         <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">Choose the Plan That Fits Your
-                    Needs</h2>
+                <h1 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">Choose the Plan That Fits Your
+                    Needs</h1>
                 <p class="mb-5 font-light text-gray-500 sm:text-xl">We offer flexible pricing plans designed to meet
                     your unique needs. Whether you're a freelancer looking to showcase your skills or a business owner
                     in need of top-notch talent, our plans provide a range of features and benefits to help you succeed.
@@ -30,7 +30,7 @@
                 @foreach($formattedProducts as $product)
                     <div class="@if(($loop->index === 1)) border-4 border-indigo-600 @endif justify-between flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow xl:p-8">
                         <div>
-                            <h3 class="mb-4 text-2xl font-semibold">{{ $product['product']['name'] }}</h3>
+                            <h2 class="mb-4 text-2xl font-semibold">{{ $product['product']['name'] }}</h2>
                             <p class="font-light text-gray-500 sm:text-lg">{{ $product['product']['description'] }}</p>
                             <div class="flex justify-center items-baseline my-8">
                 <span class="mr-2 text-5xl font-extrabold text_price" data-monthly="{{ $product['pricingPlans']['monthly']['amount'] }}"

@@ -23,7 +23,7 @@ class Comment extends Component
     public $isVoted;
     public $isUserVoted;
     public $commentVotesCount;
-    public $userHasVoted;
+    public $userHasVoted = [];
     public $successMessage;
     public $clearProperty;
     public $errorMessage;
@@ -35,13 +35,18 @@ class Comment extends Component
         $this->user = $user;
         $date = $user->created_at;
         $this->joinedAt = $date->format('F Y');
-        $this->totalRating = number_format($this->company->comments->avg('rating'), 1);
+        $this->totalRating = number_format($this->company->comments->avg('rating'));
 
         $this->commentVotesCount = [];
 
         foreach ($this->company->comments as $comment) {
             $this->commentVotesCount[$comment->id] = $comment->votes->where('is_upvote', true)->count();
-            $this->userHasVoted[$comment->id] = $comment->votes->where('is_upvote', true)->contains('user_id', Auth::user()->id);
+
+            if (Auth::check()) {
+                $this->userHasVoted[$comment->id] = $comment->votes->where('is_upvote', true)->contains('user_id', Auth::user()->id);
+            } else {
+                $this->userHasVoted[$comment->id] = false;
+            }
         }
     }
 
