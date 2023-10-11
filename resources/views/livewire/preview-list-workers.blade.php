@@ -592,7 +592,7 @@
                             </span>
                                                     @if(count($user->company->comments))
                                                         <div
-                                                            class="absolute sm:-top-2 -top-3 sm:-right-10 right-0 flex items-center">
+                                                            class="absolute sm:-top-2 -top-3 sm:-right-6 right-0 flex items-center">
                                                             <svg class="w-4 h-4 text-yellow-300" aria-hidden="true"
                                                                  xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                                  viewBox="0 0 22 20">

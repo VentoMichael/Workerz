@@ -38,7 +38,9 @@
             </button>
         </div>
     @endif
-    <section x-data="{ activeTab: 'workers' }">
+    <section  x-data="{ activeTab: 'workers' }" x-init="() => {
+    console.log('activeTab:', activeTab);
+    }" @keydown.window.escape="activeTab = 'workers'">
         <div class="pt-10 sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden bg-gray-900">
             <div class="mx-auto max-w-7xl lg:px-8">
                 <div class="lg:grid lg:grid-cols-2 lg:gap-8">
@@ -94,11 +96,11 @@
                 <div>
                     <div class="block" id="tabs-section">
                         <nav class="flex space-x-4 p-4 justify-center" aria-label="Tabs">
-                            <a x-on:click="activeTab = 'workers'"
+                            <a @click="activeTab = 'workers'"
                                x-bind:class="[activeTab === 'workers' ? 'bg-purple-600 text-white' : 'text-gray-600']"
                                data-tab="workers" aria-current="page"
                                class="tab-link text-gray-600 px-3 py-2 font-medium text-sm rounded-md border cursor-pointer">Workers</a>
-                            <a x-on:click="activeTab = 'ads'"
+                            <a @click="activeTab = 'ads'"
                                x-bind:class="[activeTab === 'ads' ? 'bg-purple-600 text-white' : 'text-gray-600']"
                                data-tab="ads"
                                class="tab-link text-gray-600 px-3 py-2 font-medium text-sm rounded-md border cursor-pointer">Ads</a>
@@ -106,7 +108,6 @@
 
                     </div>
                 </div>
-
 
             </section>
         </section>
@@ -119,7 +120,7 @@
                 </div>
             </section>
 
-            <section x-show="activeTab === 'ads'"
+            <section x-cloak x-show="activeTab === 'ads'"
                      class="section-tab-content ">
                 <h3 style="z-index: -10" class="text-transparent absolute">Most popular ads</h3>
                 <div id="ads-section" role="list" class="flex md:grid md:grid-cols-500px flex-col gap-4">
@@ -135,8 +136,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-
-    </script>
 @endsection
 

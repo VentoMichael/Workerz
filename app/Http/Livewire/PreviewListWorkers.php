@@ -199,7 +199,9 @@ $orderBySubscription = "
         $users = $query->paginate(11);
 
         $allUsers = User::with('company.skills', 'company.regions')->get();
-        $countUsers = User::count();
+        $countUsers = User::whereHas('subscriptions', function ($query) {
+            $query->where('stripe_status', 'active');
+        })->count();
 
         $this->userRegions = [];
         $this->userSkills = [];
