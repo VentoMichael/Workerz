@@ -56,11 +56,11 @@
                                     @foreach($adSkillsWithCount as $category => $count)
                                         <div class="flex items-center mt-0">
                                             <input wire:click="updFilters" wire:model="selectedCategories"
-                                                   id="filter-mobile-category-{{ $loop->index }}" name="category[]"
+                                                   id="filter-mobile-ad-category-{{ $loop->index }}" name="category[]"
                                                    value="{{ $category }}"
                                                    type="checkbox"
                                                    class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-mobile-category-{{ $loop->index }}"
+                                            <label for="filter-mobile-ad-category-{{ $loop->index }}"
                                                    class="ml-3 text-sm font-medium text-gray-700">
                                                 {{ $category }} ({{ $count }})</label>
                                         </div>
@@ -102,11 +102,11 @@
                                     @foreach($adRegionsWithCount as $region => $count)
                                         <div class="flex items-center mt-0">
                                             <input wire:click="updFilters" wire:model="selectedRegions"
-                                                   id="filter-mobile-region-{{ $loop->index }}" name="region[]"
+                                                   id="filter-mobile-ad-region-{{ $loop->index }}" name="region[]"
                                                    value="{{$region}}"
                                                    type="checkbox"
                                                    class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                            <label for="filter-mobile-region-{{ $loop->index }}"
+                                            <label for="filter-mobile-ad-region-{{ $loop->index }}"
                                                    class="ml-3 text-sm font-medium text-gray-700">
                                                 {{ $region }} ({{ $count }})</label>
                                         </div>
@@ -246,11 +246,11 @@
                                         @foreach($adSkillsWithCount as $category => $count)
                                             <div class="flex items-center mt-0">
                                                 <input wire:click="updFilters" wire:model="selectedCategories"
-                                                       id="filter-category-{{ $loop->index }}" name="category[]"
+                                                       id="filter-category-ad-{{ $loop->index }}" name="category[]"
                                                        value="{{ $category }}"
                                                        type="checkbox"
                                                        class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                                <label for="filter-category-{{ $loop->index }}"
+                                                <label for="filter-category-ad-{{ $loop->index }}"
                                                        class="ml-3 text-sm font-medium text-gray-700">
                                                     {{ $category }} ({{ $count }})</label>
                                             </div>
@@ -290,11 +290,11 @@
                                         @foreach($adRegionsWithCount as $region => $count)
                                             <div class="flex items-center mt-0">
                                                 <input wire:click="updFilters" wire:model="selectedRegions"
-                                                       id="filter-region-{{ $loop->index }}" name="region[]"
+                                                       id="filter-region-ad-{{ $loop->index }}" name="region[]"
                                                        value="{{$region}}"
                                                        type="checkbox"
                                                        class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500">
-                                                <label for="filter-region-{{ $loop->index }}"
+                                                <label for="filter-region-ad-{{ $loop->index }}"
                                                        class="ml-3 pr-6 text-sm font-medium text-gray-700">
                                                     {{ $region }} ({{ $count }})</label>
                                             </div>
@@ -309,7 +309,7 @@
         </section>
     </div>
 
-    <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4 ">
+    <div class="max-w-7xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 mx-auto my-4" wire:loading.class="opacity-60">
 
         <section>
             <p class="text-xs mb-2">About {{ $countAds }} result{{ $countAds > 1 ? 's': '' }}</p>

@@ -6,6 +6,7 @@ use App\Models\Ad;
 use App\Models\Reports;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Jenssegers\Agent\Agent;
 use Livewire\Component;
@@ -91,20 +92,13 @@ class PreviewList extends Component
     {
         $agent = new Agent();
         if ($agent->isDesktop()) {
-            $this->selectedAd = Ad::with(['skills', 'region', 'user.company'])
-                ->when($this->selectedCategories, function ($query) {
-                    $query->whereHas('skills', function ($subQuery) {
-                        $subQuery->whereIn('name', $this->selectedCategories);
-                    });
-                })
-                ->when($this->selectedRegions, function ($query) {
-                    $query->whereHas('region', function ($subQuery) {
-                        $subQuery->whereIn('name', $this->selectedRegions);
-                    });
-                })
-                ->orderBy($this->sortingOption === 'cheaper' ? 'budget' : 'posted_at', $this->sortingOption === 'cheaper' ? 'asc' : 'desc')
+            $adsPerPage = 11;
+            $offset = (request()->input('page') - 1) * $adsPerPage;
+            $this->selectedAd = Ad::orderBy($this->sortingOption === 'cheaper' ? 'budget' : 'posted_at', $this->sortingOption === 'cheaper' ? 'asc' : 'desc')
+                ->skip($offset)
+                ->take(1)
                 ->get()
-            ->first();
+                ->first();
             $this->initializeSelectedAdProperties();
         }
         $this->subject = '';
@@ -191,6 +185,7 @@ class PreviewList extends Component
         $this->selectedCategoryCount = count($this->selectedCategories);
         $this->selectedRegionCount = count($this->selectedRegions);
 
+        sleep(.9);
 
         return $ads;
     }
@@ -215,7 +210,7 @@ class PreviewList extends Component
 
     public function render()
     {
-        $ads = Ad::with(['skills', 'region', 'user.company'])
+        $query = Ad::with(['skills', 'region', 'user.company'])
             ->when($this->selectedCategories, function ($query) {
                 $query->whereHas('skills', function ($subQuery) {
                     $subQuery->whereIn('name', $this->selectedCategories);
@@ -226,14 +221,20 @@ class PreviewList extends Component
                     $subQuery->whereIn('name', $this->selectedRegions);
                 });
             })
-            ->orderBy($this->sortingOption === 'cheaper' ? 'budget' : 'posted_at', $this->sortingOption === 'cheaper' ? 'asc' : 'desc')
-            ->paginate(11);
+            ->orderBy($this->sortingOption === 'cheaper' ? 'budget' : 'posted_at', $this->sortingOption === 'cheaper' ? 'asc' : 'desc');
+
+        if ($this->sortingOrder === 'cheaper') {
+            $query->orderBy('budget');
+        } else {
+            $query->orderBy('posted_at', 'desc');
+        }
+        $countAds = $query->count();
+        $ads = $query->paginate(11);
+
         $allAds = Ad::with('skills', 'region', 'user.company')
             ->get();
-        $countAds = Ad::count();
         $this->adRegions = [];
         $this->adSkills = [];
-
         foreach ($allAds as $allAd) {
             $this->adRegions[] = $allAd->region->name;
             $this->adSkills = array_merge($this->adSkills, $allAd->skills->pluck('name', 'id')->toArray());

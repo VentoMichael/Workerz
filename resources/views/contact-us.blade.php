@@ -92,6 +92,8 @@
                         </div>
                         <div class="p-6 bg-blue-gray-50 rounded-bl-2xl rounded-br-2xl md:px-8">
                             <a href="?subject=Partnership%20opportunities#form"
+                               x-data="{ preventReload: false }"
+                               x-on:click.prevent="if (!preventReload) { window.location.href = '?subject=Partnership%20opportunities#form'; }"
                                class="text-base font-medium text-indigo-600 hover:text-indigo-800">Contact us<span
                                     aria-hidden="true"> &rarr;</span></a>
                         </div>

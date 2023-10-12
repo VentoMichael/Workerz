@@ -105,6 +105,7 @@ class PreviewListWorkers extends Component
 
     public function updFilters($sortingOption = null)
     {
+
         $usersQuery = User::byRoleId(1)->whereHas('subscriptions', function ($query) {
             $query->where('stripe_status', 'active');
         })->with('company.skills', 'company.regions')
@@ -144,6 +145,7 @@ class PreviewListWorkers extends Component
         $this->selectedCategoryCount = count($this->selectedCategories);
         $this->selectedRegionCount = count($this->selectedRegions);
 
+        sleep(.9);
 
         return $users;
     }
@@ -195,13 +197,12 @@ $orderBySubscription = "
         } else {
             $query->orderByRaw($orderBySubscription)->orderBy('created_at', 'desc');
         }
+        $countUsers = $query->count();
 
         $users = $query->paginate(11);
 
         $allUsers = User::with('company.skills', 'company.regions')->get();
-        $countUsers = User::whereHas('subscriptions', function ($query) {
-            $query->where('stripe_status', 'active');
-        })->count();
+
 
         $this->userRegions = [];
         $this->userSkills = [];
