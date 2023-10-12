@@ -13,6 +13,7 @@
 @endsection
 @section('scripts')
 
+            <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
 
     <script>
         function copyUrl(url) {

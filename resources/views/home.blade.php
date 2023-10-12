@@ -38,7 +38,7 @@
             </button>
         </div>
     @endif
-    <section  x-data="{ activeTab: 'workers' }" x-init="() => {
+    <section x-data="{ activeTab: 'workers' }" x-init="() => {
     console.log('activeTab:', activeTab);
     }" @keydown.window.escape="activeTab = 'workers'">
         <div class="pt-10 sm:pt-16 lg:pt-8 lg:pb-14 lg:overflow-hidden bg-gray-900">

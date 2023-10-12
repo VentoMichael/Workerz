@@ -27,7 +27,7 @@ module.exports = {
             },
             maxWidth:{
                 '25vw':'25vw',
-                '80vw':'80vw'
+                '80vw':'80vw',
             }
         },
     },

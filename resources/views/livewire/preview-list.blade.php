@@ -7,11 +7,11 @@
             <div
                 class="ml-auto relative max-w-xs w-full h-full bg-white shadow-xl py-4 pb-6 flex flex-col overflow-y-auto">
                 <div class="px-4 flex items-center justify-between">
-                    <h2 class="text-lg font-medium text-gray-900">Filters</h2>
+                    <h2 class="text-lg font-medium text-gray-900">Filters
+                    </h2>
                     <button @click="openFilterMobile = false" type="button"
-                            class="button_filter_mobile mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            class="button_filter_mobile -mr-2 sm:mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         <span class="sr-only">Close menu</span>
-                        <!-- Heroicon name: outline/x -->
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -20,15 +20,18 @@
                     </button>
                 </div>
 
-                <!-- Filters -->
                 <form class="mt-4">
                     <div class="border-t border-gray-200 px-4 py-6">
                         <p @click="openCategory = !openCategory" class="-mx-2 -my-3 flow-root">
-                            <!-- Expand/collapse question button -->
                             <button type="button"
                                     class="button_filter_category px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400"
                                     aria-controls="filter-section-0" aria-expanded="false">
-                                <span class="font-medium text-gray-900"> Category </span>
+                                <span class="font-medium text-gray-900"> Category
+                                @if($selectedCategoryCount)
+                                        <span
+                                            class="ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs font-semibold text-purple-600 tabular-nums">{{ $selectedCategoryCount }}</span>
+                                    @endif
+                                </span>
                                 <span class="ml-6 flex items-center">
                                     <svg x-bind:class="{ 'rotate-0': !openCategory, 'rotate-180': openCategory }"
                                          class="chevron_category rotate-0 h-5 w-5 transform"
@@ -47,7 +50,9 @@
 
                                 <fieldset>
 
-                                    <legend class="sr-only">Category</legend>
+                                    <legend class="sr-only">Category
+
+                                    </legend>
                                     @foreach($adSkillsWithCount as $category => $count)
                                         <div class="flex items-center mt-0">
                                             <input wire:click="updFilters" wire:model="selectedCategories"
@@ -60,6 +65,7 @@
                                                 {{ $category }} ({{ $count }})</label>
                                         </div>
                                     @endforeach
+
                                 </fieldset>
                             </div>
                         </div>
@@ -70,7 +76,12 @@
                             <button type="button"
                                     class="filter_region px-2 py-3 bg-white w-full flex items-center justify-between text-sm text-gray-400"
                                     aria-controls="filter-section-1" aria-expanded="false">
-                                <span class="font-medium text-gray-900"> Region </span>
+                                <span class="font-medium text-gray-900"> Region
+                                    @if($selectedRegionCount)
+                                        <span
+                                            class="ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs font-semibold text-purple-600 tabular-nums">{{ $selectedRegionCount }}</span>
+                                    @endif
+                                </span>
                                 <span class="ml-6 flex items-center">
                     <svg class="chevron_region rotate-0 h-5 w-5 transform" xmlns="http://www.w3.org/2000/svg"
                          viewBox="0 0 20 20"
@@ -86,7 +97,8 @@
                             <div class="space-y-6">
                                 <fieldset>
 
-                                    <legend class="sr-only">Region</legend>
+                                    <legend class="sr-only">Region
+                                    </legend>
                                     @foreach($adRegionsWithCount as $region => $count)
                                         <div class="flex items-center mt-0">
                                             <input wire:click="updFilters" wire:model="selectedRegions"
@@ -99,6 +111,7 @@
                                                 {{ $region }} ({{ $count }})</label>
                                         </div>
                                     @endforeach
+
                                 </fieldset>
 
                             </div>
@@ -123,8 +136,12 @@
             <div aria-labelledby="filter-heading" class="border-t border-gray-200 py-6">
                 <p id="filter-heading" class="sr-only">Product filters</p>
 
-                <div x-data="{ openFilter: false, openCategory: false, openRegions: false }"
-                     class="flex items-center justify-between">
+                <div
+                    x-data="{ isFixed: false, divOffset: null, openFilter: false, openCategory: false, openRegions: false }"
+                    x-init="divOffset = $el.offsetTop, divHeight = $el.offsetHeight"
+                    x-on:scroll.window="isFixed = (window.scrollY >= divOffset - divHeight)"
+                    x-bind:class="{ 'fixed py-6 top-0 px-4 sm:px-6 left-0 w-full z-20 bg-gray-50': isFixed && window.innerWidth <= 1024 }"
+                    class="flex items-center justify-between">
                     <div class=" relative z-10 inline-block text-left">
                         <div>
 
@@ -189,7 +206,10 @@
 
                     <button @click="openFilterMobile = true" type="button"
                             class="inline-block text-sm font-medium text-gray-700 hover:text-gray-900 sm:hidden">
-                        Filters
+                        Filters @if($selectedCategoryCount || $selectedRegionCount)
+                            <span
+                                class="ml-1.5 rounded py-0.5 px-1.5 bg-gray-200 text-xs font-semibold text-purple-600 tabular-nums">{{ $selectedCategoryCount + $selectedRegionCount }}</span>
+                        @endif
                     </button>
 
                     <div x-data="{ openCategory: false, openRegions: false }"

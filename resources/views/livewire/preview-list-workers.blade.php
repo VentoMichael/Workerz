@@ -9,7 +9,7 @@
                 <div class="px-4 flex items-center justify-between">
                     <h2 class="text-lg font-medium text-gray-900">Filters</h2>
                     <button @click="openFilterMobile = false" type="button"
-                            class="button_filter_mobile mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            class="button_filter_mobile -mr-2 sm:mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         <span class="sr-only">Close menu</span>
                         <!-- Heroicon name: outline/x -->
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -119,10 +119,14 @@
                         skills and interests.</p>
                 </div>
             @endif
-            <div aria-labelledby="filter-heading" class="border-t border-gray-200 py-6">
+            <div class="border-t border-gray-200 py-6" style="height:73px;">
                 <p id="filter-heading" class="sr-only">Product filters</p>
 
-                <div x-data="{ openFilter: false, openCategory: false, openRegions: false }"
+                <div x-data="{ isFixed: false, divOffset: null, openFilter: false, openCategory: false, openRegions: false }"
+                     x-init="divOffset = $el.offsetTop, divHeight = $el.offsetHeight"
+                     x-on:scroll.window="isFixed = (window.scrollY >= divOffset - divHeight)"
+                     x-bind:class="{ 'fixed py-6 top-0 px-4 sm:px-6 left-0 w-full z-20 bg-gray-50': isFixed && window.innerWidth <= 1024 }"
+                     aria-labelledby="filter-heading"
                      class="flex items-center justify-between">
                     <div class=" relative z-10 inline-block text-left">
                         <div>
