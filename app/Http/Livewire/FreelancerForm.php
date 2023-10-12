@@ -9,6 +9,7 @@ use App\Models\Region;
 use App\Models\Role;
 use App\Models\Skill;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -31,6 +32,8 @@ class FreelancerForm extends Component
     public $showPhoneNumber3 = false;
     public $backgroundUpload;
     public $firstname;
+    public $tempUrlCover;
+    public $tempUrlLogo;
     public $lastname;
     public $jobTitle;
     public $mainSkill;
@@ -80,6 +83,20 @@ class FreelancerForm extends Component
 
     ];
 
+    public function updatedBackgroundUpload(){
+        try{
+            $this->tempUrlCover = $this->backgroundUpload->temporaryUrl();
+        }catch(Exception $e){
+            $this->tempUrlCover = '';
+        }
+    }
+    public function updatedLogoUpload(){
+        try{
+            $this->tempUrlLogo = $this->logoUpload->temporaryUrl();
+        }catch(Exception $e){
+            $this->tempUrlLogo = '';
+        }
+    }
 //TODO:doesn't redirect to the error if there is error
     public function mount()
     {
