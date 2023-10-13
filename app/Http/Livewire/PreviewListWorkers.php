@@ -187,21 +187,22 @@ $orderBySubscription = "
             ELSE 3
         END
     ";
-        if ($this->sortingOrder === 'popular') {
-            $query->select('users.*', DB::raw('AVG(comments.rating) as avg_rating'))
-                ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
-                ->leftJoin('comments', 'companies.id', '=', 'comments.company_id')
-                ->groupBy('users.id')
-                ->orderBy('avg_rating', 'desc')
-                ->orderByRaw($orderBySubscription);
-        } else {
-            $query->orderByRaw($orderBySubscription)->orderBy('created_at', 'desc');
-        }
         $countUsers = $query->count();
-
-        $users = $query->paginate(11);
-
         $allUsers = User::with('company.skills', 'company.regions')->get();
+        if ($allUsers) {
+            if ($this->sortingOrder === 'popular') {
+                $query->select('users.*', DB::raw('AVG(comments.rating) as avg_rating'))
+                    ->leftJoin('companies', 'users.id', '=', 'companies.user_id')
+                    ->leftJoin('comments', 'companies.id', '=', 'comments.company_id')
+                    ->groupBy('users.id')
+                    ->orderBy('avg_rating', 'desc')
+                    ->orderByRaw($orderBySubscription);
+            } else {
+                $query->orderByRaw($orderBySubscription)->orderBy('created_at', 'desc');
+            }
+
+            $users = $query->paginate(11);
+        }
 
 
         $this->userRegions = [];

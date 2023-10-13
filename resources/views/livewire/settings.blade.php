@@ -1,21 +1,21 @@
 <div x-data="{ showMessage: @if($successMessage || $errorMessage || $infoMessage) true @else false @endif }">
     @if($successMessage)
-        <div x-show="showMessage" >
+        <div x-show="showMessage">
             @include('components.success-message', ['message' => $successMessage,'clearProperty' => 'successMessage'])
         </div>
     @endif
-        @if($errorMessage)
-            <div x-show="showMessage">
-                @include('components.error-message', ['message' => $errorMessage,'clearProperty' => 'errorMessage'])
-            </div>
-        @endif
-        @if($infoMessage)
-            <div x-show="showMessage" >
-                @include('components.info-message', ['message' => $infoMessage,'clearProperty' => 'infoMessage'])
-            </div>
-        @endif
-</div>
-    <!-- Profile section -->
+
+    @if($errorMessage)
+        <div x-show="showMessage">
+            @include('components.error-message', ['message' => $errorMessage,'clearProperty' => 'errorMessage'])
+        </div>
+    @endif
+    @if($infoMessage)
+        <div x-show="showMessage">
+            @include('components.info-message', ['message' => $infoMessage,'clearProperty' => 'infoMessage'])
+        </div>
+    @endif
+<!-- Profile section -->
 
     <section class="mt-6" aria-labelledby="payment-details-heading">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
@@ -102,7 +102,8 @@
                                 </div>
                                 <!-- Delete Button -->
 
-                                <x-button onclick="Livewire.dispatch('openModal', { component: 'confirm-delete' })" kind="danger"
+                                <x-button onclick="Livewire.dispatch('openModal', { component: 'confirm-delete' })"
+                                          kind="danger"
                                           class="disabled:opacity-50" wire:loading.attr="disabled"
                                           wire:target="deleteAccount" wire:click="deleteBtn">
                                     Delete
@@ -144,6 +145,8 @@
             </div>
         </div>
     </section>
+</div>
+
 @section('scripts')
 
     @livewire('wire-elements-modal')

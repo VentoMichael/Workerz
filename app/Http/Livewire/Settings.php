@@ -72,12 +72,10 @@ class Settings extends Component
                 $this->infoMessage = null;
                 $this->clearProperty = 'successMessage';
                 $this->changesMade = false;
-            } else {
-                if (!$this->deleteActivation) {
-                    $this->successMessage = null;
-                    $this->clearProperty = 'infoMessage';
-                    $this->infoMessage = 'No changes made to update.';
-                }
+            } else if (!$this->deleteActivation) {
+                $this->successMessage = null;
+                $this->clearProperty = 'infoMessage';
+                $this->infoMessage = 'No changes made to update.';
             }
             $this->changesMade = false;
         } catch (Exception $e) {

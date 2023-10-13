@@ -99,7 +99,9 @@ class PreviewList extends Component
                 ->take(1)
                 ->get()
                 ->first();
-            $this->initializeSelectedAdProperties();
+            if ($this->selectedAd) {
+                $this->initializeSelectedAdProperties();
+            }
         }
         $this->subject = '';
     }
@@ -265,7 +267,9 @@ class PreviewList extends Component
         $this->selectedRegionCount = count($this->selectedRegions);
         $agent = new Agent();
         if ($agent->isDesktop()) {
-            $this->initializeSelectedAdProperties();
+            if (!$ads->isEmpty()) {
+                $this->initializeSelectedAdProperties();
+            }
         }
         return view('livewire.preview-list', compact('ads', 'agent', 'countAds')
         );
