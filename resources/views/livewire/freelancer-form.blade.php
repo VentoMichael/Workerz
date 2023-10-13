@@ -77,9 +77,8 @@
                                 <input wire:model.blur="logoUpload" type='file' class="hidden"/>
                             </label>
                         </div>
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or
-                            GIF
-                            (MAX. 800x400px).</p>
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPEG or
+                            WEBP up to 1MB.</p>
                         @error('logoUpload')
                         <p class="text-red-500 mt-1">{{ $message }}</p>
                         @enderror
@@ -124,7 +123,8 @@
                             </label>
                             <p class="pl-1">or drag and drop</p>
                         </div>
-                        <p class="text-xs leading-5 text-gray-600">PNG, JPG up to 5MB</p>
+                        <p class="text-xs leading-5 text-gray-600">SVG, PNG, JPEG or
+                            WEBP up to 3MB</p>
                     </div>
                 </div>
                 @error('backgroundUpload')

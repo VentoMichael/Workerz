@@ -8,33 +8,47 @@
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div class="sm:col-span-full">
                     <div class="col-span-full">
+                        <label for="photo" class="block text-sm font-medium leading-6 text-gray-900">Photo</label>
+                        <div class="mt-2 flex gap-x-3 flex-col">
+                            <div class="relative">
+                                @if($avatarUpload && $tempUrlAvatar !== '' && isset($tempUrlAvatar))
 
-                        <label class="block text-sm font-medium leading-6" for="avatarUpload">Upload
-                            file</label>
-                        <div class="relative">
-                            @if ($avatarUpload)
-                                <button wire:click.lazy="$set('avatarUpload',null)" type="button"
-                                        class="inset-y-1/2 mt-[-16px] right-3 absolute ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
-                                        data-dismiss-target="#alert-3" aria-label="Close">
-                                    <span class="sr-only">Close</span>
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                         fill="none"
-                                         viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                              stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                    <button wire:click.lazy="$set('tempUrlAvatar',null)" type="button"
+                                            class="inset-y-1/2 -mt-1 -left-1 absolute mr-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
+                                            data-dismiss-target="#alert-3" aria-label="Close">
+                                        <span class="sr-only">Close</span>
+                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                             fill="none"
+                                             viewBox="0 0 14 14">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                  stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                        </svg>
+                                    </button>
+                                @endif
+                            </div>
+                            <div class="flex gap-3 items-end mb-2">
+                                @if($avatarUpload && $tempUrlAvatar !== '' && isset($tempUrlAvatar))
+                                    <img class="h-20 w-20 text-gray-300 rounded-full" src="{{$tempUrlAvatar}}" alt="">
+                                @else
+                                    <svg class="h-20 w-20 text-gray-300" viewBox="0 0 24 24" fill="currentColor"
+                                         aria-hidden="true">
+                                        <path fill-rule="evenodd"
+                                              d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                                              clip-rule="evenodd"/>
                                     </svg>
-                                </button>
-                            @endif
-                            <input wire:model.blur="avatarUpload"
-                                   class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-white focus:outline-none"
-                                   aria-describedby="avatarUpload" id="avatarUpload" type="file">
+                                @endif
+                                <label class="cursor-pointer">
+                            <span
+                                class="text-sm whitespace-nowrap inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-2.5 py-1.5 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700">Select Avatar</span>
+                                    <input wire:model.blur="avatarUpload" type='file' class="hidden"/>
+                                </label>
+                            </div>
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPEG or
+                                WEBP up to 1MB.</p>
+                            @error('avatarUpload')
+                            <p class="text-red-500 mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or
-                            GIF
-                            (MAX. 800x400px).</p>
-                        @error('avatarUpload')
-                        <p class="text-red-500 mt-1">{{ $message }}</p>
-                        @enderror
                     </div>
 
                 </div>

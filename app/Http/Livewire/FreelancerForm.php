@@ -66,7 +66,7 @@ class FreelancerForm extends Component
         'name' => 'required|unique:companies',
         'about' => 'required|min:10',
         'logoUpload' => 'nullable|image|mimes:jpeg,png,svg,webp|max:1024',
-        'backgroundUpload' => 'nullable|image|mimes:jpeg,png,svg,webp|max:1024',
+        'backgroundUpload' => 'nullable|image|mimes:jpeg,png,svg,webp|max:3072',
         'firstname' => 'required',
         'lastname' => 'required',
         'email' => 'required|email|unique:users',

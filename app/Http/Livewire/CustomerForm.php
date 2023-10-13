@@ -7,6 +7,7 @@ use App\Models\Region;
 use App\Models\Role;
 use App\Models\Skill;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -25,6 +26,7 @@ class CustomerForm extends Component
     public $showPhoneNumber2 = false;
     public $showPhoneNumber3 = false;
     public $backgroundUpload;
+    public $tempUrlAvatar;
     public $firstname;
     public $lastname;
     public $email;
@@ -81,11 +83,21 @@ class CustomerForm extends Component
         }
     }
 
+    public function updatedAvatarUpload()
+    {
+        try {
+            $this->tempUrlAvatar = $this->avatarUpload->temporaryUrl();
+        } catch (Exception $e) {
+            $this->tempUrlAvatar = '';
+        }
+    }
+
     public function removePhoneNumber2()
     {
         $this->phoneNumber2 = null;
         $this->showPhoneNumber2 = false;
     }
+
     public function removePhoneNumber3()
     {
         $this->phoneNumber3 = null;
@@ -105,6 +117,7 @@ class CustomerForm extends Component
             $this->filteredRegions = $this->regions;
         }
     }
+
     public function removeRegion($regionId)
     {
         if (($key = array_search($regionId, $this->selectedRegions)) !== false) {
@@ -143,8 +156,6 @@ class CustomerForm extends Component
     }
 
 
-
-
     public function updated($property)
     {
         $this->validateOnly($property);
@@ -156,6 +167,7 @@ class CustomerForm extends Component
     {
         $this->passwordVisible = !$this->passwordVisible;
     }
+
     public function getSelectedRegionNames()
     {
         return collect($this->regions)->filter(function ($region) {
@@ -179,6 +191,7 @@ class CustomerForm extends Component
         $regions = Region::whereIn('name', $selectedRegionNames)->get();
         $user->regions()->sync($regions);
     }
+
     public function submitForm()
     {
         $this->validate();
@@ -187,7 +200,7 @@ class CustomerForm extends Component
             'lastname' => ucfirst($this->lastname),
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'avatarUpload' => $this->processAndStoreImage($this->avatarUpload, 'avatars', $this->firstname . "_" .$this->lastname, true),
+            'avatarUpload' => $this->processAndStoreImage($this->avatarUpload, 'avatars', $this->firstname . "_" . $this->lastname, true),
             'streetAddress' => $this->streetAddress,
             'city' => $this->city,
             'postalCode' => $this->postalCode,
@@ -215,7 +228,7 @@ class CustomerForm extends Component
 
     public function generateInitialsImage($folder, $username)
     {
-        $name = $this->firstname . "_" .$this->lastname;
+        $name = $this->firstname . "_" . $this->lastname;
         $initials = strtoupper($name[0]);
 
         $svgImage = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -224,9 +237,9 @@ class CustomerForm extends Component
     </svg>';
 
         $filename = 'initial';
-        Storage::disk('public')->put('customer/'. $folder . '/' . $username . '/initials/' . $filename . '.svg', $svgImage);
+        Storage::disk('public')->put('customer/' . $folder . '/' . $username . '/initials/' . $filename . '.svg', $svgImage);
 
-        return 'customer/'. $folder . '/' . $username . '/initials/' . $filename;
+        return 'customer/' . $folder . '/' . $username . '/initials/' . $filename;
     }
 
 
@@ -253,13 +266,13 @@ class CustomerForm extends Component
                 ->fit($width, $height)
                 ->encode('jpg', 80);
 
-            $imagePath[] = 'customer/'. $folder . '/' . $filename . '/' . $size . '.jpg';
-            Storage::disk('public')->put('customer/'. $folder . '/' . $filename . '/' . $size . '.jpg', $image);
+            $imagePath[] = 'customer/' . $folder . '/' . $filename . '/' . $size . '.jpg';
+            Storage::disk('public')->put('customer/' . $folder . '/' . $filename . '/' . $size . '.jpg', $image);
 
             $webpImage = clone $image;
             $webpImage->encode('webp', 80);
-            $imagePath[] = 'customer/'. $folder . '/' . $filename . '/' . $size . '.webp';
-            Storage::disk('public')->put('customer/'. $folder . '/' . $filename . '/' . $size . '.webp', $webpImage);
+            $imagePath[] = 'customer/' . $folder . '/' . $filename . '/' . $size . '.webp';
+            Storage::disk('public')->put('customer/' . $folder . '/' . $filename . '/' . $size . '.webp', $webpImage);
         }
 
         return $imagePath;
