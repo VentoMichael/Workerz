@@ -1,5 +1,46 @@
 @if($message)
-    <div class="z-50 max-w-xs flex gap-5 fixed right-8 bottom-4 bg-red-100 border-t-4 border-red-500 rounded-b text-teal-900 px-5 py-4 shadow-md" role="alert">
+        <div x-data="{ show: true, progress: 0, timer: null }"
+             x-show="show"
+             x-data
+             x-init="
+            timer = setTimeout(() => {
+                show = false;
+                @this.set('errorMessage', null);
+            }, 5000);
+
+            let interval = setInterval(() => {
+                if (progress < 100) {
+                    progress += 1;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 50);
+
+            $el.addEventListener('mouseenter', () => {
+                clearInterval(interval);
+                clearTimeout(timer);
+            });
+
+            $el.addEventListener('mouseleave', () => {
+                interval = setInterval(() => {
+                    if (progress < 100) {
+                        progress += 1;
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 50);
+
+                timer = setTimeout(() => {
+                    show = false;
+                    @this.set('errorMessage', null);
+                }, 5000);
+            });
+        "
+             class="z-50 max-w-xs flex gap-5 fixed right-8 bottom-4 bg-green-100 rounded-b text-teal-900 px-5 py-4 pt-6 shadow-md"
+             role="alert">
+            <div class="absolute top-0 left-0 w-full">
+                <div x-bind:style="'width: ' + progress + '%'" class="h-2 bg-red-500 absolute top-0 left-0 rounded-t"></div>
+            </div>
         <div class="flex gap-2">
 
             <div class="py-1">

@@ -14,7 +14,7 @@ class ContactForm extends Component
     public $message;
     public $successMessage;
     public $clearProperty;
-    public $errorMessage ;
+    public $errorMessage;
 
     protected $rules = [
         'email_contact' => 'required|email',
@@ -24,7 +24,8 @@ class ContactForm extends Component
 
     public function updated($propertyName)
     {
-        $this->validateOnly($propertyName,);
+        $this->validateOnly($propertyName);
+
     }
 
     public function mount()
