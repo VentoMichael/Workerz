@@ -144,8 +144,7 @@ class PreviewListWorkers extends Component
         }
         $this->selectedCategoryCount = count($this->selectedCategories);
         $this->selectedRegionCount = count($this->selectedRegions);
-
-        sleep(.9);
+            sleep(.9);
 
         return $users;
     }

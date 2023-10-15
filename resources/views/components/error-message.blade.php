@@ -36,7 +36,7 @@
                 }, 5000);
             });
         "
-             class="z-50 max-w-xs flex gap-5 fixed right-8 bottom-4 bg-green-100 rounded-b text-teal-900 px-5 py-4 pt-6 shadow-md"
+             class="z-50 max-w-xs flex gap-5 fixed right-8 bottom-4 bg-red-100 rounded-b text-teal-900 px-5 py-4 pt-6 shadow-md"
              role="alert">
             <div class="absolute top-0 left-0 w-full">
                 <div x-bind:style="'width: ' + progress + '%'" class="h-2 bg-red-500 absolute top-0 left-0 rounded-t"></div>

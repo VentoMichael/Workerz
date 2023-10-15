@@ -1,6 +1,15 @@
 <div class="mt-8">
 
-    <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+    <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md"
+         x-data="{ errors: {{ json_encode($errors->keys()) }}, focusField(input) { $refs[input].scrollIntoView();console.log(errors.length) } }"
+         x-init="() => {
+         $nextTick(() => {
+
+             if (errors.length > 0) {
+                 focusField(errors[0]);
+             }
+         });
+     }">
         <div x-data="{ showMessage: @if($successMessage || $errorMessage) true @else false @endif }">
             @if($successMessage)
                 <div x-show="showMessage" >
@@ -14,11 +23,11 @@
                     </div>
                 @endif
         </div>
-        <form id="form" wire:submit="submitForm" method="get" class="space-y-8">
+        <form id="form" wire:submit="submitForm" method="get" class="space-y-8" >
             @csrf
-            <div>
+            <div >
                 <label for="email_contact" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
-                <input wire:model.blur="email_contact" value="{{ old('email_contact') }}" type="email" id="email_contact" name="email_contact"
+                <input x-ref="email_contact" wire:model.blur="email_contact" value="{{ old('email_contact') }}" type="email" id="email_contact" name="email_contact"
                        class="@error('email_contact')border border-red-500 @enderror placeholder:text-gray-400 shadow-sm bg-gray-50 border border-gray-300 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
                        placeholder="your-email@hotmail.com">
                  @error('email_contact')
@@ -28,7 +37,7 @@
 
             <div>
                 <label for="subject" class="block mb-2 text-sm font-medium text-gray-900">Subject</label>
-                <input wire:model.blur="subject" value="{{ old('subject') }}" type="text" id="subject" name="subject"
+                <input x-ref="subject" wire:model.blur="subject" value="{{ old('subject') }}" type="text" id="subject" name="subject"
                        class="@error('subject')border border-red-500 @enderror placeholder:text-gray-400 block p-3 w-full text-sm text-black bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500"
                        placeholder="Let us know how we can help you" >
                 @error('subject')
@@ -39,7 +48,7 @@
             <div class="sm:col-span-2">
                 <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Your
                     message</label>
-                <textarea wire:model.blur="message" id="message" name="message" rows="6"
+                <textarea x-ref="message" wire:model.blur="message" id="message" name="message" rows="6"
                           class="@error('message')border border-red-500 @enderror placeholder:text-gray-400 block p-2.5 w-full text-sm text-black bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
                           placeholder="Leave a message...">{{ old('message') }}</textarea>
                 @error('message')
@@ -59,3 +68,4 @@
         </form>
     </div>
 </div>
+
