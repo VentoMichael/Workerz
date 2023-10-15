@@ -39,6 +39,8 @@ class ProfilUpdates extends Component
     public $containsDefaultAvatar = false;
     public $defaultBackgrounds = ["default_cover/default_background_320.jpg", "default_cover/default_background_320.webp", "default_cover/default_background_680.jpg", "default_cover/default_background_680.webp", "default_cover/default_background_1280.jpg", "default_cover/default_background_1280.webp", "default_cover/default_background_1980.jpg", "default_cover/default_background_1980.webp"];
     public $defaultLogo;
+    public $tempUrlCover;
+    public $tempUrlLogo;
 
     protected $logoSizes = ['32x32', '160x160', '128x128'];
     protected $backgroundSizes = ['1980x192', '1280x192', '680x192'];
@@ -57,9 +59,26 @@ class ProfilUpdates extends Component
         'streetAddress' => 'required',
         'city' => 'required',
         'region' => 'required',
+        'logoUpload' => 'nullable|image|mimes:jpeg,png,svg,webp|max:1024',
+        'backgroundUpload' => 'nullable|image|mimes:jpeg,png,svg,webp|max:3072',
         'postalCode' => 'required|integer',
     ];
-
+    public function updatedBackgroundUpload(){
+        try{
+            $this->tempUrlCover = $this->backgroundUpload->temporaryUrl();
+        }catch(Exception $e){
+            $this->tempUrlCover = '';
+            $this->hasChanges = false;
+        }
+    }
+    public function updatedLogoUpload(){
+        try{
+            $this->tempUrlLogo = $this->logoUpload->temporaryUrl();
+        }catch(Exception $e){
+            $this->tempUrlLogo = '';
+            $this->hasChanges = false;
+        }
+    }
     public function mount()
     {
         $user = Auth::user();
@@ -96,9 +115,22 @@ class ProfilUpdates extends Component
     public function removeBackgroundImage()
     {
         $this->showBackgroundImage = false;
-        $this->backgroundUpload = false;
+        $company = Auth::user()->company;
+        $company->update(['backgroundUpload' => $this->defaultBackgrounds]);
+        $company->save();
         $this->hasChanges = true;
+    }
 
+    public function removeAvatarImage()
+    {
+
+        $this->showAvatarImage = false;
+        $company = Auth::user()->company;
+        $this->tempUrlLogo = asset($this->defaultLogo . '.svg');
+        $company['logoUpload'] = $this->defaultLogo;
+
+        $company->save();
+        $this->hasChanges = true;
     }
 
     public function toggleRegionsList()
@@ -154,12 +186,6 @@ class ProfilUpdates extends Component
         $this->showRegionsList = true;
     }
 
-    public function removeAvatarImage()
-    {
-        $this->showAvatarImage = false;
-        $this->logoUpload = false;
-        $this->hasChanges = true;
-    }
 
     public function getSelectedRegionNames()
     {
@@ -224,14 +250,9 @@ class ProfilUpdates extends Component
                 }
                 if ($this->logoUpload) {
                     $companyData['logoUpload'] = $this->processAndStoreImage($this->logoUpload, 'logos', $this->name, true);
-                } else {
-                    $companyData['logoUpload'] = $this->defaultLogo;
                 }
-
                 if ($this->backgroundUpload) {
                     $companyData['backgroundUpload'] = $this->processAndStoreImage($this->backgroundUpload, 'covers', $this->name, false);
-                } else {
-                    $companyData['backgroundUpload'] = $this->defaultBackgrounds;
                 }
 
                 $this->successMessage = 'Profile updated successfully!';
