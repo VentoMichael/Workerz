@@ -139,9 +139,7 @@ Route::get('/terms', function () {
 Route::get('/newsletter',
     [\App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter');
 
-// Routes accessible only to authenticated users
 Route::middleware(['auth'])->group(function () {
-    // Dashboard views
     Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.dashboard');
 
     Route::get('/dashboard/profil', [\App\Http\Controllers\DashboardController::class, 'profil'])->name('dashboard.profil');
@@ -149,6 +147,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/messages', [\App\Http\Controllers\DashboardController::class, 'messages'])->name('dashboard.messages');
 
     Route::get('/dashboard/plans', [\App\Http\Controllers\DashboardController::class, 'plans'])->name('dashboard.plans');
+
+    Route::get('/dashboard/plan-change', [\App\Http\Controllers\DashboardController::class, 'plansChange'])->name('dashboard.plan-change');
+    Route::post('/dashboard/plan-change', [\App\Http\Controllers\DashboardController::class, 'plansChangePost'])->name('dashboard.plan-change.post');
 
     Route::get('/dashboard/settings', [\App\Http\Controllers\DashboardController::class, 'settings'])->name('dashboard.settings');
     Route::put('/dashboard/password', [DashboardController::class, 'updatePassword'])->middleware(['auth'])->name('password.update');

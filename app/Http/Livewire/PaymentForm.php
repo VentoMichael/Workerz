@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -31,6 +32,7 @@ class PaymentForm extends Component
     public $creditCard;
 
     public $cardNumber;
+    public $previousSubscription;
     public $planPayment;
     public $nameOnCard;
     protected $paymentMethods = [];
@@ -39,13 +41,34 @@ class PaymentForm extends Component
     public function mount()
     {
         Stripe::setApiKey(config('app.stripeKey'));
-        $user = session('user')['account'];
+        $user = session('user') !== null ? session('user')['account'] : Auth::user();
         $this->selectedPlan = session('productSelected')['product']['id'];
         $productSelected = session('productSelected')['product'];
         $price = session('productSelected')['paymentYearly'] ? $productSelected['price_yearly'] : $productSelected['price_monthly'];
 
         $this->email = $user['email'];
-        $this->planPayment = $price;
+
+        $plans = Plan::all();
+        $stripePlanNames = [];
+        $matchedPlan = null;
+        foreach ($plans as $plan) {
+            $stripePlanNames[] = $plan->name;
+        }
+
+        foreach ($stripePlanNames as $planName) {
+            $this->previousSubscription = $user->subscription($planName)
+                ->latest('created_at')
+                ->first();
+            if ($this->previousSubscription['name'] === $planName) {
+                $matchedPlan = $planName;
+                break;
+            }
+        }
+        $previousPrice = $this->previousSubscription->price;
+        $this->planPayment = $this->previousSubscription ? $price - $previousPrice : $price;
+        if ($this->planPayment < 0) {
+            $this->planPayment = 0;
+        }
         session()->put('price', $this->planPayment);
         $this->firstName = $user['firstname'];
         $this->lastName = $user['lastname'];
@@ -57,14 +80,15 @@ class PaymentForm extends Component
         $this->planPayment = $newProductData['paymentYearly'] ? $product['price_yearly'] : $product['price_monthly'];
         session('price', $this->planPayment);
     }
+
     public function render()
     {
-        $user = User::where('email', session('user')['account']['email'])->first();
+        $user = session('user') !== null ? User::where('email', session('user')['account']['email'])->first() : Auth::user();
         $productSelected = session('productSelected')['product'];
         $planPayment = $this->planPayment;
         $yearlyPayment = session('productSelected')['paymentYearly'];
         $intent = $user->createSetupIntent();
-        return view('livewire.payment-form', compact('user', 'yearlyPayment','intent', 'productSelected', 'planPayment'));
+        return view('livewire.payment-form', compact('user', 'yearlyPayment', 'intent', 'productSelected', 'planPayment'));
     }
 
     public function clearMessage($property)

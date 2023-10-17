@@ -361,7 +361,7 @@ class FreelancerForm extends Component
             sleep(1);
             return redirect()->route('sign-up.confirmation');
         } catch (Exception $e) {
-            return $e->getBody();
+            return $e->getMessage();
         }
     }
 

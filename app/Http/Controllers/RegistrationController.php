@@ -49,25 +49,40 @@ class RegistrationController extends Controller
 
     public function storeConfirmation(Request $request)
     {
-        $user = User::where('email', session('user')['account']['email'])->first();
-        $productSelected = session('productSelected')['product'];
-        $planId = session('productSelected')['paymentYearly'] ? $productSelected['stripe_plan_yearly'] : $productSelected['stripe_plan_monthly'];
-        $paymentMethod = \request()->input('payment_method');
+
+        $user = session('user') !== null ? User::where('email', session('user.account.email')->first()) : Auth::user();
+        $productSelected = session('productSelected.product');
+        $planId = session('productSelected.paymentYearly') ? $productSelected->stripe_plan_yearly : $productSelected->stripe_plan_monthly;
+        $paymentMethod = request('payment_method');
         $planPayment = session('price');
+
         $user->createOrGetStripeCustomer();
-        //Todo:send invoice
 
         try {
+            if (session('productSelected.changePlan', false)) {
+                foreach ($user->subscriptions->where('stripe_status','active') as $subscriptionHistory) {
+                    if ($subscriptionHistory) {
+                        $subscriptionHistory->cancelNow();
+                    }
+                }
+
+                $subscription = $user->newSubscription($productSelected['name'], $planId)->create($paymentMethod);
+                $subscription->price = $planPayment;
+                $subscription->is_annualy = (bool) session('productSelected.paymentYearly');
+                $subscription->save();
+                $user->addPaymentMethod($paymentMethod);
+                return redirect(route('dashboard.plans'))->with('successMessage', 'We received your message successfully and will get back to you shortly!');
+
+            }
 
             $subscription = $user->newSubscription($productSelected['name'], $planId)->create($paymentMethod);
-
             $subscription->price = $planPayment;
-            $subscription->is_annualy = (bool)session('productSelected')['paymentYearly'];
+            $subscription->is_annualy = (bool) session('productSelected.paymentYearly');
             $subscription->save();
+
             $user->addPaymentMethod($paymentMethod);
 
             Auth::login($user);
-
             return redirect(route('dashboard.dashboard'));
         } catch (\Exception $e) {
             return back();

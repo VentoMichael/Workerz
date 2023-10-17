@@ -49,6 +49,29 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
+    public function plansChange(){
+        return view('dashboard.payment-plan');
+    }
+    public function plansChangePost(){
+        $plans = Plan::all();
+        $selectedPlan = request('plan');
+
+        $matchedPlan = $plans->first(function ($plan) use ($selectedPlan) {
+            return $plan->name === $selectedPlan;
+        });
+
+        if ($matchedPlan) {
+            $productSelected = session('productSelected');
+            $productSelected['paymentYearly'] = (bool) request('annualBilling');
+            $productSelected['changePlan'] = (bool) request('changePlan');
+            $price = $productSelected['paymentYearly'] ? $matchedPlan->price_yearly : $matchedPlan->price_monthly;
+            $productSelected['product'] = $matchedPlan;
+
+            session()->put('productSelected', $productSelected);
+            session()->put('price', $price);
+        }
+        return redirect(route('sign-up.confirmation'));
+    }
     public function plans()
     {
         $user = Auth::user();
@@ -60,16 +83,22 @@ class DashboardController extends Controller
         }
 
         foreach ($stripePlanNames as $planName) {
-            $subscription = $user->subscription($planName);
-            if ($subscription) {
+            $subscription = $user->subscription($planName)
+                ->latest('created_at')
+                ->first();
+            if ($subscription['name'] === $planName) {
                 $matchedPlan = $planName;
+                $matchedPrice = $user->upcomingInvoice()->amount_due / 100;
                 break;
             }
         }
+
+        $clearProperty = null;
+        $successMessage = null;
+        $errorMessage = null;
         $interval = $subscription->asStripeSubscription()->plan->interval === 'month' ? 'Month' : 'Annual';
         $lastDay = Carbon::createFromTimestamp($subscription->asStripeSubscription()->current_period_end)->format('d-m-Y');
-        $invoices = $user->invoices();
-        return view('dashboard.plans', compact('matchedPlan','invoices','interval','lastDay','plans','subscription'));
+        return view('dashboard.plans', compact('matchedPlan','matchedPrice','interval','lastDay','plans','subscription','clearProperty','successMessage','errorMessage'));
 
     }
 
