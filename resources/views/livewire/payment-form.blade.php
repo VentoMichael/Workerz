@@ -58,7 +58,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @if($previousSubscription)
+                                        @if(!$previousSubscription)
 
                                             <div onclick="Livewire.dispatch('openModal', { component: 'change-plans' })"
                                                  class="cursor-pointer text-blue-300 hover:underline">Change plan
@@ -72,7 +72,7 @@
                                             <dt class="text-base font-medium">Total</dt>
                                             <dd class="text-base font-medium text-gray-900">
                                                 <span
-                                                    wire:model.live="planPayment">{{$planPayment}}</span>€ @if(!$previousSubscription){{$yearlyPayment ? '/yearly' : '/monthly'}} @else {{ $yearlyPayment ? 'in a year' : 'in a month' }}
+                                                    wire:model.live="planPayment">{{$planPayment}}</span>€ @if(!$previousSubscription){{$yearlyPayment ? '/yearly' : '/monthly'}} @else to upgrade
                                             @endif
 
                                         </div>
@@ -98,7 +98,6 @@
                             </li>
 
 
-                            <!-- More products... -->
                         </ul>
 
 

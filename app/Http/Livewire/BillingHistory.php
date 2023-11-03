@@ -63,7 +63,6 @@ class BillingHistory extends Component
                     $matches = [];
                     $name = $description;
 
-                    // Extract the name using regular expression
                     if (preg_match('/(\d+ × )?(.*?) \(/', $description, $matches)) {
                         $name = trim($matches[2]);
                     }

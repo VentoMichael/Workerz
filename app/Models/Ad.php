@@ -21,4 +21,9 @@ class Ad extends Model
     {
         return $this->belongsToMany(Skill::class, 'ad_skills');
     }
+    public function test(){
+        $string = "foobar";
+
+        // shave the last two characters off of $string
+    }
 }

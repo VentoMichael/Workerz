@@ -41,7 +41,7 @@ class PaymentForm extends Component
     public function mount()
     {
         Stripe::setApiKey(config('app.stripeKey'));
-        $user = session('user') !== null ? session('user')['account'] : Auth::user();
+        $user = session('user')['account'];
         $this->selectedPlan = session('productSelected')['product']['id'];
         $productSelected = session('productSelected')['product'];
         $price = session('productSelected')['paymentYearly'] ? $productSelected['price_yearly'] : $productSelected['price_monthly'];
@@ -49,23 +49,29 @@ class PaymentForm extends Component
         $this->email = $user['email'];
 
         $plans = Plan::all();
-        $stripePlanNames = [];
-        $matchedPlan = null;
-        foreach ($plans as $plan) {
-            $stripePlanNames[] = $plan->name;
-        }
+        $previousPrice = 0;
+        if (Auth::user()) {
+            $user = Auth::user();
 
-        foreach ($stripePlanNames as $planName) {
-            $this->previousSubscription = $user->subscription($planName)
-                ->latest('created_at')
-                ->first();
-            if ($this->previousSubscription['name'] === $planName) {
-                $matchedPlan = $planName;
-                break;
+            $stripePlanNames = [];
+            $matchedPlan = null;
+            foreach ($plans as $plan) {
+                $stripePlanNames[] = $plan->name;
             }
+            foreach ($stripePlanNames as $planName) {
+                $this->previousSubscription = $user->subscriptions->first();
+                if ($this->previousSubscription['name'] === $planName) {
+                    $matchedPlan = $planName;
+                    break;
+                }
+            }
+            $previousPrice = $this->previousSubscription->price;
         }
-        $previousPrice = $this->previousSubscription->price;
         $this->planPayment = $this->previousSubscription ? $price - $previousPrice : $price;
+
+        dump($previousPrice,$this->planPayment,$this->previousSubscription,$price);
+
+        //TODO::NOT SHOWING THE PREVIOUS SUBSCRIPTION IN THE PAYMENT
         if ($this->planPayment < 0) {
             $this->planPayment = 0;
         }

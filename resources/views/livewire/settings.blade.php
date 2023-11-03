@@ -15,7 +15,6 @@
             @include('components.info-message', ['message' => $infoMessage,'clearProperty' => 'infoMessage'])
         </div>
     @endif
-<!-- Profile section -->
 
     <section class="mt-6" aria-labelledby="payment-details-heading">
         <div class="shadow sm:rounded-md sm:overflow-hidden">
@@ -100,7 +99,6 @@
                                         Permanently delete your account. This action cannot
                                         be undone.</p>
                                 </div>
-                                <!-- Delete Button -->
 
                                 <x-button onclick="Livewire.dispatch('openModal', { component: 'confirm-delete' })"
                                           kind="danger"

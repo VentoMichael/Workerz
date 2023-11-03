@@ -49,8 +49,7 @@ class RegistrationController extends Controller
 
     public function storeConfirmation(Request $request)
     {
-
-        $user = session('user') !== null ? User::where('email', session('user.account.email')->first()) : Auth::user();
+        $user = session('user') !== null ? User::where('email', session('user.account.email'))->first() : Auth::user();
         $productSelected = session('productSelected.product');
         $planId = session('productSelected.paymentYearly') ? $productSelected->stripe_plan_yearly : $productSelected->stripe_plan_monthly;
         $paymentMethod = request('payment_method');

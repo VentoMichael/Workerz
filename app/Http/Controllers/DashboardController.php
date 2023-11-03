@@ -49,10 +49,13 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function plansChange(){
+    public function plansChange()
+    {
         return view('dashboard.payment-plan');
     }
-    public function plansChangePost(){
+
+    public function plansChangePost()
+    {
         $plans = Plan::all();
         $selectedPlan = request('plan');
 
@@ -62,8 +65,8 @@ class DashboardController extends Controller
 
         if ($matchedPlan) {
             $productSelected = session('productSelected');
-            $productSelected['paymentYearly'] = (bool) request('annualBilling');
-            $productSelected['changePlan'] = (bool) request('changePlan');
+            $productSelected['paymentYearly'] = (bool)request('annualBilling');
+            $productSelected['changePlan'] = (bool)request('changePlan');
             $price = $productSelected['paymentYearly'] ? $matchedPlan->price_yearly : $matchedPlan->price_monthly;
             $productSelected['product'] = $matchedPlan;
 
@@ -72,6 +75,7 @@ class DashboardController extends Controller
         }
         return redirect(route('sign-up.confirmation'));
     }
+
     public function plans()
     {
         $user = Auth::user();
@@ -81,11 +85,11 @@ class DashboardController extends Controller
         foreach ($plans as $plan) {
             $stripePlanNames[] = $plan->name;
         }
-
         foreach ($stripePlanNames as $planName) {
-            $subscription = $user->subscription($planName)
+            $subscription = $user->subscriptions($planName)
                 ->latest('created_at')
                 ->first();
+
             if ($subscription['name'] === $planName) {
                 $matchedPlan = $planName;
                 $matchedPrice = $user->upcomingInvoice()->amount_due / 100;
@@ -98,7 +102,7 @@ class DashboardController extends Controller
         $errorMessage = null;
         $interval = $subscription->asStripeSubscription()->plan->interval === 'month' ? 'Month' : 'Annual';
         $lastDay = Carbon::createFromTimestamp($subscription->asStripeSubscription()->current_period_end)->format('d-m-Y');
-        return view('dashboard.plans', compact('matchedPlan','matchedPrice','interval','lastDay','plans','subscription','clearProperty','successMessage','errorMessage'));
+        return view('dashboard.plans', compact('matchedPlan', 'matchedPrice', 'interval', 'lastDay', 'plans', 'subscription', 'clearProperty', 'successMessage', 'errorMessage'));
 
     }
 
