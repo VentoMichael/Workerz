@@ -28,7 +28,7 @@
                                 <a href="{{route('sign-up.role')}}">
                                     <x-button kind="primary">Get started</x-button>
                                 </a>
-                                <a href="{{route('how-it-works')}}">
+                                <a href="{{route('how-it-works.index')}}">
                                     <x-button kind="secondary">Learn more</x-button>
                                 </a>
                             </div>

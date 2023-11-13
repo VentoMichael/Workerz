@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 
 class NewsletterController extends Controller
 {
-
-    public function subscribe(Request $request)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(Request $request)
     {
         $request->validate([
             'newsletter' => 'required|email',

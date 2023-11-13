@@ -33,7 +33,7 @@
                     potential clients.</p>
             </div>
             <div class="flex justify-between">
-                <form class="flex justify-between" action="{{route('dashboard.dashboard')}}" method="get">
+                <form class="flex justify-between" action="{{route('dashboard.index')}}" method="get">
                     <x-button class="close-tutorial-button" name="nevermind" kind="secondary">Nevermind</x-button>
                 </form>
                 <x-button class="next-step-button" id="next-step-button" kind="primary">Next</x-button>
@@ -73,7 +73,7 @@
                 <p class="text-sm text-gray-600">Click "Go back home" to return to your profile quickly. This takes you
                     to your profile page with your information and updates.</p>
             </div>
-            <form class="flex justify-end" action="{{route('dashboard.dashboard')}}" method="get">
+            <form class="flex justify-end" action="{{route('dashboard.index')}}" method="get">
                 <x-button class="next-step-button" name="nevermind" id="next-step-button" kind="primary">Close</x-button>
             </form>
         </div>

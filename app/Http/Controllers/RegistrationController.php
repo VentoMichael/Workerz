@@ -82,7 +82,7 @@ class RegistrationController extends Controller
             $user->addPaymentMethod($paymentMethod);
 
             Auth::login($user);
-            return redirect(route('dashboard.dashboard'));
+            return redirect(route('dashboard.index'));
         } catch (\Exception $e) {
             return back();
         }

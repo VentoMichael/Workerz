@@ -231,7 +231,7 @@
                                             </svg>
                                             <div class="ml-2 text-sm text-gray-800 rounded-lg" role="alert">
                         <span class="font-medium">Respectez les <a
-                                href="{{route('disclaimer')}}"
+                                href="{{route('disclaimer.index')}}"
                                 class="underline hover:no-underline">règles.</a></span>
                                             </div>
                                         </div>

@@ -222,7 +222,7 @@ class CustomerForm extends Component
         $this->saveRegionsForUser($newUser);
         sleep(1);
         Auth::login($newUser);
-        return redirect()->route('dashboard.dashboard');
+        return redirect()->route('dashboard.index');
     }
 
 

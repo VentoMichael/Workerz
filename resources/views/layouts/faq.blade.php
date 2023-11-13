@@ -4,7 +4,7 @@
             <div>
                 <h2 class="text-3xl font-extrabold text-gray-900">Frequently asked questions</h2>
                 <p class="mt-4 text-lg text-gray-500">Can’t find the answer you’re looking for ? <a
-                        href="{{route('contact-us')}}?subject=Technical%20support#form"
+                        href="{{route('contact-us.index')}}?subject=Technical%20support#form"
                         class="text-base font-medium text-indigo-600 hover:text-indigo-800">Contact us<span
                             aria-hidden="true"> &rarr;</span></a></p>
             </div>

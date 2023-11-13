@@ -4,7 +4,7 @@
             <div
                 class="flex justify-between items-center max-w-7xl mx-auto px-4 py-6 sm:px-6 md:justify-between md:space-x-10 lg:px-8">
                 <div class="flex justify-start lg:w-0">
-                    <a href="{{route('home')}}">
+                    <a href="{{route('home.index')}}">
                         <span class="sr-only">Workerz</span>
                         {!! file_get_contents(asset('img/logo.svg')) !!}
                     </a>
@@ -132,7 +132,7 @@
                                  class="dropdown-menu-dashboard hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
                                  role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                 <!-- Active: "bg-gray-100", Not Active: "" -->
-                                <a href="{{route('dashboard.dashboard') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                <a href="{{route('dashboard.index') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
                                    id="user-menu-item-0">Dashboard</a>
 
                                 <a href="{{route('dashboard.profil')}} " class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
@@ -163,13 +163,13 @@
                     </button>
                 </div>
                 <nav class="hidden md:flex space-x-10">
-                    <x-nav-link kind="primary" href="{{ route('ads') }}" class="{{ Route::currentRouteName() === 'ads' || Route::currentRouteName() === 'ads.show' ? 'font-extrabold text-purple-700' : '' }}">
+                    <x-nav-link kind="primary" href="{{ route('ads.index') }}" class="{{ Route::currentRouteName() === 'ads' || Route::currentRouteName() === 'ads.show' ? 'font-extrabold text-purple-700' : '' }}">
                         Ads
                     </x-nav-link>
-                    <x-nav-link kind="primary" href="{{ route('workers') }}" class="{{ Route::currentRouteName() === 'workers' || Route::currentRouteName() === 'workers.show' ? 'font-extrabold text-purple-700' : '' }}">
+                    <x-nav-link kind="primary" href="{{ route('workers.index') }}" class="{{ Route::currentRouteName() === 'workers' || Route::currentRouteName() === 'workers.show' ? 'font-extrabold text-purple-700' : '' }}">
                         Workers
                     </x-nav-link>
-                    <x-nav-link kind="primary" href="{{ route('contact-us') }}" class="{{ Route::currentRouteName() === 'contact-us' ? 'font-extrabold text-purple-700' : '' }}">
+                    <x-nav-link kind="primary" href="{{ route('contact-us.index') }}" class="{{ Route::currentRouteName() === 'contact-us' ? 'font-extrabold text-purple-700' : '' }}">
                         Contact
                     </x-nav-link>
                     <x-nav-link kind="primary" href="{{ route('about-us') }}" class="{{ Route::currentRouteName() === 'about-us'  ? 'font-extrabold text-purple-700' : '' }}">About us</x-nav-link>
@@ -291,7 +291,7 @@
                              class="dropdown-menu-dashboard hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
                              role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                             <!-- Active: "bg-gray-100", Not Active: "" -->
-                            <a href="{{route('dashboard.dashboard') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                            <a href="{{route('dashboard.index') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
                                id="user-menu-item-0">Dashboard</a>
 
                             <a href="{{route('dashboard.profil')}} " class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
@@ -334,7 +334,7 @@
                         </div>
                         <div class="mt-6">
                             <nav class="grid grid-cols-1 gap-7">
-                                <a href="{{ route('ads') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                                <a href="{{ route('ads.index') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
                                     <div
                                         class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
                                         <!-- Heroicon name: outline/inbox -->
@@ -347,7 +347,7 @@
                                     <span class="ml-4 text-base font-medium text-gray-900">Ads</span>
                                 </a>
 
-                                <a href="{{ route('workers') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                                <a href="{{ route('workers.index') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
                                     <div
                                         class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
                                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -359,7 +359,7 @@
                                     <span class="ml-4 text-base font-medium text-gray-900">Workers</span>
                                 </a>
 
-                                <a href="{{ route('contact-us') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                                <a href="{{ route('contact-us.index') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
                                     <div
                                         class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
                                         <!-- Heroicon name: outline/chat-alt-2 -->
@@ -490,7 +490,7 @@
                                  class="dropdown-menu-dashboard hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
                                  role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                 <!-- Active: "bg-gray-100", Not Active: "" -->
-                                <a href="{{route('dashboard.dashboard') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                                <a href="{{route('dashboard.index') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
                                    id="user-menu-item-0">Dashboard</a>
 
                                 <a href="{{route('dashboard.profil') }}" class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem" tabindex="-1"
@@ -520,7 +520,7 @@
         <div
             class="flex justify-between items-center max-w-7xl mx-auto px-4 py-6 sm:px-6 md:justify-start md:space-x-10 lg:px-8">
             <div class="flex justify-start lg:w-0 lg:flex-1">
-                <a href="{{route('home')}}">
+                <a href="{{route('home.index')}}">
                     <span class="sr-only">Workerz</span>
                     {!! file_get_contents(asset('img/logo.svg')) !!}
                 </a>
@@ -540,13 +540,13 @@
                 </button>
             </div>
             <nav class="hidden md:flex space-x-10">
-                <x-nav-link kind="primary" href="{{ route('ads') }}" class="{{ Route::currentRouteName() === 'ads' || Route::currentRouteName() === 'ads.show' ? 'font-extrabold text-purple-700' : '' }}">
+                <x-nav-link kind="primary" href="{{ route('ads.index') }}" class="{{ Route::currentRouteName() === 'ads' || Route::currentRouteName() === 'ads.show' ? 'font-extrabold text-purple-700' : '' }}">
                     Ads
                 </x-nav-link>
-                <x-nav-link kind="primary" href="{{ route('workers') }}" class="{{ Route::currentRouteName() === 'workers' || Route::currentRouteName() === 'workers.show' ? 'font-extrabold text-purple-700' : '' }}">
+                <x-nav-link kind="primary" href="{{ route('workers.index') }}" class="{{ Route::currentRouteName() === 'workers' || Route::currentRouteName() === 'workers.show' ? 'font-extrabold text-purple-700' : '' }}">
                     Workers
                 </x-nav-link>
-                <x-nav-link kind="primary" href="{{ route('contact-us') }}" class="{{ Route::currentRouteName() === 'contact-us' ? 'font-extrabold text-purple-700' : '' }}">
+                <x-nav-link kind="primary" href="{{ route('contact-us.index') }}" class="{{ Route::currentRouteName() === 'contact-us' ? 'font-extrabold text-purple-700' : '' }}">
                     Contact
                 </x-nav-link>
                 <x-nav-link kind="primary" href="{{ route('about-us') }}" class="{{ Route::currentRouteName() === 'about-us'  ? 'font-extrabold text-purple-700' : '' }}">About us</x-nav-link>
@@ -583,7 +583,7 @@
                     </div>
                     <div class="mt-6">
                         <nav class="grid grid-cols-1 gap-7">
-                            <a href="{{ route('ads') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                            <a href="{{ route('ads.index') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
                                 <div
                                     class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
                                     <!-- Heroicon name: outline/inbox -->
@@ -596,7 +596,7 @@
                                 <span class="ml-4 text-base font-medium text-gray-900">Ads</span>
                             </a>
 
-                            <a href="{{ route('workers') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                            <a href="{{ route('workers.index') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
                                 <div
                                     class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
                                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -608,7 +608,7 @@
                                 <span class="ml-4 text-base font-medium text-gray-900">Workers</span>
                             </a>
 
-                            <a href="{{ route('contact-us') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                            <a href="{{ route('contact-us.index') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
                                 <div
                                     class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
                                     <!-- Heroicon name: outline/chat-alt-2 -->

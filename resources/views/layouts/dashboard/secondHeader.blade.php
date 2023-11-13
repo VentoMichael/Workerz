@@ -20,7 +20,7 @@
                 <nav class="flex-1 px-2 pb-4 space-y-1 flex flex-col justify-between">
                     <div>
 
-                        <a href="{{route('dashboard.dashboard')}}"
+                        <a href="{{route('dashboard.index')}}"
                            class="{{ request()->is('dashboard') ? 'bg-gray-50 text-indigo-600' : 'text-gray-900 hover:text-gray-900 hover:bg-gray-50' }} group rounded-md px-3 py-2 flex items-center text-sm font-medium">
                             <svg
                                 class="{{ request()->is('dashboard') ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500' }} flex-shrink-0 -ml-1 mr-3 h-6 w-6"
@@ -85,7 +85,7 @@
                             <span class="truncate"> Settings </span>
                         </a>
                     </div>
-                    <a href="{{ route('home') }}"
+                    <a href="{{ route('home.index') }}"
                        class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor"
@@ -104,7 +104,7 @@
 <aside class="py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-3 hidden lg:block">
     <nav class="space-y-1 flex flex-col justify-between gap-12 sticky top-4">
         <div>
-            <a href="{{route('dashboard.dashboard')}}"
+            <a href="{{route('dashboard.index')}}"
                class="{{ request()->is('dashboard') ? 'bg-gray-50 text-indigo-600' : 'text-gray-900 hover:text-gray-900 hover:bg-gray-50' }} group rounded-md px-3 py-2 flex items-center text-sm font-medium">
                 <svg
                     class="{{ request()->is('dashboard') ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500' }} flex-shrink-0 -ml-1 mr-3 h-6 w-6"
@@ -169,7 +169,7 @@
                 <span class="truncate"> Settings </span>
             </a>
         </div>
-        <a href="{{ route('home') }}"
+        <a href="{{ route('home.index') }}"
            class="text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6">

@@ -1,14 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\RegistrationController;
-use App\Models\Ad;
-use App\Models\User;
-use Carbon\Carbon;
+use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 use Stripe\Stripe;
 
 /*
@@ -22,149 +20,99 @@ use Stripe\Stripe;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// Home Page
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
-Route::get('/how-it-works', function () {
-    return view('how-it-works');
-})->name('how-it-works');
+// How It Works Page
+Route::get('/how-it-works', [\App\Http\Controllers\HowItWorksController::class, 'index'])->name('how-it-works.index');
 
-Route::get('/ads', [\App\Http\Controllers\AdController::class, 'index'])->name('ads');
-Route::get('/ads/details', function () {
-    return view('ads.show');
-})->name('ads.show');
-
-
-Route::get('/workers', [\App\Http\Controllers\WorkerController::class, 'index'])->name('workers');
-
-Route::get('/workers/{name}',[\App\Http\Controllers\WorkerController::class, 'show'])->name('workers.show');
-
-
-Route::get('/contact-us', function () {
-    return view('contact-us');
-})->name('contact-us');
-
-Route::post('/contact-us/post', [ContactController::class, 'store'])->name('contact-us.store');
-
-
-Route::get('/about-us', function () {
-    return view('about');
-})->name('about-us');
-
-Route::get('/pricing', function () {
-    Stripe::setApiKey(config('app.stripeKey'));
-
-    // Fetch the products from Stripe
-    $products = \Stripe\Product::all();
-    $pricingPlans = \Stripe\Price::all();
-
-    // Create an array to hold the formatted product and pricing data
-    $formattedProducts = [];
-
-    foreach ($products as $product) {
-        // Find pricing plans associated with the current product
-        $productPricingPlans = array_filter($pricingPlans->data, function ($plan) use ($product) {
-            return $plan->product == $product->id;
-        });
-
-        // Retrieve product details, including features
-        $stripeProduct = \Stripe\Product::retrieve($product->id);
-        $features = explode(',', $stripeProduct->metadata['features'] ?? '');
-        // Format the product and pricing plan data
-        $formattedPricingPlans = [];
-        foreach ($productPricingPlans as $plan) {
-            $intervalKey = ($plan->recurring->interval === 'month') ? 'monthly' : 'yearly';
-            $formattedPricingPlans[$intervalKey] = [
-                'id' => $plan->id,
-                'billing_scheme' => $plan->billing_scheme,
-                'amount' => number_format($plan->unit_amount / 100, 2), // Convert cents to currency
-                'currency' => $plan->currency,
-                'interval' => $plan->recurring->interval,
-            ];
-        }
-
-        $formattedProducts[] = [
-            'product' => [
-                'id' => $product->id,
-                'name' => $product->name,
-                'description' => $product->description,
-                'features' => $features,
-            ],
-            'pricingPlans' => $formattedPricingPlans,
-        ];
-    }
-
-    return view('pricing', compact('formattedProducts'));
-})->name('pricing');
-
-
-// Step 1: User role selection
-Route::get('/sign-up', [RegistrationController::class, 'showRoleForm'])->name('sign-up.role');
-Route::post('/sign-up', [RegistrationController::class, 'storeRole'])->name('post.sign-up.role');
-
-// Step 2: User account information
-Route::get('/sign-up/account', [RegistrationController::class, 'showAccountForm'])->name('sign-up.account');
-Route::post('/sign-up/account', [RegistrationController::class, 'storeAccount'])->name('post.sign-up.account');
-
-// Step 3: Payment / confirmation
-Route::get('/sign-up/confirmation', [RegistrationController::class, 'showConfirmationForm'])->name('sign-up.confirmation');
-Route::post('/sign-up/confirmation', [RegistrationController::class, 'storeConfirmation'])->name('post.sign-up.confirmation');
-
-
-//
-//Route::get('/sign-in', function () {
-//    return view('connexion.sign-in');
-//})->name('sign-in');
-
-
-// Legal views
-
-Route::get('/privacy', function () {
-    return view('legal.privacy');
-})->name('privacy');
-Route::get('/cookie', function () {
-    return view('legal.cookie');
-})->name('cookie');
-Route::get('/disclaimer', function () {
-    return view('legal.disclaimer');
-})->name('disclaimer');
-Route::get('/terms', function () {
-    return view('legal.terms');
-})->name('terms');
-
-
-// Newsletter
-
-Route::get('/newsletter',
-    [\App\Http\Controllers\NewsletterController::class, 'subscribe'])->name('newsletter');
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.dashboard');
-
-    Route::get('/dashboard/profil', [\App\Http\Controllers\DashboardController::class, 'profil'])->name('dashboard.profil');
-
-    Route::get('/dashboard/messages', [\App\Http\Controllers\DashboardController::class, 'messages'])->name('dashboard.messages');
-
-    Route::get('/dashboard/plans', [\App\Http\Controllers\DashboardController::class, 'plans'])->name('dashboard.plans');
-
-    Route::get('/dashboard/plan-change', [\App\Http\Controllers\DashboardController::class, 'plansChange'])->name('dashboard.plan-change');
-    Route::post('/dashboard/plan-change', [\App\Http\Controllers\DashboardController::class, 'plansChangePost'])->name('dashboard.plan-change.post');
-
-    Route::get('/dashboard/settings', [\App\Http\Controllers\DashboardController::class, 'settings'])->name('dashboard.settings');
-    Route::put('/dashboard/password', [DashboardController::class, 'updatePassword'])->middleware(['auth'])->name('password.update');
-    Route::post('/dashboard/settings', [\App\Http\Controllers\DashboardController::class, 'updateSettings'])->name('dashboard.settings.privacy');
-    Route::delete('/dashboard/delete', [\App\Http\Controllers\DashboardController::class, 'deleteAccount'])->name('dashboard.settings.delete');
+// Ads Routes
+Route::prefix('ads')->group(function () {
+    Route::controller(AdController::class)->group(function () {
+        // Ads Index Page
+        Route::get('/', 'index')->name('ads.index');
+        // Ads Details Page
+        Route::get('/details', 'show')->name('ads.show');
+    });
 });
 
+// Workers Routes
+Route::prefix('workers')->group(function () {
+    Route::controller(WorkerController::class)->group(function () {
+        // Workers Index Page
+        Route::get('/',  'index')->name('workers.index');
+        // Workers Show Page
+        Route::get('/{name}', 'show')->name('workers.show');
+    });
+});
 
+// Contact Us Routes
+Route::prefix('contact-us')->group(function () {
+    Route::controller(ContactController::class)->group(function () {
+        // Contact Us Index Page
+        Route::get('/', 'index')->name('contact-us');
+        // Contact Us Store Page
+        Route::post('/post', 'store')->name('contact-us.store');
+    });
+});
 
+// About Us Page
+Route::get('/about-us', [\App\Http\Controllers\AboutController::class,'index'])->name('about-us');
 
+// Pricing Page
+Route::get('/pricing', [\App\Http\Controllers\PriceController::class,'index'])->name('pricing');
 
+// Sign Up Routes
+Route::prefix('sign-up')->group(function () {
+    Route::controller(RegistrationController::class)->group(function () {
+        // Step 1: User role selection
+        Route::get('/', 'showRoleForm')->name('sign-up.role');
+        Route::post('/', 'storeRole')->name('post.sign-up.role');
 
+        // Step 2: User account information
+        Route::get('/account', 'showAccountForm')->name('sign-up.account');
+        Route::post('/account', 'storeAccount')->name('post.sign-up.account');
 
+        // Step 3: Payment / confirmation
+        Route::get('/confirmation', 'showConfirmationForm')->name('sign-up.confirmation');
+        Route::post('/confirmation', 'storeConfirmation')->name('post.sign-up.confirmation');
+    });
+});
 
+// Legal Views Routes
+Route::get('/privacy', [\App\Http\Controllers\PrivacyController::class, 'index'])->name('privacy.index');
+Route::get('/cookie', [\App\Http\Controllers\CookieController::class, 'index'])->name('cookie.index');
+Route::get('/disclaimer', [\App\Http\Controllers\DisclaimerController::class, 'index'])->name('disclaimer.index');
+Route::get('/terms', [\App\Http\Controllers\TermsController::class, 'index'])->name('terms.index');
 
+// Newsletter Page
+Route::get('/newsletter',[\App\Http\Controllers\NewsletterController::class, 'index'])->name('newsletter.index');
 
+// Authenticated User Routes
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('dashboard')->group(function () {
+        Route::controller(DashboardController::class)->group(function () {
+            // Dashboard Routes
+            Route::get('/', 'index')->name('dashboard.index'); // Dashboard Index Page
+            Route::get('/profil', 'profil')->name('dashboard.profil'); // Dashboard Profile Page
+            Route::get('/messages', 'messages')->name('dashboard.messages'); // Dashboard Messages Page
+            Route::get('/plans', 'plans')->name('dashboard.plans'); // Dashboard Plans Page
 
+// Plan Change Routes
+            Route::get('/plan-change', 'plansChange')->name('dashboard.plan-change'); // Plan Change Page
+            Route::post('/plan-change', 'plansChangePost')->name('dashboard.plan-change.post'); // Post Plan Change
 
+// Settings Routes
+            Route::get('/settings', 'settings')->name('dashboard.settings'); // Dashboard Settings Page
+
+// Password Update Route
+            Route::get('/password', 'updatePassword')->name('dashboard.update'); // Dashboard Password Update Page
+
+// Settings Update Route
+            Route::get('/settings', 'updateSettings')->name('dashboard.settings.privacy'); // Dashboard Settings Privacy Page
+
+// Delete Account Route
+            Route::get('/delete', 'delete')->name('dashboard.delete'); // Dashboard Delete Account Page|
+        });
+    });
+});

@@ -18,7 +18,7 @@ class ConfirmDelete extends ModalComponent
 
         Session::flush();
         session()->flash('successMessage', 'Account deleted successfully!');
-        return redirect()->route('home');
+        return redirect()->route('home.index');
     }
 
 

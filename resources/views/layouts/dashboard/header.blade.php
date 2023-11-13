@@ -7,7 +7,7 @@
             <div class="relative h-16 flex justify-between">
                 <div class="relative z-10 px-2 flex lg:px-0">
                     <div class="flex-shrink-0 flex items-center">
-                        <a href="{{route('home')}}">
+                        <a href="{{route('home.index')}}">
                             <span class="sr-only">Workerz</span>
                             {!! file_get_contents('img/logo.svg') !!}
                         </a>
@@ -170,7 +170,7 @@
                              class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none"
                              role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                             <!-- Active: "bg-gray-100", Not Active: "" -->
-                            <a href="{{route('dashboard.dashboard') }}"
+                            <a href="{{route('dashboard.index') }}"
                                class="hover:bg-indigo-100 block py-2 px-4 text-sm text-gray-700" role="menuitem"
                                tabindex="-1"
                                id="user-menu-item-0">Dashboard</a>
@@ -327,7 +327,7 @@
                      class="hidden mt-3 px-2 space-y-1"
                      role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                     <!-- Active: "bg-gray-100", Not Active: "" -->
-                    <a href="{{route('dashboard.dashboard') }}"
+                    <a href="{{route('dashboard.index') }}"
                        class="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                        role="menuitem" tabindex="-1"
                        id="user-menu-item-0">Dashboard</a>

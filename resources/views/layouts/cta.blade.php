@@ -7,7 +7,7 @@
                 class="-mb-1 pb-1 block bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">Get in touch or create an account.</span>
         </h2>
         <div class="mt-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-4 space-x-2">
-            <a href="{{route('how-it-works')}}">
+            <a href="{{route('how-it-works.index')}}">
                 <x-button kind="secondary">Learn more</x-button>
             </a>
             <a href="{{route('sign-up.role')}}">

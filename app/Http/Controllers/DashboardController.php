@@ -133,7 +133,7 @@ class DashboardController extends Controller
     }
 
 
-    public function deleteAccount()
+    public function delete()
     {
     }
 }

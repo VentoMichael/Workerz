@@ -8,7 +8,7 @@
                         <h3 class="text-sm font-semibold text-gray-700 tracking-wider uppercase">Support</h3>
                         <ul role="list" class="mt-4 space-y-4">
                             <li>
-                                <x-nav-link kind="ternary" href="{{ route('how-it-works') }}">
+                                <x-nav-link kind="ternary" href="{{ route('how-it-works.index') }}">
                                     How it works
                                 </x-nav-link>
                             </li>
@@ -18,17 +18,17 @@
                                 </x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link kind="ternary" href="{{ route('contact-us') }}">
+                                <x-nav-link kind="ternary" href="{{ route('contact-us.index') }}">
                                     Contact Us
                                 </x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link kind="ternary" href="{{ route('how-it-works') }}#faq">
+                                <x-nav-link kind="ternary" href="{{ route('how-it-works.index') }}#faq">
                                     FAQs
                                 </x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link kind="ternary" href="{{ route('contact-us') }}?subject=Report%20a%20bug#form">
+                                <x-nav-link kind="ternary" href="{{ route('contact-us.index') }}?subject=Report%20a%20bug#form">
                                     Report a Bug
                                 </x-nav-link>
                             </li>
@@ -44,7 +44,7 @@
                                 </x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link kind="ternary" href="{{ route('contact-us') }}">
+                                <x-nav-link kind="ternary" href="{{ route('contact-us.index') }}">
                                     Contact us
                                 </x-nav-link>
                             </li>
@@ -54,24 +54,24 @@
                         <h3 class="text-sm font-semibold text-gray-700 tracking-wider uppercase">Legal</h3>
                         <ul role="list" class="mt-4 space-y-4">
                             <li>
-                                <x-nav-link kind="ternary" href="{{ route('cookie') }}">
+                                <x-nav-link kind="ternary" href="{{ route('cookie.index') }}">
                                     Cookie
                                 </x-nav-link>
                             </li>
 
                             <li>
-                                <x-nav-link kind="ternary" href="{{ route('privacy') }}">
+                                <x-nav-link kind="ternary" href="{{ route('privacy.index') }}">
                                     Privacy
                                 </x-nav-link>
                             </li>
 
                             <li>
-                                <x-nav-link kind="ternary" href="{{ route('terms') }}">
+                                <x-nav-link kind="ternary" href="{{ route('terms.index') }}">
                                     Terms
                                 </x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link kind="ternary" href="{{ route('disclaimer') }}">
+                                <x-nav-link kind="ternary" href="{{ route('disclaimer.index') }}">
                                     Disclaimer
                                 </x-nav-link>
                             </li>
