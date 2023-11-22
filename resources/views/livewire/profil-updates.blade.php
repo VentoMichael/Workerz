@@ -376,7 +376,7 @@
                 <div class="sm:col-span-3">
                     <label for="streetAddress"
                            class="block text-sm font-medium leading-6 text-gray-900">Street
-                        address</label>
+                        address and number</label>
                     <div class="mt-2">
                         <input wire:model.blur="streetAddress" type="text" name="streetAddress"
                                id="streetAddress"

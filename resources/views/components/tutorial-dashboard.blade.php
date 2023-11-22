@@ -22,7 +22,7 @@
             <div class="mb-4">
                 <h3 class="text-base font-semibold mb-2">Step 2: Profile Setup</h3>
                 <p class="text-sm text-gray-600">Click "Profile" in the menu to set up your profile. Add your name,
-                    contact info, and professional bio. Showcase your recent achievements in the "Realizations" section.
+                    contact info, and professional bio. Showcase your recent achievements in the "Realisations" section.
                     An informative profile helps clients understand your expertise.
                 </p>
             </div>

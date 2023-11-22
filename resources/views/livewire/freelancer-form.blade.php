@@ -306,7 +306,7 @@
 
             <div class="col-span-full">
                 <label for="streetAddress" class="block text-sm font-medium leading-6 text-gray-900">Street
-                    address <span class="text-red-500">*</span></label>
+                    address and number<span class="text-red-500">*</span></label>
                 <div class="mt-2">
                     <input wire:model.blur="streetAddress" type="text" name="streetAddress" id="streetAddress"
                            autocomplete="streetAddress"

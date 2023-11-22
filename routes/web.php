@@ -41,7 +41,7 @@ Route::prefix('workers')->group(function () {
     Route::controller(WorkerController::class)->group(function () {
         // Workers Index Page
         Route::get('/',  'index')->name('workers.index');
-        // Workers Show Page
+        // Workers Details Page
         Route::get('/{name}', 'show')->name('workers.show');
     });
 });
@@ -50,17 +50,17 @@ Route::prefix('workers')->group(function () {
 Route::prefix('contact-us')->group(function () {
     Route::controller(ContactController::class)->group(function () {
         // Contact Us Index Page
-        Route::get('/', 'index')->name('contact-us');
+        Route::get('/', 'index')->name('contact-us.index');
         // Contact Us Store Page
         Route::post('/post', 'store')->name('contact-us.store');
     });
 });
 
 // About Us Page
-Route::get('/about-us', [\App\Http\Controllers\AboutController::class,'index'])->name('about-us');
+Route::get('/about-us', [\App\Http\Controllers\AboutController::class,'index'])->name('about-us.index');
 
 // Pricing Page
-Route::get('/pricing', [\App\Http\Controllers\PriceController::class,'index'])->name('pricing');
+Route::get('/pricing', [\App\Http\Controllers\PriceController::class,'index'])->name('pricing.index');
 
 // Sign Up Routes
 Route::prefix('sign-up')->group(function () {
@@ -92,27 +92,25 @@ Route::get('/newsletter',[\App\Http\Controllers\NewsletterController::class, 'in
 Route::middleware(['auth'])->group(function () {
     Route::prefix('dashboard')->group(function () {
         Route::controller(DashboardController::class)->group(function () {
-            // Dashboard Routes
-            Route::get('/', 'index')->name('dashboard.index'); // Dashboard Index Page
-            Route::get('/profil', 'profil')->name('dashboard.profil'); // Dashboard Profile Page
-            Route::get('/messages', 'messages')->name('dashboard.messages'); // Dashboard Messages Page
-            Route::get('/plans', 'plans')->name('dashboard.plans'); // Dashboard Plans Page
-
-// Plan Change Routes
-            Route::get('/plan-change', 'plansChange')->name('dashboard.plan-change'); // Plan Change Page
-            Route::post('/plan-change', 'plansChangePost')->name('dashboard.plan-change.post'); // Post Plan Change
-
-// Settings Routes
-            Route::get('/settings', 'settings')->name('dashboard.settings'); // Dashboard Settings Page
-
-// Password Update Route
-            Route::get('/password', 'updatePassword')->name('dashboard.update'); // Dashboard Password Update Page
-
-// Settings Update Route
-            Route::get('/settings', 'updateSettings')->name('dashboard.settings.privacy'); // Dashboard Settings Privacy Page
-
-// Delete Account Route
-            Route::get('/delete', 'delete')->name('dashboard.delete'); // Dashboard Delete Account Page|
+            // Dashboard Index Page
+            Route::get('/', 'index')->name('dashboard.index');
+            // Dashboard Profile Page
+            Route::get('/profil', 'profil')->name('dashboard.profil');
+            // Dashboard Messages Page
+            Route::get('/messages', 'messages')->name('dashboard.messages');
+            // Dashboard Plans Page
+            Route::get('/plans', 'plans')->name('dashboard.plans');
+            // Plan Change Routes
+            Route::get('/plan-change', 'plansChange')->name('dashboard.plan-change');
+            Route::post('/plan-change', 'plansChangePost')->name('dashboard.plan-change.post');
+            // Settings Routes
+            Route::get('/settings', 'settings')->name('dashboard.settings');
+            // Password Update Route
+            Route::get('/password', 'updatePassword')->name('dashboard.update');
+            // Settings Update Route
+            Route::post('/settings', 'updateSettings')->name('dashboard.settings.privacy');
+            // Delete Account Route
+            Route::get('/delete', 'delete')->name('dashboard.delete');
         });
     });
 });

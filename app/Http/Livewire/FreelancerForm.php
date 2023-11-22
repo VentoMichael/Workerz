@@ -377,9 +377,9 @@ class FreelancerForm extends Component
     </svg>';
 
         $filename = 'initial';
-        Storage::disk('public')->put('freelancer/' . $folder . '/' . $nameLink . '/initials/' . $filename . '.svg', $svgImage);
+        Storage::disk('public')->put('freelancer/' . Str::slug($folder,'-') . '/' . Str::slug($nameLink,'-') . '/initials/' . $filename . '.svg', $svgImage);
 
-        return 'freelancer/' . $folder . '/' . $nameLink . '/initials/' . $filename;
+        return 'freelancer/' . Str::slug($folder,'-') . '/' . $nameLink . '/initials/' . $filename;
     }
 
     protected function processAndStoreImage($uploadedImage, $folder, $filename, $isAvatar)
@@ -405,13 +405,13 @@ class FreelancerForm extends Component
                 ->fit($width, $height)
                 ->encode('jpg', 80);
 
-            $imagePath[] = 'freelancer/' . $folder . '/' . $filename . '/' . $size . '.jpg';
-            Storage::disk('public')->put('freelancer/' . $folder . '/' . $filename . '/' . $size . '.jpg', $image);
+            $imagePath[] = 'freelancer/' . Str::slug($folder,'-') . '/' . Str::slug($filename,'-') . '/' . $size . '.jpg';
+            Storage::disk('public')->put('freelancer/' . Str::slug($folder,'-') . '/' . Str::slug($filename,'-') . '/' . $size . '.jpg', $image);
 
             $webpImage = clone $image;
             $webpImage->encode('webp', 80);
-            $imagePath[] = 'freelancer/' . $folder . '/' . $filename . '/' . $size . '.webp';
-            Storage::disk('public')->put('freelancer/' . $folder . '/' . $filename . '/' . $size . '.webp', $webpImage);
+            $imagePath[] = 'freelancer/' . Str::slug($folder,'-') . '/' . Str::slug($filename,'-') . '/' . $size . '.webp';
+            Storage::disk('public')->put('freelancer/' . Str::slug($folder,'-') . '/' . Str::slug($filename,'-') . '/' . $size . '.webp', $webpImage);
         }
 
         return $imagePath;

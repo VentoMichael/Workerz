@@ -206,10 +206,11 @@ $orderBySubscription = "
 
         $this->userRegions = [];
         $this->userSkills = [];
-
-        foreach ($allUsers as $allUser) {
-            $this->userRegions = array_merge($this->userRegions, $allUser->company->regions->pluck('name', 'id')->toArray());
-            $this->userSkills = array_merge($this->userSkills, $allUser->company->skills->pluck('name', 'id')->toArray());
+        if ($allUsers->isEmpty()) {
+            foreach ($allUsers as $allUser) {
+                $this->userRegions = array_merge($this->userRegions, $allUser->company->regions->pluck('name', 'id')->toArray());
+                $this->userSkills = array_merge($this->userSkills, $allUser->company->skills->pluck('name', 'id')->toArray());
+            }
         }
 
         foreach ($users as $user) {

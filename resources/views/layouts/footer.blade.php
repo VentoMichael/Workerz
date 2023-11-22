@@ -13,7 +13,7 @@
                                 </x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link kind="ternary" href="{{ route('pricing') }}">
+                                <x-nav-link kind="ternary" href="{{ route('pricing.index') }}">
                                     Pricing
                                 </x-nav-link>
                             </li>
@@ -39,7 +39,7 @@
                         <h3 class="text-sm font-semibold text-gray-700 tracking-wider uppercase">Company</h3>
                         <ul role="list" class="mt-4 space-y-4">
                             <li>
-                                <x-nav-link kind="ternary" href="{{ route('about-us') }}">
+                                <x-nav-link kind="ternary" href="{{ route('about-us.index') }}">
                                     About us
                                 </x-nav-link>
                             </li>

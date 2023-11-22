@@ -172,7 +172,7 @@
                     <x-nav-link kind="primary" href="{{ route('contact-us.index') }}" class="{{ Route::currentRouteName() === 'contact-us' ? 'font-extrabold text-purple-700' : '' }}">
                         Contact
                     </x-nav-link>
-                    <x-nav-link kind="primary" href="{{ route('about-us') }}" class="{{ Route::currentRouteName() === 'about-us'  ? 'font-extrabold text-purple-700' : '' }}">About us</x-nav-link>
+                    <x-nav-link kind="primary" href="{{ route('about-us.index') }}" class="{{ Route::currentRouteName() === 'about-us'  ? 'font-extrabold text-purple-700' : '' }}">About us</x-nav-link>
 
                 </nav>
                 <div class=" hidden md:flex lg:relative lg:z-10 lg:ml-4 lg:items-center">
@@ -372,7 +372,7 @@
                                     <span class="ml-4 text-base font-medium text-gray-900">Contact</span>
                                 </a>
 
-                                <a href="{{ route('about-us') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                                <a href="{{ route('about-us.index') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
                                     <div
                                         class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
                                         <!-- Heroicon name: outline/question-mark-circle -->
@@ -549,7 +549,7 @@
                 <x-nav-link kind="primary" href="{{ route('contact-us.index') }}" class="{{ Route::currentRouteName() === 'contact-us' ? 'font-extrabold text-purple-700' : '' }}">
                     Contact
                 </x-nav-link>
-                <x-nav-link kind="primary" href="{{ route('about-us') }}" class="{{ Route::currentRouteName() === 'about-us'  ? 'font-extrabold text-purple-700' : '' }}">About us</x-nav-link>
+                <x-nav-link kind="primary" href="{{ route('about-us.index') }}" class="{{ Route::currentRouteName() === 'about-us'  ? 'font-extrabold text-purple-700' : '' }}">About us</x-nav-link>
 
             </nav>
             <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0 gap-4">
@@ -621,7 +621,7 @@
                                 <span class="ml-4 text-base font-medium text-gray-900">Contact</span>
                             </a>
 
-                            <a href="{{ route('about-us') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
+                            <a href="{{ route('about-us.index') }}" class="-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50">
                                 <div
                                     class="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
                                     <!-- Heroicon name: outline/question-mark-circle -->

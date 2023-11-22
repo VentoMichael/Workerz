@@ -34,8 +34,9 @@ class DashboardController extends Controller
     public function profil()
     {
         $user = Auth::user();
+        $realisations = $user->realisations();
 
-        return view('dashboard.profil', compact('user'));
+        return view('dashboard.profil', compact('user','realisations'));
     }
 
     /**

@@ -26,6 +26,10 @@ class User extends Authenticatable implements MustVerifyEmail
             $query->where('id', $roleId);
         });
     }
+    public function realisations()
+    {
+        return $this->hasMany(Realisation::class);
+    }
     public function company()
     {
         return $this->hasOne(Company::class);
