@@ -122,7 +122,7 @@
                 </a>
 
             </div>
-            <p class="mt-8 text-base text-gray-700 md:mt-0 md:order-1">&copy; {{date('Y')}} Workflow, Inc. All rights
+            <p class="mt-8 text-base text-gray-700 md:mt-0 md:order-1">&copy; @if(date('Y') !== "2024") 2024 - @endif {{date('Y')}} Workerz, Inc. All rights
                 reserved.</p>
         </div>
     </div>

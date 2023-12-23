@@ -189,7 +189,7 @@ class CustomerForm extends Component
         $selectedRegionNames = $this->getSelectedRegionNames();
 
         $regions = Region::whereIn('name', $selectedRegionNames)->get();
-        $user->regions()->sync($regions);
+        $user->company()->regions()->sync($regions);
     }
 
     public function submitForm()

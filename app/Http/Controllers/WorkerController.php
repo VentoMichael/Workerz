@@ -12,7 +12,7 @@ class WorkerController extends Controller
      */
     public function index()
     {
-        $workers = User::byRoleId(1)->with('company.skills', 'company.regions')->get();
+        $workers = User::freelancers()->with('company.skills', 'company.regions')->get();
         $userRegions = [];
         $userSkills = [];
 

@@ -22,33 +22,33 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="py-16">
 
-            <section>
+            <section class="mb-12">
                 <h2 class="text-4xl font-bold dark:text-black">
                     Cookie Policy for Workerz
                 </h2>
-                <p class="mb-3 text-gray-600 mb-8 mt-2">
+                <p class="text-gray-600 mb-8 mt-2">
                     This is the Cookie Policy for Workerz, accessible from {{ config('app.urlNoHttp') }}, and it explains how we use cookies and similar technologies on our website.
                 </p>
             </section>
-            <section>
+            <section class="mb-12">
                 <h2 class="text-4xl font-bold dark:text-black">
                     What are cookies?
                 </h2>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="text-gray-600 mb-8 mt-2">
                         Cookies are small text files that are stored on your device when you visit a website. They help us to enhance your user experience on our website by remembering your preferences and actions, such as login details or language selection.
                     </p>
 
             </section>
-            <section>
+            <section class="mb-12">
                 <h2 class="text-4xl font-bold dark:text-black">
                     Why do we use cookies?
                 </h2>
-                <p class="mb-3 text-gray-600 mb-8 mt-2">
+                <p class="text-gray-600 mb-8 mt-2">
                     We use cookies to improve your browsing experience, personalize content, analyze traffic, and understand how our website is being used. Cookies also help us to provide you with relevant advertising based on your interests and behavior on our website.
                 </p>
-                <section>
+                <section class="mb-12">
 
-                <h3 class="mb-3 text-gray-600 mb-8 mt-2">
+                <h3 class="text-gray-600 mb-8 mt-2">
                     What types of cookies do we use?
                 </h3>
                 <p class="mb-3 text-gray-600 mb-2 mt-2">
@@ -73,14 +73,14 @@
                 </section>
 
             </section>
-            <section>
+            <section class="mb-12">
                 <h2 class="text-4xl font-bold dark:text-black">
                     How to manage cookies?
                 </h2>
-                <p class="mb-3 text-gray-600 mb-8 mt-2">
+                <p class="text-gray-600 mb-8 mt-2">
                     You can manage or delete cookies at any time using your browser settings. However, please note that disabling cookies may affect your user experience on our website and limit some of its features.
                 </p>
-                <p class="mb-3 text-gray-600 mb-8 mt-2">
+                <p class="text-gray-600 mb-8 mt-2">
                     Most web browsers allow you to control cookies through their settings. To learn more about cookie management with specific web browsers, you can visit the respective browser's website:
                 </p>
                 <ul class="max-w-lg space-y-1 list-disc list-inside text-gray-600 mb-6">
@@ -98,19 +98,19 @@
                     </li>
                 </ul>
             </section>
-            <section>
+            <section class="mb-12">
                 <h2 class="text-4xl font-bold dark:text-black">
                     Changes to our Cookie Policy
                 </h2>
-                <p class="mb-3 text-gray-600 mb-8 mt-2">
+                <p class="text-gray-600 mb-8 mt-2">
                     We may update our Cookie Policy from time to time. Any changes will be posted on this page with an updated revision date. We encourage you to review this Cookie Policy periodically to stay informed about our use of cookies on our website.
                 </p>
             </section>
-            <section>
+            <section class="mb-12">
                 <h2 class="text-4xl font-bold dark:text-black">
                     Contact Us
                 </h2>
-                <p class="mb-3 text-gray-600 mb-8 mt-2">
+                <p class="text-gray-600 mb-8 mt-2">
                     If you have any questions or concerns about our Cookie Policy, please <a class="font-medium text-blue-600 underline hover:no-underline" href="mailto:{{config('app.supportEmail')}}">contact us</a>.
                 </p>
             </section>

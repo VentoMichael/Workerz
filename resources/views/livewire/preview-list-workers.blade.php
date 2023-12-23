@@ -230,6 +230,7 @@
                             </div>
                             <div x-cloak x-show="openCategory" @click.away="openCategory = false"
                                  class="w-64 max-w-xs filter_content_category origin-top-right absolute right-0 mt-2 bg-white rounded-md shadow-2xl p-4 ring-1 ring-black ring-opacity-5 focus:outline-none">
+
                                 @if(count($userSkillsWithCount) > 0)
                                     <fieldset>
                                         <legend class="sr-only">Category</legend>

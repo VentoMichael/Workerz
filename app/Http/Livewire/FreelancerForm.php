@@ -11,6 +11,7 @@ use App\Models\Skill;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -93,6 +94,7 @@ class FreelancerForm extends Component
     public function updatedLogoUpload(){
         try{
             $this->tempUrlLogo = $this->logoUpload->temporaryUrl();
+            Log::info($this->logoUpload);
         }catch(Exception $e){
             $this->tempUrlLogo = '';
         }

@@ -106,7 +106,7 @@ class PreviewListWorkers extends Component
     public function updFilters($sortingOption = null)
     {
 
-        $usersQuery = User::byRoleId(1)->whereHas('subscriptions', function ($query) {
+        $usersQuery = User::freelancers()->whereHas('subscriptions', function ($query) {
             $query->where('stripe_status', 'active');
         })->with('company.skills', 'company.regions')
             ->when(!empty($this->selectedCategories), function ($query) {
@@ -163,7 +163,7 @@ class PreviewListWorkers extends Component
 
     public function render()
     {
-        $query = User::byRoleId(1)
+        $query = User::freelancers()
             ->with('company.skills', 'company.regions')
             ->whereHas('subscriptions', function ($query) {
                 $query->where('stripe_status', 'active');
@@ -187,7 +187,7 @@ $orderBySubscription = "
         END
     ";
         $countUsers = $query->count();
-        $allUsers = User::with('company.skills', 'company.regions')->get();
+        $allUsers = User::freelancers()->with('company.skills', 'company.regions')->get();
         if ($allUsers) {
             if ($this->sortingOrder === 'popular') {
                 $query->select('users.*', DB::raw('AVG(comments.rating) as avg_rating'))
@@ -206,7 +206,7 @@ $orderBySubscription = "
 
         $this->userRegions = [];
         $this->userSkills = [];
-        if ($allUsers->isEmpty()) {
+        if (!$allUsers->isEmpty()) {
             foreach ($allUsers as $allUser) {
                 $this->userRegions = array_merge($this->userRegions, $allUser->company->regions->pluck('name', 'id')->toArray());
                 $this->userSkills = array_merge($this->userSkills, $allUser->company->skills->pluck('name', 'id')->toArray());

@@ -20,11 +20,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return 'company.name';
     }
-    public function scopeByRoleId($query, $roleId)
+    public function scopeFreelancers($query)
     {
-        return $query->whereHas('role', function ($query) use ($roleId) {
-            $query->where('id', $roleId);
-        });
+        return $query->where('role_id', 1);
     }
     public function realisations()
     {

@@ -9,7 +9,7 @@
                     <div class="flex-shrink-0 flex items-center">
                         <a href="{{route('home.index')}}">
                             <span class="sr-only">Workerz</span>
-                            {!! file_get_contents('img/logo.svg') !!}
+                            <img class="w-24 sm:w-32" src="{{ asset('img/logo.svg') }}" alt="Logo">
                         </a>
                     </div>
                 </div>

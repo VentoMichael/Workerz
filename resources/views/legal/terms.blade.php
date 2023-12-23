@@ -28,30 +28,30 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="py-16">
 
-                <section>
+                <section class="mb-12">
                     <h2 class="text-4xl font-bold dark:text-black">
                         Terms Policy for Workerz
                     </h2>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         These terms and conditions outline the rules and regulations for the use of Workerz's website,
                         located at {{ config('app.urlNoHttp') }}.
                     </p>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         By accessing this website, we assume you accept these terms and conditions in full. If you
                         disagree with these terms and conditions, or any part of these terms and conditions, you must
                         not use this website.
                     </p>
                 </section>
-                <section>
+                <section class="mb-12">
                     <h2 class="text-4xl font-bold dark:text-black">
                         License to Use Website
                     </h2>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         Unless otherwise stated, Workerz and/or its licensors own the intellectual property rights in
                         the website and material on the website. Subject to the license below, all these intellectual
                         property rights are reserved.
                     </p>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         You may view, download for caching purposes only, and print pages from the website for your own
                         personal use, subject to the restrictions set out below and elsewhere in these terms and
                         conditions.
@@ -78,91 +78,91 @@
                         </li>
                     </ul>
                 </section>
-                <section>
+                <section class="mb-12">
                     <h2 class="text-4xl font-bold dark:text-black">
                         Acceptable Use
                     </h2>
 
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         You must not use this website in any way that causes, or may cause, damage to the website or
                         impairment of the availability or accessibility of the website, or in any way which is unlawful,
                         illegal, fraudulent or harmful, or in connection with any unlawful, illegal, fraudulent or
                         harmful purpose or activity.
                     </p>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         You must not use this website to copy, store, host, transmit, send, use, publish or distribute
                         any material that consists of (or is linked to) any spyware, computer virus, Trojan horse, worm,
                         keystroke logger, rootkit or other malicious computer software.
                     </p>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         You must not conduct any systematic or automated data collection activities on or in relation to
                         this website without Workerz's express written consent. This includes but is not limited to
                         scraping, data mining, data extraction and data harvesting.
                     </p>
                 </section>
-                <section>
+                <section class="mb-12">
                     <h2 class="text-4xl font-bold dark:text-black">
                         User Content
                     </h2>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         In these terms and conditions, "user content" means material (including without limitation text,
                         images, audio material, video material and audio-visual material) that you submit to this
                         website, for whatever purpose.
                     </p>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         You grant to Workerz a worldwide, irrevocable, non-exclusive, royalty-free license to use,
                         reproduce, adapt, publish, translate and distribute your user content in any existing or future
                         media. You also grant to Workerz the right to sub-license these rights, and the right to bring
                         an action for infringement of these rights.
                     </p>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         Your user content must not be defamatory or libelous, obscene or indecent, infringe on any third
                         party's rights, or infringe on any applicable law or regulation.
                     </p>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         Workerz reserves the right to edit or remove any material submitted to this website, or stored
                         on its servers, or hosted or published upon this website.
                     </p>
                 </section>
-                <section>
+                <section class="mb-12">
                     <h2 class="text-4xl font-bold dark:text-black">
                         Indemnity
                     </h2>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         You agree to indemnify and hold Workerz and its officers, directors, employees and agents
                         harmless from any claim or demand, including reasonable attorneys' fees, made by any third party
                         due to or arising out of your use of the website, your violation of these terms and conditions,
                         or your violation of any rights of another.
                     </p>
                 </section>
-                <section>
+                <section class="mb-12">
                     <h2 class="text-4xl font-bold dark:text-black">
                         Variation
                     </h2>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         Workerz may revise these terms and conditions from time-to-time. Revised terms and conditions
                         will apply to the use of this website from the date of the publication of the revised terms and
                         conditions on our website.
                     </p>
                 </section>
-                <section>
+                <section class="mb-12">
                     <h2 class="text-4xl font-bold dark:text-black">
                         Assignment
                     </h2>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         Workerz may transfer, sub-contract or otherwise deal with our rights and/or obligations under
                         these terms and conditions without notifying you or obtaining your consent.
                     </p>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         You may not transfer, sub-contract or otherwise deal with your rights and/or obligations under
                         these terms and conditions.
                     </p>
                 </section>
-                <section>
+                <section class="mb-12">
                     <h2 class="text-4xl font-bold dark:text-black">
                         Entire Agreement
                     </h2>
-                    <p class="mb-3 text-gray-600 mb-8 mt-2">
+                    <p class="mb-3 text-gray-600 mt-2">
                         These terms and conditions, together with our Privacy
                     </p>
                 </section>

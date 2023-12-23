@@ -16,10 +16,6 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-    'stripeKey' => env('STRIPE_SECRET'),
-    'supportEmail' => env('APP_SUPPORT_EMAIL','workerz@support.be'),
-    'urlNoHttp' => env('URL','workerz.be'),
-    'date_last_update_disclaimer' => env('DATE_LAST_UPDATE_DISCLAIMER'),
 
     /*
     |--------------------------------------------------------------------------
@@ -146,6 +142,15 @@ return [
         'driver' => 'file',
         // 'store'  => 'redis',
     ],
+
+
+
+    'stripeKey' => env('STRIPE_SECRET'),
+    'stripeKeyPublic' => env('STRIPE_PUBLIC'),
+    'supportEmail' => env('APP_SUPPORT_EMAIL','workerz@support.be'),
+    'urlNoHttp' => env('URL','workerz.be'),
+    'date_last_update_disclaimer' => env('DATE_LAST_UPDATE_DISCLAIMER'),
+
 
     /*
     |--------------------------------------------------------------------------
