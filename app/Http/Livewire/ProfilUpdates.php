@@ -82,12 +82,15 @@ class ProfilUpdates extends Component
     public function mount()
     {
         $user = Auth::user();
-        foreach ($user->company->backgroundUpload as $value) {
-            if (strpos($value, 'default_cover/default_background_') !== false) {
-                $this->containsDefaultBackground = true;
-                break;
+        if($user->role_id === 1) {
+            foreach ($user->company->backgroundUpload as $value) {
+                if (strpos($value, 'default_cover/default_background_') !== false) {
+                    $this->containsDefaultBackground = true;
+                    break;
+                }
             }
         }
+
         $this->about = $user->company->about ?? '';
         $this->name = $user->company->name ?? '';
         $this->email = $user->email ?? '';
@@ -97,7 +100,11 @@ class ProfilUpdates extends Component
         $this->city = $user->city ?? '';
         $this->selectedRegion = $user->company->regions ?? '';
         $this->postalCode = $user->postalCode ?? '';
-        $this->selectedRegions = $user->company->regions->pluck('id', 'name')->toArray() ?? '';
+        if ($user->role_id === 1){
+            $this->selectedRegions = $user->company->regions->pluck('id', 'name')->toArray() ?? '';
+        }else{
+            $this->selectedRegions = $user->region()->pluck('id', 'name')->toArray() ?? '';
+        }
         $this->defaultLogo = 'freelancer/logos/' . $this->name . '/initials/initial';
         $this->regions = Region::all()->toArray();
     }

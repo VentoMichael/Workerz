@@ -28,45 +28,47 @@
                     publicly so
                     be careful what you share.</p>
             </div>
-            <div class="mt-6 flex-grow lg:mt-0 lg:flex-grow-0 lg:flex-shrink-0 relative">
-                <p class="text-sm font-medium text-gray-700 mb-2" aria-hidden="true">Background
-                    picture</p>
-                <div class="mt-1 lg:hidden">
-                    <div class="flex items-center relative">
+            @if(auth()->user()->role_id === 1)
+                <div class="mt-6 flex-grow lg:mt-0 lg:flex-grow-0 lg:flex-shrink-0 relative">
+                    <p class="text-sm font-medium text-gray-700 mb-2" aria-hidden="true">Background
+                        picture</p>
+                    <div class="mt-1 lg:hidden">
+                        <div class="flex items-center relative">
 
-                        @if (!$showBackgroundImage && (!$containsDefaultBackground || isset($backgroundUpload)))
-                            <button wire:click.lazy="removeBackgroundImage" type="button"
-                                    class="z-10 inset-y-1/2 mt-[-16px] right-3 absolute ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
-                                    data-dismiss-target="#alert-3" aria-label="Close">
-                                <span class="sr-only">Close</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                     viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                          stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                </svg>
-                            </button>
-                        @endif
-                        <div
-                            class="flex-shrink-0 inline-block rounded-md overflow-hidden h-12 w-12"
-                            aria-hidden="true">
-                            @if($backgroundUpload)
-                                @if($tempUrlCover === "")
-                                    <img class="w-full relative h-40"
-                                         srcset="
+                            @if (!$showBackgroundImage && (!$containsDefaultBackground || isset($backgroundUpload)))
+                                <button wire:click.lazy="removeBackgroundImage" type="button"
+                                        class="z-10 inset-y-1/2 mt-[-16px] right-3 absolute ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
+                                        data-dismiss-target="#alert-3" aria-label="Close">
+                                    <span class="sr-only">Close</span>
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                         fill="none"
+                                         viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                              stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                    </svg>
+                                </button>
+                            @endif
+                            <div
+                                class="flex-shrink-0 inline-block rounded-md overflow-hidden h-12 w-12"
+                                aria-hidden="true">
+                                @if($backgroundUpload)
+                                    @if($tempUrlCover === "")
+                                        <img class="w-full relative h-40"
+                                             srcset="
                                      @foreach(\Illuminate\Support\Facades\Auth::user()->company->backgroundUpload as $imagePath)
                                          {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                                     @endforeach
                                              "
-                                         src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->backgroundUpload) ? \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload)) }}"
-                                         alt="Background Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->firstname . \Illuminate\Support\Facades\Auth::user()->company->lastname }}"/>
+                                             src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->backgroundUpload) ? \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload)) }}"
+                                             alt="Background Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->firstname . \Illuminate\Support\Facades\Auth::user()->company->lastname }}"/>
+                                    @else
+                                        <img class="w-full relative h-40"
+                                             src="{{ $tempUrlCover }}"
+                                             alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
+                                    @endif
                                 @else
                                     <img class="w-full relative h-40"
-                                         src="{{ $tempUrlCover }}"
-                                         alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
-                                @endif
-                            @else
-                                <img class="w-full relative h-40"
-                                     srcset="
+                                         srcset="
                                                                  @if ($showBackgroundImage)
                                      @foreach(\Illuminate\Support\Facades\Auth::user()->company->backgroundUpload as $imagePath)
                                      {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
@@ -76,64 +78,64 @@
                                      {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                                         @endforeach                         @endif
                                          "
-                                     src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->backgroundUpload) ? \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload)) }}"
-                                     alt="Background Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
-                            @endif
+                                         src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->backgroundUpload) ? \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload)) }}"
+                                         alt="Background Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
+                                @endif
 
 
-                        </div>
-                        <div class="ml-5 rounded-md shadow-sm">
-                            <div
-                                class="group relative border border-gray-300 rounded-md py-2 px-3 flex items-center justify-center hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-500">
-                                <label for="mobile-user-photo"
-                                       class="relative text-sm leading-4 font-medium text-gray-700 pointer-events-none">
-                                    <span>Change</span>
-                                    <span class="sr-only"> background photo</span>
-                                </label>
-                                <input wire:model.blur="backgroundUpload" id="mobile-user-background"
-                                       name="user-background"
-                                       type="file"
-                                       class="absolute w-full h-full opacity-0 cursor-pointer border-gray-300">
                             </div>
+                            <div class="ml-5 rounded-md shadow-sm">
+                                <div
+                                    class="group relative border border-gray-300 rounded-md py-2 px-3 flex items-center justify-center hover:bg-gray-50 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-sky-500">
+                                    <label for="mobile-user-photo"
+                                           class="relative text-sm leading-4 font-medium text-gray-700 pointer-events-none">
+                                        <span>Change</span>
+                                        <span class="sr-only"> background photo</span>
+                                    </label>
+                                    <input wire:model.blur="backgroundUpload" id="mobile-user-background"
+                                           name="user-background"
+                                           type="file"
+                                           class="absolute w-full h-full opacity-0 cursor-pointer border-gray-300">
+                                </div>
+                            </div>
+                            <p class="text-xs leading-5 text-gray-600">SVG, PNG, JPEG or WEBP up to 3MB.</p>
                         </div>
-                        <p class="text-xs leading-5 text-gray-600">SVG, PNG, JPEG or WEBP up to 3MB.</p>
                     </div>
-                </div>
-                <div class="hidden relative rounded-md overflow-hidden lg:block">
-                    @if ($showBackgroundImage && !$containsDefaultBackground || isset($backgroundUpload))
+                    <div class="hidden relative rounded-md overflow-hidden lg:block">
+                        @if ($showBackgroundImage && !$containsDefaultBackground || isset($backgroundUpload))
 
-                        <button wire:click.lazy="removeBackgroundImage" type="button"
-                                class="z-10 inset-y-1/2 mt-[-16px] top-6 right-4 absolute ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
-                                data-dismiss-target="#alert-3" aria-label="Close">
-                            <span class="sr-only">Close</span>
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                 viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                            </svg>
-                        </button>
-                    @endif
-                    <div class="h-40">
+                            <button wire:click.lazy="removeBackgroundImage" type="button"
+                                    class="z-10 inset-y-1/2 mt-[-16px] top-6 right-4 absolute ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
+                                    data-dismiss-target="#alert-3" aria-label="Close">
+                                <span class="sr-only">Close</span>
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                     viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                            </button>
+                        @endif
+                        <div class="h-40">
 
-                        @if($backgroundUpload)
-                            @if($tempUrlCover === "")
-                                <img class="object-cover w-full h-full relative"
-                                     srcset="
+                            @if($backgroundUpload)
+                                @if($tempUrlCover === "")
+                                    <img class="object-cover w-full h-full relative"
+                                         srcset="
                                      @foreach(\Illuminate\Support\Facades\Auth::user()->company->backgroundUpload as $imagePath)
                                      {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                                     @endforeach
                                          "
-                                     src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->backgroundUpload) ? \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload)) }}"
-                                     alt="Background Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->firstname . \Illuminate\Support\Facades\Auth::user()->company->lastname }}"/>
+                                         src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->backgroundUpload) ? \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload)) }}"
+                                         alt="Background Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->firstname . \Illuminate\Support\Facades\Auth::user()->company->lastname }}"/>
+                                @else
+                                    <img class="object-cover w-full h-full relative"
+                                         src="{{ $tempUrlCover }}"
+                                         alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
+                                @endif
                             @else
-                                <img class="object-cover w-full h-full relative"
-                                     src="{{ $tempUrlCover }}"
-                                     alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
-                            @endif
-                        @else
 
-                            <img class="object-cover w-full h-full relative"
-                                 srcset="
+                                <img class="object-cover w-full h-full relative"
+                                     srcset="
                                  @if ($showBackgroundImage)
                                  @foreach(\Illuminate\Support\Facades\Auth::user()->company->backgroundUpload as $imagePath)
                                  {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
@@ -144,25 +146,27 @@
                                     @endforeach
                                  @endif
                                      "
-                                 src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->backgroundUpload) ? \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload)) }}"
-                                 alt="Background Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->firstname . \Illuminate\Support\Facades\Auth::user()->company->lastname }}"/>
+                                     src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->backgroundUpload) ? \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload)) }}"
+                                     alt="Background Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->firstname . \Illuminate\Support\Facades\Auth::user()->company->lastname }}"/>
 
-                        @endif
+                            @endif
+                        </div>
+                        <label for="desktop-user-photo"
+                               class="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
+                            <span>Change</span>
+                            <span class="sr-only"> background photo</span>
+                            <input wire:model.blur="backgroundUpload" type="file" id="desktop-user-background"
+                                   name="user-background"
+                                   class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300">
+                        </label>
                     </div>
-                    <label for="desktop-user-photo"
-                           class="absolute inset-0 w-full h-full bg-black bg-opacity-75 flex items-center justify-center text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100">
-                        <span>Change</span>
-                        <span class="sr-only"> background photo</span>
-                        <input wire:model.blur="backgroundUpload" type="file" id="desktop-user-background"
-                               name="user-background"
-                               class="absolute inset-0 w-full h-full opacity-0 cursor-pointer border-gray-300">
-                    </label>
+                    @error('backgroundUpload')
+                    <p class="text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
-                @error('backgroundUpload')
-                <p class="text-red-500 mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+            @endif
             <div class="mt-6 flex flex-col lg:flex-row">
+                @if(auth()->user()->role_id === 1)
                 <div class="flex-grow space-y-6">
                     <div class="sm:col-span-4">
                         <label for="name"
@@ -193,20 +197,38 @@
                         @enderror
                     </div>
                 </div>
+                @endif
+
                 <div class="mt-6 flex-grow lg:mt-0 lg:ml-6 lg:flex-grow-0 lg:flex-shrink-0 relative">
                     <p class="text-sm font-medium text-gray-700" aria-hidden="true">Photo</p>
-                    @if($showAvatarImage && (is_array(Auth::user()->company->logoUpload)) || isset($tempUrlLogo) && !str_contains($logoUpload, 'freelancer') || Auth::user()->company->logoUpload !== $defaultLogo )
-                        <button wire:click.lazy="removeAvatarImage" type="button"
-                                class="z-10 inset-y-1/2 mt-[-16px] top-4 right-4 absolute ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
-                                data-dismiss-target="#alert-3" aria-label="Close">
-                            <span class="sr-only">Close</span>
-                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                 viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                            </svg>
-                        </button>
+                    @if(auth()->user()->role_id === 1)
+                        @if($showAvatarImage && (is_array(Auth::user()->company->logoUpload)) || isset($tempUrlLogo) && !str_contains($logoUpload, 'freelancer') || Auth::user()->company->logoUpload !== $defaultLogo )
+                            <button wire:click.lazy="removeAvatarImage" type="button"
+                                    class="z-10 inset-y-1/2 mt-[-16px] top-4 right-4 absolute ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
+                                    data-dismiss-target="#alert-3" aria-label="Close">
+                                <span class="sr-only">Close</span>
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                     viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                            </button>
+                        @endif
+                    @else
+                        @if($showAvatarImage && (is_array(Auth::user()->avatarUpload)) || isset($tempUrlLogo) && !str_contains($avatarUpload, 'customer') || Auth::user()->avatarUpload !== $defaultLogo )
+                            <button wire:click.lazy="removeAvatarImage" type="button"
+                                    class="z-10 inset-y-1/2 mt-[-16px] top-4 right-4 absolute ml-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8"
+                                    data-dismiss-target="#alert-3" aria-label="Close">
+                                <span class="sr-only">Close</span>
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                     viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                            </button>
+                        @endif
                     @endif
+
                     <div class="mt-1 lg:hidden relative">
 
                         <div class="flex items-center">
@@ -216,19 +238,36 @@
 
                                 @if($logoUpload)
                                     @if($tempUrlLogo === "")
-                                        @if(is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload))
-                                            <img class="object-cover w-full h-full relative"
-                                                 srcset="
+                                        @if(auth()->user()->role_id === 1)
+                                            @if(is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload))
+                                                <img class="object-cover w-full h-full relative"
+                                                     srcset="
                                                     @foreach(\Illuminate\Support\Facades\Auth::user()->company->logoUpload as $imagePath)
                                                  {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                                                     @endforeach
                                                      "
-                                                 src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) ? \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload)) }}"
-                                                 alt="Background Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->firstname . \Illuminate\Support\Facades\Auth::user()->company->lastname }}"/>
+                                                     src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) ? \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->backgroundUpload)) }}"
+                                                     alt="Background Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->firstname . \Illuminate\Support\Facades\Auth::user()->company->lastname }}"/>
+                                            @else
+                                                <img class="object-cover w-full h-full relative"
+                                                     src="{{ asset(\Illuminate\Support\Facades\Auth::user()->company->logoUpload . '.svg') }}"
+                                                     alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
+                                            @endif
                                         @else
-                                            <img class="object-cover w-full h-full relative"
-                                                 src="{{ asset(\Illuminate\Support\Facades\Auth::user()->company->logoUpload . '.svg') }}"
-                                                 alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
+                                            @if(is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
+                                                <img class="object-cover w-full h-full relative"
+                                                     srcset="
+                                                    @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+                                                 {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                                                    @endforeach
+                                                     "
+                                                     src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                                     alt="Background Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                            @else
+                                                <img class="object-cover w-full h-full relative"
+                                                     src="{{ asset(\Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
+                                                     alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->name }}"/>
+                                            @endif
                                         @endif
                                     @else
                                         <img class="object-cover w-full h-full relative"
@@ -236,15 +275,16 @@
                                              alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
                                     @endif
                                 @else
-                                    @if(!is_array(Auth::user()->company->logoUpload))
-                                        <img class="object-cover w-full h-full relative"
-                                             src="{{ asset('storage/' .  \Illuminate\Support\Facades\Auth::user()->company->logoUpload) }}"
-                                             alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->tname }}"/>
-                                        />
+                                    @if(auth()->user()->role_id === 1)
+                                        @if(!is_array(Auth::user()->company->logoUpload))
+                                            <img class="object-cover w-full h-full relative"
+                                                 src="{{ asset('storage/' .  \Illuminate\Support\Facades\Auth::user()->company->logoUpload) }}"
+                                                 alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->tname }}"/>
+                                            />
 
-                                    @else
-                                        <img class="object-cover w-full h-full relative"
-                                             srcset="
+                                        @else
+                                            <img class="object-cover w-full h-full relative"
+                                                 srcset="
                                         @if ($showAvatarImage)
                                              @foreach(\Illuminate\Support\Facades\Auth::user()->company->logoUpload as $imagePath)
                                              {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
@@ -254,8 +294,31 @@
                                              {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                                         @endforeach                         @endif
                                                  "
-                                             src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) ? \Illuminate\Support\Facades\Auth::user()->company->logoUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->logoUpload)) }}"
-                                             alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
+                                                 src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) ? \Illuminate\Support\Facades\Auth::user()->company->logoUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->logoUpload)) }}"
+                                                 alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
+                                        @endif
+                                    @else
+                                        @if(!is_array(Auth::user()->avatarUpload))
+                                            <img class="object-cover w-full h-full relative"
+                                                 src="{{ asset('storage/' .  \Illuminate\Support\Facades\Auth::user()->avatarUpload) }}"
+                                                 alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->name }}"/>
+                                            />
+
+                                        @else
+                                            <img class="object-cover w-full h-full relative"
+                                                 srcset="
+                                        @if ($showAvatarImage)
+                                             @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+                                             {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                                             @endforeach
+                                             @else
+                                             @foreach($defaultBackgrounds as $imagePath)
+                                             {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                                        @endforeach                         @endif
+                                                 "
+                                                 src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                                 alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->name }}"/>
+                                        @endif
                                     @endif
                                 @endif
 
@@ -279,6 +342,7 @@
                     <div class="hidden relative rounded-full overflow-hidden lg:block">
                         @if($logoUpload)
                             @if($tempUrlLogo === "")
+                                @if(auth()->user()->role_id === 1)
                                 @if(is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload))
                                     <img class="object-cover relative rounded-full w-40 h-40"
                                          srcset="
@@ -293,12 +357,29 @@
                                          src="{{ asset(\Illuminate\Support\Facades\Auth::user()->company->logoUpload . '.svg') }}"
                                          alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
                                 @endif
+                                @else
+                                    @if(is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload))
+                                        <img class="object-cover relative rounded-full w-40 h-40"
+                                             srcset="
+                                                    @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+                                         {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                                                    @endforeach
+                                             "
+                                             src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+                                             alt="Background Picture of {{ \Illuminate\Support\Facades\Auth::user()->firstname . \Illuminate\Support\Facades\Auth::user()->lastname }}"/>
+                                    @else
+                                        <img class="object-cover relative rounded-full w-40 h-40"
+                                             src="{{ asset(\Illuminate\Support\Facades\Auth::user()->avatarUpload . '.svg') }}"
+                                             alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->name }}"/>
+                                    @endif
+                                @endif
                             @else
                                 <img class="object-cover relative rounded-full w-40 h-40"
                                      src="{{ $tempUrlLogo }}"
                                      alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
                             @endif
                         @else
+                            @if(auth()->user()->role_id === 1)
                             @if(!is_array(Auth::user()->company->logoUpload))
                                 <img class="object-cover relative rounded-full w-40 h-40"
                                      src="{{ asset('storage/' .  \Illuminate\Support\Facades\Auth::user()->company->logoUpload) . '.svg' }}"
@@ -307,7 +388,7 @@
                             @else
                                 <img class="object-cover relative rounded-full w-40 h-40"
                                      @if ($showAvatarImage)
-                                     srcset="
+                                         srcset="
                                      @foreach(\Illuminate\Support\Facades\Auth::user()->company->logoUpload as $imagePath)
                                      {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
                                              @endforeach
@@ -315,10 +396,33 @@
                                      src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->company->logoUpload) ? \Illuminate\Support\Facades\Auth::user()->company->logoUpload[0] : \Illuminate\Support\Facades\Auth::user()->company->logoUpload)) }}"
 
                                      @else
-                                     src="{{ asset('storage/'. $defaultLogo . '.svg') }}"
+                                         src="{{ asset('storage/'. $defaultLogo . '.svg') }}"
 
                                      @endif
                                      alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->company->name }}"/>
+                            @endif
+                            @else
+                                @if(!is_array(Auth::user()->avatarUpload))
+                                    <img class="object-cover relative rounded-full w-40 h-40"
+                                         src="{{ asset('storage/' .  \Illuminate\Support\Facades\Auth::user()->avatarUpload) . '.svg' }}"
+                                         alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->name }}"/>
+
+                                @else
+                                    <img class="object-cover relative rounded-full w-40 h-40"
+                                         @if ($showAvatarImage)
+                                             srcset="
+                                     @foreach(\Illuminate\Support\Facades\Auth::user()->avatarUpload as $imagePath)
+                                     {{ asset('storage/' . $imagePath) }} {{ $loop->iteration }}w,
+                                             @endforeach
+                                         "
+                                         src="{{ asset('storage/' . (is_array(\Illuminate\Support\Facades\Auth::user()->avatarUpload) ? \Illuminate\Support\Facades\Auth::user()->avatarUpload[0] : \Illuminate\Support\Facades\Auth::user()->avatarUpload)) }}"
+
+                                         @else
+                                             src="{{ asset('storage/'. $defaultLogo . '.svg') }}"
+
+                                         @endif
+                                         alt="Profile Picture of {{ \Illuminate\Support\Facades\Auth::user()->name }}"/>
+                                @endif
                             @endif
                         @endif
                         <label for="desktop-user-photo"
@@ -334,7 +438,6 @@
                     @enderror
                 </div>
             </div>
-
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div class="sm:col-span-3">
                     <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">First name</label>

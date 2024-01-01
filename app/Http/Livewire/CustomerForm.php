@@ -184,12 +184,21 @@ class CustomerForm extends Component
         return $selectedRegions->pluck('name', 'id');
     }
 
-    public function saveRegionsForUser($user)
+    public function saveRegionsForCompany($user)
     {
         $selectedRegionNames = $this->getSelectedRegionNames();
 
         $regions = Region::whereIn('name', $selectedRegionNames)->get();
-        $user->company()->regions()->sync($regions);
+            $user->company()->regions()->sync($regions);
+    }
+
+    public function saveRegionForUser($user)
+    {
+        $selectedRegionNames = $this->getSelectedRegionNames();
+
+        $region = Region::whereIn('name', $selectedRegionNames)->first();
+        $user->region()->associate($region);
+
     }
 
     public function submitForm()
@@ -210,6 +219,7 @@ class CustomerForm extends Component
         session(['user' => $user]);
         $newUser = User::create($userData);
         $newUser->role()->associate(Role::find($user['role']));
+        $this->saveRegionForUser($newUser);
         $newUser->save();
         $phoneNumbers = [$this->phoneNumber1, $this->phoneNumber2, $this->phoneNumber3,
         ];
@@ -219,7 +229,9 @@ class CustomerForm extends Component
         foreach ($phoneNumbers as $phoneNumber) {
             $newUser->phoneNumbers()->create(['number' => $phoneNumber]);
         }
-        $this->saveRegionsForUser($newUser);
+        if (!$newUser->simpleuser()){
+            $this->saveRegionsForCompany($newUser);
+        }
         sleep(1);
         Auth::login($newUser);
         return redirect()->route('dashboard.index');

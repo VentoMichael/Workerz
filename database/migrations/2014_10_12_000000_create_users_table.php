@@ -34,6 +34,7 @@ return new class extends Migration
             $table->boolean('private')->default(false);
             //$table->boolean('allow_commenting')->default(false);
             $table->boolean('banned')->default(false);
+            $table->foreignId('region_id')->nullable()->constrained();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="border-b border-gray-900/10 pb-12 pt-4">
+        <div class="pb-12 pt-4">
             <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
             <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive
                 mail.</p>

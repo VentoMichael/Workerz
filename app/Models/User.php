@@ -24,6 +24,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $query->where('role_id', 1);
     }
+    public function scopeSimpleuser($query)
+    {
+        return $query->where('role_id', 2);
+    }
     public function realisations()
     {
         return $this->hasMany(Realisation::class);
@@ -31,6 +35,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function company()
     {
         return $this->hasOne(Company::class);
+    }
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
     }
     public function hasRole($roleId)
     {
