@@ -61,9 +61,11 @@
                         </div>
                         <div class="flex gap-3 items-end mb-2">
                             @if($logoUpload && $tempUrlLogo !== '' && isset($tempUrlLogo))
-                                <img class="h-20 w-20 text-gray-300 rounded-full object-cover" src="{{$tempUrlLogo}}" alt="">
+                                <img class="h-20 w-20 text-gray-300 rounded-full object-cover" src="{{$tempUrlLogo}}"
+                                     alt="">
                             @else
-                                <svg class="h-20 w-20 text-gray-300 object-cover" viewBox="0 0 24 24" fill="currentColor"
+                                <svg class="h-20 w-20 text-gray-300 object-cover" viewBox="0 0 24 24"
+                                     fill="currentColor"
                                      aria-hidden="true">
                                     <path fill-rule="evenodd"
                                           d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
@@ -71,8 +73,19 @@
                                 </svg>
                             @endif
                             <label class="cursor-pointer">
+
                             <span
-                                class="text-sm whitespace-nowrap inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-2.5 py-1.5 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700">Select Avatar</span>
+                                class="disabled:opacity-50 whitespace-nowrap inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-2.5 py-1.5 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700">Select Avatar</span>
+                                <svg wire:loading wire:target="logoUpload" aria-hidden="true"
+                                     class="inline w-5 h-5 ml-2 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"
+                                     viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                        fill="currentColor"/>
+                                    <path
+                                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                        fill="currentFill"/>
+                                </svg>
                                 <input wire:model.blur="logoUpload" type='file' class="hidden"/>
                             </label>
                         </div>
@@ -91,7 +104,7 @@
                     photo</label>
                 <div
                     @if($backgroundUpload)
-                    style="background-image: url('{{ $tempUrlCover }}'); background-position: center;background-repeat: no-repeat;background-size: cover;"
+                        style="background-image: url('{{ $tempUrlCover }}'); background-position: center;background-repeat: no-repeat;background-size: cover;"
                     @endif
                     class="@error('$backgroundUpload')border border-red-500 rounded-md @enderror mt-2 flex justify-center rounded-lg border border-dashed relative border-gray-900/25 px-6 py-10">
                     @if($backgroundUpload && $tempUrlCover !== '' && isset($tempUrlCover))
@@ -106,6 +119,7 @@
                             </svg>
                         </button>
                     @endif
+
                     <div class="text-center bg-white p-4 rounded-md">
                         <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24"
                              fill="currentColor" aria-hidden="true">
@@ -126,17 +140,27 @@
                             WEBP up to 3MB</p>
                     </div>
                 </div>
+                <svg wire:loading wire:target="backgroundUpload" aria-hidden="true"
+                     class="inline w-5 h-5 ml-2 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"
+                     viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                        fill="currentColor"/>
+                    <path
+                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                        fill="currentFill"/>
+                </svg>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPEG or
+                    WEBP up to 3MB.</p>
                 @error('backgroundUpload')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
                 @enderror
             </div>
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div class="sm:col-span-3">
-                    <label for="jobTitle" class="block text-sm font-medium leading-6 text-gray-900">Main Job
-                        Title <span class="text-red-500">*</span></label>
+                    <label for="jobTitle" class="block text-sm font-medium leading-6 text-gray-900">Main Job Title <span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <input wire:model.blur="jobTitle" type="text" name="jobTitle" id="jobTitle"
-                               autocomplete="jobTitle"
+                        <input wire:model.blur="jobTitle" type="text" name="jobTitle" id="jobTitle" autocomplete="jobTitle"
                                class="@error('jobTitle')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
                     <p class="mt-1 text-sm leading-6 text-gray-600">Enter your primary job title or role.</p>
@@ -146,14 +170,13 @@
                 </div>
 
                 <div class="sm:col-span-3">
-                    <label for="mainSkill" class="block text-sm font-medium leading-6 text-gray-900">General
-                        Skill <span class="text-red-500">*</span></label>
+                    <label for="mainSkill" class="block text-sm font-medium leading-6 text-gray-900">General Skill <span class="text-red-500">*</span></label>
                     <div class="mt-2">
-                        <select wire:model.blur="mainSkill" id="mainSkill"
+                        <select wire:model.blur="mainSkill" wire:change="loadSubSkills" id="mainSkill"
                                 class="@error('mainSkill')border border-red-500 rounded-md @else border-0 ring-gray-300 ring-1 @enderror px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             <option selected>Choose a skill</option>
-                            @foreach($skills as $mainSkill)
-                                <option value="{{$mainSkill['id']}}">{{$mainSkill['name']}}</option>
+                            @foreach($skills as $skill)
+                                <option value="{{$skill['id']}}">{{$skill['name']}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -164,56 +187,59 @@
                 </div>
             </div>
 
-
             <div class="mt-6">
                 <label for="skills" class="block text-sm font-medium leading-6 text-gray-900">
                     Sub skills <span class="text-gray-500 text-xs">(limited to {{ $maxSkills }})</span>
                 </label>
                 <div class="relative mt-2">
-                    <input
-                        wire:model.blur="typeSkill"
-                        type="text"
-                        id="skills"
-                        @if(count($selectedSkills) === $maxSkills) disabled @endif
-                        class="@if(count($selectedSkills) === $maxSkills) bg-gray-100 cursor-not-allowed focus:ring-0 @else ring-inset ring-gray-300 ring-1 focus:ring-2 focus:ring-inset focus:ring-indigo-600  @endif border-0 px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                        placeholder="Select or filter skills"
-                        wire:keyup="filterSkills"
-                        wire:click="toggleSkillsList"
+                    <input wire:model.blur="typeSkill"
+                           type="text"
+                           id="skills"
+                           @if(count($pluckedSkills) === $maxSkills) disabled @endif
+                           class="@if(count($pluckedSkills) === $maxSkills) bg-gray-100 cursor-not-allowed focus:ring-0 @else ring-inset ring-gray-300 ring-1 focus:ring-2 focus:ring-inset focus:ring-indigo-600  @endif border-0 px-2 block w-full rounded-md py-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                           placeholder="Select or filter skills"
+                           wire:keyup="filterSkills"
+                           wire:click="toggleSkillsList"
                     >
 
-                    @if ($showSkillsList && count($filteredSkills) !== 0 && count($selectedSkills) < $maxSkills)
-                        <div
-                            class="skills-list absolute mt-1 w-full z-10 bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-x-auto"
-                            id="listSkills">
-                            @foreach($filteredSkills as $skill)
-                                @unless(in_array($skill['id'], $selectedSkills))
-                                    <span wire:key="skill-{{ $skill['id'] }}"
-                                          wire:click="addSkill('{{ $skill['id'] }}')"
-                                          class="cursor-pointer hover:bg-indigo-100 block text-sm font-medium leading-6 text-gray-900 p-2"
-                                    >
-                            {{ $skill['name'] }}
-                        </span>
-                                @endunless
+                    @if ($showSkillsList && count($subSkills) !== 0 && count($pluckedSkills) < $maxSkills)
+                        <div class="skills-list absolute mt-1 w-full z-10 bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-x-auto" id="listSkills">
+                            @foreach($subSkills as $subSkill)
+                                @if(is_array($subSkill))
+                                    @unless(in_array(strtolower($subSkill['name']), array_map('strtolower', $pluckedSkills)))
+                                        <span wire:key="skill-{{ $subSkill['name'] }}"
+                                              wire:click="addSkill('{{ $subSkill['name'] }}')"
+                                              class="cursor-pointer hover:bg-indigo-100 block text-sm font-medium leading-6 text-gray-900 p-2"
+                                        >
+                        {{ $subSkill['name'] }}
+                    </span>
+                                    @endunless
+                                @else
+                                    @unless(in_array(strtolower($subSkill), array_map('strtolower', $pluckedSkills)))
+                                        <span wire:key="skill-{{ $subSkill }}"
+                                              wire:click="addSkill('{{ $subSkill }}')"
+                                              class="cursor-pointer hover:bg-indigo-100 block text-sm font-medium leading-6 text-gray-900 p-2"
+                                        >
+                        {{ $subSkill }}
+                    </span>
+                                    @endunless
+                                @endif
                             @endforeach
                         </div>
                     @endif
+
                 </div>
 
                 <div class="mt-2">
-                    @if (count($filteredSkills) === 0 && $showSkillsList)
+                    @if (count($subSkills) === 0 && $showSkillsList)
                         <div class="text-gray-500">No results found.</div>
                     @else
                         @foreach($this->getSelectedSkillNameId() as $skillId => $skillName)
-                            <div wire:key="skill-{{ $skillId }}"
-                                 class="inline-flex items-center bg-purple-100 rounded-lg p-1 my-1">
-                                <span
-                                    class="inline-flex items-center px-2 py-1 text-sm font-medium text-purple-800 rounded">{{ $skillName }}</span>
-                                <div wire:click="removeSkill('{{ $skillId }}')"
-                                     class="cursor-pointer text-red-600 hover:text-red-800 focus:outline-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                         stroke="currentColor" class="h-4 w-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                              d="M6 18L18 6M6 6l12 12"></path>
+                            <div wire:key="skill-{{ $skillId }}" class="inline-flex items-center bg-purple-100 rounded-lg p-1 my-1">
+                                <span class="inline-flex items-center px-2 py-1 text-sm font-medium text-purple-800 rounded">{{ $skillName }}</span>
+                                <div wire:click="removeSkill('{{ $skillName }}')" class="cursor-pointer text-red-600 hover:text-red-800 focus:outline-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-4 w-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                     </svg>
                                 </div>
                             </div>
@@ -221,6 +247,8 @@
                     @endif
                 </div>
             </div>
+
+
 
 
         </div>
@@ -444,7 +472,11 @@
             @if ($showPhoneNumber3)
                 <div class="sm:col-span-2">
                     <label for="phoneNumber3" class="block text-sm font-medium leading-6 text-gray-900">Phone
-                        number @if($showPhoneNumber2)3 @else 2 @endif</label>
+                        number @if($showPhoneNumber2)
+                            3
+                        @else
+                            2
+                        @endif</label>
                     <div class="relative">
                         <input wire:model="phoneNumber3" type="number" name="phoneNumber3" id="phoneNumber3"
                                autocomplete="phoneNumber3"

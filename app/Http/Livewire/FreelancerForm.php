@@ -51,7 +51,10 @@ class FreelancerForm extends Component
     public $typeSkill;
     public $showSkillsList = false;
     public $filteredSkills = [];
+    public $subSkills = [];
+
     public $selectedSkills = [];
+    public $pluckedSkills = [];
     public $skills = [];
     public $maxSkills = 3;
 
@@ -91,15 +94,32 @@ class FreelancerForm extends Component
             $this->tempUrlCover = '';
         }
     }
+    public function loadSubSkills(): void
+    {
+        if (!empty($this->mainSkill)) {
+            $selectedSkill = Skill::find($this->mainSkill);
+
+            if ($selectedSkill && isset($selectedSkill['subSkills'])) {
+                $this->subSkills = json_decode($selectedSkill['subSkills'], true);
+            } else {
+                $this->subSkills = [];
+            }
+        } else {
+            $this->subSkills = [];
+        }
+
+        //TODO:If change main skill empty the pluckedSkills and add the new one
+
+    }
+
     public function updatedLogoUpload(){
         try{
             $this->tempUrlLogo = $this->logoUpload->temporaryUrl();
-            Log::info($this->logoUpload);
         }catch(Exception $e){
             $this->tempUrlLogo = '';
         }
     }
-//TODO:doesn't redirect to the error if there is error
+    //TODO:doesn't redirect to the error if there is error
     public function mount()
     {
         $userData = session('user', []);
@@ -116,6 +136,7 @@ class FreelancerForm extends Component
         $this->jobTitle = $userData['account']['jobTitle'] ?? '';
         $this->mainSkill = $companyData['mainSkill'] ?? '';
         $this->skills = Skill::all()->toArray();
+        $this->subSkills = [];
         $this->regions = Region::all()->toArray();
     }
 
@@ -138,13 +159,17 @@ class FreelancerForm extends Component
     {
         $this->showSkillsList = !$this->showSkillsList;
 
-        if ($this->showSkillsList) {
-            $this->filteredSkills = $this->skills;
-        } else {
+    }
 
-            $this->typeSkill = '';
-            $this->filteredSkills = $this->skills;
-        }
+    protected function decodeSubSkills($skills)
+    {
+        // Decode subSkills for each skill in the array
+        return array_map(function ($skill) {
+            if (isset($skill['subSkills'])) {
+                $skill['subSkills'] = json_decode($skill['subSkills'], true);
+            }
+            return $skill;
+        }, $skills);
     }
 
     public function removePhoneNumber3()
@@ -155,10 +180,10 @@ class FreelancerForm extends Component
 
     public function removeSkill($skillId)
     {
-        if (($key = array_search($skillId, $this->selectedSkills)) !== false) {
-            unset($this->selectedSkills[$key]);
+        if (($key = array_search($skillId, $this->pluckedSkills)) !== false) {
+            unset($this->pluckedSkills[$key]);
         }
-        $this->selectedSkills = array_values($this->selectedSkills);
+        $this->pluckedSkills = array_values($this->pluckedSkills);
     }
 
     public function addSkill($skill)
@@ -166,14 +191,14 @@ class FreelancerForm extends Component
 
         $skill = trim($skill);
 
-        $selectedSkillsLower = array_map('strtolower', $this->selectedSkills);
+        $selectedSkillsLower = array_map('strtolower', $this->pluckedSkills);
 
         if (
             !empty($skill) &&
             !in_array(strtolower($skill), $selectedSkillsLower) &&
-            count($this->selectedSkills) < $this->maxSkills
+            count($this->pluckedSkills) < $this->maxSkills
         ) {
-            $this->selectedSkills[] = $skill;
+            $this->pluckedSkills[] = $skill;
             $this->showSkillsList = false;
             $this->highlightedSkill = null;
             $this->reset('typeSkill');
@@ -265,11 +290,7 @@ class FreelancerForm extends Component
 
     public function getSelectedSkillNameId()
     {
-        $selectedSkills = collect($this->skills)->filter(function ($skill) {
-            return in_array($skill['id'], $this->selectedSkills);
-        });
-
-        return $selectedSkills->pluck('name', 'id');
+        return $this->pluckedSkills;
     }
 
     public function saveSkillsForCompany($company)
